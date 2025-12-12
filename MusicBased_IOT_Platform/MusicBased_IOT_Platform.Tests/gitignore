@@ -1,0 +1,3 @@
+# Ignore test project build junk
+MusicBased_IOT_Platform.Tests/bin/
+MusicBased_IOT_Platform.Tests/obj/
