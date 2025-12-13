@@ -19,4 +19,8 @@
     <None Include="C:\Users\L00176523\OneDrive - Atlantic TU\Desktop\Music-Multisensory-Platform\MusicBased_IOT_Platform\MusicBased_IOT_Platform\MusicBased_IOT_Platform\.editorconfig" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Database\" />
+  </ItemGroup>
+
 </Project>
