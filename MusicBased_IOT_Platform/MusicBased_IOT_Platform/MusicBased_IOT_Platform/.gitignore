@@ -71,3 +71,7 @@ nunit-*.xml
 
 *.sln.docstates
 
+# Postman
+.postman/
+postman/globals/
+
