@@ -1,4 +1,4 @@
-# MultiSensory Music-Based IoT Platform To Support Overall Wellbeing
+# A MultiSensory Music-Based IoT Platform To Aid Psychological Wellbeing
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
