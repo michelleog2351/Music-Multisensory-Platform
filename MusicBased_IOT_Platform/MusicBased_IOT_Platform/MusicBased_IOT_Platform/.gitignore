@@ -75,3 +75,7 @@ nunit-*.xml
 .postman/
 postman/globals/
 
+# Fitbit Data
+data/
+*.csv
+
