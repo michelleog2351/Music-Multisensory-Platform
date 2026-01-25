@@ -14,7 +14,7 @@ namespace MusicBased_IOT_Platform.Service
     /// This interface represents defines the base functionality that the dataClients
     /// (live and mock) must implement. 
     /// </summary>
-    public interface ISpotifyDataService
+    public interface MockSpotifyDataService
     {
 
         /// <summary>

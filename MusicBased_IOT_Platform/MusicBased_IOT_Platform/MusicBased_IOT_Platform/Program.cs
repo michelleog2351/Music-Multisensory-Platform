@@ -1,5 +1,4 @@
 using MusicBased_IOT_Platform.Application;
-using MusicBased_IOT_Platform.Client.Pages;
 using MusicBased_IOT_Platform.Components;
 using MusicBased_IOT_Platform.Service;
 
@@ -11,7 +10,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
 // Demo use of the mock data service
- builder.Services.AddSingleton<ISpotifyDataService, MockSpotifyDataService>();
+builder.Services.AddSingleton<MockSpotifyDataService>();
 // Create an instance of the SpotifyClientApplication and start it running
 SpotifyClientApplication spotifyClientApplication = new();
 spotifyClientApplication.Run();

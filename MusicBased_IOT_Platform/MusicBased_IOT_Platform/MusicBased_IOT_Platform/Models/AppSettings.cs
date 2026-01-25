@@ -1,7 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-namespace MusicBased_IOT_Platform.Model
+namespace MusicBased_IOT_Platform.Models
 {
     /// <summary>
     /// The AppSettings class is used to store authentication details

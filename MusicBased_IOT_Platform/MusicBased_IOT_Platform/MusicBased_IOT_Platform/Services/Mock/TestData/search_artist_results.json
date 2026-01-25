@@ -1,0 +1,677 @@
+﻿{
+    "artists": {
+        "href": "https://api.spotify.com/v1/search?query=genre+folk&type=artist&market=IE&offset=0&limit=20",
+        "items": [
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/4r5Xw9aOukGMRlSK70CdEr"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 1402
+                },
+                "genres": [
+                    "acoustic guitar cover"
+                ],
+                "href": "https://api.spotify.com/v1/artists/4r5Xw9aOukGMRlSK70CdEr",
+                "id": "4r5Xw9aOukGMRlSK70CdEr",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5ebce2a1327b6543e55eb03111c",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab67616100005174ce2a1327b6543e55eb03111c",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f178ce2a1327b6543e55eb03111c",
+                        "width": 160
+                    }
+                ],
+                "name": "Familiar Folk",
+                "popularity": 37,
+                "type": "artist",
+                "uri": "spotify:artist:4r5Xw9aOukGMRlSK70CdEr"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/68xJjwAFcVSDmF9vTlnqi8"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 11822
+                },
+                "genres": [
+                    "children's folk"
+                ],
+                "href": "https://api.spotify.com/v1/artists/68xJjwAFcVSDmF9vTlnqi8",
+                "id": "68xJjwAFcVSDmF9vTlnqi8",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5eb7658cc772d9b0ade205c83df",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab676161000051747658cc772d9b0ade205c83df",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f1787658cc772d9b0ade205c83df",
+                        "width": 160
+                    }
+                ],
+                "name": "Old Town School of Folk Music",
+                "popularity": 47,
+                "type": "artist",
+                "uri": "spotify:artist:68xJjwAFcVSDmF9vTlnqi8"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/0vNfZW2aLWeldSO6KgGJwn"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 429
+                },
+                "genres": [
+                    "environmental"
+                ],
+                "href": "https://api.spotify.com/v1/artists/0vNfZW2aLWeldSO6KgGJwn",
+                "id": "0vNfZW2aLWeldSO6KgGJwn",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5eb0b5a210ffc4c352b7c0764ee",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab676161000051740b5a210ffc4c352b7c0764ee",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f1780b5a210ffc4c352b7c0764ee",
+                        "width": 160
+                    }
+                ],
+                "name": "Forest FX",
+                "popularity": 36,
+                "type": "artist",
+                "uri": "spotify:artist:0vNfZW2aLWeldSO6KgGJwn"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/3JXiu3SDoHUdFWQkgDnJlK"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 0
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/3JXiu3SDoHUdFWQkgDnJlK",
+                "id": "3JXiu3SDoHUdFWQkgDnJlK",
+                "images": [],
+                "name": "Gente Del Reino",
+                "popularity": 6,
+                "type": "artist",
+                "uri": "spotify:artist:3JXiu3SDoHUdFWQkgDnJlK"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/1ifC4znYCvmMSJ0rght5JS"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 158192
+                },
+                "genres": [
+                    "indie anthem-folk",
+                    "indie folk",
+                    "modern indie folk"
+                ],
+                "href": "https://api.spotify.com/v1/artists/1ifC4znYCvmMSJ0rght5JS",
+                "id": "1ifC4znYCvmMSJ0rght5JS",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5eb96a97f8d2d6ba6f3c2024ef1",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab6761610000517496a97f8d2d6ba6f3c2024ef1",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f17896a97f8d2d6ba6f3c2024ef1",
+                        "width": 160
+                    }
+                ],
+                "name": "Haux",
+                "popularity": 50,
+                "type": "artist",
+                "uri": "spotify:artist:1ifC4znYCvmMSJ0rght5JS"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/6Xa4nbrSTfbioA4lLShbjh"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 150822
+                },
+                "genres": [
+                    "hopebeat",
+                    "indie poptimism",
+                    "indie rockism",
+                    "modern alternative rock",
+                    "modern rock",
+                    "swedish alternative rock"
+                ],
+                "href": "https://api.spotify.com/v1/artists/6Xa4nbrSTfbioA4lLShbjh",
+                "id": "6Xa4nbrSTfbioA4lLShbjh",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5eb454683a1d2793bc1012dbd88",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab67616100005174454683a1d2793bc1012dbd88",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f178454683a1d2793bc1012dbd88",
+                        "width": 160
+                    }
+                ],
+                "name": "Grizfolk",
+                "popularity": 46,
+                "type": "artist",
+                "uri": "spotify:artist:6Xa4nbrSTfbioA4lLShbjh"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/7rure1hFRz36lJv4LSTXxH"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 13549
+                },
+                "genres": [
+                    "nuevo folklore argentino"
+                ],
+                "href": "https://api.spotify.com/v1/artists/7rure1hFRz36lJv4LSTXxH",
+                "id": "7rure1hFRz36lJv4LSTXxH",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5ebf45b2a8fc267a28920ea2f3b",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab67616100005174f45b2a8fc267a28920ea2f3b",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f178f45b2a8fc267a28920ea2f3b",
+                        "width": 160
+                    }
+                ],
+                "name": "Rumbo Tumba",
+                "popularity": 45,
+                "type": "artist",
+                "uri": "spotify:artist:7rure1hFRz36lJv4LSTXxH"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/39RnqcMpFSK4e7tbODSsaP"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 17327
+                },
+                "genres": [
+                    "crank wave",
+                    "uk post-punk revival"
+                ],
+                "href": "https://api.spotify.com/v1/artists/39RnqcMpFSK4e7tbODSsaP",
+                "id": "39RnqcMpFSK4e7tbODSsaP",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5ebf46413744ae1ec6e2261fd3d",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab67616100005174f46413744ae1ec6e2261fd3d",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f178f46413744ae1ec6e2261fd3d",
+                        "width": 160
+                    }
+                ],
+                "name": "Folly Group",
+                "popularity": 36,
+                "type": "artist",
+                "uri": "spotify:artist:39RnqcMpFSK4e7tbODSsaP"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/0eD8oA7A2RsyHdB1Vqbpq7"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 316
+                },
+                "genres": [
+                    "musica jalisciense"
+                ],
+                "href": "https://api.spotify.com/v1/artists/0eD8oA7A2RsyHdB1Vqbpq7",
+                "id": "0eD8oA7A2RsyHdB1Vqbpq7",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5ebbfbecef28228e91c5a83daa8",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab67616100005174bfbecef28228e91c5a83daa8",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f178bfbecef28228e91c5a83daa8",
+                        "width": 160
+                    }
+                ],
+                "name": "Gente de Mando",
+                "popularity": 4,
+                "type": "artist",
+                "uri": "spotify:artist:0eD8oA7A2RsyHdB1Vqbpq7"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/7D85NYUepsEefpLYMIM6IR"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 1180
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/7D85NYUepsEefpLYMIM6IR",
+                "id": "7D85NYUepsEefpLYMIM6IR",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5eb5868e84f55e82a85a5468c87",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab676161000051745868e84f55e82a85a5468c87",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f1785868e84f55e82a85a5468c87",
+                        "width": 160
+                    }
+                ],
+                "name": "Jimmy & Scots Folk Band",
+                "popularity": 35,
+                "type": "artist",
+                "uri": "spotify:artist:7D85NYUepsEefpLYMIM6IR"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/0tkboyBYNymYytYlb9EXkN"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 416486
+                },
+                "genres": [
+                    "charango",
+                    "folklore boliviano",
+                    "musica andina",
+                    "tinku"
+                ],
+                "href": "https://api.spotify.com/v1/artists/0tkboyBYNymYytYlb9EXkN",
+                "id": "0tkboyBYNymYytYlb9EXkN",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5eb29ed2bc1acdba6400e9d6989",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab6761610000517429ed2bc1acdba6400e9d6989",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f17829ed2bc1acdba6400e9d6989",
+                        "width": 160
+                    }
+                ],
+                "name": "Los Kjarkas",
+                "popularity": 53,
+                "type": "artist",
+                "uri": "spotify:artist:0tkboyBYNymYytYlb9EXkN"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/0DToZ2QFAaFFboPRzpvJI0"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 13
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/0DToZ2QFAaFFboPRzpvJI0",
+                "id": "0DToZ2QFAaFFboPRzpvJI0",
+                "images": [],
+                "name": "Folk Fusion",
+                "popularity": 13,
+                "type": "artist",
+                "uri": "spotify:artist:0DToZ2QFAaFFboPRzpvJI0"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/1W6Ar3FyrfqCRnqHbfjIiY"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 205
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/1W6Ar3FyrfqCRnqHbfjIiY",
+                "id": "1W6Ar3FyrfqCRnqHbfjIiY",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273674b8d4977b7e9344a6e3b50",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02674b8d4977b7e9344a6e3b50",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851674b8d4977b7e9344a6e3b50",
+                        "width": 64
+                    }
+                ],
+                "name": "Gente Maravillosa",
+                "popularity": 5,
+                "type": "artist",
+                "uri": "spotify:artist:1W6Ar3FyrfqCRnqHbfjIiY"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/1lLqclT8tDQKcGtFQHF2yT"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 62
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/1lLqclT8tDQKcGtFQHF2yT",
+                "id": "1lLqclT8tDQKcGtFQHF2yT",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273ff5b35023526d032b925c41a",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02ff5b35023526d032b925c41a",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851ff5b35023526d032b925c41a",
+                        "width": 64
+                    }
+                ],
+                "name": "Folk Aid",
+                "popularity": 2,
+                "type": "artist",
+                "uri": "spotify:artist:1lLqclT8tDQKcGtFQHF2yT"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/3Ofl7L5rNmZhAi2TyFyVes"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 14
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/3Ofl7L5rNmZhAi2TyFyVes",
+                "id": "3Ofl7L5rNmZhAi2TyFyVes",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b27331b201e068a02baad166e6db",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e0231b201e068a02baad166e6db",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d0000485131b201e068a02baad166e6db",
+                        "width": 64
+                    }
+                ],
+                "name": "Gente Pescaito",
+                "popularity": 3,
+                "type": "artist",
+                "uri": "spotify:artist:3Ofl7L5rNmZhAi2TyFyVes"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/3qtcbDvdIgQOXkPbtRvBaQ"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 112387
+                },
+                "genres": [
+                    "american folk revival",
+                    "folk"
+                ],
+                "href": "https://api.spotify.com/v1/artists/3qtcbDvdIgQOXkPbtRvBaQ",
+                "id": "3qtcbDvdIgQOXkPbtRvBaQ",
+                "images": [
+                    {
+                        "height": 661,
+                        "url": "https://i.scdn.co/image/c77989e1d9a05cf54ac2d98737469d05183e560e",
+                        "width": 1000
+                    },
+                    {
+                        "height": 423,
+                        "url": "https://i.scdn.co/image/fd99898c5805a42b96ef401e4686d2e467ce589e",
+                        "width": 640
+                    },
+                    {
+                        "height": 132,
+                        "url": "https://i.scdn.co/image/eca1ff423abd9f1ce76ab0ce38d184e42146662c",
+                        "width": 200
+                    },
+                    {
+                        "height": 42,
+                        "url": "https://i.scdn.co/image/86f22ecb6792bfdc1a9f515552ef07b8741e496a",
+                        "width": 64
+                    }
+                ],
+                "name": "The Kingston Trio",
+                "popularity": 39,
+                "type": "artist",
+                "uri": "spotify:artist:3qtcbDvdIgQOXkPbtRvBaQ"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/0X0IJtOkxw1P5csEWXk0vR"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 124
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/0X0IJtOkxw1P5csEWXk0vR",
+                "id": "0X0IJtOkxw1P5csEWXk0vR",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5ebc0ede698872028ae59be5548",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab67616100005174c0ede698872028ae59be5548",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f178c0ede698872028ae59be5548",
+                        "width": 160
+                    }
+                ],
+                "name": "gente pequeña",
+                "popularity": 5,
+                "type": "artist",
+                "uri": "spotify:artist:0X0IJtOkxw1P5csEWXk0vR"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/5dazvIn89knw9HjScy3F0H"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 1
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/5dazvIn89knw9HjScy3F0H",
+                "id": "5dazvIn89knw9HjScy3F0H",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5eb15174915391a346c9d0b6a7d",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab6761610000517415174915391a346c9d0b6a7d",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f17815174915391a346c9d0b6a7d",
+                        "width": 160
+                    }
+                ],
+                "name": "Folky",
+                "popularity": 2,
+                "type": "artist",
+                "uri": "spotify:artist:5dazvIn89knw9HjScy3F0H"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/446mV2yNk82K3T6TW1j7Ot"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 409
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/446mV2yNk82K3T6TW1j7Ot",
+                "id": "446mV2yNk82K3T6TW1j7Ot",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5eb339cad7ff347003b49dfca9a",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab67616100005174339cad7ff347003b49dfca9a",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f178339cad7ff347003b49dfca9a",
+                        "width": 160
+                    }
+                ],
+                "name": "Hans Ek",
+                "popularity": 34,
+                "type": "artist",
+                "uri": "spotify:artist:446mV2yNk82K3T6TW1j7Ot"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/0XU75p0MCHOmuza8EMNMxq"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 4
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/0XU75p0MCHOmuza8EMNMxq",
+                "id": "0XU75p0MCHOmuza8EMNMxq",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273a05c3b2405f77fbe1d630511",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02a05c3b2405f77fbe1d630511",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851a05c3b2405f77fbe1d630511",
+                        "width": 64
+                    }
+                ],
+                "name": "Folk Poet",
+                "popularity": 6,
+                "type": "artist",
+                "uri": "spotify:artist:0XU75p0MCHOmuza8EMNMxq"
+            }
+        ],
+        "limit": 20,
+        "next": "https://api.spotify.com/v1/search?query=genre+folk&type=artist&market=IE&offset=20&limit=20",
+        "offset": 0,
+        "previous": null,
+        "total": 1000
+    }
+}

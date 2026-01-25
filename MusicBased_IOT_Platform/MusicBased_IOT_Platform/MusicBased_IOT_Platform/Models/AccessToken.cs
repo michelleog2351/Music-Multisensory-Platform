@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace MusicBased_IOT_Platform.Model
+namespace MusicBased_IOT_Platform.Models
 {
     /// <summary>
     /// A POCO class to store the access token acquired from the Spotify authentication process.

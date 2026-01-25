@@ -3,7 +3,7 @@
 
 using System.Text.Json.Serialization;
 
-namespace MusicBased_IOT_Platform.Model
+namespace MusicBased_IOT_Platform.Models
 {
     /// <summary>
     /// The NewReleases class stores a list of new Releases

@@ -1,0 +1,80 @@
+﻿{
+    "artists": [
+        {
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/6caPJFLv1wesmM7gwK1ACy"
+            },
+            "followers": {
+                "href": null,
+                "total": 1338738
+            },
+            "genres": [
+                "german house",
+                "german techno",
+                "high-tech minimal",
+                "minimal techno"
+            ],
+            "href": "https://api.spotify.com/v1/artists/6caPJFLv1wesmM7gwK1ACy",
+            "id": "6caPJFLv1wesmM7gwK1ACy",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://i.scdn.co/image/ab6761610000e5eb33c9b5dcc05194199aa68410",
+                    "width": 640
+                },
+                {
+                    "height": 320,
+                    "url": "https://i.scdn.co/image/ab6761610000517433c9b5dcc05194199aa68410",
+                    "width": 320
+                },
+                {
+                    "height": 160,
+                    "url": "https://i.scdn.co/image/ab6761610000f17833c9b5dcc05194199aa68410",
+                    "width": 160
+                }
+            ],
+            "name": "Boris Brejcha",
+            "popularity": 62,
+            "type": "artist",
+            "uri": "spotify:artist:6caPJFLv1wesmM7gwK1ACy"
+        },
+        {
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/4dwdTW1Lfiq0cM8nBAqIIz"
+            },
+            "followers": {
+                "href": null,
+                "total": 3454691
+            },
+            "genres": [
+                "folk-pop",
+                "metropopolis",
+                "modern rock",
+                "stomp and holler"
+            ],
+            "href": "https://api.spotify.com/v1/artists/4dwdTW1Lfiq0cM8nBAqIIz",
+            "id": "4dwdTW1Lfiq0cM8nBAqIIz",
+            "images": [
+                {
+                    "height": 640,
+                    "url": "https://i.scdn.co/image/ab6761610000e5ebce5451b5cc60faf1992e969a",
+                    "width": 640
+                },
+                {
+                    "height": 320,
+                    "url": "https://i.scdn.co/image/ab67616100005174ce5451b5cc60faf1992e969a",
+                    "width": 320
+                },
+                {
+                    "height": 160,
+                    "url": "https://i.scdn.co/image/ab6761610000f178ce5451b5cc60faf1992e969a",
+                    "width": 160
+                }
+            ],
+            "name": "Of Monsters and Men",
+            "popularity": 68,
+            "type": "artist",
+            "uri": "spotify:artist:4dwdTW1Lfiq0cM8nBAqIIz"
+        }
+    ]
+}

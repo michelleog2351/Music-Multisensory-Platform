@@ -18,7 +18,7 @@ namespace MusicBased_IOT_Platform.Service.Live
     /// The <c>LiveSpotifyDataService</c> class implemented the methods defined by the
     /// ISpotifyDataService interface and retrieves live data from the the Spotify API.
     /// </summary>  
-    public class LiveSpotifyDataService : ISpotifyDataService
+    public class LiveSpotifyDataService : MockSpotifyDataService
     {
         // Fields
         // HttpClient used to make live calls to the spotify API

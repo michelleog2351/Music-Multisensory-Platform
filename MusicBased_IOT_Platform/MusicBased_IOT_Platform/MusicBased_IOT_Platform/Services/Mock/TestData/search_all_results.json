@@ -1,0 +1,3200 @@
+﻿{
+    "albums": {
+        "href": "https://api.spotify.com/v1/search?query=genre+folk&type=album&market=IE&offset=0&limit=20",
+        "items": [
+            {
+                "album_type": "album",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/7lUh5wTzo5BAweVebw7QB3"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/7lUh5wTzo5BAweVebw7QB3",
+                        "id": "7lUh5wTzo5BAweVebw7QB3",
+                        "name": "Christine Salhany",
+                        "type": "artist",
+                        "uri": "spotify:artist:7lUh5wTzo5BAweVebw7QB3"
+                    },
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/5jsVUhDh4cy6ahH02mw9cX"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/5jsVUhDh4cy6ahH02mw9cX",
+                        "id": "5jsVUhDh4cy6ahH02mw9cX",
+                        "name": "Crossing Genres",
+                        "type": "artist",
+                        "uri": "spotify:artist:5jsVUhDh4cy6ahH02mw9cX"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/08jGIKhgIlfqadRO11BGEC"
+                },
+                "href": "https://api.spotify.com/v1/albums/08jGIKhgIlfqadRO11BGEC",
+                "id": "08jGIKhgIlfqadRO11BGEC",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b27323375162870d23f994d33f60",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e0223375162870d23f994d33f60",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d0000485123375162870d23f994d33f60",
+                        "width": 64
+                    }
+                ],
+                "is_playable": true,
+                "name": "Eclectic Graffiti, Vol. 3 (Grunge / Folk-Rock / Flamenco / Latino Rap / Reggae / Country) [feat. Dr. Jimmy]",
+                "release_date": "2014-12-11",
+                "release_date_precision": "day",
+                "total_tracks": 10,
+                "type": "album",
+                "uri": "spotify:album:08jGIKhgIlfqadRO11BGEC"
+            },
+            {
+                "album_type": "album",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/3AbWtjrWtPi5Yl7KLr6nWw"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/3AbWtjrWtPi5Yl7KLr6nWw",
+                        "id": "3AbWtjrWtPi5Yl7KLr6nWw",
+                        "name": "Leggera Electric Folk Band",
+                        "type": "artist",
+                        "uri": "spotify:artist:3AbWtjrWtPi5Yl7KLr6nWw"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/5roI1DOELfIiVtfW7WW8yl"
+                },
+                "href": "https://api.spotify.com/v1/albums/5roI1DOELfIiVtfW7WW8yl",
+                "id": "5roI1DOELfIiVtfW7WW8yl",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b2731b4fa2a402a57954890c991c",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e021b4fa2a402a57954890c991c",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d000048511b4fa2a402a57954890c991c",
+                        "width": 64
+                    }
+                ],
+                "is_playable": true,
+                "name": "Gente Allegra Iddio L'aiuta",
+                "release_date": "2015-08-31",
+                "release_date_precision": "day",
+                "total_tracks": 11,
+                "type": "album",
+                "uri": "spotify:album:5roI1DOELfIiVtfW7WW8yl"
+            },
+            {
+                "album_type": "compilation",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/0LyfQWJT6nXafLPZqxe9Of"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/0LyfQWJT6nXafLPZqxe9Of",
+                        "id": "0LyfQWJT6nXafLPZqxe9Of",
+                        "name": "Various Artists",
+                        "type": "artist",
+                        "uri": "spotify:artist:0LyfQWJT6nXafLPZqxe9Of"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/0h272QAuGAvfP0cSUNjVLx"
+                },
+                "href": "https://api.spotify.com/v1/albums/0h272QAuGAvfP0cSUNjVLx",
+                "id": "0h272QAuGAvfP0cSUNjVLx",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273543e81589c325658599877ba",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02543e81589c325658599877ba",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851543e81589c325658599877ba",
+                        "width": 64
+                    }
+                ],
+                "is_playable": true,
+                "name": "Indie Folk",
+                "release_date": "2013-07-16",
+                "release_date_precision": "day",
+                "total_tracks": 7,
+                "type": "album",
+                "uri": "spotify:album:0h272QAuGAvfP0cSUNjVLx"
+            },
+            {
+                "album_type": "single",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/5VE6IinEVSwdQNqQIN8zAN"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/5VE6IinEVSwdQNqQIN8zAN",
+                        "id": "5VE6IinEVSwdQNqQIN8zAN",
+                        "name": "Los Caimanes De Sinaloa",
+                        "type": "artist",
+                        "uri": "spotify:artist:5VE6IinEVSwdQNqQIN8zAN"
+                    },
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/5ZZ2zIylJkPJVKZDVwW29B"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/5ZZ2zIylJkPJVKZDVwW29B",
+                        "id": "5ZZ2zIylJkPJVKZDVwW29B",
+                        "name": "Los Populares Del Llano",
+                        "type": "artist",
+                        "uri": "spotify:artist:5ZZ2zIylJkPJVKZDVwW29B"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/6KjEepf5Mu6Bt1AoqFR68u"
+                },
+                "href": "https://api.spotify.com/v1/albums/6KjEepf5Mu6Bt1AoqFR68u",
+                "id": "6KjEepf5Mu6Bt1AoqFR68u",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273477afaa84b3920c55ab05a13",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02477afaa84b3920c55ab05a13",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851477afaa84b3920c55ab05a13",
+                        "width": 64
+                    }
+                ],
+                "is_playable": true,
+                "name": "Gente Del Sombrero (En Vivo)",
+                "release_date": "2023-10-20",
+                "release_date_precision": "day",
+                "total_tracks": 1,
+                "type": "album",
+                "uri": "spotify:album:6KjEepf5Mu6Bt1AoqFR68u"
+            },
+            {
+                "album_type": "album",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/01cy54KoiBt6XAOJNtDIgT"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/01cy54KoiBt6XAOJNtDIgT",
+                        "id": "01cy54KoiBt6XAOJNtDIgT",
+                        "name": "Pete Hawkes",
+                        "type": "artist",
+                        "uri": "spotify:artist:01cy54KoiBt6XAOJNtDIgT"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/5nrQLr6FW5OS3LQwcjJHQm"
+                },
+                "href": "https://api.spotify.com/v1/albums/5nrQLr6FW5OS3LQwcjJHQm",
+                "id": "5nrQLr6FW5OS3LQwcjJHQm",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273d355de56d58d989d907d0214",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02d355de56d58d989d907d0214",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851d355de56d58d989d907d0214",
+                        "width": 64
+                    }
+                ],
+                "is_playable": true,
+                "name": "Genres Volume 2: Gypsy, Celtic and Folk, Selected Instrumentals",
+                "release_date": "2010-02-20",
+                "release_date_precision": "day",
+                "total_tracks": 14,
+                "type": "album",
+                "uri": "spotify:album:5nrQLr6FW5OS3LQwcjJHQm"
+            },
+            {
+                "album_type": "album",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/4yEPUYCv1QtFjWEUaYjCnm"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/4yEPUYCv1QtFjWEUaYjCnm",
+                        "id": "4yEPUYCv1QtFjWEUaYjCnm",
+                        "name": "Mario Battaini orchestra folk romagnola",
+                        "type": "artist",
+                        "uri": "spotify:artist:4yEPUYCv1QtFjWEUaYjCnm"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/5uApmnWqhkGCxCLBQOMSQY"
+                },
+                "href": "https://api.spotify.com/v1/albums/5uApmnWqhkGCxCLBQOMSQY",
+                "id": "5uApmnWqhkGCxCLBQOMSQY",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273017ce72b238fde534b69d271",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02017ce72b238fde534b69d271",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851017ce72b238fde534b69d271",
+                        "width": 64
+                    }
+                ],
+                "is_playable": true,
+                "name": "Il meglio di Casadei, la mia gente",
+                "release_date": "2012-05-01",
+                "release_date_precision": "day",
+                "total_tracks": 12,
+                "type": "album",
+                "uri": "spotify:album:5uApmnWqhkGCxCLBQOMSQY"
+            },
+            {
+                "album_type": "compilation",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/0LyfQWJT6nXafLPZqxe9Of"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/0LyfQWJT6nXafLPZqxe9Of",
+                        "id": "0LyfQWJT6nXafLPZqxe9Of",
+                        "name": "Various Artists",
+                        "type": "artist",
+                        "uri": "spotify:artist:0LyfQWJT6nXafLPZqxe9Of"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/63DGe2gPl9a12uUDqmmNeB"
+                },
+                "href": "https://api.spotify.com/v1/albums/63DGe2gPl9a12uUDqmmNeB",
+                "id": "63DGe2gPl9a12uUDqmmNeB",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273484aea923d5aae7f0a0169cf",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02484aea923d5aae7f0a0169cf",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851484aea923d5aae7f0a0169cf",
+                        "width": 64
+                    }
+                ],
+                "is_playable": true,
+                "name": "Best of Folk",
+                "release_date": "2009-07-27",
+                "release_date_precision": "day",
+                "total_tracks": 80,
+                "type": "album",
+                "uri": "spotify:album:63DGe2gPl9a12uUDqmmNeB"
+            },
+            {
+                "album_type": "single",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/3O8REjW84wRHnhTtc2bI4Q"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/3O8REjW84wRHnhTtc2bI4Q",
+                        "id": "3O8REjW84wRHnhTtc2bI4Q",
+                        "name": "Gente di Toscana",
+                        "type": "artist",
+                        "uri": "spotify:artist:3O8REjW84wRHnhTtc2bI4Q"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/3TeppbYQnOGDMo1uloj3Ya"
+                },
+                "href": "https://api.spotify.com/v1/albums/3TeppbYQnOGDMo1uloj3Ya",
+                "id": "3TeppbYQnOGDMo1uloj3Ya",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273a3c2dbd22cef23ffa86c6bed",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02a3c2dbd22cef23ffa86c6bed",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851a3c2dbd22cef23ffa86c6bed",
+                        "width": 64
+                    }
+                ],
+                "is_playable": true,
+                "name": "Monte Viso",
+                "release_date": "2022-11-11",
+                "release_date_precision": "day",
+                "total_tracks": 1,
+                "type": "album",
+                "uri": "spotify:album:3TeppbYQnOGDMo1uloj3Ya"
+            },
+            {
+                "album_type": "single",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/6Mm7bnfcvv1mi96ibAJvKb"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/6Mm7bnfcvv1mi96ibAJvKb",
+                        "id": "6Mm7bnfcvv1mi96ibAJvKb",
+                        "name": "Genre Master",
+                        "type": "artist",
+                        "uri": "spotify:artist:6Mm7bnfcvv1mi96ibAJvKb"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/7wLYBABpHs69Q61YW2Mz3P"
+                },
+                "href": "https://api.spotify.com/v1/albums/7wLYBABpHs69Q61YW2Mz3P",
+                "id": "7wLYBABpHs69Q61YW2Mz3P",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b27391dfac281fd19c0a7dbbe5b3",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e0291dfac281fd19c0a7dbbe5b3",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d0000485191dfac281fd19c0a7dbbe5b3",
+                        "width": 64
+                    }
+                ],
+                "is_playable": true,
+                "name": "Play With Other Folks Wifes They Fool Around On You \"Ooh Let's Have & Affair\"",
+                "release_date": "2015-08-28",
+                "release_date_precision": "day",
+                "total_tracks": 1,
+                "type": "album",
+                "uri": "spotify:album:7wLYBABpHs69Q61YW2Mz3P"
+            },
+            {
+                "album_type": "single",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/3IbMKPOS9cC2cDggbT5KSN"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/3IbMKPOS9cC2cDggbT5KSN",
+                        "id": "3IbMKPOS9cC2cDggbT5KSN",
+                        "name": "Gente per tutti",
+                        "type": "artist",
+                        "uri": "spotify:artist:3IbMKPOS9cC2cDggbT5KSN"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/0XZhwrfx7dy4W3M4OtvOci"
+                },
+                "href": "https://api.spotify.com/v1/albums/0XZhwrfx7dy4W3M4OtvOci",
+                "id": "0XZhwrfx7dy4W3M4OtvOci",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273d6fad6ea35370af72fc43c00",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02d6fad6ea35370af72fc43c00",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851d6fad6ea35370af72fc43c00",
+                        "width": 64
+                    }
+                ],
+                "is_playable": true,
+                "name": "Folkrore",
+                "release_date": "2022-08-04",
+                "release_date_precision": "day",
+                "total_tracks": 3,
+                "type": "album",
+                "uri": "spotify:album:0XZhwrfx7dy4W3M4OtvOci"
+            },
+            {
+                "album_type": "compilation",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/0LyfQWJT6nXafLPZqxe9Of"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/0LyfQWJT6nXafLPZqxe9Of",
+                        "id": "0LyfQWJT6nXafLPZqxe9Of",
+                        "name": "Various Artists",
+                        "type": "artist",
+                        "uri": "spotify:artist:0LyfQWJT6nXafLPZqxe9Of"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/0bY2HtMx36v35wtNfQiy8f"
+                },
+                "href": "https://api.spotify.com/v1/albums/0bY2HtMx36v35wtNfQiy8f",
+                "id": "0bY2HtMx36v35wtNfQiy8f",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273041b248e5f576fa5b07a8c82",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02041b248e5f576fa5b07a8c82",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851041b248e5f576fa5b07a8c82",
+                        "width": 64
+                    }
+                ],
+                "is_playable": true,
+                "name": "Folk Festival",
+                "release_date": "1998-01-01",
+                "release_date_precision": "day",
+                "total_tracks": 27,
+                "type": "album",
+                "uri": "spotify:album:0bY2HtMx36v35wtNfQiy8f"
+            },
+            {
+                "album_type": "single",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/0jIdHXAIvkSENgn8J0G1Qi"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/0jIdHXAIvkSENgn8J0G1Qi",
+                        "id": "0jIdHXAIvkSENgn8J0G1Qi",
+                        "name": "Cían Wolf",
+                        "type": "artist",
+                        "uri": "spotify:artist:0jIdHXAIvkSENgn8J0G1Qi"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/69iChk2RupWNa7c6D032BE"
+                },
+                "href": "https://api.spotify.com/v1/albums/69iChk2RupWNa7c6D032BE",
+                "id": "69iChk2RupWNa7c6D032BE",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273f98dc21ccd850913b02ef7fe",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02f98dc21ccd850913b02ef7fe",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851f98dc21ccd850913b02ef7fe",
+                        "width": 64
+                    }
+                ],
+                "is_playable": true,
+                "name": "Gente Falsa",
+                "release_date": "2023-06-22",
+                "release_date_precision": "day",
+                "total_tracks": 1,
+                "type": "album",
+                "uri": "spotify:album:69iChk2RupWNa7c6D032BE"
+            },
+            {
+                "album_type": "compilation",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/0LyfQWJT6nXafLPZqxe9Of"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/0LyfQWJT6nXafLPZqxe9Of",
+                        "id": "0LyfQWJT6nXafLPZqxe9Of",
+                        "name": "Various Artists",
+                        "type": "artist",
+                        "uri": "spotify:artist:0LyfQWJT6nXafLPZqxe9Of"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/3NqU4lbjvBGHzHSN5rkJyS"
+                },
+                "href": "https://api.spotify.com/v1/albums/3NqU4lbjvBGHzHSN5rkJyS",
+                "id": "3NqU4lbjvBGHzHSN5rkJyS",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273dfe82d08cbfb1b48a89ee4e5",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02dfe82d08cbfb1b48a89ee4e5",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851dfe82d08cbfb1b48a89ee4e5",
+                        "width": 64
+                    }
+                ],
+                "is_playable": true,
+                "name": "Folk Rock",
+                "release_date": "2020-05-15",
+                "release_date_precision": "day",
+                "total_tracks": 27,
+                "type": "album",
+                "uri": "spotify:album:3NqU4lbjvBGHzHSN5rkJyS"
+            },
+            {
+                "album_type": "album",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/7ifIChIp9s9QItffFUYhIu"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/7ifIChIp9s9QItffFUYhIu",
+                        "id": "7ifIChIp9s9QItffFUYhIu",
+                        "name": "Gente De Abolengo",
+                        "type": "artist",
+                        "uri": "spotify:artist:7ifIChIp9s9QItffFUYhIu"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/0yV43zvKXumtnRB5JwAfhH"
+                },
+                "href": "https://api.spotify.com/v1/albums/0yV43zvKXumtnRB5JwAfhH",
+                "id": "0yV43zvKXumtnRB5JwAfhH",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b27343e6aac8e8d6e783ba21ac1e",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e0243e6aac8e8d6e783ba21ac1e",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d0000485143e6aac8e8d6e783ba21ac1e",
+                        "width": 64
+                    }
+                ],
+                "is_playable": true,
+                "name": "De Vuelta al Rancho",
+                "release_date": "2022-03-27",
+                "release_date_precision": "day",
+                "total_tracks": 9,
+                "type": "album",
+                "uri": "spotify:album:0yV43zvKXumtnRB5JwAfhH"
+            },
+            {
+                "album_type": "compilation",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/0LyfQWJT6nXafLPZqxe9Of"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/0LyfQWJT6nXafLPZqxe9Of",
+                        "id": "0LyfQWJT6nXafLPZqxe9Of",
+                        "name": "Various Artists",
+                        "type": "artist",
+                        "uri": "spotify:artist:0LyfQWJT6nXafLPZqxe9Of"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/1zlk0aJcCGKJ8pe2iDK6p7"
+                },
+                "href": "https://api.spotify.com/v1/albums/1zlk0aJcCGKJ8pe2iDK6p7",
+                "id": "1zlk0aJcCGKJ8pe2iDK6p7",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273dd240d4a66239d59b58d0997",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02dd240d4a66239d59b58d0997",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851dd240d4a66239d59b58d0997",
+                        "width": 64
+                    }
+                ],
+                "is_playable": false,
+                "name": "40 Favourite Folk Songs",
+                "release_date": "2011-07-08",
+                "release_date_precision": "day",
+                "restrictions": {
+                    "reason": "market"
+                },
+                "total_tracks": 40,
+                "type": "album",
+                "uri": "spotify:album:1zlk0aJcCGKJ8pe2iDK6p7"
+            },
+            {
+                "album_type": "single",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/4PUXHSshLF51oFtzS7Nl0C"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/4PUXHSshLF51oFtzS7Nl0C",
+                        "id": "4PUXHSshLF51oFtzS7Nl0C",
+                        "name": "Los Panx",
+                        "type": "artist",
+                        "uri": "spotify:artist:4PUXHSshLF51oFtzS7Nl0C"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/1O3QFHs5Gojf1n2bhx2vNX"
+                },
+                "href": "https://api.spotify.com/v1/albums/1O3QFHs5Gojf1n2bhx2vNX",
+                "id": "1O3QFHs5Gojf1n2bhx2vNX",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b27315b16a2361f073b1aedf42bd",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e0215b16a2361f073b1aedf42bd",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d0000485115b16a2361f073b1aedf42bd",
+                        "width": 64
+                    }
+                ],
+                "is_playable": true,
+                "name": "Gente",
+                "release_date": "2018-11-20",
+                "release_date_precision": "day",
+                "total_tracks": 1,
+                "type": "album",
+                "uri": "spotify:album:1O3QFHs5Gojf1n2bhx2vNX"
+            },
+            {
+                "album_type": "album",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/5VwfUDvuISC9Sqc7jMTpIV"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/5VwfUDvuISC9Sqc7jMTpIV",
+                        "id": "5VwfUDvuISC9Sqc7jMTpIV",
+                        "name": "Phoenix Moon",
+                        "type": "artist",
+                        "uri": "spotify:artist:5VwfUDvuISC9Sqc7jMTpIV"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/15XQDYZVLHL96iiPo1O7d5"
+                },
+                "href": "https://api.spotify.com/v1/albums/15XQDYZVLHL96iiPo1O7d5",
+                "id": "15XQDYZVLHL96iiPo1O7d5",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273bbe7f8fef134c9fc807dcdc2",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02bbe7f8fef134c9fc807dcdc2",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851bbe7f8fef134c9fc807dcdc2",
+                        "width": 64
+                    }
+                ],
+                "is_playable": true,
+                "name": "Classic Folk and Acoustic Favourites",
+                "release_date": "2019-10-10",
+                "release_date_precision": "day",
+                "total_tracks": 40,
+                "type": "album",
+                "uri": "spotify:album:15XQDYZVLHL96iiPo1O7d5"
+            },
+            {
+                "album_type": "album",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/5Yt7r0dboZKRgEBkedDFwG"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/5Yt7r0dboZKRgEBkedDFwG",
+                        "id": "5Yt7r0dboZKRgEBkedDFwG",
+                        "name": "Gente OK",
+                        "type": "artist",
+                        "uri": "spotify:artist:5Yt7r0dboZKRgEBkedDFwG"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/5KeeMGB6NxeruzxOOHXBE4"
+                },
+                "href": "https://api.spotify.com/v1/albums/5KeeMGB6NxeruzxOOHXBE4",
+                "id": "5KeeMGB6NxeruzxOOHXBE4",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b2739d06904b47e8666803f95f56",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e029d06904b47e8666803f95f56",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d000048519d06904b47e8666803f95f56",
+                        "width": 64
+                    }
+                ],
+                "is_playable": true,
+                "name": "Lo Mejor de Gente Ok",
+                "release_date": "2024-02-23",
+                "release_date_precision": "day",
+                "total_tracks": 12,
+                "type": "album",
+                "uri": "spotify:album:5KeeMGB6NxeruzxOOHXBE4"
+            },
+            {
+                "album_type": "album",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/4y6J8jwRAwO4dssiSmN91R"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/4y6J8jwRAwO4dssiSmN91R",
+                        "id": "4y6J8jwRAwO4dssiSmN91R",
+                        "name": "Muddy Waters",
+                        "type": "artist",
+                        "uri": "spotify:artist:4y6J8jwRAwO4dssiSmN91R"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/4bi0CKFKviadIaSlkakfN7"
+                },
+                "href": "https://api.spotify.com/v1/albums/4bi0CKFKviadIaSlkakfN7",
+                "id": "4bi0CKFKviadIaSlkakfN7",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273f7ae2efa32ae0e057d170fb5",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02f7ae2efa32ae0e057d170fb5",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851f7ae2efa32ae0e057d170fb5",
+                        "width": 64
+                    }
+                ],
+                "is_playable": true,
+                "name": "Folk Singer (Expanded Edition)",
+                "release_date": "1964-04-05",
+                "release_date_precision": "day",
+                "total_tracks": 14,
+                "type": "album",
+                "uri": "spotify:album:4bi0CKFKviadIaSlkakfN7"
+            },
+            {
+                "album_type": "single",
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/044xvh3zPu82tsolDMc9wy"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/044xvh3zPu82tsolDMc9wy",
+                        "id": "044xvh3zPu82tsolDMc9wy",
+                        "name": "Los De La Nueva Era",
+                        "type": "artist",
+                        "uri": "spotify:artist:044xvh3zPu82tsolDMc9wy"
+                    }
+                ],
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/album/2KDT6EUEJ4593jTrJn7mwX"
+                },
+                "href": "https://api.spotify.com/v1/albums/2KDT6EUEJ4593jTrJn7mwX",
+                "id": "2KDT6EUEJ4593jTrJn7mwX",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273c3edf8bced58b8f4b7a3095e",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02c3edf8bced58b8f4b7a3095e",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851c3edf8bced58b8f4b7a3095e",
+                        "width": 64
+                    }
+                ],
+                "is_playable": true,
+                "name": "Gente De Isaias",
+                "release_date": "2023-04-28",
+                "release_date_precision": "day",
+                "total_tracks": 1,
+                "type": "album",
+                "uri": "spotify:album:2KDT6EUEJ4593jTrJn7mwX"
+            }
+        ],
+        "limit": 20,
+        "next": "https://api.spotify.com/v1/search?query=genre+folk&type=album&market=IE&offset=20&limit=20",
+        "offset": 0,
+        "previous": null,
+        "total": 1000
+    },
+    "artists": {
+        "href": "https://api.spotify.com/v1/search?query=genre+folk&type=artist&market=IE&offset=0&limit=20",
+        "items": [
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/4r5Xw9aOukGMRlSK70CdEr"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 1402
+                },
+                "genres": [
+                    "acoustic guitar cover"
+                ],
+                "href": "https://api.spotify.com/v1/artists/4r5Xw9aOukGMRlSK70CdEr",
+                "id": "4r5Xw9aOukGMRlSK70CdEr",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5ebce2a1327b6543e55eb03111c",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab67616100005174ce2a1327b6543e55eb03111c",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f178ce2a1327b6543e55eb03111c",
+                        "width": 160
+                    }
+                ],
+                "name": "Familiar Folk",
+                "popularity": 37,
+                "type": "artist",
+                "uri": "spotify:artist:4r5Xw9aOukGMRlSK70CdEr"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/68xJjwAFcVSDmF9vTlnqi8"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 11822
+                },
+                "genres": [
+                    "children's folk"
+                ],
+                "href": "https://api.spotify.com/v1/artists/68xJjwAFcVSDmF9vTlnqi8",
+                "id": "68xJjwAFcVSDmF9vTlnqi8",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5eb7658cc772d9b0ade205c83df",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab676161000051747658cc772d9b0ade205c83df",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f1787658cc772d9b0ade205c83df",
+                        "width": 160
+                    }
+                ],
+                "name": "Old Town School of Folk Music",
+                "popularity": 47,
+                "type": "artist",
+                "uri": "spotify:artist:68xJjwAFcVSDmF9vTlnqi8"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/0vNfZW2aLWeldSO6KgGJwn"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 429
+                },
+                "genres": [
+                    "environmental"
+                ],
+                "href": "https://api.spotify.com/v1/artists/0vNfZW2aLWeldSO6KgGJwn",
+                "id": "0vNfZW2aLWeldSO6KgGJwn",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5eb0b5a210ffc4c352b7c0764ee",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab676161000051740b5a210ffc4c352b7c0764ee",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f1780b5a210ffc4c352b7c0764ee",
+                        "width": 160
+                    }
+                ],
+                "name": "Forest FX",
+                "popularity": 36,
+                "type": "artist",
+                "uri": "spotify:artist:0vNfZW2aLWeldSO6KgGJwn"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/3JXiu3SDoHUdFWQkgDnJlK"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 0
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/3JXiu3SDoHUdFWQkgDnJlK",
+                "id": "3JXiu3SDoHUdFWQkgDnJlK",
+                "images": [],
+                "name": "Gente Del Reino",
+                "popularity": 6,
+                "type": "artist",
+                "uri": "spotify:artist:3JXiu3SDoHUdFWQkgDnJlK"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/1ifC4znYCvmMSJ0rght5JS"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 158192
+                },
+                "genres": [
+                    "indie anthem-folk",
+                    "indie folk",
+                    "modern indie folk"
+                ],
+                "href": "https://api.spotify.com/v1/artists/1ifC4znYCvmMSJ0rght5JS",
+                "id": "1ifC4znYCvmMSJ0rght5JS",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5eb96a97f8d2d6ba6f3c2024ef1",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab6761610000517496a97f8d2d6ba6f3c2024ef1",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f17896a97f8d2d6ba6f3c2024ef1",
+                        "width": 160
+                    }
+                ],
+                "name": "Haux",
+                "popularity": 50,
+                "type": "artist",
+                "uri": "spotify:artist:1ifC4znYCvmMSJ0rght5JS"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/6Xa4nbrSTfbioA4lLShbjh"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 150822
+                },
+                "genres": [
+                    "hopebeat",
+                    "indie poptimism",
+                    "indie rockism",
+                    "modern alternative rock",
+                    "modern rock",
+                    "swedish alternative rock"
+                ],
+                "href": "https://api.spotify.com/v1/artists/6Xa4nbrSTfbioA4lLShbjh",
+                "id": "6Xa4nbrSTfbioA4lLShbjh",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5eb454683a1d2793bc1012dbd88",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab67616100005174454683a1d2793bc1012dbd88",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f178454683a1d2793bc1012dbd88",
+                        "width": 160
+                    }
+                ],
+                "name": "Grizfolk",
+                "popularity": 46,
+                "type": "artist",
+                "uri": "spotify:artist:6Xa4nbrSTfbioA4lLShbjh"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/7rure1hFRz36lJv4LSTXxH"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 13549
+                },
+                "genres": [
+                    "nuevo folklore argentino"
+                ],
+                "href": "https://api.spotify.com/v1/artists/7rure1hFRz36lJv4LSTXxH",
+                "id": "7rure1hFRz36lJv4LSTXxH",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5ebf45b2a8fc267a28920ea2f3b",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab67616100005174f45b2a8fc267a28920ea2f3b",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f178f45b2a8fc267a28920ea2f3b",
+                        "width": 160
+                    }
+                ],
+                "name": "Rumbo Tumba",
+                "popularity": 45,
+                "type": "artist",
+                "uri": "spotify:artist:7rure1hFRz36lJv4LSTXxH"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/39RnqcMpFSK4e7tbODSsaP"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 17327
+                },
+                "genres": [
+                    "crank wave",
+                    "uk post-punk revival"
+                ],
+                "href": "https://api.spotify.com/v1/artists/39RnqcMpFSK4e7tbODSsaP",
+                "id": "39RnqcMpFSK4e7tbODSsaP",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5ebf46413744ae1ec6e2261fd3d",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab67616100005174f46413744ae1ec6e2261fd3d",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f178f46413744ae1ec6e2261fd3d",
+                        "width": 160
+                    }
+                ],
+                "name": "Folly Group",
+                "popularity": 36,
+                "type": "artist",
+                "uri": "spotify:artist:39RnqcMpFSK4e7tbODSsaP"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/0eD8oA7A2RsyHdB1Vqbpq7"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 316
+                },
+                "genres": [
+                    "musica jalisciense"
+                ],
+                "href": "https://api.spotify.com/v1/artists/0eD8oA7A2RsyHdB1Vqbpq7",
+                "id": "0eD8oA7A2RsyHdB1Vqbpq7",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5ebbfbecef28228e91c5a83daa8",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab67616100005174bfbecef28228e91c5a83daa8",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f178bfbecef28228e91c5a83daa8",
+                        "width": 160
+                    }
+                ],
+                "name": "Gente de Mando",
+                "popularity": 4,
+                "type": "artist",
+                "uri": "spotify:artist:0eD8oA7A2RsyHdB1Vqbpq7"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/7D85NYUepsEefpLYMIM6IR"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 1180
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/7D85NYUepsEefpLYMIM6IR",
+                "id": "7D85NYUepsEefpLYMIM6IR",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5eb5868e84f55e82a85a5468c87",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab676161000051745868e84f55e82a85a5468c87",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f1785868e84f55e82a85a5468c87",
+                        "width": 160
+                    }
+                ],
+                "name": "Jimmy & Scots Folk Band",
+                "popularity": 35,
+                "type": "artist",
+                "uri": "spotify:artist:7D85NYUepsEefpLYMIM6IR"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/0tkboyBYNymYytYlb9EXkN"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 416486
+                },
+                "genres": [
+                    "charango",
+                    "folklore boliviano",
+                    "musica andina",
+                    "tinku"
+                ],
+                "href": "https://api.spotify.com/v1/artists/0tkboyBYNymYytYlb9EXkN",
+                "id": "0tkboyBYNymYytYlb9EXkN",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5eb29ed2bc1acdba6400e9d6989",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab6761610000517429ed2bc1acdba6400e9d6989",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f17829ed2bc1acdba6400e9d6989",
+                        "width": 160
+                    }
+                ],
+                "name": "Los Kjarkas",
+                "popularity": 53,
+                "type": "artist",
+                "uri": "spotify:artist:0tkboyBYNymYytYlb9EXkN"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/0DToZ2QFAaFFboPRzpvJI0"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 13
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/0DToZ2QFAaFFboPRzpvJI0",
+                "id": "0DToZ2QFAaFFboPRzpvJI0",
+                "images": [],
+                "name": "Folk Fusion",
+                "popularity": 13,
+                "type": "artist",
+                "uri": "spotify:artist:0DToZ2QFAaFFboPRzpvJI0"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/1W6Ar3FyrfqCRnqHbfjIiY"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 205
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/1W6Ar3FyrfqCRnqHbfjIiY",
+                "id": "1W6Ar3FyrfqCRnqHbfjIiY",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273674b8d4977b7e9344a6e3b50",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02674b8d4977b7e9344a6e3b50",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851674b8d4977b7e9344a6e3b50",
+                        "width": 64
+                    }
+                ],
+                "name": "Gente Maravillosa",
+                "popularity": 5,
+                "type": "artist",
+                "uri": "spotify:artist:1W6Ar3FyrfqCRnqHbfjIiY"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/1lLqclT8tDQKcGtFQHF2yT"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 62
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/1lLqclT8tDQKcGtFQHF2yT",
+                "id": "1lLqclT8tDQKcGtFQHF2yT",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273ff5b35023526d032b925c41a",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02ff5b35023526d032b925c41a",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851ff5b35023526d032b925c41a",
+                        "width": 64
+                    }
+                ],
+                "name": "Folk Aid",
+                "popularity": 2,
+                "type": "artist",
+                "uri": "spotify:artist:1lLqclT8tDQKcGtFQHF2yT"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/3Ofl7L5rNmZhAi2TyFyVes"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 14
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/3Ofl7L5rNmZhAi2TyFyVes",
+                "id": "3Ofl7L5rNmZhAi2TyFyVes",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b27331b201e068a02baad166e6db",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e0231b201e068a02baad166e6db",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d0000485131b201e068a02baad166e6db",
+                        "width": 64
+                    }
+                ],
+                "name": "Gente Pescaito",
+                "popularity": 3,
+                "type": "artist",
+                "uri": "spotify:artist:3Ofl7L5rNmZhAi2TyFyVes"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/3qtcbDvdIgQOXkPbtRvBaQ"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 112387
+                },
+                "genres": [
+                    "american folk revival",
+                    "folk"
+                ],
+                "href": "https://api.spotify.com/v1/artists/3qtcbDvdIgQOXkPbtRvBaQ",
+                "id": "3qtcbDvdIgQOXkPbtRvBaQ",
+                "images": [
+                    {
+                        "height": 661,
+                        "url": "https://i.scdn.co/image/c77989e1d9a05cf54ac2d98737469d05183e560e",
+                        "width": 1000
+                    },
+                    {
+                        "height": 423,
+                        "url": "https://i.scdn.co/image/fd99898c5805a42b96ef401e4686d2e467ce589e",
+                        "width": 640
+                    },
+                    {
+                        "height": 132,
+                        "url": "https://i.scdn.co/image/eca1ff423abd9f1ce76ab0ce38d184e42146662c",
+                        "width": 200
+                    },
+                    {
+                        "height": 42,
+                        "url": "https://i.scdn.co/image/86f22ecb6792bfdc1a9f515552ef07b8741e496a",
+                        "width": 64
+                    }
+                ],
+                "name": "The Kingston Trio",
+                "popularity": 39,
+                "type": "artist",
+                "uri": "spotify:artist:3qtcbDvdIgQOXkPbtRvBaQ"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/0X0IJtOkxw1P5csEWXk0vR"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 124
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/0X0IJtOkxw1P5csEWXk0vR",
+                "id": "0X0IJtOkxw1P5csEWXk0vR",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5ebc0ede698872028ae59be5548",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab67616100005174c0ede698872028ae59be5548",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f178c0ede698872028ae59be5548",
+                        "width": 160
+                    }
+                ],
+                "name": "gente pequeña",
+                "popularity": 5,
+                "type": "artist",
+                "uri": "spotify:artist:0X0IJtOkxw1P5csEWXk0vR"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/5dazvIn89knw9HjScy3F0H"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 1
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/5dazvIn89knw9HjScy3F0H",
+                "id": "5dazvIn89knw9HjScy3F0H",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5eb15174915391a346c9d0b6a7d",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab6761610000517415174915391a346c9d0b6a7d",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f17815174915391a346c9d0b6a7d",
+                        "width": 160
+                    }
+                ],
+                "name": "Folky",
+                "popularity": 2,
+                "type": "artist",
+                "uri": "spotify:artist:5dazvIn89knw9HjScy3F0H"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/446mV2yNk82K3T6TW1j7Ot"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 409
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/446mV2yNk82K3T6TW1j7Ot",
+                "id": "446mV2yNk82K3T6TW1j7Ot",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab6761610000e5eb339cad7ff347003b49dfca9a",
+                        "width": 640
+                    },
+                    {
+                        "height": 320,
+                        "url": "https://i.scdn.co/image/ab67616100005174339cad7ff347003b49dfca9a",
+                        "width": 320
+                    },
+                    {
+                        "height": 160,
+                        "url": "https://i.scdn.co/image/ab6761610000f178339cad7ff347003b49dfca9a",
+                        "width": 160
+                    }
+                ],
+                "name": "Hans Ek",
+                "popularity": 34,
+                "type": "artist",
+                "uri": "spotify:artist:446mV2yNk82K3T6TW1j7Ot"
+            },
+            {
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/0XU75p0MCHOmuza8EMNMxq"
+                },
+                "followers": {
+                    "href": null,
+                    "total": 4
+                },
+                "genres": [],
+                "href": "https://api.spotify.com/v1/artists/0XU75p0MCHOmuza8EMNMxq",
+                "id": "0XU75p0MCHOmuza8EMNMxq",
+                "images": [
+                    {
+                        "height": 640,
+                        "url": "https://i.scdn.co/image/ab67616d0000b273a05c3b2405f77fbe1d630511",
+                        "width": 640
+                    },
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/ab67616d00001e02a05c3b2405f77fbe1d630511",
+                        "width": 300
+                    },
+                    {
+                        "height": 64,
+                        "url": "https://i.scdn.co/image/ab67616d00004851a05c3b2405f77fbe1d630511",
+                        "width": 64
+                    }
+                ],
+                "name": "Folk Poet",
+                "popularity": 6,
+                "type": "artist",
+                "uri": "spotify:artist:0XU75p0MCHOmuza8EMNMxq"
+            }
+        ],
+        "limit": 20,
+        "next": "https://api.spotify.com/v1/search?query=genre+folk&type=artist&market=IE&offset=20&limit=20",
+        "offset": 0,
+        "previous": null,
+        "total": 1000
+    },
+    "tracks": {
+        "href": "https://api.spotify.com/v1/search?query=genre+folk&type=track&market=IE&offset=0&limit=20",
+        "items": [
+            {
+                "album": {
+                    "album_type": "album",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/4mwV1WYAU6qaAyQ1plR9ro"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/4mwV1WYAU6qaAyQ1plR9ro",
+                            "id": "4mwV1WYAU6qaAyQ1plR9ro",
+                            "name": "Karunaas",
+                            "type": "artist",
+                            "uri": "spotify:artist:4mwV1WYAU6qaAyQ1plR9ro"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/2wVq7yQntgTKcoxwaoRQMf"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/2wVq7yQntgTKcoxwaoRQMf",
+                    "id": "2wVq7yQntgTKcoxwaoRQMf",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b273a6aba38d25f668fb73aaef99",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e02a6aba38d25f668fb73aaef99",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d00004851a6aba38d25f668fb73aaef99",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "Vettiveru Vaasam",
+                    "release_date": "2000-01-01",
+                    "release_date_precision": "day",
+                    "total_tracks": 11,
+                    "type": "album",
+                    "uri": "spotify:album:2wVq7yQntgTKcoxwaoRQMf"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/4mwV1WYAU6qaAyQ1plR9ro"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/4mwV1WYAU6qaAyQ1plR9ro",
+                        "id": "4mwV1WYAU6qaAyQ1plR9ro",
+                        "name": "Karunaas",
+                        "type": "artist",
+                        "uri": "spotify:artist:4mwV1WYAU6qaAyQ1plR9ro"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 345533,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "IN25T0610889"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/3yly4dmh99jyFjqsrd8Z3y"
+                },
+                "href": "https://api.spotify.com/v1/tracks/3yly4dmh99jyFjqsrd8Z3y",
+                "id": "3yly4dmh99jyFjqsrd8Z3y",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Otthakallu - Language: Tamil; Genre: Folk-Tamil",
+                "popularity": 32,
+                "preview_url": "https://p.scdn.co/mp3-preview/0d86310ea179b41e171420fd7f8cbc43d7483656?cid=0ef20ae82f284c1da3c5b8bfd02bebc4",
+                "track_number": 1,
+                "type": "track",
+                "uri": "spotify:track:3yly4dmh99jyFjqsrd8Z3y"
+            },
+            {
+                "album": {
+                    "album_type": "album",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/1Xqfa9sfJ094hHdEVS1C6t"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/1Xqfa9sfJ094hHdEVS1C6t",
+                            "id": "1Xqfa9sfJ094hHdEVS1C6t",
+                            "name": "Hunter Hunted",
+                            "type": "artist",
+                            "uri": "spotify:artist:1Xqfa9sfJ094hHdEVS1C6t"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/17EFF25Ee9kK5QgPgd4bv5"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/17EFF25Ee9kK5QgPgd4bv5",
+                    "id": "17EFF25Ee9kK5QgPgd4bv5",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b2734f6a773d6f422c76d6d8de30",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e024f6a773d6f422c76d6d8de30",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d000048514f6a773d6f422c76d6d8de30",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "Ready For You",
+                    "release_date": "2015-07-10",
+                    "release_date_precision": "day",
+                    "total_tracks": 11,
+                    "type": "album",
+                    "uri": "spotify:album:17EFF25Ee9kK5QgPgd4bv5"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/1Xqfa9sfJ094hHdEVS1C6t"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/1Xqfa9sfJ094hHdEVS1C6t",
+                        "id": "1Xqfa9sfJ094hHdEVS1C6t",
+                        "name": "Hunter Hunted",
+                        "type": "artist",
+                        "uri": "spotify:artist:1Xqfa9sfJ094hHdEVS1C6t"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 233933,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "USUM71311088"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/6TUtl0J6uLLhrIFHEJZFNU"
+                },
+                "href": "https://api.spotify.com/v1/tracks/6TUtl0J6uLLhrIFHEJZFNU",
+                "id": "6TUtl0J6uLLhrIFHEJZFNU",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Gentle Folks",
+                "popularity": 20,
+                "preview_url": "https://p.scdn.co/mp3-preview/f1fc2366b1ecc3c20465d552e9fae6758786cf5c?cid=0ef20ae82f284c1da3c5b8bfd02bebc4",
+                "track_number": 7,
+                "type": "track",
+                "uri": "spotify:track:6TUtl0J6uLLhrIFHEJZFNU"
+            },
+            {
+                "album": {
+                    "album_type": "album",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/5ekB66OtYyjTDQPdsdVsrl"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/5ekB66OtYyjTDQPdsdVsrl",
+                            "id": "5ekB66OtYyjTDQPdsdVsrl",
+                            "name": "AmbientAura",
+                            "type": "artist",
+                            "uri": "spotify:artist:5ekB66OtYyjTDQPdsdVsrl"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/4cPDa0TYaCJYDF9hYIgAdH"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/4cPDa0TYaCJYDF9hYIgAdH",
+                    "id": "4cPDa0TYaCJYDF9hYIgAdH",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b273982c2f75b84f2310e9ee9da0",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e02982c2f75b84f2310e9ee9da0",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d00004851982c2f75b84f2310e9ee9da0",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "Acoustic Agony",
+                    "release_date": "2024-01-13",
+                    "release_date_precision": "day",
+                    "total_tracks": 50,
+                    "type": "album",
+                    "uri": "spotify:album:4cPDa0TYaCJYDF9hYIgAdH"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/5ekB66OtYyjTDQPdsdVsrl"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/5ekB66OtYyjTDQPdsdVsrl",
+                        "id": "5ekB66OtYyjTDQPdsdVsrl",
+                        "name": "AmbientAura",
+                        "type": "artist",
+                        "uri": "spotify:artist:5ekB66OtYyjTDQPdsdVsrl"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 52349,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "GBLFP2411805"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/7nmOkOwT8qZWERj5EpOyOp"
+                },
+                "href": "https://api.spotify.com/v1/tracks/7nmOkOwT8qZWERj5EpOyOp",
+                "id": "7nmOkOwT8qZWERj5EpOyOp",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Folk Fusion",
+                "popularity": 19,
+                "preview_url": "https://p.scdn.co/mp3-preview/db54420e32140840dbe5845dfb37bcfeae015ca2?cid=0ef20ae82f284c1da3c5b8bfd02bebc4",
+                "track_number": 40,
+                "type": "track",
+                "uri": "spotify:track:7nmOkOwT8qZWERj5EpOyOp"
+            },
+            {
+                "album": {
+                    "album_type": "single",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/5VE6IinEVSwdQNqQIN8zAN"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/5VE6IinEVSwdQNqQIN8zAN",
+                            "id": "5VE6IinEVSwdQNqQIN8zAN",
+                            "name": "Los Caimanes De Sinaloa",
+                            "type": "artist",
+                            "uri": "spotify:artist:5VE6IinEVSwdQNqQIN8zAN"
+                        },
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/5ZZ2zIylJkPJVKZDVwW29B"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/5ZZ2zIylJkPJVKZDVwW29B",
+                            "id": "5ZZ2zIylJkPJVKZDVwW29B",
+                            "name": "Los Populares Del Llano",
+                            "type": "artist",
+                            "uri": "spotify:artist:5ZZ2zIylJkPJVKZDVwW29B"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/6KjEepf5Mu6Bt1AoqFR68u"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/6KjEepf5Mu6Bt1AoqFR68u",
+                    "id": "6KjEepf5Mu6Bt1AoqFR68u",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b273477afaa84b3920c55ab05a13",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e02477afaa84b3920c55ab05a13",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d00004851477afaa84b3920c55ab05a13",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "Gente Del Sombrero (En Vivo)",
+                    "release_date": "2023-10-20",
+                    "release_date_precision": "day",
+                    "total_tracks": 1,
+                    "type": "album",
+                    "uri": "spotify:album:6KjEepf5Mu6Bt1AoqFR68u"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/5VE6IinEVSwdQNqQIN8zAN"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/5VE6IinEVSwdQNqQIN8zAN",
+                        "id": "5VE6IinEVSwdQNqQIN8zAN",
+                        "name": "Los Caimanes De Sinaloa",
+                        "type": "artist",
+                        "uri": "spotify:artist:5VE6IinEVSwdQNqQIN8zAN"
+                    },
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/5ZZ2zIylJkPJVKZDVwW29B"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/5ZZ2zIylJkPJVKZDVwW29B",
+                        "id": "5ZZ2zIylJkPJVKZDVwW29B",
+                        "name": "Los Populares Del Llano",
+                        "type": "artist",
+                        "uri": "spotify:artist:5ZZ2zIylJkPJVKZDVwW29B"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 156593,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "QZQMB2105956"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/5zCBlIb5JprpQ3yZZcoabZ"
+                },
+                "href": "https://api.spotify.com/v1/tracks/5zCBlIb5JprpQ3yZZcoabZ",
+                "id": "5zCBlIb5JprpQ3yZZcoabZ",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Gente Del Sombrero",
+                "popularity": 28,
+                "preview_url": "https://p.scdn.co/mp3-preview/f7259644f5e239818387ec4322205540daa8dad4?cid=0ef20ae82f284c1da3c5b8bfd02bebc4",
+                "track_number": 1,
+                "type": "track",
+                "uri": "spotify:track:5zCBlIb5JprpQ3yZZcoabZ"
+            },
+            {
+                "album": {
+                    "album_type": "album",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/65QQXSMk2ehU9nKaKVKIBG"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/65QQXSMk2ehU9nKaKVKIBG",
+                            "id": "65QQXSMk2ehU9nKaKVKIBG",
+                            "name": "Chandramuki Chinnaponnu",
+                            "type": "artist",
+                            "uri": "spotify:artist:65QQXSMk2ehU9nKaKVKIBG"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/6za8EYFBTRTWqK8El3XMrY"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/6za8EYFBTRTWqK8El3XMrY",
+                    "id": "6za8EYFBTRTWqK8El3XMrY",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b273b158bcf89e6fcccb60f4ebea",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e02b158bcf89e6fcccb60f4ebea",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d00004851b158bcf89e6fcccb60f4ebea",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "Marikkozhunthae",
+                    "release_date": "2005-01-01",
+                    "release_date_precision": "day",
+                    "total_tracks": 10,
+                    "type": "album",
+                    "uri": "spotify:album:6za8EYFBTRTWqK8El3XMrY"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/65QQXSMk2ehU9nKaKVKIBG"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/65QQXSMk2ehU9nKaKVKIBG",
+                        "id": "65QQXSMk2ehU9nKaKVKIBG",
+                        "name": "Chandramuki Chinnaponnu",
+                        "type": "artist",
+                        "uri": "spotify:artist:65QQXSMk2ehU9nKaKVKIBG"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 269546,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "IN25T0610006"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/54eYkLkqQCL8rergzRL27k"
+                },
+                "href": "https://api.spotify.com/v1/tracks/54eYkLkqQCL8rergzRL27k",
+                "id": "54eYkLkqQCL8rergzRL27k",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Marikkozhunthae - Language: Tamil; Genre: Folk-Tamil",
+                "popularity": 22,
+                "preview_url": "https://p.scdn.co/mp3-preview/b520e1beb1eeb8e1b58bca2fcbd3009a4110305c?cid=0ef20ae82f284c1da3c5b8bfd02bebc4",
+                "track_number": 6,
+                "type": "track",
+                "uri": "spotify:track:54eYkLkqQCL8rergzRL27k"
+            },
+            {
+                "album": {
+                    "album_type": "compilation",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/0LyfQWJT6nXafLPZqxe9Of"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/0LyfQWJT6nXafLPZqxe9Of",
+                            "id": "0LyfQWJT6nXafLPZqxe9Of",
+                            "name": "Various Artists",
+                            "type": "artist",
+                            "uri": "spotify:artist:0LyfQWJT6nXafLPZqxe9Of"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/5kDKbBt8TjPKskaq9FdDlZ"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/5kDKbBt8TjPKskaq9FdDlZ",
+                    "id": "5kDKbBt8TjPKskaq9FdDlZ",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b273573651f076a4184d96be21ec",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e02573651f076a4184d96be21ec",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d00004851573651f076a4184d96be21ec",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "50 Best of Folk Music",
+                    "release_date": "2011-06-20",
+                    "release_date_precision": "day",
+                    "total_tracks": 50,
+                    "type": "album",
+                    "uri": "spotify:album:5kDKbBt8TjPKskaq9FdDlZ"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/51jUwNrGtvk86bvHtLD0M5"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/51jUwNrGtvk86bvHtLD0M5",
+                        "id": "51jUwNrGtvk86bvHtLD0M5",
+                        "name": "Flower Power Singers",
+                        "type": "artist",
+                        "uri": "spotify:artist:51jUwNrGtvk86bvHtLD0M5"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 200338,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "CAM460418074"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/5NBxeJznAYFB4303Chhuc0"
+                },
+                "href": "https://api.spotify.com/v1/tracks/5NBxeJznAYFB4303Chhuc0",
+                "id": "5NBxeJznAYFB4303Chhuc0",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Don't Think Twice, It's All Right",
+                "popularity": 1,
+                "preview_url": "https://p.scdn.co/mp3-preview/6508cb2430f3ac09d60e006d86ecd50d90ca9b6a?cid=0ef20ae82f284c1da3c5b8bfd02bebc4",
+                "track_number": 36,
+                "type": "track",
+                "uri": "spotify:track:5NBxeJznAYFB4303Chhuc0"
+            },
+            {
+                "album": {
+                    "album_type": "single",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/1mg13496l9W0lDmr4REaVH"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/1mg13496l9W0lDmr4REaVH",
+                            "id": "1mg13496l9W0lDmr4REaVH",
+                            "name": "Melmo Jbc",
+                            "type": "artist",
+                            "uri": "spotify:artist:1mg13496l9W0lDmr4REaVH"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/2TRYwn6gOAh3rn4ndE27wu"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/2TRYwn6gOAh3rn4ndE27wu",
+                    "id": "2TRYwn6gOAh3rn4ndE27wu",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b273b5ae3a491a21c8e6638f08fe",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e02b5ae3a491a21c8e6638f08fe",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d00004851b5ae3a491a21c8e6638f08fe",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "Gente Falsa",
+                    "release_date": "2024-01-29",
+                    "release_date_precision": "day",
+                    "total_tracks": 1,
+                    "type": "album",
+                    "uri": "spotify:album:2TRYwn6gOAh3rn4ndE27wu"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/1mg13496l9W0lDmr4REaVH"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/1mg13496l9W0lDmr4REaVH",
+                        "id": "1mg13496l9W0lDmr4REaVH",
+                        "name": "Melmo Jbc",
+                        "type": "artist",
+                        "uri": "spotify:artist:1mg13496l9W0lDmr4REaVH"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 160240,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "AUMEV2410573"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/49rpMkngCRaQnxTZdljGDE"
+                },
+                "href": "https://api.spotify.com/v1/tracks/49rpMkngCRaQnxTZdljGDE",
+                "id": "49rpMkngCRaQnxTZdljGDE",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Gente Falsa",
+                "popularity": 27,
+                "preview_url": "https://p.scdn.co/mp3-preview/16c70855e2bdccb81b7e550d76effe86f7c2c32a?cid=0ef20ae82f284c1da3c5b8bfd02bebc4",
+                "track_number": 1,
+                "type": "track",
+                "uri": "spotify:track:49rpMkngCRaQnxTZdljGDE"
+            },
+            {
+                "album": {
+                    "album_type": "album",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/65QQXSMk2ehU9nKaKVKIBG"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/65QQXSMk2ehU9nKaKVKIBG",
+                            "id": "65QQXSMk2ehU9nKaKVKIBG",
+                            "name": "Chandramuki Chinnaponnu",
+                            "type": "artist",
+                            "uri": "spotify:artist:65QQXSMk2ehU9nKaKVKIBG"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/6za8EYFBTRTWqK8El3XMrY"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/6za8EYFBTRTWqK8El3XMrY",
+                    "id": "6za8EYFBTRTWqK8El3XMrY",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b273b158bcf89e6fcccb60f4ebea",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e02b158bcf89e6fcccb60f4ebea",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d00004851b158bcf89e6fcccb60f4ebea",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "Marikkozhunthae",
+                    "release_date": "2005-01-01",
+                    "release_date_precision": "day",
+                    "total_tracks": 10,
+                    "type": "album",
+                    "uri": "spotify:album:6za8EYFBTRTWqK8El3XMrY"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/65QQXSMk2ehU9nKaKVKIBG"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/65QQXSMk2ehU9nKaKVKIBG",
+                        "id": "65QQXSMk2ehU9nKaKVKIBG",
+                        "name": "Chandramuki Chinnaponnu",
+                        "type": "artist",
+                        "uri": "spotify:artist:65QQXSMk2ehU9nKaKVKIBG"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 427306,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "IN25T0610010"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/4C4IEdmGbdCa7nIT8cpchg"
+                },
+                "href": "https://api.spotify.com/v1/tracks/4C4IEdmGbdCa7nIT8cpchg",
+                "id": "4C4IEdmGbdCa7nIT8cpchg",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Eallakkayaam - Language: Tamil; Genre: Folk-Tamil",
+                "popularity": 20,
+                "preview_url": "https://p.scdn.co/mp3-preview/414460be3d64b2986bd29671db938c5efd23bda2?cid=0ef20ae82f284c1da3c5b8bfd02bebc4",
+                "track_number": 10,
+                "type": "track",
+                "uri": "spotify:track:4C4IEdmGbdCa7nIT8cpchg"
+            },
+            {
+                "album": {
+                    "album_type": "compilation",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/0LyfQWJT6nXafLPZqxe9Of"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/0LyfQWJT6nXafLPZqxe9Of",
+                            "id": "0LyfQWJT6nXafLPZqxe9Of",
+                            "name": "Various Artists",
+                            "type": "artist",
+                            "uri": "spotify:artist:0LyfQWJT6nXafLPZqxe9Of"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/5kDKbBt8TjPKskaq9FdDlZ"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/5kDKbBt8TjPKskaq9FdDlZ",
+                    "id": "5kDKbBt8TjPKskaq9FdDlZ",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b273573651f076a4184d96be21ec",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e02573651f076a4184d96be21ec",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d00004851573651f076a4184d96be21ec",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "50 Best of Folk Music",
+                    "release_date": "2011-06-20",
+                    "release_date_precision": "day",
+                    "total_tracks": 50,
+                    "type": "album",
+                    "uri": "spotify:album:5kDKbBt8TjPKskaq9FdDlZ"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/2ToPZVyWUmZjOV02O75hnR"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/2ToPZVyWUmZjOV02O75hnR",
+                        "id": "2ToPZVyWUmZjOV02O75hnR",
+                        "name": "The Magic Time Travelers",
+                        "type": "artist",
+                        "uri": "spotify:artist:2ToPZVyWUmZjOV02O75hnR"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 180008,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "CAM460400447"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/6ppb4Tq2dZ1ZdNr3qKRnTM"
+                },
+                "href": "https://api.spotify.com/v1/tracks/6ppb4Tq2dZ1ZdNr3qKRnTM",
+                "id": "6ppb4Tq2dZ1ZdNr3qKRnTM",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Heart of Gold",
+                "popularity": 1,
+                "preview_url": "https://p.scdn.co/mp3-preview/eff9668749e07bccf4cfff928f81061729e3fa29?cid=0ef20ae82f284c1da3c5b8bfd02bebc4",
+                "track_number": 43,
+                "type": "track",
+                "uri": "spotify:track:6ppb4Tq2dZ1ZdNr3qKRnTM"
+            },
+            {
+                "album": {
+                    "album_type": "album",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/3xMrj5ZHbOpnRO13WKBcPz"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/3xMrj5ZHbOpnRO13WKBcPz",
+                            "id": "3xMrj5ZHbOpnRO13WKBcPz",
+                            "name": "Victor Felix",
+                            "type": "artist",
+                            "uri": "spotify:artist:3xMrj5ZHbOpnRO13WKBcPz"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/6Z9pi1FwqhRpp3J8bMGcaW"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/6Z9pi1FwqhRpp3J8bMGcaW",
+                    "id": "6Z9pi1FwqhRpp3J8bMGcaW",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b273b5b6d7b00ea1023f6989c54f",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e02b5b6d7b00ea1023f6989c54f",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d00004851b5b6d7b00ea1023f6989c54f",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "Anomalía",
+                    "release_date": "2023-05-19",
+                    "release_date_precision": "day",
+                    "total_tracks": 7,
+                    "type": "album",
+                    "uri": "spotify:album:6Z9pi1FwqhRpp3J8bMGcaW"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/3xMrj5ZHbOpnRO13WKBcPz"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/3xMrj5ZHbOpnRO13WKBcPz",
+                        "id": "3xMrj5ZHbOpnRO13WKBcPz",
+                        "name": "Victor Felix",
+                        "type": "artist",
+                        "uri": "spotify:artist:3xMrj5ZHbOpnRO13WKBcPz"
+                    },
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/0eVk0SII53GvRxtrq57ZIG"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/0eVk0SII53GvRxtrq57ZIG",
+                        "id": "0eVk0SII53GvRxtrq57ZIG",
+                        "name": "Alberto Ruiz",
+                        "type": "artist",
+                        "uri": "spotify:artist:0eVk0SII53GvRxtrq57ZIG"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 145802,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "QZDQH2367463"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/21KSyyxCZrYPNtaUfaMioc"
+                },
+                "href": "https://api.spotify.com/v1/tracks/21KSyyxCZrYPNtaUfaMioc",
+                "id": "21KSyyxCZrYPNtaUfaMioc",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Gente del Sombrero",
+                "popularity": 14,
+                "preview_url": "https://p.scdn.co/mp3-preview/062d9c2b329cad093cfa53fd489f0bca85b072ab?cid=0ef20ae82f284c1da3c5b8bfd02bebc4",
+                "track_number": 7,
+                "type": "track",
+                "uri": "spotify:track:21KSyyxCZrYPNtaUfaMioc"
+            },
+            {
+                "album": {
+                    "album_type": "album",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/65QQXSMk2ehU9nKaKVKIBG"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/65QQXSMk2ehU9nKaKVKIBG",
+                            "id": "65QQXSMk2ehU9nKaKVKIBG",
+                            "name": "Chandramuki Chinnaponnu",
+                            "type": "artist",
+                            "uri": "spotify:artist:65QQXSMk2ehU9nKaKVKIBG"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/6za8EYFBTRTWqK8El3XMrY"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/6za8EYFBTRTWqK8El3XMrY",
+                    "id": "6za8EYFBTRTWqK8El3XMrY",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b273b158bcf89e6fcccb60f4ebea",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e02b158bcf89e6fcccb60f4ebea",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d00004851b158bcf89e6fcccb60f4ebea",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "Marikkozhunthae",
+                    "release_date": "2005-01-01",
+                    "release_date_precision": "day",
+                    "total_tracks": 10,
+                    "type": "album",
+                    "uri": "spotify:album:6za8EYFBTRTWqK8El3XMrY"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/65QQXSMk2ehU9nKaKVKIBG"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/65QQXSMk2ehU9nKaKVKIBG",
+                        "id": "65QQXSMk2ehU9nKaKVKIBG",
+                        "name": "Chandramuki Chinnaponnu",
+                        "type": "artist",
+                        "uri": "spotify:artist:65QQXSMk2ehU9nKaKVKIBG"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 257826,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "IN25T0610007"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/6FQuN9Ynuf96hcCDEWsbGB"
+                },
+                "href": "https://api.spotify.com/v1/tracks/6FQuN9Ynuf96hcCDEWsbGB",
+                "id": "6FQuN9Ynuf96hcCDEWsbGB",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Mannu Veesum - Language: Tamil; Genre: Folk-Tamil",
+                "popularity": 20,
+                "preview_url": "https://p.scdn.co/mp3-preview/f9e333801ef75253aaa31d23f8f7da3e68214a15?cid=0ef20ae82f284c1da3c5b8bfd02bebc4",
+                "track_number": 7,
+                "type": "track",
+                "uri": "spotify:track:6FQuN9Ynuf96hcCDEWsbGB"
+            },
+            {
+                "album": {
+                    "album_type": "album",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/0iagfMudddILCHklm3LT16"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/0iagfMudddILCHklm3LT16",
+                            "id": "0iagfMudddILCHklm3LT16",
+                            "name": "Folk",
+                            "type": "artist",
+                            "uri": "spotify:artist:0iagfMudddILCHklm3LT16"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/4xeYCU39w7HdWvttLraA2m"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/4xeYCU39w7HdWvttLraA2m",
+                    "id": "4xeYCU39w7HdWvttLraA2m",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b273fcc2417f598b9459051486b3",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e02fcc2417f598b9459051486b3",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d00004851fcc2417f598b9459051486b3",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "De nos cœurs cellulose",
+                    "release_date": "2023-12-20",
+                    "release_date_precision": "day",
+                    "total_tracks": 10,
+                    "type": "album",
+                    "uri": "spotify:album:4xeYCU39w7HdWvttLraA2m"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/0iagfMudddILCHklm3LT16"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/0iagfMudddILCHklm3LT16",
+                        "id": "0iagfMudddILCHklm3LT16",
+                        "name": "Folk",
+                        "type": "artist",
+                        "uri": "spotify:artist:0iagfMudddILCHklm3LT16"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 237551,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "QZZ972346577"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/68obHMmjVYkfQkkBUvh26n"
+                },
+                "href": "https://api.spotify.com/v1/tracks/68obHMmjVYkfQkkBUvh26n",
+                "id": "68obHMmjVYkfQkkBUvh26n",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Erreur",
+                "popularity": 0,
+                "preview_url": "https://p.scdn.co/mp3-preview/5cc3bf5f5dae4e179755d68122cec373f910605b?cid=0ef20ae82f284c1da3c5b8bfd02bebc4",
+                "track_number": 6,
+                "type": "track",
+                "uri": "spotify:track:68obHMmjVYkfQkkBUvh26n"
+            },
+            {
+                "album": {
+                    "album_type": "album",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/6tOsSffQQIXmK8TqsDck8t"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/6tOsSffQQIXmK8TqsDck8t",
+                            "id": "6tOsSffQQIXmK8TqsDck8t",
+                            "name": "Chico Buarque",
+                            "type": "artist",
+                            "uri": "spotify:artist:6tOsSffQQIXmK8TqsDck8t"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/3dbh9K8CNUq8BQcL0VxbZf"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/3dbh9K8CNUq8BQcL0VxbZf",
+                    "id": "3dbh9K8CNUq8BQcL0VxbZf",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b273fa6535ff8be19762d889f397",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e02fa6535ff8be19762d889f397",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d00004851fa6535ff8be19762d889f397",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "Chico Buarque De Hollanda Nº4",
+                    "release_date": "1970-01-01",
+                    "release_date_precision": "day",
+                    "total_tracks": 12,
+                    "type": "album",
+                    "uri": "spotify:album:3dbh9K8CNUq8BQcL0VxbZf"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/6tOsSffQQIXmK8TqsDck8t"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/6tOsSffQQIXmK8TqsDck8t",
+                        "id": "6tOsSffQQIXmK8TqsDck8t",
+                        "name": "Chico Buarque",
+                        "type": "artist",
+                        "uri": "spotify:artist:6tOsSffQQIXmK8TqsDck8t"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 147840,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "BRPGD7000022"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/24OF9ihv97VwNXQZ2gGy8v"
+                },
+                "href": "https://api.spotify.com/v1/tracks/24OF9ihv97VwNXQZ2gGy8v",
+                "id": "24OF9ihv97VwNXQZ2gGy8v",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Gente Humilde",
+                "popularity": 54,
+                "preview_url": null,
+                "track_number": 5,
+                "type": "track",
+                "uri": "spotify:track:24OF9ihv97VwNXQZ2gGy8v"
+            },
+            {
+                "album": {
+                    "album_type": "album",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/7mlyuQNP02Vp1Jyio9KJrO"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/7mlyuQNP02Vp1Jyio9KJrO",
+                            "id": "7mlyuQNP02Vp1Jyio9KJrO",
+                            "name": "Pushpavanam Kuppusamy",
+                            "type": "artist",
+                            "uri": "spotify:artist:7mlyuQNP02Vp1Jyio9KJrO"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/5p24PMRPNrF76RAEprLhm2"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/5p24PMRPNrF76RAEprLhm2",
+                    "id": "5p24PMRPNrF76RAEprLhm2",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b273de00fdad1895dbcf8e4f9fa3",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e02de00fdad1895dbcf8e4f9fa3",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d00004851de00fdad1895dbcf8e4f9fa3",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "Megam Karukuthadi",
+                    "release_date": "1993-01-01",
+                    "release_date_precision": "day",
+                    "total_tracks": 8,
+                    "type": "album",
+                    "uri": "spotify:album:5p24PMRPNrF76RAEprLhm2"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/7mlyuQNP02Vp1Jyio9KJrO"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/7mlyuQNP02Vp1Jyio9KJrO",
+                        "id": "7mlyuQNP02Vp1Jyio9KJrO",
+                        "name": "Pushpavanam Kuppusamy",
+                        "type": "artist",
+                        "uri": "spotify:artist:7mlyuQNP02Vp1Jyio9KJrO"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 405386,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "IN25T0610498"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/5KGStYHxR5xRVXPHYWQPA2"
+                },
+                "href": "https://api.spotify.com/v1/tracks/5KGStYHxR5xRVXPHYWQPA2",
+                "id": "5KGStYHxR5xRVXPHYWQPA2",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Onnum Onnum - Language: Tamil; Genre: Folk-Tamil",
+                "popularity": 20,
+                "preview_url": "https://p.scdn.co/mp3-preview/a17f4f315e03b763da0d5cacc74981354e5fdf8e?cid=0ef20ae82f284c1da3c5b8bfd02bebc4",
+                "track_number": 1,
+                "type": "track",
+                "uri": "spotify:track:5KGStYHxR5xRVXPHYWQPA2"
+            },
+            {
+                "album": {
+                    "album_type": "compilation",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/0LyfQWJT6nXafLPZqxe9Of"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/0LyfQWJT6nXafLPZqxe9Of",
+                            "id": "0LyfQWJT6nXafLPZqxe9Of",
+                            "name": "Various Artists",
+                            "type": "artist",
+                            "uri": "spotify:artist:0LyfQWJT6nXafLPZqxe9Of"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/5kDKbBt8TjPKskaq9FdDlZ"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/5kDKbBt8TjPKskaq9FdDlZ",
+                    "id": "5kDKbBt8TjPKskaq9FdDlZ",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b273573651f076a4184d96be21ec",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e02573651f076a4184d96be21ec",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d00004851573651f076a4184d96be21ec",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "50 Best of Folk Music",
+                    "release_date": "2011-06-20",
+                    "release_date_precision": "day",
+                    "total_tracks": 50,
+                    "type": "album",
+                    "uri": "spotify:album:5kDKbBt8TjPKskaq9FdDlZ"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/2ToPZVyWUmZjOV02O75hnR"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/2ToPZVyWUmZjOV02O75hnR",
+                        "id": "2ToPZVyWUmZjOV02O75hnR",
+                        "name": "The Magic Time Travelers",
+                        "type": "artist",
+                        "uri": "spotify:artist:2ToPZVyWUmZjOV02O75hnR"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 159122,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "CAM460413993"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/741YuQ2aDt663PVkuiMtLl"
+                },
+                "href": "https://api.spotify.com/v1/tracks/741YuQ2aDt663PVkuiMtLl",
+                "id": "741YuQ2aDt663PVkuiMtLl",
+                "is_local": false,
+                "is_playable": true,
+                "name": "This Land Is Your Land",
+                "popularity": 1,
+                "preview_url": "https://p.scdn.co/mp3-preview/0eb0575cf5fdbdae064b2501d9bb49e9e3a1e7c3?cid=0ef20ae82f284c1da3c5b8bfd02bebc4",
+                "track_number": 34,
+                "type": "track",
+                "uri": "spotify:track:741YuQ2aDt663PVkuiMtLl"
+            },
+            {
+                "album": {
+                    "album_type": "album",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/0llOGBcrHCKcZrw8mmdDkF"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/0llOGBcrHCKcZrw8mmdDkF",
+                            "id": "0llOGBcrHCKcZrw8mmdDkF",
+                            "name": "Alemi Bustos",
+                            "type": "artist",
+                            "uri": "spotify:artist:0llOGBcrHCKcZrw8mmdDkF"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/2xKOzdT5esr3jveNmQGgPI"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/2xKOzdT5esr3jveNmQGgPI",
+                    "id": "2xKOzdT5esr3jveNmQGgPI",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b273223f738b761130363619157b",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e02223f738b761130363619157b",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d00004851223f738b761130363619157b",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "El Sombrerudo",
+                    "release_date": "2020-12-03",
+                    "release_date_precision": "day",
+                    "total_tracks": 12,
+                    "type": "album",
+                    "uri": "spotify:album:2xKOzdT5esr3jveNmQGgPI"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/0llOGBcrHCKcZrw8mmdDkF"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/0llOGBcrHCKcZrw8mmdDkF",
+                        "id": "0llOGBcrHCKcZrw8mmdDkF",
+                        "name": "Alemi Bustos",
+                        "type": "artist",
+                        "uri": "spotify:artist:0llOGBcrHCKcZrw8mmdDkF"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 233512,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "FRS182081247"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/3hYFL1mS8npewptfsAnshq"
+                },
+                "href": "https://api.spotify.com/v1/tracks/3hYFL1mS8npewptfsAnshq",
+                "id": "3hYFL1mS8npewptfsAnshq",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Gente Argüendera",
+                "popularity": 19,
+                "preview_url": "https://p.scdn.co/mp3-preview/fa62d7c32535e62960b5172a3b2d2ba48dc0f43a?cid=0ef20ae82f284c1da3c5b8bfd02bebc4",
+                "track_number": 11,
+                "type": "track",
+                "uri": "spotify:track:3hYFL1mS8npewptfsAnshq"
+            },
+            {
+                "album": {
+                    "album_type": "album",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/65QQXSMk2ehU9nKaKVKIBG"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/65QQXSMk2ehU9nKaKVKIBG",
+                            "id": "65QQXSMk2ehU9nKaKVKIBG",
+                            "name": "Chandramuki Chinnaponnu",
+                            "type": "artist",
+                            "uri": "spotify:artist:65QQXSMk2ehU9nKaKVKIBG"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/6za8EYFBTRTWqK8El3XMrY"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/6za8EYFBTRTWqK8El3XMrY",
+                    "id": "6za8EYFBTRTWqK8El3XMrY",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b273b158bcf89e6fcccb60f4ebea",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e02b158bcf89e6fcccb60f4ebea",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d00004851b158bcf89e6fcccb60f4ebea",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "Marikkozhunthae",
+                    "release_date": "2005-01-01",
+                    "release_date_precision": "day",
+                    "total_tracks": 10,
+                    "type": "album",
+                    "uri": "spotify:album:6za8EYFBTRTWqK8El3XMrY"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/65QQXSMk2ehU9nKaKVKIBG"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/65QQXSMk2ehU9nKaKVKIBG",
+                        "id": "65QQXSMk2ehU9nKaKVKIBG",
+                        "name": "Chandramuki Chinnaponnu",
+                        "type": "artist",
+                        "uri": "spotify:artist:65QQXSMk2ehU9nKaKVKIBG"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 232546,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "IN25T0610001"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/6H9HfJcGDyMCroAczlukZx"
+                },
+                "href": "https://api.spotify.com/v1/tracks/6H9HfJcGDyMCroAczlukZx",
+                "id": "6H9HfJcGDyMCroAczlukZx",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Aattukku Thazhai - Language: Tamil; Genre: Folk-Tamil",
+                "popularity": 19,
+                "preview_url": "https://p.scdn.co/mp3-preview/e94b6c3f78cd20c35c96ac53bc82ab94ba772d1e?cid=0ef20ae82f284c1da3c5b8bfd02bebc4",
+                "track_number": 1,
+                "type": "track",
+                "uri": "spotify:track:6H9HfJcGDyMCroAczlukZx"
+            },
+            {
+                "album": {
+                    "album_type": "single",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/1o2oKjgjDjZwAjaLnKB2LX"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/1o2oKjgjDjZwAjaLnKB2LX",
+                            "id": "1o2oKjgjDjZwAjaLnKB2LX",
+                            "name": "Sukhpall Channi",
+                            "type": "artist",
+                            "uri": "spotify:artist:1o2oKjgjDjZwAjaLnKB2LX"
+                        },
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/2WcrD17Io276ir3miEHCrc"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/2WcrD17Io276ir3miEHCrc",
+                            "id": "2WcrD17Io276ir3miEHCrc",
+                            "name": "Sargi Maan",
+                            "type": "artist",
+                            "uri": "spotify:artist:2WcrD17Io276ir3miEHCrc"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/692kERgGCmWYEHE9HFpS9p"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/692kERgGCmWYEHE9HFpS9p",
+                    "id": "692kERgGCmWYEHE9HFpS9p",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b273049113d67ad8c40113195071",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e02049113d67ad8c40113195071",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d00004851049113d67ad8c40113195071",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "Folk",
+                    "release_date": "2023-11-22",
+                    "release_date_precision": "day",
+                    "total_tracks": 1,
+                    "type": "album",
+                    "uri": "spotify:album:692kERgGCmWYEHE9HFpS9p"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/1o2oKjgjDjZwAjaLnKB2LX"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/1o2oKjgjDjZwAjaLnKB2LX",
+                        "id": "1o2oKjgjDjZwAjaLnKB2LX",
+                        "name": "Sukhpall Channi",
+                        "type": "artist",
+                        "uri": "spotify:artist:1o2oKjgjDjZwAjaLnKB2LX"
+                    },
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/2WcrD17Io276ir3miEHCrc"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/2WcrD17Io276ir3miEHCrc",
+                        "id": "2WcrD17Io276ir3miEHCrc",
+                        "name": "Sargi Maan",
+                        "type": "artist",
+                        "uri": "spotify:artist:2WcrD17Io276ir3miEHCrc"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 148430,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "USA2P2357396"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/2wKflILHIG36zmARqQIlzx"
+                },
+                "href": "https://api.spotify.com/v1/tracks/2wKflILHIG36zmARqQIlzx",
+                "id": "2wKflILHIG36zmARqQIlzx",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Folk",
+                "popularity": 15,
+                "preview_url": "https://p.scdn.co/mp3-preview/0032bce8df7a66c7ae2d71962211aa3ec75ed61d?cid=0ef20ae82f284c1da3c5b8bfd02bebc4",
+                "track_number": 1,
+                "type": "track",
+                "uri": "spotify:track:2wKflILHIG36zmARqQIlzx"
+            },
+            {
+                "album": {
+                    "album_type": "single",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/3i984adu6EpxLqDRk3Dhq3"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/3i984adu6EpxLqDRk3Dhq3",
+                            "id": "3i984adu6EpxLqDRk3Dhq3",
+                            "name": "Los de la Setenta",
+                            "type": "artist",
+                            "uri": "spotify:artist:3i984adu6EpxLqDRk3Dhq3"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/2fpJHiIs7HwhPphHzdF7ZO"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/2fpJHiIs7HwhPphHzdF7ZO",
+                    "id": "2fpJHiIs7HwhPphHzdF7ZO",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b27319840f6c93e03ebf6ab15260",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e0219840f6c93e03ebf6ab15260",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d0000485119840f6c93e03ebf6ab15260",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "gente del señor",
+                    "release_date": "2023-11-19",
+                    "release_date_precision": "day",
+                    "total_tracks": 1,
+                    "type": "album",
+                    "uri": "spotify:album:2fpJHiIs7HwhPphHzdF7ZO"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/3i984adu6EpxLqDRk3Dhq3"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/3i984adu6EpxLqDRk3Dhq3",
+                        "id": "3i984adu6EpxLqDRk3Dhq3",
+                        "name": "Los de la Setenta",
+                        "type": "artist",
+                        "uri": "spotify:artist:3i984adu6EpxLqDRk3Dhq3"
+                    },
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/08kBmhvwU857Bg34xuMy6E"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/08kBmhvwU857Bg34xuMy6E",
+                        "id": "08kBmhvwU857Bg34xuMy6E",
+                        "name": "Los Chavitos De La Baja",
+                        "type": "artist",
+                        "uri": "spotify:artist:08kBmhvwU857Bg34xuMy6E"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 174008,
+                "explicit": false,
+                "external_ids": {
+                    "isrc": "QZDQH2389040"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/6bzWEOyxfvgDkpkTMYjrpR"
+                },
+                "href": "https://api.spotify.com/v1/tracks/6bzWEOyxfvgDkpkTMYjrpR",
+                "id": "6bzWEOyxfvgDkpkTMYjrpR",
+                "is_local": false,
+                "is_playable": true,
+                "name": "gente del señor",
+                "popularity": 19,
+                "preview_url": "https://p.scdn.co/mp3-preview/c8f452287dc7bebf85cbcade1dc1c4c4288e5476?cid=0ef20ae82f284c1da3c5b8bfd02bebc4",
+                "track_number": 1,
+                "type": "track",
+                "uri": "spotify:track:6bzWEOyxfvgDkpkTMYjrpR"
+            },
+            {
+                "album": {
+                    "album_type": "single",
+                    "artists": [
+                        {
+                            "external_urls": {
+                                "spotify": "https://open.spotify.com/artist/6uR4FhNuKSzvsYAy2LKMrP"
+                            },
+                            "href": "https://api.spotify.com/v1/artists/6uR4FhNuKSzvsYAy2LKMrP",
+                            "id": "6uR4FhNuKSzvsYAy2LKMrP",
+                            "name": "welcome2bishu",
+                            "type": "artist",
+                            "uri": "spotify:artist:6uR4FhNuKSzvsYAy2LKMrP"
+                        }
+                    ],
+                    "external_urls": {
+                        "spotify": "https://open.spotify.com/album/1wmO9sQN0lx7rXC26hRdrK"
+                    },
+                    "href": "https://api.spotify.com/v1/albums/1wmO9sQN0lx7rXC26hRdrK",
+                    "id": "1wmO9sQN0lx7rXC26hRdrK",
+                    "images": [
+                        {
+                            "height": 640,
+                            "url": "https://i.scdn.co/image/ab67616d0000b2736eef199c60825fb32a90e495",
+                            "width": 640
+                        },
+                        {
+                            "height": 300,
+                            "url": "https://i.scdn.co/image/ab67616d00001e026eef199c60825fb32a90e495",
+                            "width": 300
+                        },
+                        {
+                            "height": 64,
+                            "url": "https://i.scdn.co/image/ab67616d000048516eef199c60825fb32a90e495",
+                            "width": 64
+                        }
+                    ],
+                    "is_playable": true,
+                    "name": "FAKE GENRES, Vol. 1",
+                    "release_date": "2022-09-19",
+                    "release_date_precision": "day",
+                    "total_tracks": 4,
+                    "type": "album",
+                    "uri": "spotify:album:1wmO9sQN0lx7rXC26hRdrK"
+                },
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/6uR4FhNuKSzvsYAy2LKMrP"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/6uR4FhNuKSzvsYAy2LKMrP",
+                        "id": "6uR4FhNuKSzvsYAy2LKMrP",
+                        "name": "welcome2bishu",
+                        "type": "artist",
+                        "uri": "spotify:artist:6uR4FhNuKSzvsYAy2LKMrP"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 102857,
+                "explicit": true,
+                "external_ids": {
+                    "isrc": "QZNWU2245131"
+                },
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/1Sdcc5DnZPZRbUnnQWX72U"
+                },
+                "href": "https://api.spotify.com/v1/tracks/1Sdcc5DnZPZRbUnnQWX72U",
+                "id": "1Sdcc5DnZPZRbUnnQWX72U",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Future Folk",
+                "popularity": 5,
+                "preview_url": "https://p.scdn.co/mp3-preview/d29011e066aafbbc2b303c1ad98ccb48ac4649e9?cid=0ef20ae82f284c1da3c5b8bfd02bebc4",
+                "track_number": 3,
+                "type": "track",
+                "uri": "spotify:track:1Sdcc5DnZPZRbUnnQWX72U"
+            }
+        ],
+        "limit": 20,
+        "next": "https://api.spotify.com/v1/search?query=genre+folk&type=track&market=IE&offset=20&limit=20",
+        "offset": 0,
+        "previous": null,
+        "total": 1000
+    }
+}

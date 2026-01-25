@@ -1,0 +1,476 @@
+﻿{
+    "album_type": "album",
+    "artists": [
+        {
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/4dwdTW1Lfiq0cM8nBAqIIz"
+            },
+            "href": "https://api.spotify.com/v1/artists/4dwdTW1Lfiq0cM8nBAqIIz",
+            "id": "4dwdTW1Lfiq0cM8nBAqIIz",
+            "name": "Of Monsters and Men",
+            "type": "artist",
+            "uri": "spotify:artist:4dwdTW1Lfiq0cM8nBAqIIz"
+        }
+    ],
+    "copyrights": [
+        {
+            "text": "© 2021 SKRIMSL ehf, under exclusive license to Republic Records, a Division of UMG Recordings, Inc.",
+            "type": "C"
+        },
+        {
+            "text": "℗ 2021 SKRIMSL ehf, under exclusive license to Republic Records, a Division of UMG Recordings, Inc.",
+            "type": "P"
+        }
+    ],
+    "external_ids": {
+        "upc": "00602438698806"
+    },
+    "external_urls": {
+        "spotify": "https://open.spotify.com/album/3BNRyWlVJZWjakfP0ybfhB"
+    },
+    "genres": [],
+    "href": "https://api.spotify.com/v1/albums/3BNRyWlVJZWjakfP0ybfhB",
+    "id": "3BNRyWlVJZWjakfP0ybfhB",
+    "images": [
+        {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273051b87b2ee1ff378a3874c58",
+            "width": 640
+        },
+        {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02051b87b2ee1ff378a3874c58",
+            "width": 300
+        },
+        {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851051b87b2ee1ff378a3874c58",
+            "width": 64
+        }
+    ],
+    "is_playable": true,
+    "label": "Republic Records",
+    "name": "My Head Is An Animal (10th Anniversary Edition)",
+    "popularity": 51,
+    "release_date": "2021-10-29",
+    "release_date_precision": "day",
+    "total_tracks": 14,
+    "tracks": {
+        "href": "https://api.spotify.com/v1/albums/3BNRyWlVJZWjakfP0ybfhB/tracks?offset=0&limit=50&market=GB&locale=en-GB,en;q=0.5",
+        "items": [
+            {
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/4dwdTW1Lfiq0cM8nBAqIIz"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/4dwdTW1Lfiq0cM8nBAqIIz",
+                        "id": "4dwdTW1Lfiq0cM8nBAqIIz",
+                        "name": "Of Monsters and Men",
+                        "type": "artist",
+                        "uri": "spotify:artist:4dwdTW1Lfiq0cM8nBAqIIz"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 278613,
+                "explicit": false,
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/39lj6JXTKQwXhI6Xqai4y9"
+                },
+                "href": "https://api.spotify.com/v1/tracks/39lj6JXTKQwXhI6Xqai4y9",
+                "id": "39lj6JXTKQwXhI6Xqai4y9",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Dirty Paws",
+                "preview_url": "https://p.scdn.co/mp3-preview/dc0e8e4dbacdcbcace46543d8d48d6186c1c6eb8?cid=2f2d685947614756b30d3bedab4c8888",
+                "track_number": 1,
+                "type": "track",
+                "uri": "spotify:track:39lj6JXTKQwXhI6Xqai4y9"
+            },
+            {
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/4dwdTW1Lfiq0cM8nBAqIIz"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/4dwdTW1Lfiq0cM8nBAqIIz",
+                        "id": "4dwdTW1Lfiq0cM8nBAqIIz",
+                        "name": "Of Monsters and Men",
+                        "type": "artist",
+                        "uri": "spotify:artist:4dwdTW1Lfiq0cM8nBAqIIz"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 284200,
+                "explicit": false,
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/5z0Sdr1do2iItDPoSorYdx"
+                },
+                "href": "https://api.spotify.com/v1/tracks/5z0Sdr1do2iItDPoSorYdx",
+                "id": "5z0Sdr1do2iItDPoSorYdx",
+                "is_local": false,
+                "is_playable": true,
+                "name": "King And Lionheart - 2011 Iceland Release Version",
+                "preview_url": "https://p.scdn.co/mp3-preview/fdcea81cdfd4c9292742dc3a1f1b2619e114341c?cid=2f2d685947614756b30d3bedab4c8888",
+                "track_number": 2,
+                "type": "track",
+                "uri": "spotify:track:5z0Sdr1do2iItDPoSorYdx"
+            },
+            {
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/4dwdTW1Lfiq0cM8nBAqIIz"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/4dwdTW1Lfiq0cM8nBAqIIz",
+                        "id": "4dwdTW1Lfiq0cM8nBAqIIz",
+                        "name": "Of Monsters and Men",
+                        "type": "artist",
+                        "uri": "spotify:artist:4dwdTW1Lfiq0cM8nBAqIIz"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 165960,
+                "explicit": false,
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/3P2JI90Acn7EjmpeiBpYnM"
+                },
+                "href": "https://api.spotify.com/v1/tracks/3P2JI90Acn7EjmpeiBpYnM",
+                "id": "3P2JI90Acn7EjmpeiBpYnM",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Numb Bears - 2011 Iceland Release Version",
+                "preview_url": "https://p.scdn.co/mp3-preview/5030210b021fafd5b17ad406016d8abd7c18984f?cid=2f2d685947614756b30d3bedab4c8888",
+                "track_number": 3,
+                "type": "track",
+                "uri": "spotify:track:3P2JI90Acn7EjmpeiBpYnM"
+            },
+            {
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/4dwdTW1Lfiq0cM8nBAqIIz"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/4dwdTW1Lfiq0cM8nBAqIIz",
+                        "id": "4dwdTW1Lfiq0cM8nBAqIIz",
+                        "name": "Of Monsters and Men",
+                        "type": "artist",
+                        "uri": "spotify:artist:4dwdTW1Lfiq0cM8nBAqIIz"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 284013,
+                "explicit": false,
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/1tA72w09anCZaYpsgaaysy"
+                },
+                "href": "https://api.spotify.com/v1/tracks/1tA72w09anCZaYpsgaaysy",
+                "id": "1tA72w09anCZaYpsgaaysy",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Sloom",
+                "preview_url": "https://p.scdn.co/mp3-preview/2edbfbe73f3310fa0e65c350b0d00357fffeb69e?cid=2f2d685947614756b30d3bedab4c8888",
+                "track_number": 4,
+                "type": "track",
+                "uri": "spotify:track:1tA72w09anCZaYpsgaaysy"
+            },
+            {
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/4dwdTW1Lfiq0cM8nBAqIIz"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/4dwdTW1Lfiq0cM8nBAqIIz",
+                        "id": "4dwdTW1Lfiq0cM8nBAqIIz",
+                        "name": "Of Monsters and Men",
+                        "type": "artist",
+                        "uri": "spotify:artist:4dwdTW1Lfiq0cM8nBAqIIz"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 266333,
+                "explicit": false,
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/0FaL1koFTvwVePiRhkM6eS"
+                },
+                "href": "https://api.spotify.com/v1/tracks/0FaL1koFTvwVePiRhkM6eS",
+                "id": "0FaL1koFTvwVePiRhkM6eS",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Little Talks",
+                "preview_url": "https://p.scdn.co/mp3-preview/c52a8e074a876faabd4696ee25378c7efe37b416?cid=2f2d685947614756b30d3bedab4c8888",
+                "track_number": 5,
+                "type": "track",
+                "uri": "spotify:track:0FaL1koFTvwVePiRhkM6eS"
+            },
+            {
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/4dwdTW1Lfiq0cM8nBAqIIz"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/4dwdTW1Lfiq0cM8nBAqIIz",
+                        "id": "4dwdTW1Lfiq0cM8nBAqIIz",
+                        "name": "Of Monsters and Men",
+                        "type": "artist",
+                        "uri": "spotify:artist:4dwdTW1Lfiq0cM8nBAqIIz"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 222760,
+                "explicit": false,
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/0xxEljY1bfFquRv9irwikv"
+                },
+                "href": "https://api.spotify.com/v1/tracks/0xxEljY1bfFquRv9irwikv",
+                "id": "0xxEljY1bfFquRv9irwikv",
+                "is_local": false,
+                "is_playable": true,
+                "name": "From Finner",
+                "preview_url": "https://p.scdn.co/mp3-preview/672eedae24e5f48ca9d09b9bfb232e96039b29ff?cid=2f2d685947614756b30d3bedab4c8888",
+                "track_number": 6,
+                "type": "track",
+                "uri": "spotify:track:0xxEljY1bfFquRv9irwikv"
+            },
+            {
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/4dwdTW1Lfiq0cM8nBAqIIz"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/4dwdTW1Lfiq0cM8nBAqIIz",
+                        "id": "4dwdTW1Lfiq0cM8nBAqIIz",
+                        "name": "Of Monsters and Men",
+                        "type": "artist",
+                        "uri": "spotify:artist:4dwdTW1Lfiq0cM8nBAqIIz"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 332746,
+                "explicit": false,
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/0GBpNAIdqcMixKemyjTWOd"
+                },
+                "href": "https://api.spotify.com/v1/tracks/0GBpNAIdqcMixKemyjTWOd",
+                "id": "0GBpNAIdqcMixKemyjTWOd",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Six Weeks",
+                "preview_url": "https://p.scdn.co/mp3-preview/9471ccb97c9b06bf189835e8227980b9ac650f63?cid=2f2d685947614756b30d3bedab4c8888",
+                "track_number": 7,
+                "type": "track",
+                "uri": "spotify:track:0GBpNAIdqcMixKemyjTWOd"
+            },
+            {
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/4dwdTW1Lfiq0cM8nBAqIIz"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/4dwdTW1Lfiq0cM8nBAqIIz",
+                        "id": "4dwdTW1Lfiq0cM8nBAqIIz",
+                        "name": "Of Monsters and Men",
+                        "type": "artist",
+                        "uri": "spotify:artist:4dwdTW1Lfiq0cM8nBAqIIz"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 237720,
+                "explicit": false,
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/2pXDPtVqnvW5OdAF8G8crf"
+                },
+                "href": "https://api.spotify.com/v1/tracks/2pXDPtVqnvW5OdAF8G8crf",
+                "id": "2pXDPtVqnvW5OdAF8G8crf",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Love Love Love",
+                "preview_url": "https://p.scdn.co/mp3-preview/a5252e14685bbf273d0618e5f77262a46534cc22?cid=2f2d685947614756b30d3bedab4c8888",
+                "track_number": 8,
+                "type": "track",
+                "uri": "spotify:track:2pXDPtVqnvW5OdAF8G8crf"
+            },
+            {
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/4dwdTW1Lfiq0cM8nBAqIIz"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/4dwdTW1Lfiq0cM8nBAqIIz",
+                        "id": "4dwdTW1Lfiq0cM8nBAqIIz",
+                        "name": "Of Monsters and Men",
+                        "type": "artist",
+                        "uri": "spotify:artist:4dwdTW1Lfiq0cM8nBAqIIz"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 247706,
+                "explicit": false,
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/1N2sNfNThnUJK6kpBQ6ff5"
+                },
+                "href": "https://api.spotify.com/v1/tracks/1N2sNfNThnUJK6kpBQ6ff5",
+                "id": "1N2sNfNThnUJK6kpBQ6ff5",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Your Bones",
+                "preview_url": "https://p.scdn.co/mp3-preview/dca4663da06a9b397bdcb21bc6828306b49191d9?cid=2f2d685947614756b30d3bedab4c8888",
+                "track_number": 9,
+                "type": "track",
+                "uri": "spotify:track:1N2sNfNThnUJK6kpBQ6ff5"
+            },
+            {
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/4dwdTW1Lfiq0cM8nBAqIIz"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/4dwdTW1Lfiq0cM8nBAqIIz",
+                        "id": "4dwdTW1Lfiq0cM8nBAqIIz",
+                        "name": "Of Monsters and Men",
+                        "type": "artist",
+                        "uri": "spotify:artist:4dwdTW1Lfiq0cM8nBAqIIz"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 356800,
+                "explicit": false,
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/4MM78MV4qaSI93ouggu4dF"
+                },
+                "href": "https://api.spotify.com/v1/tracks/4MM78MV4qaSI93ouggu4dF",
+                "id": "4MM78MV4qaSI93ouggu4dF",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Lakehouse - 2011 Iceland Release Version",
+                "preview_url": "https://p.scdn.co/mp3-preview/3ff94605b76a0482e2b825c4c8e606286a3de7f6?cid=2f2d685947614756b30d3bedab4c8888",
+                "track_number": 10,
+                "type": "track",
+                "uri": "spotify:track:4MM78MV4qaSI93ouggu4dF"
+            },
+            {
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/4dwdTW1Lfiq0cM8nBAqIIz"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/4dwdTW1Lfiq0cM8nBAqIIz",
+                        "id": "4dwdTW1Lfiq0cM8nBAqIIz",
+                        "name": "Of Monsters and Men",
+                        "type": "artist",
+                        "uri": "spotify:artist:4dwdTW1Lfiq0cM8nBAqIIz"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 293800,
+                "explicit": false,
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/5shQUuVwr78xUDSW2Dujue"
+                },
+                "href": "https://api.spotify.com/v1/tracks/5shQUuVwr78xUDSW2Dujue",
+                "id": "5shQUuVwr78xUDSW2Dujue",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Yellow Light",
+                "preview_url": "https://p.scdn.co/mp3-preview/a756c3693b1aaa27b4a75ee4a728ccd00bced6d0?cid=2f2d685947614756b30d3bedab4c8888",
+                "track_number": 11,
+                "type": "track",
+                "uri": "spotify:track:5shQUuVwr78xUDSW2Dujue"
+            },
+            {
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/4dwdTW1Lfiq0cM8nBAqIIz"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/4dwdTW1Lfiq0cM8nBAqIIz",
+                        "id": "4dwdTW1Lfiq0cM8nBAqIIz",
+                        "name": "Of Monsters and Men",
+                        "type": "artist",
+                        "uri": "spotify:artist:4dwdTW1Lfiq0cM8nBAqIIz"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 169226,
+                "explicit": false,
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/0X43iQ8MVamcvGMkb2EfNW"
+                },
+                "href": "https://api.spotify.com/v1/tracks/0X43iQ8MVamcvGMkb2EfNW",
+                "id": "0X43iQ8MVamcvGMkb2EfNW",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Sinking Man - 2011 Iceland Release Version",
+                "preview_url": "https://p.scdn.co/mp3-preview/f99fa45394483c7065eda445da779d70885da6d2?cid=2f2d685947614756b30d3bedab4c8888",
+                "track_number": 12,
+                "type": "track",
+                "uri": "spotify:track:0X43iQ8MVamcvGMkb2EfNW"
+            },
+            {
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/4dwdTW1Lfiq0cM8nBAqIIz"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/4dwdTW1Lfiq0cM8nBAqIIz",
+                        "id": "4dwdTW1Lfiq0cM8nBAqIIz",
+                        "name": "Of Monsters and Men",
+                        "type": "artist",
+                        "uri": "spotify:artist:4dwdTW1Lfiq0cM8nBAqIIz"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 282440,
+                "explicit": false,
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/2fq4SiCvhv8NrLnxeNa8l9"
+                },
+                "href": "https://api.spotify.com/v1/tracks/2fq4SiCvhv8NrLnxeNa8l9",
+                "id": "2fq4SiCvhv8NrLnxeNa8l9",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Phantom",
+                "preview_url": "https://p.scdn.co/mp3-preview/597879e2136478733ca0cbdcf0c38947d85731dc?cid=2f2d685947614756b30d3bedab4c8888",
+                "track_number": 13,
+                "type": "track",
+                "uri": "spotify:track:2fq4SiCvhv8NrLnxeNa8l9"
+            },
+            {
+                "artists": [
+                    {
+                        "external_urls": {
+                            "spotify": "https://open.spotify.com/artist/4dwdTW1Lfiq0cM8nBAqIIz"
+                        },
+                        "href": "https://api.spotify.com/v1/artists/4dwdTW1Lfiq0cM8nBAqIIz",
+                        "id": "4dwdTW1Lfiq0cM8nBAqIIz",
+                        "name": "Of Monsters and Men",
+                        "type": "artist",
+                        "uri": "spotify:artist:4dwdTW1Lfiq0cM8nBAqIIz"
+                    }
+                ],
+                "disc_number": 1,
+                "duration_ms": 168626,
+                "explicit": false,
+                "external_urls": {
+                    "spotify": "https://open.spotify.com/track/5MKfqLrtXhoq4zZu86BPzA"
+                },
+                "href": "https://api.spotify.com/v1/tracks/5MKfqLrtXhoq4zZu86BPzA",
+                "id": "5MKfqLrtXhoq4zZu86BPzA",
+                "is_local": false,
+                "is_playable": true,
+                "name": "Sugar in a Bowl",
+                "preview_url": "https://p.scdn.co/mp3-preview/76c086858f7f24915227d7d8495cb6a82f186245?cid=2f2d685947614756b30d3bedab4c8888",
+                "track_number": 14,
+                "type": "track",
+                "uri": "spotify:track:5MKfqLrtXhoq4zZu86BPzA"
+            }
+        ],
+        "limit": 50,
+        "next": null,
+        "offset": 0,
+        "previous": null,
+        "total": 14
+    },
+    "type": "album",
+    "uri": "spotify:album:3BNRyWlVJZWjakfP0ybfhB"
+}
