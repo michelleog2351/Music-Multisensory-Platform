@@ -14,6 +14,12 @@
         <article class="content px-4">
             @Body
         </article>
+
+        @* sticky scroll back to top button *@
+        <button class="btn btn-secondary" 
+                style="position: fixed; bottom: 20px; right: 20px;" 
+                @onclick="ScrollToTop">↑ Top</button>
+
     </main>
 </div>
 
@@ -22,3 +28,9 @@
     <a href="." class="reload">Reload</a>
     <span class="dismiss">🗙</span>
 </div>
+@code {
+    private Task ScrollToTop(MouseEventArgs args)
+    {
+        throw new NotImplementedException();
+    }
+}

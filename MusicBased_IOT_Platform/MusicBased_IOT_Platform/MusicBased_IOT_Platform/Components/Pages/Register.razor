@@ -17,4 +17,43 @@
     public string Username { get; set; }} = string.Empty;
     public string Password { get; set; }} = string.Empty;
     public string ConfirmPassword { get; set; }} = string.Empty;
+
+    @* Method to ensure that email is entered *@
+    private bool IsEmailValid()
+    {
+@*         return !string.IsNullOrEmpty(Email) && Email.Contains("@");
+ *@    }
+
+    private bool IsFormValid()
+    {
+        return !string.IsNullOrEmpty(FirstName)
+            && !string.IsNullOrEmpty(Username)
+            && !string.IsNullOrEmpty(Password)
+            && Password == ConfirmPassword
+            && IsEmailValid();
+    }
+
+    private void OnRegister()
+    {
+        try 
+        {
+            // Simulate potential exception 
+            throw new InvalidOperationException("Simulated exception during registration.");
+        }
+        catch (Exception ex)
+        {
+            // Log the exception 
+            Console.WriteLine($"An error occurred: {ex.Message}");
+            Console.WriteLine($"Please try again later");
+        }
+
+        if (IsFormValid())
+        {
+            // Registration logic here
+        }
+        else
+        {
+            // Show validation errors
+        }
+    }
 }
