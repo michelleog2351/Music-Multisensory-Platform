@@ -1,4 +1,4 @@
-﻿using MusicBased_IOT_Platform.Model;
+﻿using MusicBased_IOT_Platform.Models;
 using System.Text.Json;
 
 namespace MusicBased_IOT_Platform.Services

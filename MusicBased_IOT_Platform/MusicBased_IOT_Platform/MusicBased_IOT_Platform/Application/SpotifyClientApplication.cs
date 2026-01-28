@@ -6,17 +6,10 @@
  * Description: Contains the definition of the SpotifyClientApplication class.
  */
 
-using System.Collections.Generic;
-using Microsoft.Extensions.Configuration;
-using MusicBased_IOT_Platform.Model;
+using MusicBased_IOT_Platform.Models;
 using MusicBased_IOT_Platform.Services;
-//using MusicBased_IOT_Platform.Services.Live;
-//using MusicBased_IOT_Platform.Services.Mock;
-using System.Text;
 using System.Diagnostics;
-using static System.Net.WebRequestMethods;
-using System.Xml.Linq;
-using MusicBased_IOT_Platform.Service.Live;
+using System.Text;
 
 
 namespace MusicBased_IOT_Platform.Application
@@ -28,9 +21,9 @@ namespace MusicBased_IOT_Platform.Application
     /// via an instance of the ISpotifyDataClient. 
     /// You should implement the methods specifeid. Add additional methods as necessary.
     /// </summary>
-      public class SpotifyClientApplication
-      {
-    
+    public class SpotifyClientApplication
+    {
+
         // Fields
         private ISpotifyService? _spotifyDataService;
         const int MainMenuMaxValue = 10;
@@ -45,9 +38,9 @@ namespace MusicBased_IOT_Platform.Application
 
 
         //Lists to hold favoutites
-        static List<Artist> favouriteArtists = new List<Artist>();
-        static List<Track> favouriteTracks = new List<Track>();
-        static List<Album> favouriteAlbums = new List<Album>();
+        static List<Artist> favouriteArtists = [];
+        static List<Track> favouriteTracks = [];
+        static List<Album> favouriteAlbums = [];
         //Options class calls add favoutite method
 
 
@@ -99,7 +92,7 @@ namespace MusicBased_IOT_Platform.Application
                     //_spotifyDataService = new LiveSpotifyDataService(AppConfig.AuthorisationUrl!, AppConfig.BaseURL!,
                     //    AppConfig.ClientID!, AppConfig.ClientSecret!);
 
-                    if (!_spotifyDataService.TestDataConnection())
+                    if (!_spotifyDataService!.TestDataConnection())
                     {
                         // We don't have a successful connection to the spotify client
                         ConsoleUI.DisplayErrorMessage("Unable to connect to the spotify client! Terminating the application");

@@ -5,7 +5,7 @@
    * Description: Contains the definition of the consoleUI class. 
    */
 
-    using MusicBased_IOT_Platform.Model;
+    using MusicBased_IOT_Platform.Models;
     using System;
     using System.Collections.Generic;
     using System.Text;

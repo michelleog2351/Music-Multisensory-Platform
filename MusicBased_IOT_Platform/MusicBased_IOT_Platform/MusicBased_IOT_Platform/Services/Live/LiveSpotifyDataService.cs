@@ -3,14 +3,10 @@
  * Description: Contains the definition of the LiveSpotifyDataService class.
  */
 
-using System;
-using System.Net;
+using MusicBased_IOT_Platform.Models;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using Microsoft.Extensions.Options;
-using MusicBased_IOT_Platform.Application;
-using MusicBased_IOT_Platform.Model;
 
 namespace MusicBased_IOT_Platform.Service.Live
 {
@@ -18,7 +14,7 @@ namespace MusicBased_IOT_Platform.Service.Live
     /// The <c>LiveSpotifyDataService</c> class implemented the methods defined by the
     /// ISpotifyDataService interface and retrieves live data from the the Spotify API.
     /// </summary>  
-    public class LiveSpotifyDataService : MockSpotifyDataService
+    public class LiveSpotifyDataService : IMockSpotifyDataService
     {
         // Fields
         // HttpClient used to make live calls to the spotify API
@@ -246,7 +242,7 @@ namespace MusicBased_IOT_Platform.Service.Live
         {
             // Check to see if the current token is stioll valid, if not get a neww one
             if (!IsTokenStillValid() && !AuthoriseClient())
-                   return new Album();
+                return new Album();
 
 
             // We have a valid token crack on with the request
@@ -281,7 +277,7 @@ namespace MusicBased_IOT_Platform.Service.Live
         /// <returns><c>List Album</c> A list of albums</returns>
         public List<Album> GetAlbums(string ids, string market = "IE")
         {
-            if(!IsTokenStillValid() && !AuthoriseClient())
+            if (!IsTokenStillValid() && !AuthoriseClient())
                 return new List<Album>();
 
 
@@ -316,8 +312,8 @@ namespace MusicBased_IOT_Platform.Service.Live
         /// <param name="limit"><c>int</c> An optional int specifying the number of items to return.</param>
         /// <returns> <c>List Track</c> A list of tracks containing track details on the album</returns>
         public List<Track> GetAlbumTracks(string ids, string market = "IE", int limit = 20)
-        { 
-            if(!IsTokenStillValid() && !AuthoriseClient())
+        {
+            if (!IsTokenStillValid() && !AuthoriseClient())
                 return new List<Track>();
 
             // We have a valid token crack on with the request
@@ -410,7 +406,7 @@ namespace MusicBased_IOT_Platform.Service.Live
             string responseBody = response.Content.ReadAsStringAsync().Result;
             ArtistsList artists = JsonSerializer.Deserialize<ArtistsList>(responseBody)!;
             return artists.Artists!;
-            
+
         }
 
         /// <summary>
@@ -494,30 +490,30 @@ namespace MusicBased_IOT_Platform.Service.Live
         /// <returns>A list of tracks</returns>
         public Track GetTrack(string id, string market = "IE")
         {
-            
-                // Check to see if the current token is still valid, if not get a new one
-                if (!IsTokenStillValid() && !AuthoriseClient())
-                    return new Track();
-                // We have a valid token crack on with the request
 
-                var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.spotify.com/v1/tracks/{id}");
+            // Check to see if the current token is still valid, if not get a new one
+            if (!IsTokenStillValid() && !AuthoriseClient())
+                return new Track();
+            // We have a valid token crack on with the request
 
-                request.Headers.Add("Authorization", "Bearer " + AccessToken.Token);
-                Task<HttpResponseMessage> task = _httpClient.SendAsync(request);
-                HttpResponseMessage response = task.Result;
-                try
-                {
-                    // throw an exception if we didn't get a valid response
-                    response.EnsureSuccessStatusCode();
-                }
-                catch (HttpRequestException)
-                {
-                    // We didn't get a valid response, return an empty list
-                    return new Track();
-                }
-                string responseBody = response.Content.ReadAsStringAsync().Result;
-                Track track = JsonSerializer.Deserialize<Track>(responseBody)!;
-                return track;
+            var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.spotify.com/v1/tracks/{id}");
+
+            request.Headers.Add("Authorization", "Bearer " + AccessToken.Token);
+            Task<HttpResponseMessage> task = _httpClient.SendAsync(request);
+            HttpResponseMessage response = task.Result;
+            try
+            {
+                // throw an exception if we didn't get a valid response
+                response.EnsureSuccessStatusCode();
+            }
+            catch (HttpRequestException)
+            {
+                // We didn't get a valid response, return an empty list
+                return new Track();
+            }
+            string responseBody = response.Content.ReadAsStringAsync().Result;
+            Track track = JsonSerializer.Deserialize<Track>(responseBody)!;
+            return track;
 
         }
 
@@ -527,32 +523,32 @@ namespace MusicBased_IOT_Platform.Service.Live
         /// <param name="ids"></param>
         /// <param name="market"></param>
         /// <returns><c>List Track</c>A list of tracks</returns>
-        public List<Track> GetTracks(string ids ,string market = "IE")
+        public List<Track> GetTracks(string ids, string market = "IE")
         {
-            
-                // Check to see if the current token is still valid, if not get a new one
-                if (!IsTokenStillValid() && !AuthoriseClient())
-                    return new List<Track>();
-                // We have a valid token crack on with the request
 
-                var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.spotify.com/v1/tracks?ids={ids}");
-                request.Headers.Add("Authorization", "Bearer " + AccessToken.Token);
-                Task<HttpResponseMessage> task = _httpClient.SendAsync(request);
-                HttpResponseMessage response = task.Result;
-                try
-                {
-                    // throw an exception if we didn't get a valid response
-                    response.EnsureSuccessStatusCode();
-                }
-                catch (HttpRequestException)
-                {
-                    // We didn't get a valid response, return an empty list
-                    return new List<Track>();
-                }
-                string responseBody = response.Content.ReadAsStringAsync().Result;
-                Tracks tracks = JsonSerializer.Deserialize<Tracks>(responseBody)!;
-                return tracks.TrackList!;
-            
+            // Check to see if the current token is still valid, if not get a new one
+            if (!IsTokenStillValid() && !AuthoriseClient())
+                return new List<Track>();
+            // We have a valid token crack on with the request
+
+            var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.spotify.com/v1/tracks?ids={ids}");
+            request.Headers.Add("Authorization", "Bearer " + AccessToken.Token);
+            Task<HttpResponseMessage> task = _httpClient.SendAsync(request);
+            HttpResponseMessage response = task.Result;
+            try
+            {
+                // throw an exception if we didn't get a valid response
+                response.EnsureSuccessStatusCode();
+            }
+            catch (HttpRequestException)
+            {
+                // We didn't get a valid response, return an empty list
+                return new List<Track>();
+            }
+            string responseBody = response.Content.ReadAsStringAsync().Result;
+            Tracks tracks = JsonSerializer.Deserialize<Tracks>(responseBody)!;
+            return tracks.TrackList!;
+
         }
 
         /// <summary>
@@ -618,7 +614,7 @@ namespace MusicBased_IOT_Platform.Service.Live
 
             // We have a valid token crack on with the request
 
-            var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.spotify.com/v1/recommendations?seed_tracks="+id );
+            var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.spotify.com/v1/recommendations?seed_tracks=" + id);
             request.Headers.Add("Authorization", "Bearer " + AccessToken.Token);
             Task<HttpResponseMessage> task = _httpClient.SendAsync(request);
             HttpResponseMessage response = task.Result;
@@ -643,31 +639,31 @@ namespace MusicBased_IOT_Platform.Service.Live
         /// </summary>
         /// <param name="id"><c>string</c>value for id</param>
         /// <returns> <c>ArtistsList</c> object with tracks based on users mood</returns>
-        public ArtistsList GetRecommendedArtists(string id) 
+        public ArtistsList GetRecommendedArtists(string id)
         {
-                // Check to see if the current token is still valid, if not get a new one
-                if (!IsTokenStillValid())
-                    return new ArtistsList();
-                // We have a valid token crack on with the request
+            // Check to see if the current token is still valid, if not get a new one
+            if (!IsTokenStillValid())
+                return new ArtistsList();
+            // We have a valid token crack on with the request
 
-                var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.spotify.com/v1/artists/" + id + "/related-artists"); 
-                request.Headers.Add("Authorization", "Bearer " + AccessToken.Token);
-                Task<HttpResponseMessage> task = _httpClient.SendAsync(request);
-                HttpResponseMessage response = task.Result;
-                try
-                {
-                    // throw an exception if we didn't get a valid response
-                    response.EnsureSuccessStatusCode();
-                }
-                catch (HttpRequestException)
-                {
-                    // We didn't get a valid response, return an empty list
-                    return new ArtistsList();
-                }
+            var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.spotify.com/v1/artists/" + id + "/related-artists");
+            request.Headers.Add("Authorization", "Bearer " + AccessToken.Token);
+            Task<HttpResponseMessage> task = _httpClient.SendAsync(request);
+            HttpResponseMessage response = task.Result;
+            try
+            {
+                // throw an exception if we didn't get a valid response
+                response.EnsureSuccessStatusCode();
+            }
+            catch (HttpRequestException)
+            {
+                // We didn't get a valid response, return an empty list
+                return new ArtistsList();
+            }
 
-                string responseBody = response.Content.ReadAsStringAsync().Result;
-                ArtistsList artists = JsonSerializer.Deserialize<ArtistsList>(responseBody)!;
-                return artists; // TrackList may return null
+            string responseBody = response.Content.ReadAsStringAsync().Result;
+            ArtistsList artists = JsonSerializer.Deserialize<ArtistsList>(responseBody)!;
+            return artists; // TrackList may return null
         }
 
         /// <summary>
@@ -676,29 +672,29 @@ namespace MusicBased_IOT_Platform.Service.Live
         /// <returns><c>List string</c></returns>
         public List<string> GetSeedGenres()
         {
-                // Check to see if the current token is still valid, if not get a new one
-                if (!IsTokenStillValid() && !AuthoriseClient())
-                    return new List<string>();
+            // Check to see if the current token is still valid, if not get a new one
+            if (!IsTokenStillValid() && !AuthoriseClient())
+                return new List<string>();
             // We have a valid token crack on with the request
-            
-                var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.spotify.com/v1/recommendations/available-genre-seeds");
-                request.Headers.Add("Authorization", "Bearer " + AccessToken.Token);
-                Task<HttpResponseMessage> task = _httpClient.SendAsync(request);
-                HttpResponseMessage response = task.Result;
-                try
-                {
-                    // throw an exception if we didn't get a valid response
-                    response.EnsureSuccessStatusCode();
-                }
-                catch (HttpRequestException)
-                {
-                    // We didn't get a valid response, return an empty list
-                    return new List<string>();
-                }
 
-                string responseBody = response.Content.ReadAsStringAsync().Result;
-                List<string> genres = JsonSerializer.Deserialize<Genre>(responseBody)!.Genres!;
-                return genres; // TrackList may return null
+            var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.spotify.com/v1/recommendations/available-genre-seeds");
+            request.Headers.Add("Authorization", "Bearer " + AccessToken.Token);
+            Task<HttpResponseMessage> task = _httpClient.SendAsync(request);
+            HttpResponseMessage response = task.Result;
+            try
+            {
+                // throw an exception if we didn't get a valid response
+                response.EnsureSuccessStatusCode();
+            }
+            catch (HttpRequestException)
+            {
+                // We didn't get a valid response, return an empty list
+                return new List<string>();
+            }
+
+            string responseBody = response.Content.ReadAsStringAsync().Result;
+            List<string> genres = JsonSerializer.Deserialize<Genre>(responseBody)!.Genres!;
+            return genres; // TrackList may return null
         }
 
 
@@ -714,7 +710,7 @@ namespace MusicBased_IOT_Platform.Service.Live
         /// <returns> <c>Reccomendations</c> object with artists based on users mood</returns>
         public Recommendations GetMoodRecommendations(int limit, double max_danceability, double max_energy, double max_valence, double max_liveness)
         {
-            
+
             // Check to see if the current token is still valid, if not get a new one
             if (!IsTokenStillValid())
                 return new Recommendations();
@@ -728,7 +724,7 @@ namespace MusicBased_IOT_Platform.Service.Live
                 if (i == 5)
                     break;
                 stringBuilder.Append($"{genre},");
-                
+
             }
 
             // We have a valid token crack on with the request
@@ -753,7 +749,7 @@ namespace MusicBased_IOT_Platform.Service.Live
             return moods; // TrackList may return null
 
         }
-        
+
 
     }
 

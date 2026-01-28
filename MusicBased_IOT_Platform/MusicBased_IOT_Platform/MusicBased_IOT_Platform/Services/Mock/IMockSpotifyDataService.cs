@@ -1,20 +1,15 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MusicBased_IOT_Platform.Model;
+using MusicBased_IOT_Platform.Models;
 
-namespace MusicBased_IOT_Platform.Service
+namespace MusicBased_IOT_Platform.Service.Mock
 {
     /// <summary>
     /// This interface represents defines the base functionality that the dataClients
     /// (live and mock) must implement. 
     /// </summary>
-    public interface MockSpotifyDataService
+    public interface IMockSpotifyDataService
     {
 
         /// <summary>
