@@ -3,31 +3,68 @@
 <PageTitle>Home</PageTitle>
 
 @* <h1>Hello/Good evening @Register.Username</h1>
- *@<h1>Muisc Platform</h1>
+ *@<h1>Music Platform</h1>
 
 
-@* Search for mood and displayed music track. WHen searchbox is clicked modal-like overlay *@
-<input type="search" name="moodSearch" placeholder="Search for your mood..." autocomplete="on" />
+@* Search for mood and displayed music track. When searchbox is clicked modal-like overlay *@
 
-@* Recently Searched *@
-@* If you have searched previously, these are the text bubbles showing your recent searches*@
- <h3>Recently Searched</h3>
-<p style="background-color: lightgray"></p>
-
-@* Search Discovery *@
-@* This section will help users to find popular categories without having to type a search query *@
-<h3>Search Discovery</h3>
+<input type="search" 
+       class="form-control"
+       name="moodSearch" 
+       placeholder="Search for your mood..." 
+       autocomplete="on" 
+       @onclick="OpenSearchModal" />
 
 
 @* <input type="text" name="search" placeholder="So, how are you feeling today?" autocomplete="on" /> *@
-<div class="mb-3">
-    <card class="">
-    <audio controls>
-        <source src="sample-music.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-    </card>
-</div>
+
+@if (isSearchModalOpen)
+{
+    <div class="modal fade show d-block" tabindex="-1 ">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Find Music by Mood</h5>
+                    <button type="button" class="btn-close" @onclick="CloseSearchModal"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <!-- Search Box inside modal -->
+                    <input type="search"
+                           class="form-control mb-3"
+                           placeholder="Search by mood e.g. calm, happy..." />
+
+                    <!-- Recently Searched -->
+                    @* If you have searched previously, these are the text bubbles showing your recent searches*@
+                    <h6>Recently Searched</h6>
+                    <div class="d-flex gap-2 flex-wrap mb-3">
+                        <span class="badge bg-secondary">Happy</span>
+                        <span class="badge bg-secondary">Calm</span>
+                        <span class="badge bg-secondary">Hopeful</span>
+                    </div>
+
+                    <!-- Search Discovery -->
+                    @* This section will help users to find popular categories without having to type a search query *@
+
+                    <h6>Popular Searches</h6>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <button class="btn btn-outline-primary btn-sm">Longing</button>
+                        <button class="btn btn-outline-primary btn-sm">Empowered</button>
+                        <button class="btn btn-outline-primary btn-sm">Goofy</button>
+                        <button class="btn btn-outline-primary btn-sm">Springtime Bops</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Backdrop -->
+    <div class="modal-backdrop fade show"></div>
+}
 
 @* Dropdown music or select from available button selection options *@
 <select>
@@ -39,8 +76,12 @@
 
 <button class="btn btn-primary">Get Music Suggestions</button>
 
-@* prompt the user to perform an action if the system has been left inactive after 30 secs i.e. "Play a music track!" or "Search for your mood!" *@
+
+
 @code {
+
+    @* prompt the user to perform an action if the system has been left inactive after 30 secs i.e. "Play a music track!" or "Search for your mood!" *@
+
     private System.Timers.Timer? inactivityTimer;
 
     /// <summary>
@@ -97,5 +138,17 @@
     private string searchQuery = string.Empty;
 
     // searchQuery.Contains("happy") || searchQuery.Contains("joy") || searchQuery.Contains("excited") ? "Happy" : "Sad" : "Relaxed" : "Energetic";
+
+    private bool isSearchModalOpen = false;
+
+    private void OpenSearchModal()
+    {
+        isSearchModalOpen = true;
+    }
+
+    private void CloseSearchModal()
+    {
+        isSearchModalOpen = false;
+    }
 
 }
