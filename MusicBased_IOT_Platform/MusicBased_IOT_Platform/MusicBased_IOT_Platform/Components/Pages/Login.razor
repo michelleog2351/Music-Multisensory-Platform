@@ -1,12 +1,22 @@
 ﻿<h3>Login</h3>
 
 
-<input class="form-control" /> type="text" placeholder="Username" />
-<input class="form-control" /> type="password" placeholder="Password" />
+<input class="form-control"  
+       type="text" 
+       placeholder="Username" 
+       @bind="Username" 
+       required />
+
+<input class="form-control"  
+       type="password" 
+       placeholder="Password" 
+       @bind="Password" 
+       required />
+
 <button class="btn btn-primary">Login</button>
 
-@code {
-
-    public string? Username { get; set; }} = string.Empty;
-    public string? Password { get; set; }} = string.Empty;
+@code 
+{
+    public string? Username { get; set; } = string.Empty;
+    public string? Password { get; set; } = string.Empty;
 }

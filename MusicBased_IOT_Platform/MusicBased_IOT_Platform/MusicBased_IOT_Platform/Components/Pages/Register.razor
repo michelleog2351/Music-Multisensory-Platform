@@ -1,44 +1,112 @@
 ﻿<h3>Register</h3>
 
+<EditForm OnValidSubmit="HandleRegister">
+    <div class="mb-3">
+        <input class="form-control" 
+               type="text" 
+               placeholder="First Name" 
+               @bind="FirstName"
+               required />
+    </div>
 
-<input class="form-control" /> type="text" placeholder="First Name" required />
-<input class="form-control" /> type="text" placeholder="Last Name" />
-<input class="form-control" /> type="text" placeholder="Email address" />
-<input class="form-control" /> type="text" placeholder="Username" />
-<input class="form-control" /> type="password" placeholder="Password" />
-<input class="form-control" /> type="password" placeholder="Confirm your password" />
-<button class="btn btn-primary">Register</button>
+    <div class="mb-3">
+        <input class="form-control"  
+               type="text" 
+               placeholder="Last Name"
+               @bind="LastName"
+               required />
+    </div>
+
+    <div class="mb-3">
+        <input class="form-control"  
+               type="text" 
+               placeholder="Email address" 
+               @bind="Email"
+               required />
+    </div>
+
+    <div class="mb-3">
+        <input class="form-control"  
+               type="text" 
+               placeholder="Username" 
+               @bind="Username"
+               required />
+    </div>
+
+    <div class="mb-3">
+        <input class="form-control"  
+               type="password" 
+               placeholder="Password"
+               @bind="Password"
+               required />
+    </div>
+
+    <div class="mb-3">
+        <input class="form-control"  
+               type="password" 
+               placeholder="Confirm your password"
+               @bind="ConfirmPassword"
+               required />
+    </div>
+
+    @if (!string.IsNullOrEmpty(ErrorMessage))
+    {
+        <div class="alert alert-danger">
+            @ErrorMessage
+        </div>
+    }
+
+    <button class="btn btn-primary" type="submit">Register</button>
+</EditForm>
 
 @code {
 
-    public string? FirstName { get; set; }} = string.Empty;
-    public string? LastName { get; set; }} = string.Empty;
-    public string? Email { get; set; }} = string.Empty;
-    public string Username { get; set; }} = string.Empty;
-    public string Password { get; set; }} = string.Empty;
-    public string ConfirmPassword { get; set; }} = string.Empty;
+    public string? FirstName { get; set; } = string.Empty;
+    public string? LastName { get; set; } = string.Empty;
+    public string? Email { get; set; } = string.Empty;
+    public string? Username { get; set; } = string.Empty;
+    public string? Password { get; set; } = string.Empty;
+    public string? ConfirmPassword { get; set; } = string.Empty;
 
-    @* Method to ensure that email is entered *@
-    private bool IsEmailValid()
-    {
-@*         return !string.IsNullOrEmpty(Email) && Email.Contains("@");
- *@    }
- 
+    private string? ErrorMessage;
+
+
+    /// <summary>
+    /// This method checks if the registration form is valid.
+    /// </summary>
+    /// <returns></returns>
     private bool IsFormValid()
     {
         return !string.IsNullOrEmpty(FirstName)
+            && !string.IsNullOrEmpty(LastName)
+            && !string.IsNullOrEmpty(Email)
             && !string.IsNullOrEmpty(Username)
             && !string.IsNullOrEmpty(Password)
+            && !string.IsNullOrEmpty(ConfirmPassword)
             && Password == ConfirmPassword
             && IsEmailValid();
     }
 
-    private void OnRegister()
+    /// <summary>
+    /// This method handles the registration process.
+    /// </summary>
+    private void HandleRegister()
     {
         try 
         {
-            // Simulate potential exception 
-            throw new InvalidOperationException("Simulated exception during registration.");
+            if (!IsEmailValid())
+            {
+                ErrorMessage = "Please enter a valid email address.";
+                return;
+            }
+
+            if (Password != ConfirmPassword)
+            {
+                ErrorMessage = "Passwords do not match.";
+                return;
+            }
+
+            ErrorMessage = null;
         }
         catch (Exception ex)
         {
@@ -47,13 +115,22 @@
             Console.WriteLine($"Please try again later");
         }
 
-        if (IsFormValid())
-        {
-            // Registration logic here
-        }
-        else
-        {
-            // Show validation errors
-        }
+        // if (IsFormValid())
+        // {
+        //     // Registration logic here
+        // }
+        // else
+        // {
+        //     // Show validation errors
+        // }
+    }
+
+    /// <summary>
+    /// This method checks if the provided email is valid.
+    /// </summary>
+    /// <returns></returns>
+    private bool IsEmailValid()
+    {
+        return !string.IsNullOrEmpty(Email) && Email.Contains("@");
     }
 }
