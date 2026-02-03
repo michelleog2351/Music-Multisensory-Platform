@@ -1,4 +1,6 @@
 ﻿@page "/"
+@inject Services.SpotifyService SpotifyService
+
 
 <PageTitle>Home</PageTitle>
 
@@ -15,6 +17,9 @@
        autocomplete="on" 
        @onclick="OpenSearchModal" />
 
+<!-- Testing -->
+
+<button class="btn btn-outline-primary btn-sm" @onclick="DisplayArtist">Longing</button>
 
 @* <input type="text" name="search" placeholder="So, how are you feeling today?" autocomplete="on" /> *@
 
@@ -76,6 +81,11 @@
 
 <button class="btn btn-primary">Get Music Suggestions</button>
 
+
+@* @if (isLoading)
+{
+    <p>Loading...</p>
+} *@
 
 
 @code {
@@ -156,5 +166,8 @@
     {
         isSearchModalOpen = false;
     }
-
+    private void DisplayArtist(MouseEventArgs args)
+    {
+        throw new NotImplementedException();
+    }
 }
