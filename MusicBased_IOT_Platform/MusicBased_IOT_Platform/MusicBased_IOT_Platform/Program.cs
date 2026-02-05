@@ -15,6 +15,10 @@ builder.Services.AddSingleton<IMockSpotifyDataService>();
 SpotifyClientApplication spotifyClientApplication = new();
 spotifyClientApplication.Run();
 
+//builder.Services.Configure<AppSettingss>(
+//    builder.Configuration.GetSection("Spotify"));
+
+
 
 var app = builder.Build();
 

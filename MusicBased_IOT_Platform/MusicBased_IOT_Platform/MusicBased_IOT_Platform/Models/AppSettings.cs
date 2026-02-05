@@ -57,5 +57,10 @@ namespace MusicBased_IOT_Platform.Models
         /// </summary>
         public string? ClientID { get; set; }
 
+        /// <summary>
+        /// The Scopes list contains the scopes of access that the application is requesting from the Spotify API.
+        /// </summary>
+        public List<string> Scopes { get; set; } = [];
+
     }
 }

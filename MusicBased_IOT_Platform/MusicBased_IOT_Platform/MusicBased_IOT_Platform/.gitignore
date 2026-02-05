@@ -79,3 +79,6 @@ postman/globals/
 data/
 *.csv
 
+# App settings
+appsettings*.json
+appsettings.Development.json
