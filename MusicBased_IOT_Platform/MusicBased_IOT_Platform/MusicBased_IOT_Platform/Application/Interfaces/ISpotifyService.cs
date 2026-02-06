@@ -1,8 +1,7 @@
-﻿
+﻿using MusicBased_IOT_Platform.Models;
+using MusicBased_IOT_Platform.Services;
 
-using MusicBased_IOT_Platform.Models;
-
-namespace MusicBased_IOT_Platform.Services
+namespace MusicBased_IOT_Platform.Application.Interfaces
 {
     public class ISpotifyService : SpotifyService
     {

@@ -6,8 +6,8 @@
  * Description: Contains the definition of the SpotifyClientApplication class.
  */
 
+using MusicBased_IOT_Platform.Application.Interfaces;
 using MusicBased_IOT_Platform.Models;
-using MusicBased_IOT_Platform.Services;
 using System.Diagnostics;
 using System.Text;
 
