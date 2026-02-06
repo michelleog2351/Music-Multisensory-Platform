@@ -1,5 +1,5 @@
-﻿using MusicBased_IOT_Platform.Models;
-using MusicBased_IOT_Platform.Services;
+﻿using MusicBased_IOT_Platform.Application.Services;
+using MusicBased_IOT_Platform.Models;
 
 namespace MusicBased_IOT_Platform.Application.Interfaces
 {

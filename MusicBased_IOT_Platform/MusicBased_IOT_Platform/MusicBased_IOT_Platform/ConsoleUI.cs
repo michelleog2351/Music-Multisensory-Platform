@@ -1,4 +1,4 @@
-﻿namespace MusicBased_IOT_Platform.Application
+﻿namespace MusicBased_IOT_Platform
 {
     /* 
    * Filename: ConsoleUI.cs

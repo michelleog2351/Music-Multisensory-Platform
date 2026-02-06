@@ -1,9 +1,13 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
 using MusicBased_IOT_Platform.Models;
 
-namespace MusicBased_IOT_Platform.Service.Mock
+namespace MusicBased_IOT_Platform.Application.Services.Mock
 {
     /// <summary>
     /// This interface represents defines the base functionality that the dataClients

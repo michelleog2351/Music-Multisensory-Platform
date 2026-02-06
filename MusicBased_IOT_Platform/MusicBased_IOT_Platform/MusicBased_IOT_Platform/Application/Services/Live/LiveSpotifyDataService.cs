@@ -3,12 +3,13 @@
  * Description: Contains the definition of the LiveSpotifyDataService class.
  */
 
+using MusicBased_IOT_Platform.Application.Services.Mock;
 using MusicBased_IOT_Platform.Models;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
-namespace MusicBased_IOT_Platform.Service.Live
+namespace MusicBased_IOT_Platform.Application.Services.Live
 {
     /// <summary>
     /// The <c>LiveSpotifyDataService</c> class implemented the methods defined by the
@@ -83,8 +84,8 @@ namespace MusicBased_IOT_Platform.Service.Live
             // The authorisation string consisting of the ClientID and ClientSecret has to be
             // converted into a Base64 string for the Spotify authorisation request. 
             string auth_string = ClientID + ":" + ClientSecret;
-            byte[] auth_bytes = System.Text.Encoding.UTF8.GetBytes(auth_string);
-            string auth_base64 = System.Convert.ToBase64String(auth_bytes);
+            byte[] auth_bytes = Encoding.UTF8.GetBytes(auth_string);
+            string auth_base64 = Convert.ToBase64String(auth_bytes);
 
             // Add the header information
             request.Headers.Add("Authorization", "Basic " + auth_base64);

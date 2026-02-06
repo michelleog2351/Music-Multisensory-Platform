@@ -1,6 +1,10 @@
 using MusicBased_IOT_Platform.Application;
+using MusicBased_IOT_Platform.Application.Interfaces;
+using MusicBased_IOT_Platform.Application.Services;
+using MusicBased_IOT_Platform.Application.Services.Live;
+using MusicBased_IOT_Platform.Application.Services.Mock;
 using MusicBased_IOT_Platform.Components;
-using MusicBased_IOT_Platform.Service.Mock;
+using MusicBased_IOT_Platform.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,15 +14,17 @@ builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
 // Demo use of the mock data service
-builder.Services.AddSingleton<IMockSpotifyDataService>();
+//builder.Services.AddSingleton<IMockSpotifyDataService, LiveSpotifyDataService>();
 // Create an instance of the SpotifyClientApplication and start it running
-SpotifyClientApplication spotifyClientApplication = new();
-spotifyClientApplication.Run();
+//SpotifyClientApplication spotifyClientApplication = new();
+//spotifyClientApplication.Run();
 
-//builder.Services.Configure<AppSettingss>(
-//    builder.Configuration.GetSection("Spotify"));
+//builder.Services.AddScoped<SpotifyService>();
+//builder.Services.AddScoped<SpotifyService, ISpotifyService>();
 
 
+builder.Services.Configure<AppSettings>(
+    builder.Configuration.GetSection("Spotify"));
 
 var app = builder.Build();
 

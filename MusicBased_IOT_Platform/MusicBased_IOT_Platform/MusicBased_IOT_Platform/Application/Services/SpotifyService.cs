@@ -1,7 +1,7 @@
 ﻿using MusicBased_IOT_Platform.Models;
 using System.Text.Json;
 
-namespace MusicBased_IOT_Platform.Services
+namespace MusicBased_IOT_Platform.Application.Services
 {
     public class SpotifyService
     {
