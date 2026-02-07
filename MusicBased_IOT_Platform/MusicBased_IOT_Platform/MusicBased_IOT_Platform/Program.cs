@@ -1,4 +1,5 @@
 using MusicBased_IOT_Platform.Application.Interfaces;
+using MusicBased_IOT_Platform.Application.Services.Live;
 using MusicBased_IOT_Platform.Application.Services.Mock;
 using MusicBased_IOT_Platform.Components;
 using MusicBased_IOT_Platform.Models;
@@ -9,6 +10,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+//bool useMock = builder.Configuration.GetValue<bool>("Spotify:UseMock");
+
+//if (useMock)
+//{
+//    builder.Services.AddScoped<ISpotifyDataService, MockSpotifyDataService>();
+//}
+//else
+//{
+//    builder.Services.AddScoped<ISpotifyDataService, LiveSpotifyDataService>();
+//}
+
 
 // Demo use of the mock data service
 builder.Services.AddScoped<ISpotifyDataService, MockSpotifyDataService>();
