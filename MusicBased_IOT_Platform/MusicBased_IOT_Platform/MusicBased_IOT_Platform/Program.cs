@@ -1,7 +1,4 @@
-using MusicBased_IOT_Platform.Application;
 using MusicBased_IOT_Platform.Application.Interfaces;
-using MusicBased_IOT_Platform.Application.Services;
-using MusicBased_IOT_Platform.Application.Services.Live;
 using MusicBased_IOT_Platform.Application.Services.Mock;
 using MusicBased_IOT_Platform.Components;
 using MusicBased_IOT_Platform.Models;
@@ -14,13 +11,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
 // Demo use of the mock data service
-//builder.Services.AddSingleton<IMockSpotifyDataService, LiveSpotifyDataService>();
-// Create an instance of the SpotifyClientApplication and start it running
-//SpotifyClientApplication spotifyClientApplication = new();
-//spotifyClientApplication.Run();
-
-//builder.Services.AddScoped<SpotifyService>();
-//builder.Services.AddScoped<SpotifyService, ISpotifyService>();
+builder.Services.AddScoped<ISpotifyDataService, MockSpotifyDataService>();
 
 
 builder.Services.Configure<AppSettings>(
@@ -51,4 +42,4 @@ app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(MusicBased_IOT_Platform.Client._Imports).Assembly);
 
-app.Run();
+await app.RunAsync();

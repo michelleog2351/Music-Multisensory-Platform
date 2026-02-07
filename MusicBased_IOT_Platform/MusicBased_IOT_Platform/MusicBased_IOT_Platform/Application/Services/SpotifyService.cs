@@ -1,26 +1,23 @@
-﻿using MusicBased_IOT_Platform.Models;
-using System.Text.Json;
+﻿using MusicBased_IOT_Platform.Application.Services.Mock;
+using MusicBased_IOT_Platform.Models;
 
 namespace MusicBased_IOT_Platform.Application.Services
 {
     public class SpotifyService
     {
-        private readonly HttpClient _http;
+        private readonly MockSpotifyDataService _dataService;
 
-        public SpotifyService(HttpClient http)
+        public SpotifyService(MockSpotifyDataService dataService)
         {
-            _http = http;
+            _dataService = dataService;
         }
 
-        public async Task<Album> GetAlbumAsync(string albumId)
+        public NewReleases GetNewReleases()
         {
-            var response = await _http.GetAsync($"https://api.spotify.com/v1/albums/{albumId}");
-            response.EnsureSuccessStatusCode();
-
-            var json = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<Album>(json);
+            return _dataService.GetNewAlbumReleases();
         }
     }
+
 
 }
 

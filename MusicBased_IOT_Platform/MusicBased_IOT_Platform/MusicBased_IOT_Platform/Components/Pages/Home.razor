@@ -1,6 +1,10 @@
 ﻿@page "/"
-@using MusicBased_IOT_Platform.Application.Services
-@inject SpotifyService SpotifyService
+@using MusicBased_IOT_Platform.Application.Interfaces
+@* @using MusicBased_IOT_Platform.Application.Interfaces
+@using MusicBased_IOT_Platform.Application.Services *@
+
+
+@inject ISpotifyDataService ISpotifyDataService
 
 
 <PageTitle>Home</PageTitle>
@@ -73,7 +77,7 @@
 }
 
 @* Dropdown music or select from available button selection options *@
-<select>
+<select class="form-select">
     <option value="happy">Happy</option>
     <option value="sad">Sad</option>
     <option value="energetic">Energetic</option>
