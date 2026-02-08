@@ -58,3 +58,23 @@ h1:focus {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
     text-align: start;
 }
+
+.app-root {
+    min-height: 100vh;
+}
+
+.navbar-nav
+{
+    align-items: center;
+}
+
+.navbar .nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.navbar, .nav-link {
+    line-height: 1.5;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}

@@ -10,19 +10,24 @@
 <PageTitle>Home</PageTitle>
 
 @* <h1>Hello/Good evening @Register.Username</h1>
- *@<h1>Music Platform</h1>
+ *@
+ <h1>Welcome Back Michelle!</h1>
+<h1>Music Platform</h1>
 
 
 @* Search for mood and displayed music track. When searchbox is clicked modal-like overlay *@
 
-<input type="search" 
-       class="form-control"
-       name="moodSearch" 
-       placeholder="Search for your mood..." 
-       autocomplete="on" 
-       @onclick="OpenSearchModal" />
+<div class="input-group mb-3">
+    <input type="search" 
+           class="form-control"
+           name="moodSearch" 
+           placeholder="Search for your mood..." 
+           autocomplete="on" 
+           @onclick="OpenSearchModal" />
+</div>
 
-<!-- Testing -->
+    <br />
+
 
 <button class="btn btn-outline-primary btn-sm" @onclick="DisplayArtist">Longing</button>
 

@@ -27,12 +27,7 @@ namespace MusicBased_IOT_Platform.Application.Interfaces
         /// <summary>
         /// The <c>GetAlbums</c> method gets the details of one or more albums with the specified IDs and optional market.
         /// </summary>
-        /// <param name="ids">a comma-separated list of spotify IDs for the albums.
-        /// For example:
-        /// 3BNRyWlVJZWjakfP0ybfhB
-        /// 3BNRyWlVJZWjakfP0ybfhB,5hJdThiWNAo9kIURyWRKwd
-        /// NB!! Use %2C for URl-encoded comma when making an API call request test
-        /// </param>
+        /// <param name="ids">a comma-separated list of spotify IDs for the albums.</param>
         /// <param name="market">an optional ISO 3166-1 alpha-2 country code.</param>
         /// <returns>An instance of the <c>album</c> class</returns>
         public List<Album> GetAlbums(string ids, string market = "IE");

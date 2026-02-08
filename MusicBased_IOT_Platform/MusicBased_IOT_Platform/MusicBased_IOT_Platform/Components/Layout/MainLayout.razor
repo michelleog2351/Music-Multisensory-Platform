@@ -1,34 +1,37 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+<div class="app-root">
+ 
+    <NavMenu />
 
-    <main>
-        <div class="top-row px-4">
-            @* <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a> *@
-            <a href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"></a>
-        </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
-
-        @* sticky scroll back to top button *@
-        <button class="btn btn-secondary" 
-                style="position: fixed; bottom: 20px; right: 20px;" 
-                @onclick="ScrollToTop">↑ Top</button>
-
+    <main class="container-fluid py-4">
+        @Body
     </main>
+
+       @* sticky scroll back to top button *@
+       <button class="btn btn-secondary" 
+               style="position: fixed; bottom: 20px; right: 20px;" 
+               @onclick="ScrollToTop">↑ Top
+       </button>
 </div>
+
+
 
 <div id="blazor-error-ui" data-nosnippet>
     An unhandled error has occurred.
     <a href="." class="reload">Reload</a>
     <span class="dismiss">🗙</span>
 </div>
+
 @code {
+
+    /// <summary>
+    /// The ScrollToTop method will be called when the user clicks the "↑ Top" button. 
+    /// It should scroll the page back to the top
+    /// </summary>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
     private Task ScrollToTop(MouseEventArgs args)
     {
         throw new NotImplementedException();

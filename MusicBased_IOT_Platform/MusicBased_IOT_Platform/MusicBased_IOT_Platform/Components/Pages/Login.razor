@@ -1,20 +1,38 @@
 ﻿@page "/login"
-<h3>Login</h3>
+@* <h3>Login</h3> *@
+
+<PageTitle>Login</PageTitle>
 
 
-<input class="form-control"  
-       type="text" 
-       placeholder="Username" 
-       @bind="Username" 
-       required />
+<div class="row justify-content-end">
+    <div class="col-12 col-md-4 col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Login</h5>
 
-<input class="form-control"  
-       type="password" 
-       placeholder="Password" 
-       @bind="Password" 
-       required />
+                    <div class="mb-3">
+                        <input class="form-control"  
+                               type="text" 
+                               placeholder="Username" 
+                               @bind="Username" 
+                               required />
+                    </div>
 
-<button class="btn btn-primary">Login</button>
+                    <div class="mb-3">
+                        <input class="form-control"  
+                               type="password" 
+                               placeholder="Password" 
+                               @bind="Password" 
+                               required />
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary btn-lg">Login</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @code 
 {
