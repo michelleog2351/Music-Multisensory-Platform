@@ -1,22 +1,40 @@
 ﻿@page "/register"
-<h3>Register</h3>
+@using MusicBased_IOT_Platform.Models
 
-<EditForm OnValidSubmit="HandleRegister">
-    <div class="mb-3">
+<PageTitle>Register</PageTitle>
+
+ <div
+      class="container d-flex justify-content-center align-items-center flex-grow-1"
+    >
+    <div class="card p-4 shadow rounded-4"
+         style="max-width: 600px; width: 100%">
+        <h2 class="text-center">Register</h2>
+
+<EditForm Model="@registerModel" 
+    OnValidSubmit="HandleRegister">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+<div class="row mb-3 g-2">
+    <div class="col-md-6">
+        <label class="visually-hidden">First Name</label>
         <input class="form-control" 
                type="text" 
                placeholder="First Name" 
                @bind="FirstName"
                required />
-    </div>
+               </div>
 
-    <div class="mb-3">
+    <div class="col-md-6">
+        <label class="visually-hidden">Last Name</label>
         <input class="form-control"  
                type="text" 
                placeholder="Last Name"
                @bind="LastName"
                required />
     </div>
+</div>
 
     <div class="mb-3">
         <input class="form-control"  
@@ -45,7 +63,7 @@
     <div class="mb-3">
         <input class="form-control"  
                type="password" 
-               placeholder="Confirm your password"
+               placeholder="Confirm your password...........Forgot your password option required"
                @bind="ConfirmPassword"
                required />
     </div>
@@ -56,9 +74,12 @@
             @ErrorMessage
         </div>
     }
-
-    <button class="btn btn-primary" type="submit">Register</button>
+    <div class="d-grid gap-2">
+        <button class="btn btn-outline-success btn-lg">Register</button>
+    </div>
 </EditForm>
+</div>
+</div>
 
 @code {
 
@@ -71,6 +92,8 @@
 
     private string? ErrorMessage;
 
+
+    private RegisterModel registerModel = new();
 
     /// <summary>
     /// This method checks if the registration form is valid.
