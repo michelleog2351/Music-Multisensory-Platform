@@ -1,7 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using MusicBased_IOT_Platform.Application.Interfaces;
 using MusicBased_IOT_Platform.Application.Services.Live;
 using MusicBased_IOT_Platform.Application.Services.Mock;
 using MusicBased_IOT_Platform.Components;
+using MusicBased_IOT_Platform.Data;
 using MusicBased_IOT_Platform.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +32,10 @@ builder.Services.AddScoped<ISpotifyDataService, MockSpotifyDataService>();
 
 builder.Services.Configure<AppSettings>(
     builder.Configuration.GetSection("Spotify"));
+
+builder.Services.AddDbContext<AppDBContext>(options =>
+    options.UseSqlite(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

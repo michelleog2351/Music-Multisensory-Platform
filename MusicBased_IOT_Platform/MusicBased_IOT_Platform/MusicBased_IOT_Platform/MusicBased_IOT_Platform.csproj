@@ -8,7 +8,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MusicBased_IOT_Platform.Client\MusicBased_IOT_Platform.Client.csproj" />
+    <PackageReference Include="BCrypt-Official" Version="0.1.109" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.13" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="9.32.0.97167">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -21,10 +24,6 @@
 
   <ItemGroup>
     <None Include="C:\Users\L00176523\OneDrive - Atlantic TU\Desktop\Music-Multisensory-Platform\MusicBased_IOT_Platform\MusicBased_IOT_Platform\MusicBased_IOT_Platform\.editorconfig" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Database\" />
   </ItemGroup>
 
 </Project>
