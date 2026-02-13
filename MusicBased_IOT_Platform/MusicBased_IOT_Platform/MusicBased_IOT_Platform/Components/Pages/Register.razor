@@ -1,7 +1,8 @@
 ﻿@page "/register"
 @using MusicBased_IOT_Platform.Data
 @using MusicBased_IOT_Platform.Models
-@inject AppDBcontext dB
+@inject NavigationManager NavigationManager
+@inject AppDBContext dB
 
 <PageTitle>Register</PageTitle>
 
@@ -12,32 +13,35 @@
         <br />
 
         <EditForm Model="@registerModel" 
-            OnValidSubmit="HandleRegister">
+            OnValidSubmit="HandleRegister"
+            FormName="registerForm">
+
 
             <DataAnnotationsValidator />
             <ValidationSummary />
 
-        <div class="row mb-3 g-2">
-            <div class="col-md-6">
-                <label class="visually-hidden">First Name</label>
-                <input class="form-control" 
-                       type="text" 
-                       placeholder="First Name" 
-                       @bind="FirstName"
-                       required
-                       @oninput="ClearError" />
+            <div class="row mb-3 g-2">
+                <div class="col-md-6">
+                    <label class="visually-hidden">First Name</label>
+                    <input class="form-control" 
+                           type="text" 
+                           placeholder="First Name" 
+                           @bind="registerModel.FirstName"
+                           required
+                           @oninput="ClearError" />
 
-            </div>
+                </div>
 
-            <div class="col-md-6">
-                <label class="visually-hidden">Last Name</label>
-                <input class="form-control"  
-                       type="text" 
-                       placeholder="Last Name"
-                       @bind="LastName"
-                       required
-                       @oninput="ClearError" />
+                <div class="col-md-6">
+                    <label class="visually-hidden">Last Name</label>
+                    <input class="form-control"  
+                           type="text" 
+                           placeholder="Last Name"
+                           @bind="registerModel.LastName"
+                           required
+                           @oninput="ClearError" />
 
+                </div>
             </div>
 
 
@@ -45,15 +49,16 @@
                 <input class="form-control"  
                        type="text" 
                        placeholder="Email address" 
-                       @bind="Email"
-                       required />
+                       @bind="registerModel.Email"
+                       required
+                           @oninput="ClearError" />
             </div>
 
             <div class="mb-3">
                 <input class="form-control"  
                        type="text" 
                        placeholder="Username" 
-                       @bind="Username"
+                       @bind="registerModel.Username"
                        required          
                        @oninput="ClearError" />
 
@@ -63,7 +68,7 @@
                 <input class="form-control"  
                        type="password" 
                        placeholder="Password"
-                       @bind="Password"
+                       @bind="registerModel.Password"
                        required
                        @oninput="ClearError" />
             </div>
@@ -72,8 +77,9 @@
                 <input class="form-control"  
                        type="password" 
                        placeholder="Confirm your password"
-                       @bind="ConfirmPassword"
-                       required />
+                       required
+                       @bind="registerModel.ConfirmPassword"
+                       @oninput="ClearError" />
             </div>
 
             @if (!string.IsNullOrEmpty(ErrorMessage))
@@ -92,12 +98,12 @@
 
 @code {
 
-    public string? FirstName { get; set; } = string.Empty;
-    public string? LastName { get; set; } = string.Empty;
-    public string? Email { get; set; } = string.Empty;
-    public string? Username { get; set; } = string.Empty;
-    public string? Password { get; set; } = string.Empty;
-    public string? ConfirmPassword { get; set; } = string.Empty;
+    // public string? FirstName { get; set; } = string.Empty;
+    // public string? LastName { get; set; } = string.Empty;
+    // public string? Email { get; set; } = string.Empty;
+    // public string? Username { get; set; } = string.Empty;
+    // public string? Password { get; set; } = string.Empty;
+    // public string? ConfirmPassword { get; set; } = string.Empty;
 
     private string? ErrorMessage;
 
@@ -110,56 +116,21 @@
     /// <returns></returns>
     private bool IsFormValid()
     {
-        return !string.IsNullOrEmpty(FirstName)
-            && !string.IsNullOrEmpty(LastName)
-            && !string.IsNullOrEmpty(Email)
-            && !string.IsNullOrEmpty(Username)
-            && !string.IsNullOrEmpty(Password)
-            && !string.IsNullOrEmpty(ConfirmPassword)
-            && Password == ConfirmPassword
+        return !string.IsNullOrEmpty(registerModel.FirstName)
+            && !string.IsNullOrEmpty(registerModel.LastName)
+            && !string.IsNullOrEmpty(registerModel.Email)
+            && !string.IsNullOrEmpty(registerModel.Username)
+            && !string.IsNullOrEmpty(registerModel.Password)
+            && !string.IsNullOrEmpty(registerModel.ConfirmPassword)
+            && registerModel.Password == registerModel.ConfirmPassword
             && IsEmailValid();
     }
 
+
     /// <summary>
-    /// This method handles the registration process.
+    /// This method handles the registration process when the user submits the form.
     /// </summary>
-    // private void HandleRegister1()
-    // {
-    //     try 
-    //     {
-    //         if (!IsEmailValid())
-    //         {
-    //             ErrorMessage = "Please enter a valid email address.";
-    //             return;
-    //         }
-
-    //         if (Password != ConfirmPassword)
-    //         {
-    //             ErrorMessage = "Passwords do not match.";
-    //             return;
-    //         }
-
-    //         ErrorMessage = null;
-
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         // Log the exception 
-    //         Console.WriteLine($"An error occurred: {ex.Message}");
-    //         Console.WriteLine($"Please try again later");
-    //     }
-
-    //     // if (IsFormValid())
-    //     // {
-    //     //     // Registration logic here
-    //     // }
-    //     // else
-    //     // {
-    //     //     // Show validation errors
-    //     // }
-    // }
-
-
+    /// <returns></returns>
     private async Task HandleRegister()
     {
         if(registerModel.Password != registerModel.ConfirmPassword)
@@ -177,6 +148,7 @@
 
             var user = new RegisterModel
             {
+                ID = registerModel.ID,
                 FirstName = registerModel.FirstName,
                 LastName = registerModel.LastName,
                 Email = registerModel.Email,
@@ -192,7 +164,7 @@
             // redirect to login page after successful registration
             NavigationManager.NavigateTo("/login");
 
-        })
+        }
 
     }
 
@@ -202,7 +174,7 @@
     /// <returns></returns>
     private bool IsEmailValid()
     {
-        return !string.IsNullOrEmpty(Email) && Email.Contains("@");
+        return !string.IsNullOrEmpty(registerModel.Email) && registerModel.Email.Contains("@");
     }
     private void ClearError(ChangeEventArgs args)
     {

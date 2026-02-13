@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using MusicBased_IOT_Platform.Application.Interfaces;
+using MusicBased_IOT_Platform.Application.Interfaces.Spotify;
 using MusicBased_IOT_Platform.Application.Services.Live;
-using MusicBased_IOT_Platform.Application.Services.Mock;
+using MusicBased_IOT_Platform.Application.Services.Spotify.Mock;
 using MusicBased_IOT_Platform.Components;
 using MusicBased_IOT_Platform.Data;
 using MusicBased_IOT_Platform.Models;

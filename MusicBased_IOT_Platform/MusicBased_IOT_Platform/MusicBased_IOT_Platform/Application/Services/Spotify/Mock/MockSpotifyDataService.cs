@@ -1,8 +1,8 @@
-﻿using MusicBased_IOT_Platform.Application.Interfaces;
+﻿using MusicBased_IOT_Platform.Application.Interfaces.Spotify;
 using MusicBased_IOT_Platform.Models;
 using System.Text.Json;
 
-namespace MusicBased_IOT_Platform.Application.Services.Mock
+namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
 {
     public class MockSpotifyDataService : ISpotifyDataService
     {

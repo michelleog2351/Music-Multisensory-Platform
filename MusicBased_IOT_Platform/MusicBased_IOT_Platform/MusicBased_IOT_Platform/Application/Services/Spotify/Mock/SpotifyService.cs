@@ -1,7 +1,6 @@
-﻿using MusicBased_IOT_Platform.Application.Services.Mock;
-using MusicBased_IOT_Platform.Models;
+﻿using MusicBased_IOT_Platform.Models;
 
-namespace MusicBased_IOT_Platform.Application.Services
+namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
 {
     public class SpotifyService
     {

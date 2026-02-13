@@ -7,7 +7,7 @@ using MusicBased_IOT_Platform.Models;
 using System.Text;
 using System.Text.Json;
 
-namespace MusicBased_IOT_Platform.Application.Services.Live
+namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
 {
     /// <summary>
     /// The <c>LiveSpotifyDataService</c> class implemented the methods defined by the
