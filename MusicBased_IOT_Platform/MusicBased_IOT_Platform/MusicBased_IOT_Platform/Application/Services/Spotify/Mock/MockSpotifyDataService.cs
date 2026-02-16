@@ -17,6 +17,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
                 AppContext.BaseDirectory,
                 "Application",
                 "Services",
+                "Spotify",
                 "Mock",
                 "TestData"
                 );
@@ -28,7 +29,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
         /// <param name="id"></param>
         /// <param name="market"></param>
         /// <returns></returns>
-        public Track GetTrack(string id, string market = "IE")
+        public Task<Track> GetTrack(string id, string market = "IE")
         {
             var filePath = Path.Combine(_jsonFilePath, "track.json");
 
@@ -38,13 +39,16 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
             }
 
             var jsonData = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<Track>(
+
+            var track = JsonSerializer.Deserialize<Track>(
                 jsonData,
                 new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 }
             )!;
+
+            return Task.FromResult(track);
         }
 
         /// <summary>
@@ -55,7 +59,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
         /// <param name="market"></param>
         /// <returns></returns>
         /// <exception cref="FileNotFoundException"></exception>
-        public List<Track> GetTracks(string ids, string market = "IE")
+        public Task<List<Track>> GetTracks(string ids, string market = "IE")
         {
             var filePath = Path.Combine(_jsonFilePath, "tracks.json");
 
@@ -65,13 +69,16 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
             }
 
             var jsonData = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<List<Track>>(
+
+            var tracks = JsonSerializer.Deserialize<List<Track>>(
                 jsonData,
                 new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 }
             )!;
+
+            return Task.FromResult(tracks);
         }
 
         /// <summary>
@@ -82,7 +89,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
         /// <param name="id"></param>
         /// <param name="market"></param>
         /// <returns></returns>
-        public Album GetAlbum(string id, string market = "IE")
+        public Task<Album> GetAlbum(string id, string market = "IE")
         {
             // Load from JSON file
             var filePath = Path.Combine(_jsonFilePath, "album.json");
@@ -94,13 +101,15 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
             }
 
             var jsonData = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<Album>(
+
+            var album = JsonSerializer.Deserialize<Album>(
                 jsonData,
                 new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 }
             )!;
+            return Task.FromResult(album);
         }
 
         /// <summary>
@@ -110,7 +119,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
         /// <param name="ids"></param>
         /// <param name="market"></param>
         /// <returns></returns>
-        public List<Album> GetAlbums(string ids, string market = "IE")
+        public Task<List<Album>> GetAlbums(string ids, string market = "IE")
         {
             // Load from JSON file
             var filePath = Path.Combine(_jsonFilePath, "albums.json");
@@ -121,13 +130,14 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
             }
 
             var jsonData = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<List<Album>>(
+            var albums = JsonSerializer.Deserialize<List<Album>>(
                 jsonData,
                 new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 }
             )!;
+            return Task.FromResult(albums);
         }
 
         /// <summary>
@@ -138,7 +148,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
         /// <param name="limit"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public List<Track> GetAlbumTracks(string ids, string market = "IE", int limit = 20)
+        public Task<List<Track>> GetAlbumTracks(string ids, string market = "IE", int limit = 20)
         {
             // Load from JSON file
             var filePath = Path.Combine(_jsonFilePath, "album_tracks.json");
@@ -149,13 +159,14 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
             }
 
             var jsonData = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<List<Track>>(
+            var tracks = JsonSerializer.Deserialize<List<Track>>(
                 jsonData,
                 new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 }
             )!;
+            return Task.FromResult(tracks);
         }
 
         /// <summary>
@@ -165,7 +176,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
         /// <param name="id"></param>
         /// <returns> An Artist object containing the artist's information.</returns>
         /// <exception cref="FileNotFoundException"></exception>
-        internal Artist GetArtist(string id)
+        public Task<Artist> GetArtist(string id)
         {
             // Load from JSON file
             var filePath = Path.Combine(_jsonFilePath, "artist.json");
@@ -177,13 +188,14 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
             }
 
             var jsonData = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<Artist>(
+            var artist = JsonSerializer.Deserialize<Artist>(
                 jsonData,
                 new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 }
             )!;
+            return Task.FromResult(artist);
         }
 
         /// <summary>
@@ -194,7 +206,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
         /// <param name="limit"></param>
         /// <returns></returns>
         /// <exception cref="FileNotFoundException"></exception>
-        public List<Artist> GetArtists(string ids, string market = "IE", int limit = 20)
+        public Task<List<Artist>> GetArtists(string ids, string market = "IE", int limit = 20)
         {
             // Load from JSON file
             var filePath = Path.Combine(_jsonFilePath, "artists.json");
@@ -205,13 +217,14 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
             }
 
             var jsonData = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<List<Artist>>(
+            var artists = JsonSerializer.Deserialize<List<Artist>>(
                 jsonData,
                 new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 }
             )!;
+            return Task.FromResult(artists);
         }
 
         /// <summary>
@@ -222,23 +235,24 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
         /// <param name="limit"></param>
         /// <returns></returns>
         /// <exception cref="FileNotFoundException"></exception>
-        public ArtistAlbums GetArtistsAlbums(string id, string market = "IE", int limit = 20)
+        public Task<ArtistAlbums> GetArtistsAlbums(string id, string market = "IE", int limit = 20)
         {
             var filePath = Path.Combine(_jsonFilePath, "artist_albums.json");
 
-            if (!File.Exists(filePath)) 
+            if (!File.Exists(filePath))
             {
                 throw new FileNotFoundException($"The file {filePath} was not found.");
             }
 
             var jsonData = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<ArtistAlbums>(
+            var artistAlbums = JsonSerializer.Deserialize<ArtistAlbums>(
                 jsonData,
                 new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 }
             )!;
+            return Task.FromResult(artistAlbums);
         }
 
         /// <summary>
@@ -248,7 +262,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
         /// <param name="market"></param>
         /// <returns></returns>
         /// <exception cref="FileNotFoundException"></exception>
-        public ArtistTopTracks GetArtistsTopTracks(string id, string market = "IE")
+        public Task<ArtistTopTracks> GetArtistsTopTracks(string id, string market = "IE")
         {
             var filePath = Path.Combine(_jsonFilePath, "artist_top_tracks.json");
             if (!File.Exists(filePath))
@@ -257,13 +271,14 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
             }
 
             var jsonData = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<ArtistTopTracks>(
+            var artistopTracks = JsonSerializer.Deserialize<ArtistTopTracks>(
                 jsonData,
                 new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 }
             )!;
+            return Task.FromResult(artistopTracks);
         }
 
         /// <summary>
@@ -274,7 +289,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
         /// <param name="offset"></param>
         /// <returns></returns>
         /// <exception cref="FileNotFoundException"></exception>
-        public NewReleases GetNewAlbumReleases(int limit = 20, int offset = 0)
+        public Task<NewReleases> GetNewAlbumReleases(int limit = 20, int offset = 0)
         {
             var filePath = Path.Combine(_jsonFilePath, "new_releases.json");
 
@@ -284,21 +299,17 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
             }
 
             var jsonData = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<NewReleases>(
+            var newReleases = JsonSerializer.Deserialize<NewReleases>(
                 jsonData,
                 new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 }
             )!;
+            return Task.FromResult(newReleases);
         }
 
-        public ArtistsList GetRecommendedArtists(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Recommendations GetRecommendedTracks(string id)
+        public Task<Recommendations> GetRecommendedTracks(string id)
         {
             throw new NotImplementedException();
         }
@@ -309,7 +320,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
         /// <param name="id"></param>
         /// <returns></returns>
         /// <exception cref="FileNotFoundException"></exception>
-        public List<Artist> GetRelatedArtists(string id)
+        public Task<List<Artist>> GetRelatedArtists(string id)
         {
             var filePath = Path.Combine(_jsonFilePath, "related_artists.json");
 
@@ -319,13 +330,14 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
             }
 
             var jsonData = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<List<Artist>>(
+            var relatedArtists = JsonSerializer.Deserialize<List<Artist>>(
                 jsonData,
                 new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 }
             )!;
+            return Task.FromResult(relatedArtists);
         }
 
         /// <summary>
@@ -333,7 +345,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
         /// </summary>
         /// <returns></returns>
         /// <exception cref="FileNotFoundException"></exception>
-        public List<string> GetSeedGenres()
+        public Task<List<string>> GetSeedGenres()
         {
             var filePath = Path.Combine(_jsonFilePath, "seed_genres.json");
 
@@ -343,59 +355,35 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
             }
 
             var jsonData = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<List<string>>(
+            var seed_genres = JsonSerializer.Deserialize<List<string>>(
                 jsonData,
                 new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 }
             )!;
+            return Task.FromResult(seed_genres);
         }
 
-        static Recommendations GetMoodRecommendations(int limit, double max_danceability, double max_energy, double max_valence, double max_liveness)
+        public Task<Recommendations> GetMoodRecommendations(int limit, double max_danceability, double max_energy, double max_valence, double max_liveness)
         {
             throw new NotImplementedException();
         }
 
 
-        static Recommendations GetRecommendations(string seedArtists, string seedGenres, string seedTracks, int limit, string market)
+        public Task<Recommendations> GetRecommendations(string seedArtists, string seedGenres, string seedTracks, int limit, string market)
         {
             throw new NotImplementedException();
         }
 
-        static SearchResults Search(string searchQuery, string searchItemTypes)
+        public Task<SearchResults> Search(string searchQuery, string searchItemTypes)
         {
             throw new NotImplementedException();
         }
 
-        static bool TestDataConnection()
+        public Task<bool> TestDataConnection()
         {
             throw new NotImplementedException();
-        }
-
-        Artist ISpotifyDataService.GetArtist(string id)
-        {
-            return GetArtist(id);
-        }
-
-        Recommendations ISpotifyDataService.GetMoodRecommendations(int limit, double max_danceability, double max_energy, double max_valence, double max_liveness)
-        {
-            return GetMoodRecommendations(limit, max_danceability, max_energy, max_valence, max_liveness);
-        }
-
-        Recommendations ISpotifyDataService.GetRecommendations(string seedArtists, string seedGenres, string seedTracks, int limit, string market)
-        {
-            return GetRecommendations(seedArtists, seedGenres, seedTracks, limit, market);
-        }
-
-        SearchResults ISpotifyDataService.Search(string searchQuery, string searchItemTypes)
-        {
-            return Search(searchQuery, searchItemTypes);
-        }
-
-        bool ISpotifyDataService.TestDataConnection()
-        {
-            return TestDataConnection();
         }
     }
 }

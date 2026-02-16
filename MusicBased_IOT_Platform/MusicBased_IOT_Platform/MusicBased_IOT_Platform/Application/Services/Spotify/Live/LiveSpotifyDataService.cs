@@ -3,6 +3,8 @@
  * Description: Contains the definition of the LiveSpotifyDataService class.
  */
 
+using Microsoft.Extensions.Options;
+using MusicBased_IOT_Platform.Application.Interfaces.Spotify;
 using MusicBased_IOT_Platform.Models;
 using System.Text;
 using System.Text.Json;
@@ -13,31 +15,33 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
     /// The <c>LiveSpotifyDataService</c> class implemented the methods defined by the
     /// ISpotifyDataService interface and retrieves live data from the the Spotify API.
     /// </summary>  
-    public class LiveSpotifyDataService
+    public class LiveSpotifyDataService : ISpotifyDataService
     {
         // Fields
         // HttpClient used to make live calls to the spotify API
         private readonly HttpClient _httpClient;
+        private readonly AppSettings _settings;
 
-        // Constructors
         /// <summary>
-        /// LiveSpotifyDataService
+        /// The constructor for the <c>LiveSpotifyDataService</c> class takes an HttpClient and AppSettings as parameters and initialises the class fields and properties.
         /// </summary>
-        /// <param name="authorisationUrl"></param>
-        /// <param name="url"></param>
-        /// <param name="clientID"></param>
-        /// <param name="clientSecret"></param>
-        public LiveSpotifyDataService(string authorisationUrl, string url, string clientID, string clientSecret)
+        /// <param name="httpClient"></param>
+        /// <param name="settings"></param>
+        public LiveSpotifyDataService(
+            HttpClient httpClient,
+            IOptions<AppSettings> settings)
         {
+            _httpClient = httpClient;
+            _settings = settings.Value;
+
             AccessToken = new AccessToken();
-            AuthorisationUrl = authorisationUrl;
-            BaseURL = url;
-            ClientID = clientID;
-            ClientSecret = clientSecret;
-            _httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(BaseURL)
-            };
+
+            AuthorisationUrl = _settings.AuthorisationUrl;
+            BaseURL = _settings.BaseURL;
+            ClientID = _settings.ClientID ?? string.Empty;
+            ClientSecret = _settings.ClientSecret;
+
+            _httpClient.BaseAddress = new Uri(BaseURL);
         }
 
         // Properties
@@ -128,7 +132,6 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             return true;
         }
 
-
         /// <summary>
         /// The <c>GetNewAlbumReleases</c> gets a list of new albums from the spotify web API
         /// </summary>
@@ -138,7 +141,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         /// </param>
         /// <param name="offset"/>
         /// <returns><c>GetNewAlbumReleases</c> A list of newly released albums</returns>
-        public async Task<NewReleases> GetNewAlbumReleasesAsync(int limit = 20, int offset = 0)
+        public async Task<NewReleases> GetNewAlbumReleases(int limit = 20, int offset = 0)
         {
             // Check to see if the current token is still valid, if not get a new one
             if (!IsTokenStillValid())
@@ -358,7 +361,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             {
                 bool authorised = await AuthoriseClientAsync();
                 if (!authorised)
-                    return new List<Track>();
+                    return [];
             }
 
             var request = new HttpRequestMessage(
@@ -773,38 +776,6 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         }
 
         /// <summary>
-        /// <c>GetRecommendedArtists</c> method gets recommended artists based on user input
-        /// </summary>
-        /// <param name="id"><c>string</c>value for id</param>
-        /// <returns> <c>ArtistsList</c> object with recommended artists based on users mood</returns>
-        public ArtistsList GetRecommendedArtists(string id)
-        {
-            // Check to see if the current token is still valid, if not get a new one
-            if (!IsTokenStillValid())
-                return new ArtistsList();
-            // We have a valid token crack on with the request
-
-            var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.spotify.com/v1/artists/" + id + "/related-artists");
-            request.Headers.Add("Authorization", $"Bearer {AccessToken.Token}");
-            Task<HttpResponseMessage> task = _httpClient.SendAsync(request);
-            HttpResponseMessage response = task.Result;
-            try
-            {
-                // throw an exception if valid response isn't received
-                response.EnsureSuccessStatusCode();
-            }
-            catch (HttpRequestException)
-            {
-                // Didn't get a valid response, return an empty list
-                return new ArtistsList();
-            }
-
-            string responseBody = response.Content.ReadAsStringAsync().Result;
-            ArtistsList artists = JsonSerializer.Deserialize<ArtistsList>(responseBody)!;
-            return artists; // TrackList may return null
-        }
-
-        /// <summary>
         /// <c>GetSeedGenres</c> returns a list of available genres seed values for recommendations
         /// </summary>
         /// <returns><c>List string</c> A list of available genres seed values for recommendations</returns>
@@ -884,7 +855,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
 
             var request = new HttpRequestMessage(
                 HttpMethod.Get,
-                $"https://api.spotify.com/v1/recommendations?limit={limit}&seed_genres={stringBuilder.ToString()}&max_danceability={max_danceability}&max_energy={max_energy}&max_valence={max_valence}&max_liveness={max_liveness}");
+                $"https://api.spotify.com/v1/recommendations?limit={limit}&seed_genres={stringBuilder}&max_danceability={max_danceability}&max_energy={max_energy}&max_valence={max_valence}&max_liveness={max_liveness}");
 
             request.Headers.Add("Authorization", "Bearer {AccessToken.Token}");
 
@@ -906,8 +877,6 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             return moods; // TrackList may return null
 
         }
-
-
     }
 
 }

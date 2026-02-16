@@ -22,7 +22,7 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Spotify
         /// <param name="id">The Spotify ID of the album.</param>
         /// <param name="market"></param>
         /// <returns>An album</returns>
-        public Album GetAlbum(string id, string market = "IE");
+        Task<Album> GetAlbum(string id, string market = "IE");
 
         /// <summary>
         /// The <c>GetAlbums</c> method gets the details of one or more albums with the specified IDs and optional market.
@@ -30,7 +30,7 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Spotify
         /// <param name="ids">a comma-separated list of spotify IDs for the albums.</param>
         /// <param name="market">an optional ISO 3166-1 alpha-2 country code.</param>
         /// <returns>An instance of the <c>album</c> class</returns>
-        public List<Album> GetAlbums(string ids, string market = "IE");
+        Task<List<Album>> GetAlbums(string ids, string market = "IE");
 
         /// <summary>
         /// The <c>GetAlbumTracks</c> method returns a list of track objects containing the details
@@ -40,7 +40,7 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Spotify
         /// <param name="market">an optional ISO 3166-1 alpha-2 country code.</param>
         /// <param name="limit">An optional int specifying the number of items to return.</param>
         /// <returns>A list of tracks containing track details on the album</returns>
-        public List<Track> GetAlbumTracks(string ids, string market = "IE", int limit = 20);
+        Task<List<Track>> GetAlbumTracks(string ids, string market = "IE", int limit = 20);
 
         /// <summary>
         /// Get Spotify catalog information for a single artist identified by
@@ -48,7 +48,7 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Spotify
         /// </summary>
         /// <param name = "id" > the Spotify IDs for the artist.</param>
         /// <returns>An artist object</returns>
-        public Artist GetArtist(string id);
+        Task<Artist> GetArtist(string id);
 
         /// <summary>
         /// Get Spotify catalog information for a list of artists identified
@@ -59,7 +59,7 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Spotify
         /// /// <param name="market"></param>
         /// /// <param name="limit"></param>
         /// <returns>A list of one or more <c>Artist</c> objects.</returns>
-        public List<Artist> GetArtists(string ids, string market = "IE", int limit = 20);
+        Task<List<Artist>> GetArtists(string ids, string market = "IE", int limit = 20);
 
         /// <summary>
         /// The <c>GetArtistsAlbums</c> method gets Spotify catalog information about an artist's albums.
@@ -68,7 +68,7 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Spotify
         /// <param name="market">an optional ISO 3166-1 alpha-2 country code.</param>
         /// <param name="limit">An optional int specifying the number of items to return.</param>
         /// <returns>A list of ArtistAlbum objects</returns>
-        public ArtistAlbums GetArtistsAlbums(string id, string market = "IE", int limit = 20);
+        Task<ArtistAlbums> GetArtistsAlbums(string id, string market = "IE", int limit = 20);
 
         /// <summary>
         /// The <c>GetArtistsTopTracks</c> gets Spotify catalog information about an artist's top tracks by country.
@@ -76,14 +76,13 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Spotify
         /// <param name="id"> a string spotify ID for the artist.</param>
         /// <param name="market">an optional ISO 3166-1 alpha-2 country code.</param>
         /// <returns>a list of top tracks for the artist.</returns>
-        public ArtistTopTracks GetArtistsTopTracks(string id, string market = "IE");
+        Task<ArtistTopTracks> GetArtistsTopTracks(string id, string market = "IE");
 
         /// <summary>
         /// Get a list of new album releases
         /// </summary>
         /// <returns>A list of album objects representing new releases</returns>
-        public NewReleases GetNewAlbumReleases(int limit = 20, int offset = 0);
-
+        Task<NewReleases> GetNewAlbumReleases(int limit = 20, int offset = 0);
 
         /// <summary>
         /// The method <c>GetRelatedArtists</c> gets Spotify catalog information about artists
@@ -92,7 +91,7 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Spotify
         /// </summary>
         /// <param name="id"> a string spotify ID for the artist.</param>
         /// <returns>A list of <c>Artist</c> objects.</returns>
-        public List<Artist> GetRelatedArtists(string id);
+        Task<List<Artist>> GetRelatedArtists(string id);
 
         /// <summary>
         /// The <c>Search</c> method gets Spotify catalog information about albums, artists,
@@ -101,7 +100,7 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Spotify
         /// <param name="searchQuery"></param>
         /// <param name="searchItemTypes"></param>
         /// <returns></returns>
-        public SearchResults Search(string searchQuery, string searchItemTypes);
+        Task<SearchResults> Search(string searchQuery, string searchItemTypes);
 
 
         /// <summary>
@@ -111,7 +110,7 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Spotify
         /// <param name="id"> a spotify ID for the required track.</param>
         /// <param name="market">an optional ISO 3166-1 alpha-2 country code.</param>
         /// <returns>A track object.</returns>
-        public Track GetTrack(string id, string market = "IE");
+        Task<Track> GetTrack(string id, string market = "IE");
 
         /// <summary>
         /// The <c>GetTracks</c> method get Spotify catalog information several tracks
@@ -120,7 +119,7 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Spotify
         /// <param name="ids"> a comma-separated list of spotify IDs for the required tracks.</param>
         /// <param name="market">an optional ISO 3166-1 alpha-2 country code.</param>
         /// <returns>A list of track objects.</returns>
-        public List<Track> GetTracks(string ids, string market = "IE");
+        Task<List<Track>> GetTracks(string ids, string market = "IE");
 
         /// <summary>
         /// The <c>GetRecommendations</c> method gets a list of recommended tracks based available
@@ -135,25 +134,19 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Spotify
         /// <param name="limit">The target size of the list of recommended tracks.</param>
         /// <param name="market">an optional ISO 3166-1 alpha-2 country code.</param>
         /// <returns><c>Recommendations</c> object</returns>
-        public Recommendations GetRecommendations(string seedArtists, string seedGenres, string seedTracks, int limit = 10, string market = "IE");
+        Task<Recommendations> GetRecommendations(string seedArtists, string seedGenres, string seedTracks, int limit = 10, string market = "IE");
 
         /// <summary>
         /// <c>GetRecommendedTracks</c> method gets recommended tracks based on user input
         /// </summary>
         /// <returns> <c>Recommendations</c> object with recommended tracks based on users mood</returns>
-        public Recommendations GetRecommendedTracks(string id);
-
-        /// <summary>
-        /// <c>GetRecommendedArtists</c> method gets recommended artists based on user input
-        /// </summary>
-        /// <returns> <c>ArtistsList</c> object with tracks based on users mood</returns>
-        public ArtistsList GetRecommendedArtists(string id);
+        Task<Recommendations> GetRecommendedTracks(string id);
 
         /// <summary>
         /// <c>GetSeedGenres</c> returns a list of grnres
         /// </summary>
         /// <returns><c>List string</c></returns>
-        public List<string> GetSeedGenres();
+        Task<List<string>> GetSeedGenres();
 
         /// <summary>
         /// The <c>GetMoodRecommendations</c> method is used to get return
@@ -165,7 +158,7 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Spotify
         /// <param name="max_valence"><c>double</c>value for valence</param>
         /// <param name="max_liveness"><c>double</c>value for liveness</param>
         /// <returns> Reccomendations object with tracks based on users mood</returns>
-        public Recommendations GetMoodRecommendations(int limit, double max_danceability, double max_energy, double max_valence, double max_liveness);
+        Task<Recommendations> GetMoodRecommendations(int limit, double max_danceability, double max_energy, double max_valence, double max_liveness);
 
 
         /// <summary>
@@ -173,6 +166,6 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Spotify
         /// to the data service. 
         /// </summary>
         /// <returns><c>True</c> if it has a valid data connection, otherwise <c>false</c>.</returns>
-        public bool TestDataConnection();
+        Task<bool> TestDataConnection();
     }
 }

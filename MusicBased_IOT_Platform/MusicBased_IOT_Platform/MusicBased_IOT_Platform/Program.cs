@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using MusicBased_IOT_Platform.Application.Interfaces.Spotify;
-using MusicBased_IOT_Platform.Application.Services.Live;
+using MusicBased_IOT_Platform.Application.Services.Spotify.Live;
 using MusicBased_IOT_Platform.Application.Services.Spotify.Mock;
 using MusicBased_IOT_Platform.Components;
 using MusicBased_IOT_Platform.Data;
@@ -14,24 +13,30 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
-//bool useMock = builder.Configuration.GetValue<bool>("Spotify:UseMock");
+bool useMock = builder.Configuration.GetValue<bool>("Spotify:UseMockSpotify");
 
-//if (useMock)
-//{
-//    builder.Services.AddScoped<ISpotifyDataService, MockSpotifyDataService>();
-//}
-//else
-//{
-//    builder.Services.AddScoped<ISpotifyDataService, LiveSpotifyDataService>();
-//}
+if (useMock)
+{
+    builder.Services.AddScoped<ISpotifyDataService, MockSpotifyDataService>();
+}
+else
+{
+    builder.Services.AddHttpClient<ISpotifyDataService, LiveSpotifyDataService>();
+}
 
+var settings = builder.Configuration
+    .GetSection("Spotify")
+    .Get<AppSettings>();
 
-// Demo use of the mock data service
-builder.Services.AddScoped<ISpotifyDataService, MockSpotifyDataService>();
+if (settings!.InTest)
+{
+    builder.Services.AddScoped<ISpotifyDataService, MockSpotifyDataService>();
+}
+else
+{
+    builder.Services.AddHttpClient<ISpotifyDataService, LiveSpotifyDataService>();
+}
 
-
-builder.Services.Configure<AppSettings>(
-    builder.Configuration.GetSection("Spotify"));
 
 builder.Services.AddDbContext<AppDBContext>(options =>
     options.UseSqlite(

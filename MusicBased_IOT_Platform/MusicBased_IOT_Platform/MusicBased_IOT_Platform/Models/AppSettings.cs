@@ -48,12 +48,12 @@ namespace MusicBased_IOT_Platform.Models
         public string BaseURL { get; set; }
 
         /// <summary>
-        /// The ClientID string used to get an API token from the spotify service
+        /// The ClientSecret string used to get an API token from the spotify service
         /// </summary>
         public string ClientSecret { get; set; }
 
         /// <summary>
-        /// The ClientSecret string used to get an API token from the spotify service
+        /// The ClientID string used to get an API token from the spotify service
         /// </summary>
         public string? ClientID { get; set; }
 
@@ -61,6 +61,8 @@ namespace MusicBased_IOT_Platform.Models
         /// The Scopes list contains the scopes of access that the application is requesting from the Spotify API.
         /// </summary>
         public List<string> Scopes { get; set; } = [];
+
+        public bool UseMockSpotify { get; set; }
 
     }
 }

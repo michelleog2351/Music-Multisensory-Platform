@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using MusicBased_IOT_Platform.Application.Interfaces
 @using MusicBased_IOT_Platform.Application.Interfaces.Spotify
+@using MusicBased_IOT_Platform.Models
 @* @using MusicBased_IOT_Platform.Application.Interfaces
 @using MusicBased_IOT_Platform.Application.Services *@
 
@@ -98,17 +99,33 @@
 } *@
 
 
+@if (releases != null)
+{
+    foreach (var album in releases.Albums!.Items!)
+    {
+        <div>
+            <h3>@album.Name</h3>
+            <p>@album.Artists![0].Name</p>
+        </div>
+    }
+}
+
+
 @code {
 
     @* prompt the user to perform an action if the system has been left inactive after 30 secs i.e. "Play a music track!" or "Search for your mood!" *@
 
     private System.Timers.Timer? inactivityTimer;
 
+    private NewReleases? releases;
+
     /// <summary>
     /// This method is called when the component is initialised.
     /// </summary>
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
+        releases = await ISpotifyDataService.GetNewAlbumReleases();     
+        
         inactivityTimer = new System.Timers.Timer(30000); // 30 seconds
         inactivityTimer.Elapsed += OnInactivityElapsed!;
         inactivityTimer.AutoReset = false; // Only trigger once
