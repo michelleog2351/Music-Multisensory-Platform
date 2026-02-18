@@ -7,33 +7,10 @@
     <main class="container-fluid py-4">
         @Body
     </main>
-
-       @* sticky scroll back to top button *@
-       <button class="btn btn-secondary" 
-               style="position: fixed; bottom: 20px; right: 20px;" 
-               @onclick="ScrollToTop">↑ Top
-       </button>
 </div>
-
-
 
 <div id="blazor-error-ui" data-nosnippet>
     An unhandled error has occurred.
     <a href="." class="reload">Reload</a>
     <span class="dismiss">🗙</span>
 </div>
-
-@code {
-
-    /// <summary>
-    /// The ScrollToTop method will be called when the user clicks the "↑ Top" button. 
-    /// It should scroll the page back to the top
-    /// </summary>
-    /// <param name="args"></param>
-    /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
-    private Task ScrollToTop(MouseEventArgs args)
-    {
-        throw new NotImplementedException();
-    }
-}

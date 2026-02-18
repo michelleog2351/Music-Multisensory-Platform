@@ -1,6 +1,13 @@
-﻿using MusicBased_IOT_Platform.Application.Interfaces.Spotify;
+﻿/* 
+ * Filename: MOckSpotifyDataService.cs
+ * Description: Contains the definition of the MockSpotifyDataService class.
+ */
+
+
+using MusicBased_IOT_Platform.Application.Interfaces.Spotify;
 using MusicBased_IOT_Platform.Models;
 using System.Text.Json;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
 {
@@ -376,11 +383,39 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
             throw new NotImplementedException();
         }
 
-        public Task<SearchResults> Search(string searchQuery, string searchItemTypes)
+        /// <summary>
+        /// The SearchResults 
+        /// </summary>
+        /// <param name="searchQuery"></param>
+        /// <param name="searchItemTypes"></param>
+        /// <returns></returns>
+        public async Task<SearchResults> Search(string searchQuery, string searchItemTypes)
         {
-            throw new NotImplementedException();
+            var json = await File.ReadAllTextAsync("search_all_results.json");
+
+            var results = JsonSerializer.Deserialize<SearchResults>
+                (
+                   json,
+                   new JsonSerializerOptions
+                   {
+                       PropertyNameCaseInsensitive = true
+                   })!;
+
+            if (results.Tracks?.Items != null)
+            {
+                results.Tracks.Items = results.Tracks.Items
+                    .Where(t => t.Name!.Contains(searchQuery, StringComparison.OrdinalIgnoreCase))
+                    .ToList()!;
+            }
+
+            return results;
         }
 
+        /// <summary>
+        /// The TestDataConnection 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public Task<bool> TestDataConnection()
         {
             throw new NotImplementedException();
