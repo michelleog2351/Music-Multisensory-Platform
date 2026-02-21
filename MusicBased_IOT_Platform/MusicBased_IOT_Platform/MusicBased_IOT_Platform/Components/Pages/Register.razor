@@ -85,7 +85,7 @@
             }
             <div class="d-grid gap-2">
                 <button class="btn btn-spotify btn-lg"
-                        type="submit">Register</button>
+                        type="button">Register</button>
             </div>
         </EditForm>
 
@@ -180,12 +180,15 @@
             dB.Users.Add(user);
             await dB.SaveChangesAsync();
 
-            NavigationManager.NavigateTo("/login");
+            //NavigationManager.NavigateTo("/login");
         }
         catch (Exception ex)
         {
             ErrorMessage = ex.Message;
+            return;
         }
+
+        NavigationManager.NavigateTo("/login");
     }
 
 
