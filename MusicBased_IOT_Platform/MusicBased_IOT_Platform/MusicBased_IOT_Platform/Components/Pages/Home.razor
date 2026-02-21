@@ -101,24 +101,24 @@
 
 @if (releases != null)
 {
+    var index = 1;
+
     foreach (var album in releases.Albums!.Items!)
     {
-        @* for (var index++)
-        { *@
-            <div class="app-card">
-            <div class="app-card-title">
-                Spotify Activity
-               
-                    <div>
-                   
-                        <h3>@album.Name</h3>
-                        <p>@album.Artists![0].Name</p>
-                   
-                </div>
+        <div class="app-card mb-3">
+            <div>
+                <h5>
+                    <span class="track-number">@index</span>
+                    @album.Name
+                </h5>
+                <p class="text-muted">
+                    @album.Artists![0].Name
+                </p>
             </div>
-       </div>
-        @* } *@
-    } 
+        </div>
+
+        index++;
+    }
 }
 
 
