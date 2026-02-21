@@ -16,15 +16,11 @@ namespace MusicBased_IOT_Platform.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.13");
 
-            modelBuilder.Entity("MusicBased_IOT_Platform.Models.RegisterModel", b =>
+            modelBuilder.Entity("MusicBased_IOT_Platform.Models.UserAccount", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("ConfirmPassword")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -35,10 +31,6 @@ namespace MusicBased_IOT_Platform.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

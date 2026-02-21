@@ -12,7 +12,7 @@
 
 @* <h1>Hello/Good evening @Register.Username</h1>
  *@
- <h1>Welcome Back Michelle!</h1>
+<h1>Welcome Back Michelle!</h1>
 <h3>Music Platform</h3>
 
 
@@ -103,12 +103,24 @@
 {
     foreach (var album in releases.Albums!.Items!)
     {
-        <div>
-            <h3>@album.Name</h3>
-            <p>@album.Artists![0].Name</p>
-        </div>
-    }
+        @* for (var index++)
+        { *@
+            <div class="app-card">
+            <div class="app-card-title">
+                Spotify Activity
+               
+                    <div>
+                   
+                        <h3>@album.Name</h3>
+                        <p>@album.Artists![0].Name</p>
+                   
+                </div>
+            </div>
+       </div>
+        @* } *@
+    } 
 }
+
 
 
 @code {

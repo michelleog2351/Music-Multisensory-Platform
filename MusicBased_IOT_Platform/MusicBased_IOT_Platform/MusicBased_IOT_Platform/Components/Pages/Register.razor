@@ -15,8 +15,6 @@
         <EditForm Model="@registerModel" 
             OnValidSubmit="HandleRegister"
             FormName="registerForm">
-
-
             <DataAnnotationsValidator />
             <ValidationSummary />
 
@@ -26,9 +24,9 @@
                     <input class="form-control" 
                            type="text" 
                            placeholder="First Name" 
+                           
                            @bind="registerModel.FirstName"
-                           required
-                           @oninput="ClearError" />
+                           />
 
                 </div>
 
@@ -37,49 +35,46 @@
                     <input class="form-control"  
                            type="text" 
                            placeholder="Last Name"
+                           
                            @bind="registerModel.LastName"
-                           required
-                           @oninput="ClearError" />
-
+                            />
                 </div>
             </div>
-
 
             <div class="mb-3">
                 <input class="form-control"  
                        type="text" 
-                       placeholder="Email address" 
+                       placeholder="Email address"
+                       
                        @bind="registerModel.Email"
-                       required
-                           @oninput="ClearError" />
+                       />
             </div>
 
             <div class="mb-3">
                 <input class="form-control"  
                        type="text" 
                        placeholder="Username" 
-                       @bind="registerModel.Username"
-                       required          
-                       @oninput="ClearError" />
-
+                       
+                       @bind="registerModel.Username"                                 
+                       />
             </div>
 
             <div class="mb-3">
                 <input class="form-control"  
                        type="password" 
                        placeholder="Password"
+                       
                        @bind="registerModel.Password"
-                       required
-                       @oninput="ClearError" />
+                        />
             </div>
 
             <div class="mb-3">
                 <input class="form-control"  
                        type="password" 
                        placeholder="Confirm your password"
-                       required
+                       
                        @bind="registerModel.ConfirmPassword"
-                       @oninput="ClearError" />
+                        />
             </div>
 
             @if (!string.IsNullOrEmpty(ErrorMessage))
@@ -89,7 +84,8 @@
                 </div>
             }
             <div class="d-grid gap-2">
-                <button class="btn btn-outline-success btn-lg">Register</button>
+                <button class="btn btn-spotify btn-lg"
+                        type="submit">Register</button>
             </div>
         </EditForm>
 
@@ -131,24 +127,49 @@
     /// This method handles the registration process when the user submits the form.
     /// </summary>
     /// <returns></returns>
+    // private async Task HandleRegister()
+    // {
+    //     ErrorMessage = null;
+
+    //     // I want this to be visible until the user starts typing again, so I will not clear the error message immediately.
+    //     // I will clear the error message when the user starts typing again in any of the input fields.
+    //     // I want the error message to be visually appealing, so I will use a Bootstrap alert to display the error message.
+
+    //     // ErrorMessage = "Passwords do not match.";
+    //     // return;
+
+    //     //   ("alert alert-danger").Remove();
+
+    //     var user = new UserAccount
+    //         {
+    //             FirstName = registerModel.FirstName,
+    //             LastName = registerModel.LastName,
+    //             Email = registerModel.Email,
+    //             Username = registerModel.Username,
+    //             PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerModel.Password)
+    //         };
+
+    //     dB.Users.Add(user);
+    //     await dB.SaveChangesAsync();
+
+    //     // ErrorMessage = null;
+
+    //     // redirect to login page after successful registration
+    //     NavigationManager.NavigateTo("/login");
+    // }
+    // private async Task HandleRegister()
+    // {
+    //     NavigationManager.NavigateTo("/login");
+    // }
+
+
+    // Debugging
     private async Task HandleRegister()
     {
-        if(registerModel.Password != registerModel.ConfirmPassword)
+        try
         {
-
-
-            // I want this to be visible until the user starts typing again, so I will not clear the error message immediately.
-            // I will clear the error message when the user starts typing again in any of the input fields.
-            // I want the error message to be visually appealing, so I will use a Bootstrap alert to display the error message.
-
-            ErrorMessage = "Passwords do not match.";
-            return;
-
-            //   ("alert alert-danger").Remove();
-
-            var user = new RegisterModel
+            var user = new UserAccount
             {
-                ID = registerModel.ID,
                 FirstName = registerModel.FirstName,
                 LastName = registerModel.LastName,
                 Email = registerModel.Email,
@@ -159,14 +180,14 @@
             dB.Users.Add(user);
             await dB.SaveChangesAsync();
 
-            ErrorMessage = null;
-
-            // redirect to login page after successful registration
             NavigationManager.NavigateTo("/login");
-
         }
-
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
     }
+
 
     /// <summary>
     /// This method checks if the provided email is valid.
@@ -176,8 +197,14 @@
     {
         return !string.IsNullOrEmpty(registerModel.Email) && registerModel.Email.Contains("@");
     }
+
+    /// <summary>
+    /// The ClearError method is called when the user starts typing again in any of the input fields. It clears the error message so that 
+    /// the user can see the error message only when they submit the form with invalid data.
+    /// </summary>
+    /// <param name="args"></param>
     private void ClearError(ChangeEventArgs args)
     {
-        throw new NotImplementedException();
+        ErrorMessage = null;
     }
 }

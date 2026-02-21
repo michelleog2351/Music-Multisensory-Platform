@@ -226,19 +226,23 @@ min-height: 1px;
         box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
     }
 
-.card {
-  width: 100%; /* let the grid system handle the card width based on the window size - ensuring responsiveness*/
-  /* height: 400px; Matches the height of the images now */
-  position: relative;
-  overflow: hidden;
-  border-radius: 10px;
+.app-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #212529;
 }
 
-.card {
+/*.card {
+  width: 100%;*/ /* let the grid system handle the card width based on the window size - ensuring responsiveness*/
+  /* height: 400px; Matches the height of the images now */
+  /*position: relative;
+  overflow: hidden;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   height: 100%;
-}
+}*/
 
 .card-body {
   flex-grow: 1;

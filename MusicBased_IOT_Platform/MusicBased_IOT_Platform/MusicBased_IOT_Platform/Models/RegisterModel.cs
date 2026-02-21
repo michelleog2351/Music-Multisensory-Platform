@@ -2,10 +2,11 @@
 
 namespace MusicBased_IOT_Platform.Models
 {
+    /// <summary>
+    /// This class represents the data model for user registration.
+    /// </summary>
     public class RegisterModel
     {
-        public int ID { get; set; }
-
         [Required]
         public string FirstName { get; set; } = string.Empty;
 
@@ -23,8 +24,6 @@ namespace MusicBased_IOT_Platform.Models
 
         [Required, Compare(nameof(Password), ErrorMessage = "Passwords do not match")]
         public string ConfirmPassword { get; set; } = string.Empty;
-
-        public string PasswordHash { get; set; } = string.Empty;
     }
 }
 

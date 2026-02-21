@@ -10,7 +10,7 @@ using MusicBased_IOT_Platform.Data;
 namespace MusicBased_IOT_Platform.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20260211224002_Initial")]
+    [Migration("20260221013022_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -19,15 +19,11 @@ namespace MusicBased_IOT_Platform.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.13");
 
-            modelBuilder.Entity("MusicBased_IOT_Platform.Models.RegisterModel", b =>
+            modelBuilder.Entity("MusicBased_IOT_Platform.Models.UserAccount", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("ConfirmPassword")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -38,10 +34,6 @@ namespace MusicBased_IOT_Platform.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
