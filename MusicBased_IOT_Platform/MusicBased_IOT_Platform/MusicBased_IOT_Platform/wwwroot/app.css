@@ -185,13 +185,21 @@ body {
   border: 1px solid #ccc;
 }
 
-#suggestions{
-min-height: 1px;
+#suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
 }
 
 .suggestion-item {
   padding: 10px 10px;
   cursor: pointer;
+  transition: background 0.2s ease;
   white-space: nowrap;
 }
 

@@ -1,43 +1,26 @@
 ﻿@page "/"
+@rendermode InteractiveServer
 @using MusicBased_IOT_Platform.Application.Interfaces
 @using MusicBased_IOT_Platform.Application.Interfaces.Spotify
 @using MusicBased_IOT_Platform.Models
-@* @using MusicBased_IOT_Platform.Application.Interfaces
-@using MusicBased_IOT_Platform.Application.Services *@
-
-
-@inject ISpotifyDataService ISpotifyDataService
 
 <PageTitle>Home</PageTitle>
 
-@* <h1>Hello/Good evening @Register.Username</h1>
- *@
 <h1>Welcome Back Michelle!</h1>
 <h3>Music Platform</h3>
 
-
-@* Search for mood and displayed music track. When searchbox is clicked modal-like overlay *@
-
-<div class="input-group mb-3">
-    <input type="search" 
+    <input id="moodSearch"
+           type="search"
            class="form-control"
-           name="moodSearch" 
-           placeholder="Search for your mood..." 
-           autocomplete="on" 
-           @onclick="OpenSearchModal" />
-</div>
-
-    <br />
+           placeholder="Search for your mood..."      
+           @onfocus="OpenSearchModal" />
 
 
-@* <button class="btn btn-outline-primary btn-sm" @onclick="DisplayArtist">Longing</button>
- *@
-@* <input type="text" name="search" placeholder="So, how are you feeling today?" autocomplete="on" /> *@
-
+<p>Modal state: @isSearchModalOpen</p>
 @if (isSearchModalOpen)
 {
-    <div class="modal fade show d-block" tabindex="-1 ">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal fade show d-block" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg" @onclick:stopPropagation="true">
             <div class="modal-content">
 
                 <div class="modal-header">
@@ -46,14 +29,30 @@
                 </div>
 
                 <div class="modal-body">
+                    <div class="position-relative">
+                        <input type="search"
+                               class="form-control mb-3"
+                               placeholder="Search tracks..."
+                               @bind="searchTerm"
+                               @oninput="OnSearchChanged" />
 
-                    <!-- Search Box inside modal -->
-                    <input type="search"
-                           class="form-control mb-3"
-                           placeholder="Search by mood e.g. calm, happy..." />
+                        @if (searchResults.Any())
+                        {
+                            <div class="position-absolute bg-white shadow rounded w-100 mt-1" style="z-index:1055;">
+                                @foreach (var track in searchResults.Take(5))
+                                {
+                                    <div class="suggestion-item p-2"
+                                         style="cursor:pointer;"
+                                         @onclick="() => SelectTrack(track)">
+                                        @track.Name - @track?.Artists[0].Name
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
 
                     <!-- Recently Searched -->
-                    @* If you have searched previously, these are the text bubbles showing your recent searches*@
+                     @* If you have searched previously, these are the text bubbles showing your recent searches *@
                     <h6>Recently Searched</h6>
                     <div class="d-flex gap-2 flex-wrap mb-3">
                         <span class="badge bg-secondary">Happy</span>
@@ -90,8 +89,8 @@
     <option value="relaxed">Relaxed</option>
 </select>
 
-<button class="btn btn-spotify">Get Music Suggestions</button>
-
+<button class="btn btn-spotify">Get Music Suggestions </button>
+<button @onclick="OpenSearchModal">TEST</button>
 
 @* @if (isLoading)
 {
@@ -125,19 +124,40 @@
 
 @code {
 
-    @* prompt the user to perform an action if the system has been left inactive after 30 secs i.e. "Play a music track!" or "Search for your mood!" *@
+    [Inject]
+    public ISpotifyDataService Spotify { get; set; } = default!;
+
+    private string searchTerm = "";
+    private List<Item> searchResults = new();
+    private List<Track>? filteredTracks = new();
+
+    private CancellationTokenSource? _cts;
+
+    // prompt the user to perform an action if the system has been left inactive after 30 secs i.e. "Play a music track!" or "Search for your mood!"
 
     private System.Timers.Timer? inactivityTimer;
 
     private NewReleases? releases;
+
+    private Tracks? tracks;
+
+    List<Track>? allTracks;
 
     /// <summary>
     /// This method is called when the component is initialised.
     /// </summary>
     protected override async Task OnInitializedAsync()
     {
-        releases = await ISpotifyDataService.GetNewAlbumReleases();     
-        
+
+        // allTracks = releases?.Albums?.Items?
+        // .SelectMany(a => a.Tracks!.Items)
+        // .ToList() ?? new();
+
+
+        releases = await Spotify.GetNewAlbumReleases();
+
+        // tracks = await ISpotifyDataService.GetTrack(10);
+
         inactivityTimer = new System.Timers.Timer(30000); // 30 seconds
         inactivityTimer.Elapsed += OnInactivityElapsed!;
         inactivityTimer.AutoReset = false; // Only trigger once
@@ -183,6 +203,67 @@
         ResetInactivityTimer();
     }
 
+    private void SelectTrack(Item track)
+    {
+        searchTerm = track.Name!;
+        searchResults.Clear();
+
+        CloseSearchModal();
+    }
+
+    private async Task OnSearchChanged(ChangeEventArgs e)
+    {
+        searchTerm = e.Value?.ToString() ?? "";
+
+        _cts?.Cancel();
+        _cts = new CancellationTokenSource();
+
+        try
+        {
+            await Task.Delay(400, _cts.Token); // 400ms debounce
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                var results = await Spotify.Search(searchTerm, "track");
+
+                searchResults = results.Tracks?.Items?.ToList()
+                                ?? new List<Item>();
+            }
+            else
+            {
+                searchResults.Clear();
+            }
+        }
+        catch (TaskCanceledException)
+        {
+            // User kept typing — ignore
+        }
+    }
+
+    private string SearchTerm
+    {
+        get => searchTerm;
+        set
+        {
+            searchTerm = value;
+            FilterTracks();
+        }
+    }
+
+    private void FilterTracks()
+    {
+        if (string.IsNullOrWhiteSpace(searchTerm))
+        {
+            filteredTracks!.Clear();
+            return;
+        }
+
+        filteredTracks = allTracks?
+            .Where(t => t.Name!.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+            .Take(8)
+            .ToList();
+    }
+
     @* Search box *@
     private string searchQuery = string.Empty;
 
@@ -195,6 +276,7 @@
     /// </summary>
     private void OpenSearchModal()
     {
+       // Console.WriteLine("OPEN CLICKED");
         isSearchModalOpen = true;
     }
 
@@ -205,8 +287,9 @@
     {
         isSearchModalOpen = false;
     }
-    private void DisplayArtist(MouseEventArgs args)
-    {
-        throw new NotImplementedException();
-    }
+
+    // private void DisplayArtist(MouseEventArgs args)
+    // {
+    //     throw new NotImplementedException();
+    // }
 }

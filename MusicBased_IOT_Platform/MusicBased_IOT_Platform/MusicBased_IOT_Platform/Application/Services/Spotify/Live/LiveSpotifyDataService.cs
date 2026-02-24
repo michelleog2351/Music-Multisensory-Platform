@@ -235,27 +235,37 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             // We have a valid token crack on with the request
             var request = new HttpRequestMessage(
                 HttpMethod.Get,
-                $"https://api.spotify.com/v1/search?q={searchQuery}&type={searchItemTypes}&market=IE&limit=5&offset=0");
+                $"https://api.spotify.com/v1/search?q={Uri.EscapeDataString(searchQuery)}&type={searchItemTypes}&market=IE&limit=5&offset=0");
 
             request.Headers.Add("Authorization", $"Bearer {AccessToken.Token}");
 
-            HttpResponseMessage response;
+            //HttpResponseMessage response;
 
             try
             {
                 // throw an exception if we didn't get a valid response
-                response = await _httpClient.SendAsync(request);
+                var response = await _httpClient.SendAsync(request);
                 response.EnsureSuccessStatusCode();
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                return JsonSerializer.Deserialize<SearchResults>(responseBody, options)
+                    ?? new SearchResults();
+
             }
-            catch (HttpRequestException)
+            catch 
             {
                 // Didn't get a valid response, return an empty list
                 return new SearchResults();
             }
 
-            string responseBody = await response.Content.ReadAsStringAsync();
+            //string responseBody = await response.Content.ReadAsStringAsync();
 
-            return JsonSerializer.Deserialize<SearchResults>(responseBody)!;
         }
 
 
