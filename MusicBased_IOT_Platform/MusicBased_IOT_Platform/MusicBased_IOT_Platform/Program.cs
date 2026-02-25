@@ -10,8 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents()
-    .AddInteractiveWebAssemblyComponents();
+.AddInteractiveServerComponents(options =>
+{
+    options.DetailedErrors = true;
+})
+.AddInteractiveWebAssemblyComponents();
 
 bool useMock = builder.Configuration.GetValue<bool>("Spotify:UseMockSpotify");
 

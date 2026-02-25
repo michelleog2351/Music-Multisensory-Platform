@@ -1,5 +1,6 @@
 ﻿@page "/"
-@rendermode InteractiveServer
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
 @using MusicBased_IOT_Platform.Application.Interfaces
 @using MusicBased_IOT_Platform.Application.Interfaces.Spotify
 @using MusicBased_IOT_Platform.Models
@@ -12,11 +13,11 @@
     <input id="moodSearch"
            type="search"
            class="form-control"
-           placeholder="Search for your mood..."      
+           placeholder="Search for your mood..."  
+           readonly
            @onfocus="OpenSearchModal" />
 
 
-<p>Modal state: @isSearchModalOpen</p>
 @if (isSearchModalOpen)
 {
     <div class="modal fade show d-block" tabindex="-1">
@@ -90,7 +91,6 @@
 </select>
 
 <button class="btn btn-spotify">Get Music Suggestions </button>
-<button @onclick="OpenSearchModal">TEST</button>
 
 @* @if (isLoading)
 {
