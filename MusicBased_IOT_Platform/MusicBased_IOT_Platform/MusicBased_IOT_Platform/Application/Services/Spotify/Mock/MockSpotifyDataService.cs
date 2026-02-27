@@ -1,5 +1,5 @@
 ﻿/* 
- * Filename: MOckSpotifyDataService.cs
+ * Filename: MockSpotifyDataService.cs
  * Description: Contains the definition of the MockSpotifyDataService class.
  */
 
@@ -7,7 +7,6 @@
 using MusicBased_IOT_Platform.Application.Interfaces.Spotify;
 using MusicBased_IOT_Platform.Models;
 using System.Text.Json;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
 {

@@ -16,22 +16,15 @@ builder.Services.AddRazorComponents()
 })
 .AddInteractiveWebAssemblyComponents();
 
+
+builder.Services.AddHttpClient<ISpotifyDataService, LiveSpotifyDataService>();
+
+builder.Services.Configure<AppSettings>(
+    builder.Configuration.GetSection("Spotify"));
+
 bool useMock = builder.Configuration.GetValue<bool>("Spotify:UseMockSpotify");
 
 if (useMock)
-{
-    builder.Services.AddScoped<ISpotifyDataService, MockSpotifyDataService>();
-}
-else
-{
-    builder.Services.AddHttpClient<ISpotifyDataService, LiveSpotifyDataService>();
-}
-
-var settings = builder.Configuration
-    .GetSection("Spotify")
-    .Get<AppSettings>();
-
-if (settings!.InTest)
 {
     builder.Services.AddScoped<ISpotifyDataService, MockSpotifyDataService>();
 }

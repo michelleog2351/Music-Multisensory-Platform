@@ -10,7 +10,7 @@ using MusicBased_IOT_Platform.Models;
 namespace MusicBased_IOT_Platform.Application.Interfaces.Spotify
 {
     /// <summary>
-    /// This interface represents defines the base functionality that the dataClients
+    /// This interface defines the base functionality that the dataClients
     /// (live and mock) must implement. 
     /// </summary>
     public interface ISpotifyDataService
