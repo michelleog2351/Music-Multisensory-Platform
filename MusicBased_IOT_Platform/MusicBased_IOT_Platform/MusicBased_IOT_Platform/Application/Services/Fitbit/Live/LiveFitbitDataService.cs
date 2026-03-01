@@ -98,7 +98,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
         {
             var request = new HttpRequestMessage(
                 HttpMethod.Post,
-                "https://api.fitbit.com/oauth2/token");
+                $"https://api.fitbit.com/oauth2/token");
 
             var authString = $"{ClientID}:{ClientSecret}";
             var authBytes = Encoding.UTF8.GetBytes(authString);
@@ -162,6 +162,27 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
         public Task<bool> TestDataConnectionAsync()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<MusicMoodResult> ReadBiometricAndMusicDataAsync()
+        {
+            var biomStats = await GetDailyHeartRateAsync(DateTime.Now);
+
+            return new MusicMoodResult
+            {
+                //BiometricSummary = biometric,
+                //Recommendations = recommendations
+            };
+        }
+
+        public Task<BiometricSummary> GetBiometricDataAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IFitbitDataService.ReadBiometricAndMusicDataAsync()
+        {
+            return ReadBiometricAndMusicDataAsync();
         }
     }
 }

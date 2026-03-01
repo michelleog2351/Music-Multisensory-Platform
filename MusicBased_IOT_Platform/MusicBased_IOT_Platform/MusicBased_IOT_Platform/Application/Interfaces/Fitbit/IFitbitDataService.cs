@@ -67,14 +67,19 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Fitbit
         Task<ActivitySummary> GetDailyActivityAsync(DateTime date);
 
         /// <summary>
+        /// The <c>GetBiometricDataAsync</c> method retrieves the user's biometric data from the Fitbit API 
+        /// and returns a summary of the biometric information, including heart rate, breathing rate, 
+        /// and other relevant biometric metrics.
+        /// </summary>
+        /// <returns></returns>
+        Task<BiometricSummary> GetBiometricDataAsync();
+
+        /// <summary>
         /// The
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        Task ReadBiometricAndMusicDataAsync()
-        {
-          
-        }
+        Task ReadBiometricAndMusicDataAsync();
 
         /// <summary>
         /// The <c>TestDataConnection</c> method tests if the client has a valid data connection
