@@ -23,6 +23,18 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         private readonly AppSettings _settings;
 
         /// <summary>
+        /// The JsonSerializerOptions object is used to specify options for the JSON serializer
+        /// PropertyNameCaseInsensitive option to true allowing for the deserialisation of JSON responses
+        /// without being case-sensitive to the property names
+        /// </summary>
+        private static readonly JsonSerializerOptions _jsonOptions =
+            new()
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+
+        /// <summary>
         /// The constructor for the <c>LiveSpotifyDataService</c> class takes an HttpClient and AppSettings as parameters and initialises the class fields and properties.
         /// </summary>
         /// <param name="httpClient"></param>
@@ -122,13 +134,8 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             // For details on deserialising JSON see:
             // https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/deserialization
 
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            };
-
             AccessToken =
-                JsonSerializer.Deserialize<AccessToken>(responseBody, options)!;
+                JsonSerializer.Deserialize<AccessToken>(responseBody, _jsonOptions)!;
             return true;
         }
 
@@ -249,12 +256,8 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
 
                 string responseBody = await response.Content.ReadAsStringAsync();
 
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                };
 
-                return JsonSerializer.Deserialize<SearchResults>(responseBody, options)
+                return JsonSerializer.Deserialize<SearchResults>(responseBody, _jsonOptions)!
                     ?? new SearchResults();
 
             }

@@ -1,0 +1,26 @@
+﻿@page "/signin-fitbit"
+@using MusicBased_IOT_Platform.Application.Interfaces.Fitbit
+@using MusicBased_IOT_Platform.Models
+@inject IFitbitDataService FitbitService
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+<h1>Sign In To Fitbit</h1>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        var uri = new Uri(Navigation.Uri);
+        var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
+        var code = query["code"];
+
+        if (!string.IsNullOrEmpty(code))
+        {
+            // Exchange the authorization code for an access token
+            await FitbitService.AuthCodeFlowAsync(code);
+            Navigation.NavigateTo("/login");
+            return;
+        }
+    }
+}

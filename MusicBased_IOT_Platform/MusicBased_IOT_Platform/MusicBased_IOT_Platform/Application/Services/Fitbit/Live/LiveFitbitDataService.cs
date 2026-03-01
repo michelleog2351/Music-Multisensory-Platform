@@ -8,10 +8,21 @@ using System.Text.Json;
 
 namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
 {
-    public class LiveFitbitDataService : IFitbitService
+    public class LiveFitbitDataService : IFitbitDataService
     {
         private readonly HttpClient _httpClient;
         private readonly AppSettings _settings;
+
+        /// <summary>
+        /// The JsonSerializerOptions object is used to specify options for the JSON serializer
+        /// PropertyNameCaseInsensitive option to true allowing for the deserialisation of JSON responses
+        /// without being case-sensitive to the property names
+        /// </summary>
+        private static readonly JsonSerializerOptions _jsonOptions =
+            new()
+            {
+                PropertyNameCaseInsensitive = true
+            };
 
         /// <summary>
         /// The constructor for the <c>LiveFitbitDataService</c> class takes an HttpClient and AppSettings as parameters and initialises the class fields and properties.
@@ -64,85 +75,93 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
         // Methods
 
         /// <summary>
-        /// The <c>AuthoriseClientAsync</c> method authorises the client to access the spotify web API and gets an access token
+        /// The BuildFitbitAuthUrl method constructs the URL for the Fitbit authorization endpoint 
+        /// i.e. the necessary query parameters such as response type, client ID, redirect URI, 
+        /// and scope of access. This URL is used to initiate the OAuth2 authorization process with Fitbit.
         /// </summary>
-        /// <returns>A <c>bool</c> Authorisation has been granted.</returns>
-        public async Task<bool> AuthoriseClientAsync()
+        /// <returns></returns>
+        private string BuildFitbitAuthUrl()
+        {
+            return $"https://www.fitbit.com/oauth2/authorize" +
+                   $"?response_type=code" +
+                   $"&client_id={ClientID}" +
+                   $"&redirect_uri=https://localhost:7039/signin-fitbit" +
+                   $"&scope=activity heartrate profile sleep";
+        }
+
+        /// <summary>
+        /// The AuthCodeFlowAsync method is used to authenticate the user and get an access token from the Fitbit API using the authorization code flow. It takes the authorization code as a parameter, sends a POST request to the Fitbit API to exchange the code for an access token, and deserializes the response into an AccessToken object which is then stored in the AccessToken property of the class.
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public async Task<bool> AuthCodeFlowAsync(string code)
         {
             var request = new HttpRequestMessage(
                 HttpMethod.Post,
-                $"{AuthorisationUrl}?grant_type=client_credentials");
+                "https://api.fitbit.com/oauth2/token");
 
-            // The authorisation string consisting of the ClientID and ClientSecret has to be
-            // converted into a Base64 string for the Spotify authorisation request. 
-            string auth_string = $"{ClientID}:{ClientSecret}";
-            byte[] auth_bytes = Encoding.UTF8.GetBytes(auth_string);
-            string auth_base64 = Convert.ToBase64String(auth_bytes);
+            var authString = $"{ClientID}:{ClientSecret}";
+            var authBytes = Encoding.UTF8.GetBytes(authString);
+            var authBase64 = Convert.ToBase64String(authBytes);
 
-            // Add the header information
-            request.Headers.Add("Authorization", "Basic " + auth_base64);
+            request.Headers.Add("Authorization", "Basic " + authBase64);
 
-            request.Content = new StringContent(
-                string.Empty,
-                Encoding.UTF8,
-                "application/x-www-form-urlencoded");
-
-            // Make the request and get the response, throw an exception if we don't get a valid response
-            HttpResponseMessage response;
-            try
+            request.Content = new FormUrlEncodedContent(new Dictionary<string, string>
             {
-                // Throw an exception if valid response isn't received
-                response = await _httpClient.SendAsync(request);
-                response.EnsureSuccessStatusCode();
-            }
-            catch (HttpRequestException)
-            {
-                // Didn't get a success code
-                // https://developer.spotify.com/documentation/web-api/concepts/api-calls
-                AccessToken = new AccessToken
-                {
-                    Token = "unable to acquire token"
-                };
-                return false;
-            }
+                { "client_id", ClientID },
+                { "grant_type", "authorization_code" },
+                { "redirect_uri", "https://localhost:7039/signin-fitbit" },
+                { "code", code }
+            });
 
-            // Read the response body as a string
-            string responseBody = await response.Content.ReadAsStringAsync();
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
 
-            // Deserialise the JSON response into an AccessToken object
-            // For details on deserialising JSON see:
-            // https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/deserialization
+            var body = await response.Content.ReadAsStringAsync();
 
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            };
+            AccessToken = JsonSerializer.Deserialize<AccessToken>(body, _jsonOptions)!;
 
-            AccessToken =
-                JsonSerializer.Deserialize<AccessToken>(responseBody, options)!;
             return true;
         }
 
-
-
-        public IConnectionHeartbeatFeature GetHeartbeatFeature()
-        {
-            // Implement logic to retrieve heartbeat feature from Fitbit API
-            throw new NotImplementedException();
-        }
-
-        public bool TestDataConnection()
+        public Task<bool> HasValidTokenAsync()
         {
             throw new NotImplementedException();
         }
 
-        IConnectionHeartbeatFeature IFitbitService.GetHeartbeatFeature()
+        public Task<FitbitProfile> GetProfileAsync()
         {
             throw new NotImplementedException();
         }
 
-        //   public HeartRateSummary GetDailyHeartRate(DateTime date)
+        public Task<HeartRateSummary> GetDailyHeartRateAsync(DateTime date)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Task<List<HeartRateZone>> GetHeartRateZonesAsync(DateTime date)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Task<Distance> GetDistanceInStepsAsync(DateTime date)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<SleepSummary> GetSleepAsync(DateTime date)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ActivitySummary> GetDailyActivityAsync(DateTime date)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> TestDataConnectionAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
