@@ -11,13 +11,28 @@
 <h1>Welcome Back Michelle!</h1>
 <h3>Music Platform</h3>
 
+<div class="d-flex gap-2">
     <input id="moodSearch"
-           type="search"
-           class="form-control"
-           placeholder="Search for your mood..."  
-           readonly
-           @onfocus="OpenSearchModal" />
+               type="search"
+               class="form-control"
+               placeholder="Search for your mood..."  
+               readonly
+               @onfocus="OpenSearchModal" />
 
+    @* Dropdown music or select from available button selection options *@
+    <select class="form-select">
+        <option value="happy">Happy</option>
+        <option value="sad">Sad</option>
+        <option value="energetic">Energetic</option>
+        <option value="relaxed">Relaxed</option>
+    </select>
+
+    <button class="btn btn-spotify">Get Music Suggestions </button>
+</div>
+
+<button class="btn btn-info scroll-to-top-btn" title="Scroll to Top">
+    <h1>↑</h1>
+</button>
 
 @if (isSearchModalOpen)
 {
@@ -46,7 +61,7 @@
                                     <div class="suggestion-item p-2"
                                          style="cursor:pointer;"
                                          @onclick="() => SelectTrack(track)">
-                                        @track.Name - @track?.Artists[0].Name
+                                        @track.Name - @track?.Artists![0].Name
                                     </div>
                                 }
                             </div>
@@ -83,21 +98,114 @@
     <div class="modal-backdrop fade show"></div>
 }
 
-@* Dropdown music or select from available button selection options *@
-<select class="form-select">
-    <option value="happy">Happy</option>
-    <option value="sad">Sad</option>
-    <option value="energetic">Energetic</option>
-    <option value="relaxed">Relaxed</option>
-</select>
+<br />
+<div class="d-flex gap-2 align-items-center justify-content-end mb-3">
+    <span class="mb-0"><b>List</b></span>
 
-<button class="btn btn-spotify">Get Music Suggestions </button>
+    <button class="btn @(currentView == TrackViewMode.List ? "btn-success" : "btn-outline-secondary")
+                   rounded-circle d-flex align-items-center justify-content-center"
+            style="width:50px; height:50px;"
+            @onclick="() => SetView(TrackViewMode.List)"
+            aria-pressed="@(currentView == TrackViewMode.List)">
+        <svg 
+            width="153" 
+            height="20" 
+            viewBox="0 0 153 105" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M44.5833 5H147.5M44.5833 52.5H147.5M44.5833 100H147.5M5 5H5.07917M5 52.5H5.07917M5 100H5.07917" stroke="#1E1E1E" 
+              stroke-width="10" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" />
+        </svg>
+    </button>
+
+    <span class="mb-0"><b>Gallery</b></span>
+    <button class="btn  @(currentView == TrackViewMode.Gallery ? "btn-success" : "btn-outline-secondary")
+                   rounded-circle d-flex align-items-center justify-content-center"
+            style="width:50px;height:50px;"
+            @onclick="() => SetView(TrackViewMode.Gallery)"
+            aria-pressed="@(currentView == TrackViewMode.Gallery)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="3" width="7" height="7" stroke="currentColor" stroke-width="2" />
+                <rect x="14" y="3" width="7" height="7" stroke="currentColor" stroke-width="2" />
+                <rect x="14" y="14" width="7" height="7" stroke="currentColor" stroke-width="2" />
+                <rect x="3" y="14" width="7" height="7" stroke="currentColor" stroke-width="2" />
+            </svg>
+        </button>
+        
+ </div>
 
 @* @if (isLoading)
 {
     <p>Loading...</p>
 } *@
 
+
+<div class="view-container @(currentView == TrackViewMode.Gallery ? "fade-in" : "fade-in")">
+
+    @if (currentView == TrackViewMode.List)
+    {
+        @foreach (var track in releases!.Albums!.Items!)
+        {
+            <div class="list-item d-flex justify-content-between align-items-center p-2 border-bottom">
+                    <div class="fw-bold">@track.Name</div>
+                   @*  <img src="@track?.Images?.FirstOrDefault()?.Url"
+                         class=""
+                         style="height:100px; object-fit:cover;" /> *@
+                    <small class="text-muted">
+                        @(track?.Artists?.FirstOrDefault()?.Name ?? "Unknown Artist")
+                    </small>
+
+                <div class="d-flex gap-2">
+                    <button class="btn btn-sm btn-outline-primary">▶</button>
+                    <button class="btn btn-sm btn-outline-danger">❤️</button>
+                </div>
+            </div>
+        }
+    }
+    else if (currentView == TrackViewMode.Gallery)
+    {
+        <div class="row g-4">
+            @foreach (var track in releases!.Albums!.Items!)
+            {
+                <div class="col-md-4">
+                    <div class="card shadow-sm h-100">
+
+                        <img src="@track?.Images?.FirstOrDefault()?.Url"
+                             class="card-img-top"
+                             style="height:200px;object-fit:cover;" />
+
+                        <div class="card-body text-center">
+
+                            <h5 class="card-title">@track!.Name</h5>
+
+                            <p class="text-muted">
+                                @(track.Artists?.FirstOrDefault()?.Name ?? "Unknown Artist")
+                            </p>
+
+                            <div class="d-flex justify-content-center gap-3 mt-3">
+                                <button class="btn btn-primary">▶ Play</button>
+                                <button class="btn btn-outline-danger">❤️</button>
+                            </div>
+
+                            <iframe style="border-radius:12px"
+                                    src="https://open.spotify.com/embed/track/@track.Id"
+                                    width="100%"
+                                    height="80"
+                                    frameborder="0"
+                                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+                            </iframe>
+
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+</div>
 
 @if (releases != null)
 {
@@ -111,10 +219,19 @@
                     <span class="track-number">@index</span>
                     @album.Name
                 </h5>
+                <img src="@album?.Images?.FirstOrDefault()?.Url"
+                     class=""
+                     style="height:100px; object-fit:cover;"/>
                 <p class="text-muted">
-                    @album.Artists![0].Name
+                    @album?.Artists![0].Name
                 </p>
             </div>
+
+@*             <svg width="145" height="122" viewBox="0 0 145 122" fill="none" xmlns="http://www.w3.org/2000/svg" style="">
+                <path d="M72.5 111.833C105.867 111.833 132.917 89.0745 132.917 61C132.917 32.9255 105.867 10.1667 72.5 10.1667C39.1328 10.1667 12.0833 32.9255 12.0833 61C12.0833 89.0745 39.1328 111.833 72.5 111.833Z" stroke="#1E1E1E" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M60.4167 40.6667L96.6667 61L60.4167 81.3333V40.6667Z" stroke="#1E1E1E" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="black" />
+            </svg>
+ *@
         </div>
 
         index++;
@@ -287,6 +404,19 @@
     private void CloseSearchModal()
     {
         isSearchModalOpen = false;
+    }
+
+    private enum TrackViewMode
+    {
+        List,
+        Gallery
+    }
+
+    private TrackViewMode currentView = TrackViewMode.Gallery;
+
+    private void SetView(TrackViewMode mode)
+    {
+        currentView = mode;
     }
 
     // private void DisplayArtist(MouseEventArgs args)

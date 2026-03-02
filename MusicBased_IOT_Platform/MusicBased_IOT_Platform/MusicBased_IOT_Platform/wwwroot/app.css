@@ -363,3 +363,28 @@ function getWindowScroll(node) {
     font-weight: 600;
     margin-right: 0.75rem;
 }
+
+.gallery-icon .list-icon {
+    position: absolute; 
+    left: 12.5%;
+    right: 12.5%;
+    top: 25%;
+    bottom: 25%;
+    border: 15px solid #1E1E1E;
+}
+
+.fade-in {
+    animation: fadeIn 0.25s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
