@@ -100,8 +100,8 @@
 
 <br />
 <div class="d-flex gap-2 align-items-center justify-content-end mb-3">
-    <span class="mb-0"><b>List</b></span>
-
+@*     <span class="mb-0"><b>List</b></span>
+ *@
     <button class="btn @(currentView == TrackViewMode.List ? "btn-success" : "btn-outline-secondary")
                    rounded-circle d-flex align-items-center justify-content-center"
             style="width:50px; height:50px;"
@@ -120,8 +120,8 @@
         </svg>
     </button>
 
-    <span class="mb-0"><b>Gallery</b></span>
-    <button class="btn  @(currentView == TrackViewMode.Gallery ? "btn-success" : "btn-outline-secondary")
+@*     <span class="mb-0"><b>Gallery</b></span>
+ *@    <button class="btn @(currentView == TrackViewMode.Gallery ? "btn-success" : "btn-outline-secondary")
                    rounded-circle d-flex align-items-center justify-content-center"
             style="width:50px;height:50px;"
             @onclick="() => SetView(TrackViewMode.Gallery)"
@@ -142,13 +142,13 @@
 } *@
 
 
-<div class="view-container @(currentView == TrackViewMode.Gallery ? "fade-in" : "fade-in")">
+<div @key="currentView" class="view-container slide-in @(currentView == TrackViewMode.Gallery ? "fade-in" : "fade-in")">
 
     @if (currentView == TrackViewMode.List)
     {
         @foreach (var track in releases!.Albums!.Items!)
         {
-            <div class="list-item d-flex justify-content-between align-items-center p-2 border-bottom">
+            <div class="list-item d-flex justify-content-between align-items-center p-3 border-bottom">
                     <div class="fw-bold">@track.Name</div>
                    @*  <img src="@track?.Images?.FirstOrDefault()?.Url"
                          class=""
@@ -156,12 +156,27 @@
                     <small class="text-muted">
                         @(track?.Artists?.FirstOrDefault()?.Name ?? "Unknown Artist")
                     </small>
+                    </div>
 
-                <div class="d-flex gap-2">
-                    <button class="btn btn-sm btn-outline-primary">▶</button>
-                    <button class="btn btn-sm btn-outline-danger">❤️</button>
-                </div>
-            </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="@track?.Images?.FirstOrDefault()?.Url" 
+                             style="width: 60px; height:60px; object-fit:cover; border-radius: 8px;" />
+
+                        <a href="@track?.ExternalUrls?.Spotify"
+                           target="_blank"
+                           class="btn btn-sm btn-outline-primary  rounded-circle"
+                           style="width:40px;height:40px;">
+                            ▶
+                        </a>
+
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-sm btn-outline-primary">▶</button>
+                            <button class="btn btn-sm btn-outline-danger rounded-circle"
+                                    style="width:40px;height:40px;">❤️
+                            </button>
+
+                        </div>
+                    </div>
         }
     }
     else if (currentView == TrackViewMode.Gallery)
@@ -189,13 +204,19 @@
                                 <button class="btn btn-outline-danger">❤️</button>
                             </div>
 
-                            <iframe style="border-radius:12px"
+                            @* <iframe style="border-radius:12px"
                                     src="https://open.spotify.com/embed/track/@track.Id"
                                     width="100%"
                                     height="80"
                                     frameborder="0"
                                     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-                            </iframe>
+                            </iframe> *@
+
+                            <a href="@track.ExternalUrls?.Spotify"
+                               target="_blank"
+                               class="btn btn-sm btn-outline-primary">
+                                ▶
+                            </a>
 
                         </div>
 

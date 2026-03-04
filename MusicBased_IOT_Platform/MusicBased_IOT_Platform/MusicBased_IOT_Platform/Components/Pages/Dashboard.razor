@@ -1,4 +1,5 @@
 ﻿@page "/dashboard"
+@inject IJSRuntime JS
 <h3>My Dashboard</h3>
 
 <PageTitle>My Dashboard</PageTitle>
@@ -21,5 +22,17 @@
 
 
 @code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var data = new[]
+            {
+                new { name = "FG", value = 12000 },
 
+            };
+
+            await JS.InvokeVoidAsync("renderBarChart", "chart", data);
+        }
+    }
 }

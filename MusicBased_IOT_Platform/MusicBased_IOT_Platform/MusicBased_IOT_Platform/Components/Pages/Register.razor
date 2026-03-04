@@ -1,6 +1,7 @@
 ﻿@page "/register"
 @using MusicBased_IOT_Platform.Data
 @using MusicBased_IOT_Platform.Models
+@rendermode InteractiveServer
 @inject NavigationManager NavigationManager
 @inject AppDBContext dB
 
@@ -127,48 +128,20 @@
     /// This method handles the registration process when the user submits the form.
     /// </summary>
     /// <returns></returns>
-    // private async Task HandleRegister()
-    // {
-    //     ErrorMessage = null;
-
-    //     // I want this to be visible until the user starts typing again, so I will not clear the error message immediately.
-    //     // I will clear the error message when the user starts typing again in any of the input fields.
-    //     // I want the error message to be visually appealing, so I will use a Bootstrap alert to display the error message.
-
-    //     // ErrorMessage = "Passwords do not match.";
-    //     // return;
-
-    //     //   ("alert alert-danger").Remove();
-
-    //     var user = new UserAccount
-    //         {
-    //             FirstName = registerModel.FirstName,
-    //             LastName = registerModel.LastName,
-    //             Email = registerModel.Email,
-    //             Username = registerModel.Username,
-    //             PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerModel.Password)
-    //         };
-
-    //     dB.Users.Add(user);
-    //     await dB.SaveChangesAsync();
-
-    //     // ErrorMessage = null;
-
-    //     // redirect to login page after successful registration
-    //     NavigationManager.NavigateTo("/login");
-    // }
-    // private async Task HandleRegister()
-    // {
-    //     NavigationManager.NavigateTo("/login");
-    // }
-
-
-    // Debugging
     private async Task HandleRegister()
     {
-        try
-        {
-            var user = new UserAccount
+        ErrorMessage = null;
+
+        // I want this to be visible until the user starts typing again, so I will not clear the error message immediately.
+        // I will clear the error message when the user starts typing again in any of the input fields.
+        // I want the error message to be visually appealing, so I will use a Bootstrap alert to display the error message.
+
+        // ErrorMessage = "Passwords do not match.";
+        // return;
+
+        //   ("alert alert-danger").Remove();
+
+        var user = new UserAccount
             {
                 FirstName = registerModel.FirstName,
                 LastName = registerModel.LastName,
@@ -177,19 +150,47 @@
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerModel.Password)
             };
 
-            dB.Users.Add(user);
-            await dB.SaveChangesAsync();
+        dB.Users.Add(user);
+        await dB.SaveChangesAsync();
 
-            //NavigationManager.NavigateTo("/login");
-        }
-        catch (Exception ex)
-        {
-            ErrorMessage = ex.Message;
-            return;
-        }
+         ErrorMessage = null;
 
+        // redirect to login page after successful registration
         NavigationManager.NavigateTo("/login");
     }
+    // private async Task HandleRegister()
+    // {
+    //     NavigationManager.NavigateTo("/login");
+    // }
+
+
+    // Debugging
+    // private async Task HandleRegister()
+    // {
+    //     try
+    //     {
+    //         var user = new UserAccount
+    //         {
+    //             FirstName = registerModel.FirstName,
+    //             LastName = registerModel.LastName,
+    //             Email = registerModel.Email,
+    //             Username = registerModel.Username,
+    //             PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerModel.Password)
+    //         };
+
+    //         dB.Users.Add(user);
+    //         await dB.SaveChangesAsync();
+
+    //         //NavigationManager.NavigateTo("/login");
+    //     }
+    //     catch (Exception ex)
+    //     {
+    //         ErrorMessage = ex.Message;
+    //         return;
+    //     }
+
+    //     NavigationManager.NavigateTo("/login");
+    // }
 
 
     /// <summary>
