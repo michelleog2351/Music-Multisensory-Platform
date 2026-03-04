@@ -1,4 +1,5 @@
 ﻿@page "/register"
+@using Microsoft.EntityFrameworkCore
 @using MusicBased_IOT_Platform.Data
 @using MusicBased_IOT_Platform.Models
 @rendermode InteractiveServer
@@ -22,41 +23,37 @@
             <div class="row mb-3 g-2">
                 <div class="col-md-6">
                     <label class="visually-hidden">First Name</label>
-                    <input class="form-control" 
+                    <InputText class="form-control" 
                            type="text" 
                            placeholder="First Name" 
                            
-                           @bind="registerModel.FirstName"
+                           @bind-Value="registerModel.FirstName"
                            />
 
                 </div>
 
                 <div class="col-md-6">
                     <label class="visually-hidden">Last Name</label>
-                    <input class="form-control"  
-                           type="text" 
+                    <InputText class="form-control"  
                            placeholder="Last Name"
-                           
-                           @bind="registerModel.LastName"
+                           @bind-Value="registerModel.LastName"
                             />
                 </div>
             </div>
 
             <div class="mb-3">
-                <input class="form-control"  
-                       type="text" 
+                <InputText 
+                       class="form-control"  
+                       type="email"
                        placeholder="Email address"
-                       
-                       @bind="registerModel.Email"
+                       @bind-Value="registerModel.Email"
                        />
             </div>
 
             <div class="mb-3">
-                <input class="form-control"  
-                       type="text" 
+                <InputText class="form-control"  
                        placeholder="Username" 
-                       
-                       @bind="registerModel.Username"                                 
+                       @bind-Value="registerModel.Username"                                 
                        />
             </div>
 
@@ -64,7 +61,6 @@
                 <input class="form-control"  
                        type="password" 
                        placeholder="Password"
-                       
                        @bind="registerModel.Password"
                         />
             </div>
@@ -86,7 +82,7 @@
             }
             <div class="d-grid gap-2">
                 <button class="btn btn-spotify btn-lg"
-                        type="button">Register</button>
+                        type="submit">Register</button>
             </div>
         </EditForm>
 
@@ -140,6 +136,15 @@
         // return;
 
         //   ("alert alert-danger").Remove();
+
+        var existingUser = await dB.Users
+        .FirstOrDefaultAsync(u => u.Username == registerModel.Username);
+
+        if (existingUser != null)
+        {
+            ErrorMessage = "Username already exists.";
+            return;
+        }
 
         var user = new UserAccount
             {

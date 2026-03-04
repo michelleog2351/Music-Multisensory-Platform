@@ -10,8 +10,8 @@ using MusicBased_IOT_Platform.Data;
 namespace MusicBased_IOT_Platform.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20260221013022_Initial")]
-    partial class Initial
+    [Migration("20260304174044_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
