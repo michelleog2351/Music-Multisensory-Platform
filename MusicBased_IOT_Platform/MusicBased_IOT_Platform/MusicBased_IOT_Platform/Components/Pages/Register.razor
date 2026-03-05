@@ -22,19 +22,19 @@
 
             <div class="row mb-3 g-2">
                 <div class="col-md-6">
-                    <label class="visually-hidden">First Name</label>
+                    @* <label class="visually-hidden">First Name</label> *@
                     <InputText class="form-control" 
                            type="text" 
                            placeholder="First Name" 
-                           
                            @bind-Value="registerModel.FirstName"
                            />
 
                 </div>
 
                 <div class="col-md-6">
-                    <label class="visually-hidden">Last Name</label>
+                    @* <label class="visually-hidden">Last Name</label> *@
                     <InputText class="form-control"  
+                           type="text"
                            placeholder="Last Name"
                            @bind-Value="registerModel.LastName"
                             />
@@ -58,19 +58,18 @@
             </div>
 
             <div class="mb-3">
-                <input class="form-control"  
+                <InputText class="form-control"  
                        type="password" 
                        placeholder="Password"
-                       @bind="registerModel.Password"
+                       @bind-Value="registerModel.Password"
                         />
             </div>
 
             <div class="mb-3">
-                <input class="form-control"  
+                <InputText class="form-control"  
                        type="password" 
                        placeholder="Confirm your password"
-                       
-                       @bind="registerModel.ConfirmPassword"
+                       @bind-Value="registerModel.ConfirmPassword"
                         />
             </div>
 
@@ -163,40 +162,6 @@
         // redirect to login page after successful registration
         NavigationManager.NavigateTo("/login");
     }
-    // private async Task HandleRegister()
-    // {
-    //     NavigationManager.NavigateTo("/login");
-    // }
-
-
-    // Debugging
-    // private async Task HandleRegister()
-    // {
-    //     try
-    //     {
-    //         var user = new UserAccount
-    //         {
-    //             FirstName = registerModel.FirstName,
-    //             LastName = registerModel.LastName,
-    //             Email = registerModel.Email,
-    //             Username = registerModel.Username,
-    //             PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerModel.Password)
-    //         };
-
-    //         dB.Users.Add(user);
-    //         await dB.SaveChangesAsync();
-
-    //         //NavigationManager.NavigateTo("/login");
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         ErrorMessage = ex.Message;
-    //         return;
-    //     }
-
-    //     NavigationManager.NavigateTo("/login");
-    // }
-
 
     /// <summary>
     /// This method checks if the provided email is valid.
