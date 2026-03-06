@@ -23,21 +23,18 @@
             <div class="row mb-3 g-2">
                 <div class="col-md-6">
                     @* <label class="visually-hidden">First Name</label> *@
-                    <InputText class="form-control" 
-                           type="text" 
-                           placeholder="First Name" 
+                    <InputText 
+                           class="form-control" 
                            @bind-Value="registerModel.FirstName"
-                           />
-
+                           placeholder="First Name" />
                 </div>
 
                 <div class="col-md-6">
                     @* <label class="visually-hidden">Last Name</label> *@
-                    <InputText class="form-control"  
-                           type="text"
-                           placeholder="Last Name"
+                    <InputText 
+                           class="form-control"  
                            @bind-Value="registerModel.LastName"
-                            />
+                           placeholder="Last Name" />
                 </div>
             </div>
 
@@ -45,32 +42,29 @@
                 <InputText 
                        class="form-control"  
                        type="email"
-                       placeholder="Email address"
                        @bind-Value="registerModel.Email"
-                       />
+                       placeholder="Email address" />
             </div>
 
             <div class="mb-3">
-                <InputText class="form-control"  
-                       placeholder="Username" 
-                       @bind-Value="registerModel.Username"                                 
-                       />
+                <InputText 
+                       class="form-control"  
+                       @bind-Value="registerModel.Username"
+                       placeholder="Username" />
             </div>
 
             <div class="mb-3">
                 <InputText class="form-control"  
                        type="password" 
-                       placeholder="Password"
                        @bind-Value="registerModel.Password"
-                        />
+                       placeholder="Password" />
             </div>
 
             <div class="mb-3">
                 <InputText class="form-control"  
                        type="password" 
-                       placeholder="Confirm your password"
                        @bind-Value="registerModel.ConfirmPassword"
-                        />
+                       placeholder="Confirm your password" />
             </div>
 
             @if (!string.IsNullOrEmpty(ErrorMessage))
@@ -84,18 +78,10 @@
                         type="submit">Register</button>
             </div>
         </EditForm>
-
     </div>
 </div>
 
 @code {
-
-    // public string? FirstName { get; set; } = string.Empty;
-    // public string? LastName { get; set; } = string.Empty;
-    // public string? Email { get; set; } = string.Empty;
-    // public string? Username { get; set; } = string.Empty;
-    // public string? Password { get; set; } = string.Empty;
-    // public string? ConfirmPassword { get; set; } = string.Empty;
 
     private string? ErrorMessage;
 
@@ -106,17 +92,17 @@
     /// This method checks if the registration form is valid.
     /// </summary>
     /// <returns></returns>
-    private bool IsFormValid()
-    {
-        return !string.IsNullOrEmpty(registerModel.FirstName)
-            && !string.IsNullOrEmpty(registerModel.LastName)
-            && !string.IsNullOrEmpty(registerModel.Email)
-            && !string.IsNullOrEmpty(registerModel.Username)
-            && !string.IsNullOrEmpty(registerModel.Password)
-            && !string.IsNullOrEmpty(registerModel.ConfirmPassword)
-            && registerModel.Password == registerModel.ConfirmPassword
-            && IsEmailValid();
-    }
+    // private bool IsFormValid()
+    // {
+    //     return !string.IsNullOrEmpty(registerModel.FirstName)
+    //         && !string.IsNullOrEmpty(registerModel.LastName)
+    //         && !string.IsNullOrEmpty(registerModel.Email)
+    //         && !string.IsNullOrEmpty(registerModel.Username)
+    //         && !string.IsNullOrEmpty(registerModel.Password)
+    //         && !string.IsNullOrEmpty(registerModel.ConfirmPassword)
+    //         && registerModel.Password == registerModel.ConfirmPassword
+    //         && IsEmailValid();
+    // }
 
 
     /// <summary>
