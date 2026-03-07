@@ -1,10 +1,11 @@
 ﻿@page "/login"
 @using Microsoft.EntityFrameworkCore
+@using MusicBased_IOT_Platform.Application.Interfaces
 @using MusicBased_IOT_Platform.Application.Services
 @using MusicBased_IOT_Platform.Data
 @using MusicBased_IOT_Platform.Models
 @rendermode InteractiveServer
-@inject AppDBContext dB
+@inject IUserService UserService
 @inject UserSessionService Session
 @inject NavigationManager NavigationManager
 
@@ -72,24 +73,17 @@
     /// <returns></returns>
     private async Task HandleLogin()
     {
-        var user = await dB.Users
-            .FirstOrDefaultAsync(u => u.Username == loginModel.Username);
+        ErrorMessage = null;
 
-        if (user == null)
+        var result = await UserService.LoginUserAsync(loginModel);
+
+        if (!result.Success)
         {
-            ErrorMessage = "Invalid username.";
+            ErrorMessage = result.Error;
             return;
         }
 
-        bool validPassword = BCrypt.Net.BCrypt.Verify(loginModel.Password, user.PasswordHash);
-
-        if (!validPassword)
-        {
-            ErrorMessage = "Invalid password.";
-            return;
-        }
-
-        Session.SetUser(user);
+        Session.SetUser(result.);
 
         NavigationManager.NavigateTo("/");
     }

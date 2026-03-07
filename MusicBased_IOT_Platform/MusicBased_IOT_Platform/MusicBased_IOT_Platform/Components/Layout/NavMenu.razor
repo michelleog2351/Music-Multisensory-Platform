@@ -1,12 +1,43 @@
 ﻿@using MusicBased_IOT_Platform.Application.Services
-@inject NavigationManager NavigationManager
 @inject UserSessionService Session
+@inject NavigationManager NavigationManager
+
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">
             MusicBased_IOT_Platform
         </a>
+
+        <ul class="navbar-nav ms-auto">
+
+            @if (Session.CurrentUser == null)
+            {
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="login">Login</NavLink>
+                </li>
+
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="register">Register</NavLink>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+                    <span class="navbar-text me-3">
+                        Hi @Session.CurrentUser.FirstName
+                    </span>
+                </li>
+
+                <li class="nav-item">
+                    <button class="btn btn-outline-light btn-sm"
+                            @onclick="Logout">
+                        Logout
+                    </button>
+                </li>
+            }
+
+        </ul>
 
         <button class="navbar-toggler"
                 type="button"

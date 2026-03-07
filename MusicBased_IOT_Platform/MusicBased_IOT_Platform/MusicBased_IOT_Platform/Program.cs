@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using MusicBased_IOT_Platform.Application.Interfaces;
 using MusicBased_IOT_Platform.Application.Interfaces.Spotify;
+using MusicBased_IOT_Platform.Application.Repository;
 using MusicBased_IOT_Platform.Application.Services;
 using MusicBased_IOT_Platform.Application.Services.Spotify.Live;
 using MusicBased_IOT_Platform.Application.Services.Spotify.Mock;
@@ -9,7 +11,7 @@ using MusicBased_IOT_Platform.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+/// Add services to the container.
 builder.Services.AddRazorComponents()
 .AddInteractiveServerComponents(options =>
 {
@@ -34,12 +36,16 @@ else
     builder.Services.AddHttpClient<ISpotifyDataService, LiveSpotifyDataService>();
 }
 
-
 builder.Services.AddDbContext<AppDBContext>(options =>
     options.UseSqlite(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 builder.Services.AddScoped<UserSessionService>();
+
 
 var app = builder.Build();
 
