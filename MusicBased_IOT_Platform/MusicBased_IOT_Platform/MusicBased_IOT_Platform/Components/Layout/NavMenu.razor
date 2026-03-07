@@ -1,4 +1,8 @@
-﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+﻿@using MusicBased_IOT_Platform.Application.Services
+@inject NavigationManager NavigationManager
+@inject UserSessionService Session
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">
             MusicBased_IOT_Platform
@@ -16,8 +20,17 @@
 
         <div class="collapse navbar-collapse" id="mainNavbar">
 
-            <ul class="navbar-nav me-auto">
+            <! -- Show the user's first name if logged in, otherwise show "Login" -->
+            @if (Session.CurrentUser != null)
+            {
+                <span>Hi @Session.CurrentUser.FirstName</span>
+            }
+            else
+            {
+                <span>Login</span>
+            }
 
+            <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">Home
                     </NavLink>
@@ -36,6 +49,8 @@
                     </NavLink>
                 </li>
 
+                <button @onclick="Logout">Logout</button>
+
                 <li class="nav-item">
                     <NavLink class="nav-link" href="register">Register
                     </NavLink>
@@ -44,4 +59,21 @@
         </div>
     </div>
 </nav>
+
+@Session.CurrentUser != null
+{
+    <div class="container mt-3">
+        <div class="alert alert-success" role="alert">
+            Welcome back, @Session.CurrentUser!.FirstName!
+        </div>
+    </div>
+}
+
+@code {
+    private void Logout()
+    {
+        Session.Logout();
+        NavigationManager.NavigateTo("/login");
+    }
+}
 

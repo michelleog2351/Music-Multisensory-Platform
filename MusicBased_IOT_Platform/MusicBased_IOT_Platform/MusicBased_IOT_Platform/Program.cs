@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MusicBased_IOT_Platform.Application.Interfaces.Spotify;
+using MusicBased_IOT_Platform.Application.Services;
 using MusicBased_IOT_Platform.Application.Services.Spotify.Live;
 using MusicBased_IOT_Platform.Application.Services.Spotify.Mock;
 using MusicBased_IOT_Platform.Components;
@@ -37,6 +38,8 @@ else
 builder.Services.AddDbContext<AppDBContext>(options =>
     options.UseSqlite(
         builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<UserSessionService>();
 
 var app = builder.Build();
 

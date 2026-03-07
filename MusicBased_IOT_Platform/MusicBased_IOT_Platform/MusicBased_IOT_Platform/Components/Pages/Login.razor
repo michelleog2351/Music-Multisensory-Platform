@@ -1,9 +1,11 @@
 ﻿@page "/login"
 @using Microsoft.EntityFrameworkCore
+@using MusicBased_IOT_Platform.Application.Services
 @using MusicBased_IOT_Platform.Data
 @using MusicBased_IOT_Platform.Models
 @rendermode InteractiveServer
 @inject AppDBContext dB
+@inject UserSessionService Session
 @inject NavigationManager NavigationManager
 
 <PageTitle>Login</PageTitle>
@@ -60,15 +62,12 @@
  </div>
 @code 
 {
-    // public string? Username { get; set; } = string.Empty;
-    // public string? Password { get; set; } = string.Empty;
-
     private LoginModel loginModel = new();
 
     private string? ErrorMessage;
 
     /// <summary>
-    /// The HandleLogin method
+    /// The HandleLogin method asynchronously checks the provided username and password against the database. If the username is not found or the password is incorrect, it sets an appropriate error message. If the credentials are valid, it navigates the user to the home page.
     /// </summary>
     /// <returns></returns>
     private async Task HandleLogin()
@@ -89,6 +88,8 @@
             ErrorMessage = "Invalid password.";
             return;
         }
+
+        Session.SetUser(user);
 
         NavigationManager.NavigateTo("/");
     }
