@@ -5,9 +5,8 @@
 @using MusicBased_IOT_Platform.Application.Services
 @using MusicBased_IOT_Platform.Data
 @using MusicBased_IOT_Platform.Models
-_Platform.Data
-@using MusicBased_IOT_Platform.Models
 @rendermode InteractiveServer
+@inject UserSessionService Session
 @inject NavigationManager NavigationManager
 @inject IUserRepository UserRepo
 @inject IUserService UserService
@@ -92,6 +91,17 @@ _Platform.Data
     private RegisterModel registerModel = new();
 
     private string? ErrorMessage;
+
+    /// <summary>
+    /// The OnInitialized method checks if there is a currently logged-in user in the session.
+    /// </summary>
+    protected override void OnInitialized()
+    {
+        if (Session.CurrentUser != null)
+        {
+            NavigationManager.NavigateTo("/dashboard");
+        }
+    }
 
     /// <summary>
     /// The HandleRegister method is called when the user submits the registration form. 

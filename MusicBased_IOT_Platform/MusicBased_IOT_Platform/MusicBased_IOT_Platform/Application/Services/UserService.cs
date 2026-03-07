@@ -48,15 +48,16 @@ namespace MusicBased_IOT_Platform.Application.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<(bool Success, string? Error)> LoginUserAsync(LoginModel model)
+        public async Task<(bool Success, UserAccount? User, string? Error)> LoginUserAsync(LoginModel model)
         {
             var user = await _userRepo.GetByUsernameAsync(model.Username);
+
             if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.PasswordHash))
             {
-                return (false, "Invalid username or password.");
+                return (false, null, "Invalid username or password.");
             }
-            // Here you would typically set up the user session or authentication cookie
-            return (true, "User logged in successfully.");
+
+            return (true, user, null);
         }
 
         public Task LogoutUserAsync()

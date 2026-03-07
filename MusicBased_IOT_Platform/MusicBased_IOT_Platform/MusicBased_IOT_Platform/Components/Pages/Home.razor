@@ -1,15 +1,25 @@
 ﻿@page "/"
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
+@inject UserSessionService UserSession
 
 @using MusicBased_IOT_Platform.Application.Interfaces
 @using MusicBased_IOT_Platform.Application.Interfaces.Spotify
+@using MusicBased_IOT_Platform.Application.Services
 @using MusicBased_IOT_Platform.Models
 
 <PageTitle>Home</PageTitle>
 <br />
 <br />
-<h1>Welcome Back Michelle!</h1>
-<h3>Music Platform</h3>
+@inject UserSessionService Session
+
+@if (Session.CurrentUser != null)
+{
+    <div class="alert alert-success">
+        <h1>Welcome back @Session.CurrentUser.FirstName!</h1>
+    </div>
+}
+
+<h3 style="color: darkgray">Music MultiSensory Platform</h3>
 
 <div class="d-flex gap-2">
     <input id="moodSearch"
@@ -278,9 +288,9 @@
 
     private NewReleases? releases;
 
-    private Tracks? tracks;
+    // private Tracks? tracks;
 
-    List<Track>? allTracks;
+    // List<Track>? allTracks;
 
     /// <summary>
     /// This method is called when the component is initialised.
@@ -397,10 +407,10 @@
             return;
         }
 
-        filteredTracks = allTracks?
-            .Where(t => t.Name!.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
-            .Take(8)
-            .ToList();
+        // filteredTracks = allTracks?
+        //     .Where(t => t.Name!.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+        //     .Take(8)
+        //     .ToList();
     }
 
     @* Search box *@

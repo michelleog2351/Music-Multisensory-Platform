@@ -1,5 +1,9 @@
 ﻿@page "/dashboard"
+@using MusicBased_IOT_Platform.Application.Services
 @inject IJSRuntime JS
+@inject UserSessionService Session
+@inject NavigationManager NavigationManager
+
 <h3>My Dashboard</h3>
 
 <PageTitle>My Dashboard</PageTitle>
@@ -22,6 +26,15 @@
 
 
 @code {
+
+    protected override void OnInitialized()
+    {
+        if (Session.CurrentUser == null)
+        {
+            NavigationManager.NavigateTo("/login");
+        }
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)

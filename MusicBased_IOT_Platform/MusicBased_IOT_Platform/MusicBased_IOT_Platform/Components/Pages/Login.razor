@@ -68,7 +68,21 @@
     private string? ErrorMessage;
 
     /// <summary>
-    /// The HandleLogin method asynchronously checks the provided username and password against the database. If the username is not found or the password is incorrect, it sets an appropriate error message. If the credentials are valid, it navigates the user to the home page.
+    /// The OnInitialized method checks if there is a currently logged-in user in the session.
+    /// </summary>
+    protected override void OnInitialized()
+    {
+        if (Session.CurrentUser != null)
+        {
+            NavigationManager.NavigateTo("/dashboard");
+        }
+    }
+
+    /// <summary>
+    /// The HandleLogin method is responsible for processing the login form submission. 
+    /// It validates the user's credentials by calling the UserService's LoginUserAsync method. 
+    /// If the login attempt is unsuccessful, it sets an error message to be displayed to the user. 
+    /// If the login is successful, it stores the user's information in the session and redirects them to the home page.
     /// </summary>
     /// <returns></returns>
     private async Task HandleLogin()
@@ -83,8 +97,8 @@
             return;
         }
 
-        Session.SetUser(result.);
+        await Session.SetUserAsync(result.User!);
 
-        NavigationManager.NavigateTo("/");
+        NavigationManager.NavigateTo("/dashboard");
     }
 }

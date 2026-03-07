@@ -6,7 +6,7 @@ namespace MusicBased_IOT_Platform.Application.Interfaces
     {
         Task<(bool Success, string? Error)> RegisterUserAsync(RegisterModel model);
 
-        Task<(bool Success, string? Error)> LoginUserAsync(LoginModel model);
+        Task<(bool Success, UserAccount? User, string? Error)> LoginUserAsync(LoginModel model);
     
         Task LogoutUserAsync();
   
