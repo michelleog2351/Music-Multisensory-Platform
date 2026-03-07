@@ -60,18 +60,21 @@
  </div>
 @code 
 {
-    public string? Username { get; set; } = string.Empty;
-    public string? Password { get; set; } = string.Empty;
+    // public string? Username { get; set; } = string.Empty;
+    // public string? Password { get; set; } = string.Empty;
 
     private LoginModel loginModel = new();
 
     private string? ErrorMessage;
 
-    ///
+    /// <summary>
+    /// The HandleLogin method
+    /// </summary>
+    /// <returns></returns>
     private async Task HandleLogin()
     {
         var user = await dB.Users
-            .FirstOrDefaultAsync(u => u.Username == Username);
+            .FirstOrDefaultAsync(u => u.Username == loginModel.Username);
 
         if (user == null)
         {
@@ -79,9 +82,9 @@
             return;
         }
 
-        bool passwordValid = BCrypt.Net.BCrypt.Verify(Password, user.PasswordHash);
+        bool validPassword = BCrypt.Net.BCrypt.Verify(loginModel.Password, user.PasswordHash);
 
-        if (!passwordValid)
+        if (!validPassword)
         {
             ErrorMessage = "Invalid password.";
             return;
