@@ -1,6 +1,7 @@
 ﻿@using MusicBased_IOT_Platform.Application.Services
 @inject UserSessionService Session
 @inject NavigationManager NavigationManager
+@implements IDisposable
 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -21,6 +22,9 @@
         </button>
 
         <div class="collapse navbar-collapse" id="mainNavbar">
+            <p style="color:yellow">
+                DEBUG USER: @(Session.CurrentUser?.FirstName ?? "NULL")
+            </p>
 
          @*    <! -- Show the user's first name if logged in, otherwise show "Login" -->
             @if (Session.CurrentUser != null)
@@ -37,12 +41,15 @@
                     <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">Home
                     </NavLink>
                 </li>
+                @if (Session.CurrentUser != null)
+                {
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="dashboard">
+                            My Dashboard
+                        </NavLink>
+                    </li>
+                }
 
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="dashboard">
-                        My Dashboard
-                    </NavLink>
-                </li>
             </ul>
 
             <ul class="navbar-nav ms-auto">
@@ -60,32 +67,19 @@
                }
                else
                {
-                    <li class="nav-item dropdown">
 
-                        <a class="nav-link dropdown-toggle"
-                            href="#"
-                            role="button"
-                            data-bs-toggle="dropdown">
-
-                            Hi @Session.CurrentUser.FirstName
-
-                        </a>
-
-                        <ul class="dropdown-menu dropdown-menu-end">
-
-                            <li>
-                                <NavLink class="dropdown-item" href="dashboard">Dashboard
-                                </NavLink>
-                            </li>
-
-                            <li>
-                                <button class="dropdown-item" @onclick="Logout">
-                                Logout
-                                </button>
-                            </li>
-                        </ul>
+                    <li class="nav-item">
+                        <span class="navbar-text me-3">
+                            Hi @Session.CurrentUser.FirstName!
+                        </span>
                     </li>
-               }
+
+                    <li class="nav-item">
+                        <button class="btn btn-outline-light btn-sm" @onclick="Logout">
+                            Logout
+                        </button>
+                    </li>
+                }
             </ul>
         </div>
     </div>
@@ -110,8 +104,6 @@
         Session.OnChange -= StateHasChanged;
     }
 
-
-
     /// <summary>
     /// The Logout method is responsible for logging the user out of the application.
     /// </summary>
@@ -119,7 +111,7 @@
     private async Task Logout()
     {
         await Session.LogoutAsync();
-        NavigationManager.NavigateTo("/login");
+        NavigationManager.NavigateTo("/login", true);
     }
 }
 

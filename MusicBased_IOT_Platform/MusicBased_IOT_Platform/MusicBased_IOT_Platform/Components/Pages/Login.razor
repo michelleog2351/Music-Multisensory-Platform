@@ -27,9 +27,8 @@
                     <div class="mb-3">
                         <InputText 
                                class="form-control"  
-                               type="text" 
-                               required
                                @bind-Value="loginModel.Username"
+                               @bind-Value:event="oninput"
                                placeholder="Username"
                                autocomplete="on" />
                     </div>
@@ -39,6 +38,7 @@
                                    type="password"
                                    required
                                    @bind-Value="loginModel.Password"
+                                   @bind-Value:event="oninput"
                                    placeholder="Password" />
                     </div>
            
@@ -70,13 +70,21 @@
     /// <summary>
     /// The OnInitialized method checks if there is a currently logged-in user in the session.
     /// </summary>
-    protected override void OnInitialized()
+    // protected override void OnInitialized()
+    // {
+    //     if (Session.CurrentUser != null)
+    //     {
+    //         NavigationManager.NavigateTo("/dashboard");
+    //     }
+    // }
+    protected override void OnAfterRender(bool firstRender)
     {
-        if (Session.CurrentUser != null)
+        if (firstRender && Session.CurrentUser != null)
         {
-            NavigationManager.NavigateTo("/dashboard");
+            NavigationManager.NavigateTo("/dashboard", true);
         }
     }
+
 
     /// <summary>
     /// The HandleLogin method is responsible for processing the login form submission. 
@@ -99,6 +107,20 @@
 
         await Session.SetUserAsync(result.User!);
 
-        NavigationManager.NavigateTo("/dashboard");
+        NavigationManager.NavigateTo("/dashboard", true);
+    }
+
+    /// <summary>
+    /// The ForgotPassword method
+    /// </summary>
+    /// 
+    // private async Task ForgotPassword()
+    // {
+    //     /// three attempts
+    // }
+
+    private void ClearError(ChangeEventArgs e)
+    {
+        ErrorMessage = null;
     }
 }

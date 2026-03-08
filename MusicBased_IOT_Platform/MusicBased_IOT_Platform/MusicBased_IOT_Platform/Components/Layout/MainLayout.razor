@@ -18,8 +18,20 @@
 </div>
 
 @code {
-    protected override async Task OnInitializedAsync()
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     await Session.LoadUserAsync();
+    // }
+
+    private bool _sessionLoaded;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await Session.LoadUserAsync();
+        if (firstRender && !_sessionLoaded)
+        {
+            _sessionLoaded = true;
+            await Session.LoadUserAsync();
+            StateHasChanged();
+        }
     }
 }
