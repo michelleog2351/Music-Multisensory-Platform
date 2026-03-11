@@ -2,7 +2,7 @@
 {
     public class HeartRateZone
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         public int Min { get; set; }
         public int Max { get; set; }

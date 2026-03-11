@@ -49,6 +49,8 @@ builder.Services.AddScoped<UserSessionService>();
 
 builder.Services.AddScoped<ProtectedLocalStorage>();
 
+builder.Services.AddScoped<MoodCalibrationService>();
+
 
 var app = builder.Build();
 

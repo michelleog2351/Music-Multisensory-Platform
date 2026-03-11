@@ -257,24 +257,32 @@
                     @album?.Artists![0].Name
                 </p>
             </div>
-
-@*             <svg width="145" height="122" viewBox="0 0 145 122" fill="none" xmlns="http://www.w3.org/2000/svg" style="">
-                <path d="M72.5 111.833C105.867 111.833 132.917 89.0745 132.917 61C132.917 32.9255 105.867 10.1667 72.5 10.1667C39.1328 10.1667 12.0833 32.9255 12.0833 61C12.0833 89.0745 39.1328 111.833 72.5 111.833Z" stroke="#1E1E1E" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M60.4167 40.6667L96.6667 61L60.4167 81.3333V40.6667Z" stroke="#1E1E1E" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="black" />
-            </svg>
- *@
         </div>
 
         index++;
     }
 }
 
+@if (recalibrationRequired)
+{
+    <div class="alert alert-warning">
+        Your biometric baseline needs recalibration.
+        Please remain calm and click recalibrate.
+    </div>
+
+    <button class="btn btn-primary" @onclick="Recalibrate">
+        Recalibrate Biometrics
+    </button>
+}
 
 
 @code {
 
     [Inject]
     public ISpotifyDataService Spotify { get; set; } = default!;
+
+    [Inject]
+    public MoodCalibrationService MoodCalibrationService { get; set; } = default!;
 
     private string searchTerm = "";
     private List<Item> searchResults = new();
@@ -288,9 +296,8 @@
 
     private NewReleases? releases;
 
-    // private Tracks? tracks;
-
-    // List<Track>? allTracks;
+    private MusicMoodResult? moodResult;
+    private bool recalibrationRequired;
 
     /// <summary>
     /// This method is called when the component is initialised.
@@ -311,6 +318,20 @@
         inactivityTimer.Elapsed += OnInactivityElapsed!;
         inactivityTimer.AutoReset = false; // Only trigger once
         inactivityTimer.Start();
+
+        recalibrationRequired = await MoodCalibrationService.IsRecalibrationRequiredAsync();
+
+        if (!recalibrationRequired)
+        {
+            moodResult = await MoodCalibrationService.GenerateMoodMusicAsync();
+        }
+    }
+
+    private async Task Recalibrate()
+    {
+        // await MoodCalibrationService.RecalibrateAsync();
+        // recalibrationRequired = false;
+        moodResult = await MoodCalibrationService.RecalibrateAsync();
     }
 
     /// <summary>
