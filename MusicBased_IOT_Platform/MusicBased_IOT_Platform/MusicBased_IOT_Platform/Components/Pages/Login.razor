@@ -27,8 +27,7 @@
                     <div class="mb-3">
                         <InputText 
                                class="form-control"  
-                               @bind-Value="loginModel.Username"
-                               @bind-Value:event="oninput"
+                               @bind-Value="loginModel.Username"                              
                                placeholder="Username"
                                autocomplete="on" />
                     </div>
@@ -38,7 +37,6 @@
                                    type="password"
                                    required
                                    @bind-Value="loginModel.Password"
-                                   @bind-Value:event="oninput"
                                    placeholder="Password" />
                     </div>
            
@@ -81,7 +79,7 @@
     {
         if (firstRender && Session.CurrentUser != null)
         {
-            NavigationManager.NavigateTo("/dashboard", true);
+            NavigationManager.NavigateTo("/dashboard");
         }
     }
 
@@ -123,4 +121,14 @@
     {
         ErrorMessage = null;
     }
+
+    // recalibration logic
+    // public async Task Recalibrate()
+    // {
+    //     if ((DateTime.Now - user.LastCalibrationDate).TotalDays > 14)
+    //     {
+    //         await PromptRecalibration();
+    //     }
+    // }
+
 }

@@ -1,0 +1,57 @@
+﻿@using MusicBased_IOT_Platform.Models
+<h3>MappingService</h3>
+
+@code {
+    public BiometricSummary MapToBiometricSummary(
+    HeartRateSummary heartRate,
+    ActivitySummary activity,
+    SleepSummary sleep)
+    {
+        var summary = new BiometricSummary();
+
+        summary.AverageRestingHeartRate = heartRate.RestingHeartRate;
+        summary.AverageDailySteps = activity.Steps;
+        summary.ActiveMinutes = activity.ActiveMinutes;
+        summary.AverageBreathingRate = CalculateBreathingRate(heartRate);
+        summary.AverageHeartRateVariability = CalculateHRV(heartRate);
+        summary.IsCalmState = summary.AverageRestingHeartRate < 70 &&
+        summary.ActiveMinutes < 20;
+        summary.CapturedAt = DateTime.Now;
+
+        return summary;
+    }
+
+    /// <summary>
+    /// The CalculateHRV
+    /// </summary>
+    /// <param name="heartRate"></param>
+    /// <returns></returns>
+    private double CalculateHRV(HeartRateSummary heartRate)
+    {
+        if (heartRate.Zones == null || heartRate.Zones.Count == 0)
+            return 0;
+
+        var avg = heartRate.Zones.Average(z => z.Min + z.Max / 2);
+
+        return avg;
+    }
+
+    private double CalculateBreathingRate(HeartRateSummary heartRate)
+    {
+        return heartRate.RestingHeartRate / 4;
+    }
+
+    public MoodState ClassifyMood(BiometricSummary bio)
+    {
+        if (bio.AverageRestingHeartRate < 65 && bio.AverageHeartRateVariability > 70)
+            return MoodState.Calm;
+
+        if (bio.ActiveMinutes > 30)
+            return MoodState.Active;
+
+        if (bio.AverageHeartRateVariability < 40)
+            return MoodState.Restless;
+
+        return MoodState.Neutral;
+    }
+}
