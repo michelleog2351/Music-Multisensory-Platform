@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using MusicBased_IOT_Platform.Application.Interfaces;
 using MusicBased_IOT_Platform.Application.Interfaces.Fitbit;
 using MusicBased_IOT_Platform.Models;
+using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 
@@ -48,27 +49,27 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
 
         // Properties
         /// <summary>
-        /// Access token used to access the spotify web api
+        /// Access token used to access the Fitbit web api
         /// </summary>
         public AccessToken AccessToken { get; set; }
 
         /// <summary>
-        /// AuthorisationUrl used to access the spotify web api
+        /// AuthorisationUrl used to access the Fitbit web api
         /// </summary>
         public string AuthorisationUrl { get; set; }
 
         /// <summary>
-        /// BaseURL used to access the spotify web api
+        /// BaseURL used to access the Fitbit web api
         /// </summary>
         public string BaseURL { get; set; }
 
         /// <summary>
-        /// ClientID used to access the spotify web api
+        /// ClientID used to access the Fitbit web api
         /// </summary>
         public string ClientID { get; set; }
 
         /// <summary>
-        /// ClientSecret used to access the spotify web api
+        /// ClientSecret used to access the Fitbit web api
         /// </summary>
         public string ClientSecret { get; set; }
 
@@ -124,37 +125,81 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
             return true;
         }
 
+        private async Task<T> GetAsync<T>(string endpoint)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, endpoint);
+
+            request.Headers.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue(
+                    "Bearer",
+                    AccessToken.AccessToken);
+
+            var response = await _httpClient.SendAsync(request);
+
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<T>(json, _jsonOptions)!;
+        }
         public Task<bool> HasValidTokenAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<FitbitProfile> GetProfileAsync()
+        /// <summary>
+        /// The 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<FitbitProfile> GetProfileAsync()
         {
-            throw new NotImplementedException();
+            var response = await GetAsync<FitbitProfileResponse>(
+                "/1/user/-/profile.json");
+
+            return response.User!;
         }
 
-        public Task<HeartRateSummary> GetDailyHeartRateAsync(DateTime date)
+        public async Task<HeartRateSummary> GetDailyHeartRateAsync(DateTime date)
         {
-            throw new NotImplementedException();
+            string endpoint =
+                $"/1/user/-/activities/heart/date/{date:yyyy-MM-dd}/1d.json";
+
+            var response = await GetAsync<HeartRateResponse>(endpoint);
+
+            return response.ActivitiesHeart!.FirstOrDefault()!;
+        }
+
+        public async Task<Distance> GetDistanceInStepsAsync(DateTime date)
+        {
+            string endpoint =
+                $"/1/user/-/activities/steps/date/{date:yyyy-MM-dd}/1d.json";
+
+            var response = await GetAsync<StepsResponse>(endpoint);
+
+            return response.ActivitiesSteps!.FirstOrDefault()!;
+        }
+
+        public async Task<SleepSummary> GetSleepAsync(DateTime date)
+        {
+            string endpoint =
+                $"/1.2/user/-/sleep/date/{date:yyyy-MM-dd}.json";
+
+            var response = await GetAsync<SleepResponse>(endpoint);
+
+            return response.Summary!;
+        }
+
+        public async Task<ActivitySummary> GetDailyActivityAsync(DateTime date)
+        {
+            string endpoint =
+                $"/1/user/-/activities/date/{date:yyyy-MM-dd}.json";
+
+            var response = await GetAsync<ActivityResponse>(endpoint);
+
+            return response.Summary!;
         }
 
         public Task<List<HeartRateZone>> GetHeartRateZonesAsync(DateTime date)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Distance> GetDistanceInStepsAsync(DateTime date)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<SleepSummary> GetSleepAsync(DateTime date)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ActivitySummary> GetDailyActivityAsync(DateTime date)
         {
             throw new NotImplementedException();
         }
@@ -175,9 +220,21 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
             };
         }
 
-        public Task<BiometricSummary> GetBiometricDataAsync()
+        public async Task<BiometricSummary> GetBiometricDataAsync()
         {
-            throw new NotImplementedException();
+            //var heartRate = await GetDailyHeartRateAsync();
+            //var steps = await GetDistanceInStepsAsync();
+            //var sleep = await GetSleepAsync();
+            //var breathing = await GetBreathingRateAsync();
+
+            return new BiometricSummary
+            {
+                //RestingHeartRate = heartRate?.RestingHeartRate ?? 0,
+                //Steps = int.Parse(steps?.Value ?? "0"),
+                //ActiveMinutes = activity?.FairlyActiveMinutes ?? 0,
+                //SleepMinutes = sleep?.TotalMinutesAsleep ?? 0,
+                //CapturedAt = DateTime.Now
+            };
         }
 
         Task IFitbitDataService.ReadBiometricAndMusicDataAsync()

@@ -36,14 +36,14 @@ namespace MusicBased_IOT_Platform.Application.Services
             var biometric = await _fitbitDataService.GetBiometricDataAsync();
             var mood = MoodClassifier.ClassifyMood(biometric);
 
-            var parameters = MapMoodToSpotify(mood);
+            var (danceability, energy, valence, liveness) = MapMoodToSpotify(mood);
 
             var tracks = await _spotifyDataService.GetMoodRecommendations(
                 10,
-                parameters.danceability,
-                parameters.energy,
-                parameters.valence,
-                parameters.liveness);
+                danceability,
+                energy,
+                valence,
+                liveness);
 
             return new MusicMoodResult
             {
