@@ -79,7 +79,7 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Fitbit
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        Task ReadBiometricAndMusicDataAsync();
+        Task <MusicMoodResult> ReadBiometricAndMusicDataAsync();
 
         /// <summary>
         /// The <c>TestDataConnection</c> method tests if the client has a valid data connection

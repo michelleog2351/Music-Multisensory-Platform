@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Connections.Features;
-using Microsoft.Extensions.Options;
-using MusicBased_IOT_Platform.Application.Interfaces;
+﻿using Microsoft.Extensions.Options;
 using MusicBased_IOT_Platform.Application.Interfaces.Fitbit;
 using MusicBased_IOT_Platform.Models;
-using System.Diagnostics;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
@@ -125,14 +123,82 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
             return true;
         }
 
+        /// <summary>
+        /// The RefreshAccessTokenAsync method is responsible for refreshing the access token when it has expired. 
+        /// It sends a POST request to the Fitbit API with the refresh token to obtain a new access token, 
+        /// and updates the AccessToken property with the new token information.
+        /// </summary>
+        /// <returns></returns>
+        private async Task RefreshAccessTokenAsync()
+        {
+            var request = new HttpRequestMessage(
+                HttpMethod.Post,
+                $"https://api.fitbit.com/oauth2/token");
+
+            var authString = $"{ClientID}:{ClientSecret}";
+            var authBytes = Encoding.UTF8.GetBytes(authString);
+            var authBase64 = Convert.ToBase64String(authBytes);
+
+            request.Headers.Add("Authorization", "Basic " + authBase64);
+
+            request.Content = new FormUrlEncodedContent(new Dictionary<string, string>
+            {
+                { "grant_type", "refresh_token" },
+                { "refresh_token", AccessToken.RefreshToken }
+            });
+
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            AccessToken =
+                JsonSerializer.Deserialize<AccessToken>(json, _jsonOptions)!;
+
+            AccessToken.DateTimeAcquired = DateTime.Now;
+        }
+
+        /// <summary>
+        /// The HasValidTokenAsync method checks if the current access token is valid by verifying that it exists and has not expired. 
+        /// If the token has expired, it attempts to refresh the access token using the refresh token. 
+        /// The method returns true if a valid access token is available, and false otherwise.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> HasValidTokenAsync()
+        {
+            if (AccessToken == null || string.IsNullOrEmpty(AccessToken.Token))
+                return false;
+
+            var expiryTime =
+                AccessToken.DateTimeAcquired.AddSeconds(AccessToken.ExpiresIn);
+
+            if (DateTime.Now >= expiryTime)
+            {
+                await RefreshAccessTokenAsync();
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// The GetAsync method is a helper method that sends an HTTP GET request to the specified endpoint, 
+        /// including the access token in the request headers for authentication. 
+        /// It then reads the response content as a string and deserializes it into an object of type T 
+        /// using the JsonSerializer with the specified options. The deserialized object is returned to the caller.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="endpoint"></param>
+        /// <returns></returns>
         private async Task<T> GetAsync<T>(string endpoint)
         {
+            await HasValidTokenAsync();
+
             var request = new HttpRequestMessage(HttpMethod.Get, endpoint);
 
             request.Headers.Authorization =
-                new System.Net.Http.Headers.AuthenticationHeaderValue(
+                new AuthenticationHeaderValue(
                     "Bearer",
-                    AccessToken.AccessToken);
+                    AccessToken.Token);
 
             var response = await _httpClient.SendAsync(request);
 
@@ -142,13 +208,11 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
 
             return JsonSerializer.Deserialize<T>(json, _jsonOptions)!;
         }
-        public Task<bool> HasValidTokenAsync()
-        {
-            throw new NotImplementedException();
-        }
 
         /// <summary>
-        /// The 
+        /// The GetProfileAsync method retrieves the user's profile information from the Fitbit API 
+        /// by sending a GET request to the appropriate endpoint and deserializing the response 
+        /// into a FitbitProfile object which is then returned to the caller.
         /// </summary>
         /// <returns></returns>
         public async Task<FitbitProfile> GetProfileAsync()
@@ -159,6 +223,15 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
             return response.User!;
         }
 
+        /// <summary>
+        /// Thw GetDailyHeartRateAsync method retrieves the user's daily heart rate data from the Fitbit API
+        /// by sending a GET request to the appropriate endpoint with the specified date and deserializing 
+        /// the response into a HeartRateResponse object. 
+        /// The method then returns the first HeartRateSummary from the response, which contains information 
+        /// about the user's resting heart rate and heart rate zones for that day.
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public async Task<HeartRateSummary> GetDailyHeartRateAsync(DateTime date)
         {
             string endpoint =
@@ -169,6 +242,11 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
             return response.ActivitiesHeart!.FirstOrDefault()!;
         }
 
+        /// <summary>
+        /// THe GetDistanceInStepsAsync method retrieves the user's daily step count data from the Fitbit API by sending a GET request to the appropriate endpoint with the specified date and deserializing the response into a StepsResponse object. The method then returns the first Distance object from the response, which contains information about the user's step count for that day.
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public async Task<Distance> GetDistanceInStepsAsync(DateTime date)
         {
             string endpoint =
@@ -179,6 +257,14 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
             return response.ActivitiesSteps!.FirstOrDefault()!;
         }
 
+        /// <summary>
+        /// The GetSleepAsync method retrieves the user's sleep data from the Fitbit API by sending a GET request to 
+        /// the appropriate endpoint with the specified date and deserializing the response into a SleepResponse object. 
+        /// The method then returns the SleepSummary from the response, which contains information about the user's 
+        /// sleep duration, quality, and other sleep-related metrics for that day.
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public async Task<SleepSummary> GetSleepAsync(DateTime date)
         {
             string endpoint =
@@ -189,6 +275,14 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
             return response.Summary!;
         }
 
+        /// <summary>
+        /// The GetDailyActivityAsync method retrieves the user's daily activity data from the Fitbit API by sending a GET request to 
+        /// the appropriate endpoint with the specified date and deserializing the response into an ActivityResponse object. 
+        /// The method then returns the ActivitySummary from the response, which contains information about the user's step count, 
+        /// active minutes, calories burned, and other activity-related metrics for that day.
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public async Task<ActivitySummary> GetDailyActivityAsync(DateTime date)
         {
             string endpoint =
@@ -235,11 +329,6 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
                 //SleepMinutes = sleep?.TotalMinutesAsleep ?? 0,
                 //CapturedAt = DateTime.Now
             };
-        }
-
-        Task IFitbitDataService.ReadBiometricAndMusicDataAsync()
-        {
-            return ReadBiometricAndMusicDataAsync();
         }
     }
 }
