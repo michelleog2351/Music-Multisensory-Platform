@@ -9,7 +9,7 @@ namespace MusicBased_IOT_Platform.Application.Services
             if (biometric.AverageRestingHeartRate < 65 && biometric.AverageHeartRateVariability > 70)
                 return MoodState.Calm;
 
-            if (biometric.ActiveMinutes > 30)
+            if (biometric.AverageActiveMinutes > 30)
                 return MoodState.Active;
 
             if (biometric.AverageHeartRateVariability < 40)

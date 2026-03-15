@@ -33,6 +33,8 @@ namespace MusicBased_IOT_Platform.Application.Services
         /// <returns></returns>
         public async Task<MusicMoodResult> RecalibrateAsync()
         {
+            //try catch?????
+
             var biometric = await _fitbitDataService.GetBiometricDataAsync();
             var mood = MoodClassifier.ClassifyMood(biometric);
 

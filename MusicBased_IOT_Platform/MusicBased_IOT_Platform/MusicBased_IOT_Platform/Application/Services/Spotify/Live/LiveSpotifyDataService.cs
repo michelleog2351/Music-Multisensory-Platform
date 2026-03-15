@@ -20,7 +20,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         // Fields
         // HttpClient used to make live calls to the spotify API
         private readonly HttpClient _httpClient;
-        private readonly AppSettings _settings;
+        private readonly SpotifySettings _settings;
 
         /// <summary>
         /// The JsonSerializerOptions object is used to specify options for the JSON serializer
@@ -41,7 +41,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         /// <param name="settings"></param>
         public LiveSpotifyDataService(
             HttpClient httpClient,
-            IOptions<AppSettings> settings)
+            IOptions<SpotifySettings> settings)
         {
             _httpClient = httpClient;
             _settings = settings.Value;
@@ -53,7 +53,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             ClientID = _settings.ClientID ?? string.Empty;
             ClientSecret = _settings.ClientSecret;
 
-            _httpClient.BaseAddress = new Uri(BaseURL);
+            _httpClient.BaseAddress = new Uri(_settings.BaseURL);
         }
 
         // Properties
@@ -217,8 +217,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         /// otherwise false.</returns>
         public async Task<bool> TestDataConnection()
         {
-            // We could make a dummy call but it is probably better to just re-Authorise the
-            // client an get a new access token.
+            // re-authorise the client and get a new access token.
             return await AuthoriseClientAsync();
         }
 

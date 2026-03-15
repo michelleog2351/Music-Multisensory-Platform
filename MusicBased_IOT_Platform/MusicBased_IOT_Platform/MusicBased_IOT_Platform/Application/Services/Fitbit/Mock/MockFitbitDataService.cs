@@ -64,7 +64,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Mock
             throw new NotImplementedException();
         }
 
-        public Task<Distance> GetDistanceInStepsAsync(DateTime date)
+        public Task<Steps> GetDistanceInStepsAsync(DateTime date)
         {
             throw new NotImplementedException();
         }
@@ -99,7 +99,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Mock
             throw new NotImplementedException();
         }
 
-        public Task ReadBiometricAndMusicDataAsync()
+        public Task<MusicMoodResult> ReadBiometricAndMusicDataAsync()
         {
             throw new NotImplementedException();
         }

@@ -48,7 +48,7 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Fitbit
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        Task<Distance> GetDistanceInStepsAsync(DateTime date);
+        Task<Steps> GetDistanceInStepsAsync(DateTime date);
 
         /// <summary>
         /// The <c>GetSleepAsync</c> method retrieves the user's sleep data for a specific date from the

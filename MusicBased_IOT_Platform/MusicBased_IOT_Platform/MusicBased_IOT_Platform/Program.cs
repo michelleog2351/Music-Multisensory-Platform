@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Microsoft.EntityFrameworkCore;
 using MusicBased_IOT_Platform.Application.Interfaces;
+using MusicBased_IOT_Platform.Application.Interfaces.Fitbit;
 using MusicBased_IOT_Platform.Application.Interfaces.Spotify;
 using MusicBased_IOT_Platform.Application.Repository;
 using MusicBased_IOT_Platform.Application.Services;
+using MusicBased_IOT_Platform.Application.Services.Fitbit.Live;
+using MusicBased_IOT_Platform.Application.Services.Fitbit.Mock;
 using MusicBased_IOT_Platform.Application.Services.Spotify.Live;
 using MusicBased_IOT_Platform.Application.Services.Spotify.Mock;
 using MusicBased_IOT_Platform.Components;
@@ -20,21 +23,33 @@ builder.Services.AddRazorComponents()
 })
 .AddInteractiveWebAssemblyComponents();
 
-
-builder.Services.AddHttpClient<ISpotifyDataService, LiveSpotifyDataService>();
-
-builder.Services.Configure<AppSettings>(
+builder.Services.Configure<SpotifySettings>(
     builder.Configuration.GetSection("Spotify"));
 
-bool useMock = builder.Configuration.GetValue<bool>("Spotify:UseMockSpotify");
+builder.Services.Configure<FitbitSettings>(
+    builder.Configuration.GetSection("Fitbit"));
 
-if (useMock)
+bool useMockSpotify = builder.Configuration.GetValue<bool>("Spotify:UseMockSpotify");
+
+if (useMockSpotify)
 {
     builder.Services.AddScoped<ISpotifyDataService, MockSpotifyDataService>();
 }
 else
 {
     builder.Services.AddHttpClient<ISpotifyDataService, LiveSpotifyDataService>();
+}
+
+bool useMockFitbit =
+    builder.Configuration.GetValue<bool>("Fitbit:UseMockFitbit");
+
+if (useMockFitbit)
+{
+    builder.Services.AddScoped<IFitbitDataService, MockFitbitDataService>();
+}
+else
+{
+    builder.Services.AddHttpClient<IFitbitDataService, LiveFitbitDataService>();
 }
 
 builder.Services.AddDbContext<AppDBContext>(options =>

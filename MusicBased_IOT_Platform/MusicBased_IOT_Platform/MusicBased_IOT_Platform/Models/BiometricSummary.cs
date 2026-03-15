@@ -6,7 +6,7 @@
         public double AverageHeartRateVariability { get; set; }
         public double AverageBreathingRate { get; set; }
         public double AverageDailySteps { get; set; }
-        public double ActiveMinutes { get; set; }
+        public double AverageActiveMinutes { get; set; }
 
         public DateTime CapturedAt { get; set; }
 

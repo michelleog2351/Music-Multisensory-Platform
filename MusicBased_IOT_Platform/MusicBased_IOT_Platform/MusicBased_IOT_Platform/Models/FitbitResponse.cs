@@ -7,7 +7,7 @@
 
     public class ActivityResponse
     {
-        public ActivitySummary? Summary { get; set; }
+        public ActivitySummary? ActivitiesSummary { get; set; }
     }
 
     public class HeartRateResponse
@@ -15,6 +15,9 @@
         public List<HeartRateSummary>? ActivitiesHeart { get; set; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class SleepResponse
     {
         public SleepSummary? Summary { get; set; }
@@ -22,6 +25,6 @@
 
     public class StepsResponse
     {
-        public List<Distance>? ActivitiesSteps { get; set; }
+        public List<Steps>? ActivitiesSteps { get; set; }
     }
 }

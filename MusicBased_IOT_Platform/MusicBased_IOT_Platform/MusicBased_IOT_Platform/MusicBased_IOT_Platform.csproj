@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MusicBased_IOT_Platform.Client\MusicBased_IOT_Platform.Client.csproj" />
-    <PackageReference Include="BCrypt-Official" Version="0.1.109" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.13" />

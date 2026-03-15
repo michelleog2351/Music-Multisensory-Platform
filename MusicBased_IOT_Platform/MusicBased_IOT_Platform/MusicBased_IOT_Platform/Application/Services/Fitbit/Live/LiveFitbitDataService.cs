@@ -10,7 +10,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
     public class LiveFitbitDataService : IFitbitDataService
     {
         private readonly HttpClient _httpClient;
-        private readonly AppSettings _settings;
+        private readonly FitbitSettings _settings;
 
         /// <summary>
         /// The JsonSerializerOptions object is used to specify options for the JSON serializer
@@ -30,7 +30,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
         /// <param name="settings"></param>
         public LiveFitbitDataService(
             HttpClient httpClient,
-            IOptions<AppSettings> settings)
+            IOptions<FitbitSettings> settings)
         {
             _httpClient = httpClient;
             _settings = settings.Value;
@@ -42,7 +42,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
             ClientID = _settings.ClientID ?? string.Empty;
             ClientSecret = _settings.ClientSecret;
 
-            _httpClient.BaseAddress = new Uri(BaseURL);
+            _httpClient.BaseAddress = new Uri(_settings.BaseURL);
         }
 
         // Properties
@@ -247,7 +247,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        public async Task<Distance> GetDistanceInStepsAsync(DateTime date)
+        public async Task<Steps> GetDistanceInStepsAsync(DateTime date)
         {
             string endpoint =
                 $"/1/user/-/activities/steps/date/{date:yyyy-MM-dd}/1d.json";
@@ -290,7 +290,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
 
             var response = await GetAsync<ActivityResponse>(endpoint);
 
-            return response.Summary!;
+            return response.ActivitiesSummary!;
         }
 
         public Task<List<HeartRateZone>> GetHeartRateZonesAsync(DateTime date)
@@ -305,17 +305,30 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
 
         public async Task<MusicMoodResult> ReadBiometricAndMusicDataAsync()
         {
-            var biomStats = await GetDailyHeartRateAsync(DateTime.Now);
+            var biometric = await GetBiometricDataAsync();
+
+            var recommendations = new List<Track>();
+            // change the above to be pulled from the spotify live service
+
 
             return new MusicMoodResult
             {
-                //BiometricSummary = biometric,
-                //Recommendations = recommendations
+                BiometricSummary = biometric,
+                RecommendedTracks = recommendations,
+                GeneratedAt = DateTime.Now
             };
         }
 
         public async Task<BiometricSummary> GetBiometricDataAsync()
         {
+            var today = DateTime.Now;
+
+            var heartRate = await GetDailyHeartRateAsync(today);
+            var steps = await GetDistanceInStepsAsync(today);
+            var activity = await GetDailyActivityAsync(today);
+            //var sleep = await GetSleepAsync(today);
+            //var breathing = await _piService.GetBreathingRateAsync();
+
             //var heartRate = await GetDailyHeartRateAsync();
             //var steps = await GetDistanceInStepsAsync();
             //var sleep = await GetSleepAsync();
@@ -323,11 +336,11 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
 
             return new BiometricSummary
             {
-                //RestingHeartRate = heartRate?.RestingHeartRate ?? 0,
-                //Steps = int.Parse(steps?.Value ?? "0"),
-                //ActiveMinutes = activity?.FairlyActiveMinutes ?? 0,
-                //SleepMinutes = sleep?.TotalMinutesAsleep ?? 0,
-                //CapturedAt = DateTime.Now
+                AverageRestingHeartRate = heartRate?.RestingHeartRate ?? 0,
+                AverageDailySteps = steps?.Value ?? 0,
+                AverageActiveMinutes = activity?.ActiveMinutes ?? 0,
+                //AverageSleepMinutes = sleep?.TotalMinutesAsleep ?? 0,
+                CapturedAt = DateTime.Now
             };
         }
     }

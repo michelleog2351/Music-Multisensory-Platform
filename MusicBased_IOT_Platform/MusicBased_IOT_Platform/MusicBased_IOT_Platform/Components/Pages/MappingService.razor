@@ -11,11 +11,11 @@
 
         summary.AverageRestingHeartRate = heartRate.RestingHeartRate;
         summary.AverageDailySteps = activity.Steps;
-        summary.ActiveMinutes = activity.ActiveMinutes;
+        summary.AverageActiveMinutes = activity.ActiveMinutes;
         summary.AverageBreathingRate = CalculateBreathingRate(heartRate);
         summary.AverageHeartRateVariability = CalculateHRV(heartRate);
         summary.IsCalmState = summary.AverageRestingHeartRate < 70 &&
-        summary.ActiveMinutes < 20;
+        summary.AverageActiveMinutes < 20;
         summary.CapturedAt = DateTime.Now;
 
         return summary;
@@ -46,7 +46,7 @@
         if (bio.AverageRestingHeartRate < 65 && bio.AverageHeartRateVariability > 70)
             return MoodState.Calm;
 
-        if (bio.ActiveMinutes > 30)
+        if (bio.AverageActiveMinutes > 30)
             return MoodState.Active;
 
         if (bio.AverageHeartRateVariability < 40)

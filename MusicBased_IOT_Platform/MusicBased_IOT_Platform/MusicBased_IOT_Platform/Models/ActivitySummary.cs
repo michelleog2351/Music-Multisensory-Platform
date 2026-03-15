@@ -6,6 +6,6 @@
         public int ActiveMinutes { get; set; }
         public double CaloriesBurned { get; set; }
 
-        public List<Distance>? Distances { get; set; }
+        public List<Steps>? Distances { get; set; }
     }
 }
