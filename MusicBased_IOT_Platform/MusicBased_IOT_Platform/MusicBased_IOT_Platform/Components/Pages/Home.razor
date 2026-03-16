@@ -156,89 +156,99 @@
 
     @if (currentView == TrackViewMode.List)
     {
-        @foreach (var track in releases!.Albums!.Items!)
+        if (releases?.Albums?.Items == null)
         {
-            <div class="list-item d-flex justify-content-between align-items-center p-3 border-bottom">
-                    <div class="fw-bold">@track.Name</div>
-                   @*  <img src="@track?.Images?.FirstOrDefault()?.Url"
-                         class=""
-                         style="height:100px; object-fit:cover;" /> *@
-                    <small class="text-muted">
-                        @(track?.Artists?.FirstOrDefault()?.Name ?? "Unknown Artist")
-                    </small>
-                    </div>
-
-                    <div class="d-flex align-items-center gap-3">
-                        <img src="@track?.Images?.FirstOrDefault()?.Url" 
-                             style="width: 60px; height:60px; object-fit:cover; border-radius: 8px;" />
-
-                        <a href="@track?.ExternalUrls?.Spotify"
-                           target="_blank"
-                           class="btn btn-sm btn-outline-primary  rounded-circle"
-                           style="width:40px;height:40px;">
-                            ▶
-                        </a>
-
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-sm btn-outline-primary">▶</button>
-                            <button class="btn btn-sm btn-outline-danger rounded-circle"
-                                    style="width:40px;height:40px;">❤️
-                            </button>
-
+                <p>No tracks available yet...</p>
+        }
+        else
+        {
+            @foreach (var track in releases!.Albums!.Items!)
+            {
+                <div class="list-item d-flex justify-content-between align-items-center p-3 border-bottom">
+                        <div class="fw-bold">@track.Name</div>
+                       @*  <img src="@track?.Images?.FirstOrDefault()?.Url"
+                             class=""
+                             style="height:100px; object-fit:cover;" /> *@
+                        <small class="text-muted">
+                            @(track?.Artists?.FirstOrDefault()?.Name ?? "Unknown Artist")
+                        </small>
                         </div>
-                    </div>
+
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="@track?.Images?.FirstOrDefault()?.Url" 
+                                 style="width: 60px; height:60px; object-fit:cover; border-radius: 8px;" />
+
+                            <a href="@track?.ExternalUrls?.Spotify"
+                               target="_blank"
+                               class="btn btn-sm btn-outline-primary  rounded-circle"
+                               style="width:40px;height:40px;">
+                                ▶
+                            </a>
+
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-outline-primary">▶</button>
+                                <button class="btn btn-sm btn-outline-danger rounded-circle"
+                                        style="width:40px;height:40px;">❤️
+                                </button>
+
+                            </div>
+                        </div>
+            }
         }
     }
     else if (currentView == TrackViewMode.Gallery)
     {
         <div class="row g-4">
-            @foreach (var track in releases!.Albums!.Items!)
+            @if (releases?.Albums?.Items != null)
             {
-                <div class="col-md-4">
-                    <div class="card shadow-sm h-100">
+                foreach (var track in releases.Albums.Items)
+                {
+                    <div class="col-md-4">
+                        <div class="card shadow-sm h-100">
 
-                        <img src="@track?.Images?.FirstOrDefault()?.Url"
-                             class="card-img-top"
-                             style="height:200px;object-fit:cover;" />
+                            <img src="@track?.Images?.FirstOrDefault()?.Url"
+                                 class="card-img-top"
+                                 style="height:200px;object-fit:cover;" />
 
-                        <div class="card-body text-center">
+                            <div class="card-body text-center">
 
-                            <h5 class="card-title">@track!.Name</h5>
+                                <h5 class="card-title">@track!.Name</h5>
 
-                            <p class="text-muted">
-                                @(track.Artists?.FirstOrDefault()?.Name ?? "Unknown Artist")
-                            </p>
+                                <p class="text-muted">
+                                    @(track.Artists?.FirstOrDefault()?.Name ?? "Unknown Artist")
+                                </p>
 
-                            <div class="d-flex justify-content-center gap-3 mt-3">
-                                <button class="btn btn-primary">▶ Play</button>
-                                <button class="btn btn-outline-danger">❤️</button>
+                                <div class="d-flex justify-content-center gap-3 mt-3">
+                                    <button class="btn btn-primary">▶ Play</button>
+                                    <button class="btn btn-outline-danger">❤️</button>
+                                </div>
+
+                                @* <iframe style="border-radius:12px"
+                                        src="https://open.spotify.com/embed/track/@track.Id"
+                                        width="100%"
+                                        height="80"
+                                        frameborder="0"
+                                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+                                </iframe> *@
+
+                                <a href="@track.ExternalUrls?.Spotify"
+                                   target="_blank"
+                                   class="btn btn-sm btn-outline-primary">
+                                    ▶
+                                </a>
+
+                                <iframe src="https://open.spotify.com/embed/track/@track.Id"
+                                        width="300"
+                                        height="380"
+                                        frameborder="0"
+                                        allow="autoplay; clipboard-write; encrypted-media">
+                                </iframe>
+
                             </div>
 
-                            @* <iframe style="border-radius:12px"
-                                    src="https://open.spotify.com/embed/track/@track.Id"
-                                    width="100%"
-                                    height="80"
-                                    frameborder="0"
-                                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-                            </iframe> *@
-
-                            <a href="@track.ExternalUrls?.Spotify"
-                               target="_blank"
-                               class="btn btn-sm btn-outline-primary">
-                                ▶
-                            </a>
-
-                            <iframe src="https://open.spotify.com/embed/track/@track.Id"
-                                    width="300"
-                                    height="380"
-                                    frameborder="0"
-                                    allow="autoplay; clipboard-write; encrypted-media">
-                            </iframe>
-
                         </div>
-
                     </div>
-                </div>
+                }
             }
         </div>
     }
@@ -249,24 +259,27 @@
 {
     var index = 1;
 
-    foreach (var album in releases.Albums!.Items!)
+    @if (releases?.Albums?.Items != null)
     {
-        <div class="app-card mb-3">
-            <div>
-                <h5>
-                    <span class="track-number">@index</span>
-                    @album.Name
-                </h5>
-                <img src="@album?.Images?.FirstOrDefault()?.Url"
-                     class=""
-                     style="height:100px; object-fit:cover;"/>
-                <p class="text-muted">
-                    @album?.Artists![0].Name
-                </p>
+        foreach (var album in releases.Albums.Items)
+        {
+            <div class="app-card mb-3">
+                <div>
+                    <h5>
+                        <span class="track-number">@index</span>
+                        @album.Name
+                    </h5>
+                    <img src="@album?.Images?.FirstOrDefault()?.Url"
+                         class=""
+                         style="height:100px; object-fit:cover;"/>
+                    <p class="text-muted">
+                        @album?.Artists![0].Name
+                    </p>
+                </div>
             </div>
-        </div>
 
-        index++;
+            index++;
+        }
     }
 }
 

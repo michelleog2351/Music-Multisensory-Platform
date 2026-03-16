@@ -6,6 +6,8 @@
 using Microsoft.Extensions.Options;
 using MusicBased_IOT_Platform.Application.Interfaces.Spotify;
 using MusicBased_IOT_Platform.Models;
+using System;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
@@ -41,10 +43,13 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         /// <param name="settings"></param>
         public LiveSpotifyDataService(
             HttpClient httpClient,
-            IOptions<SpotifySettings> settings)
+            IOptions<SpotifySettings> settings, IConfiguration config)
         {
             _httpClient = httpClient;
             _settings = settings.Value;
+
+            ClientID = config["Spotify:ClientID"];
+            ClientSecret = config["Spotify:ClientSecret"];
 
             AccessToken = new AccessToken();
 
@@ -92,7 +97,10 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         {
             var request = new HttpRequestMessage(
                 HttpMethod.Post,
-                $"{AuthorisationUrl}?grant_type=client_credentials");
+                AuthorisationUrl);
+
+            Console.WriteLine($"ClientID: {ClientID}");
+            Console.WriteLine($"ClientSecret length: {ClientSecret?.Length}");
 
             // The authorisation string consisting of the ClientID and ClientSecret has to be
             // converted into a Base64 string for the Spotify authorisation request. 
@@ -101,12 +109,17 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             string auth_base64 = Convert.ToBase64String(auth_bytes);
 
             // Add the header information
-            request.Headers.Add("Authorization", "Basic " + auth_base64);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Basic", auth_base64);
 
-            request.Content = new StringContent(
-                string.Empty,
-                Encoding.UTF8,
-                "application/x-www-form-urlencoded");
+            //request.Content = new StringContent(
+            //    "grant_type=client_credentials",
+            //    Encoding.UTF8,
+            //    "application/x-www-form-urlencoded");
+            request.Content = new FormUrlEncodedContent(
+                new Dictionary<string, string>
+                {
+                    { "grant_type", "client_credentials" }
+                });
 
             // Make the request and get the response, throw an exception if we don't get a valid response
             HttpResponseMessage response;
@@ -119,7 +132,9 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             catch (HttpRequestException)
             {
                 // Didn't get a success code
-                // https://developer.spotify.com/documentation/web-api/concepts/api-calls
+
+                Console.WriteLine("Spotify token request failed");
+
                 AccessToken = new AccessToken
                 {
                     Token = "unable to acquire token"
@@ -129,6 +144,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
 
             // Read the response body as a string
             string responseBody = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"{responseBody}");
 
             // Deserialise the JSON response into an AccessToken object
             // For details on deserialising JSON see:

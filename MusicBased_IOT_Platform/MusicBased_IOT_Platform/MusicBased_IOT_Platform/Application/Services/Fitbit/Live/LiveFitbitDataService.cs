@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using MusicBased_IOT_Platform.Application.Interfaces.Fitbit;
+using MusicBased_IOT_Platform.Application.Services.Fitbit.Mock;
 using MusicBased_IOT_Platform.Models;
 using System.Net.Http.Headers;
 using System.Text;
@@ -321,27 +322,66 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
 
         public async Task<BiometricSummary> GetBiometricDataAsync()
         {
-            var today = DateTime.Now;
+            Console.WriteLine("LIVE FITBIT SERVICE RUNNING");
+            try
+            {
+                var today = DateTime.Now;
 
-            var heartRate = await GetDailyHeartRateAsync(today);
-            var steps = await GetDistanceInStepsAsync(today);
-            var activity = await GetDailyActivityAsync(today);
-            //var sleep = await GetSleepAsync(today);
-            //var breathing = await _piService.GetBreathingRateAsync();
+                var heartRate = await GetDailyHeartRateAsync(today);
+                var steps = await GetDistanceInStepsAsync(today);
+                var activity = await GetDailyActivityAsync(today);
+                //var sleep = await GetSleepAsync(today);
+                //var breathing = await _piService.GetBreathingRateAsync();
 
-            //var heartRate = await GetDailyHeartRateAsync();
-            //var steps = await GetDistanceInStepsAsync();
-            //var sleep = await GetSleepAsync();
-            //var breathing = await GetBreathingRateAsync();
+                //var heartRate = await GetDailyHeartRateAsync();
+                //var steps = await GetDistanceInStepsAsync();
+                //var sleep = await GetSleepAsync();
+                //var breathing = await GetBreathingRateAsync();
 
+                return new BiometricSummary
+                {
+                    AverageRestingHeartRate = heartRate?.RestingHeartRate ?? 0,
+                    AverageDailySteps = steps?.Value ?? 0,
+                    AverageActiveMinutes = activity?.ActiveMinutes ?? 0,
+                    //AverageSleepMinutes = sleep?.TotalMinutesAsleep ?? 0,
+                    CapturedAt = DateTime.Now
+                };
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fitbit error: {ex.Message}");
+                Console.WriteLine("FALLBACK TO MOCK FITBIT SERVICE");
+                Console.WriteLine("Fitbit API unavailable - using mock data");
+
+                // return GetMockBiometricData();
+                var mock = new MockFitbitDataService();
+
+                var heartRate = await mock.GetDailyHeartRateAsync(DateTime.Now);
+                var activity = await mock.GetDailyActivityAsync(DateTime.Now);
+
+                return new BiometricSummary
+                {
+                    AverageRestingHeartRate = heartRate?.RestingHeartRate ?? 70,
+                    AverageDailySteps = 6500,
+                    AverageActiveMinutes = activity?.ActiveMinutes ?? 30,
+                    CapturedAt = DateTime.Now
+                };
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private static BiometricSummary GetMockBiometricData()
+        {
             return new BiometricSummary
             {
-                AverageRestingHeartRate = heartRate?.RestingHeartRate ?? 0,
-                AverageDailySteps = steps?.Value ?? 0,
-                AverageActiveMinutes = activity?.ActiveMinutes ?? 0,
-                //AverageSleepMinutes = sleep?.TotalMinutesAsleep ?? 0,
-                CapturedAt = DateTime.Now
+                AverageRestingHeartRate = 68,
+                AverageDailySteps = 7500,
+                AverageActiveMinutes = 45,
+                CapturedAt = DateTime.Now,
+                IsCalmState = true
             };
-        }
+         }
     }
 }

@@ -53,8 +53,6 @@ namespace MusicBased_IOT_Platform.Models
         /// </summary>
         public string RedirectUri { get; set; }
 
-        public bool UseMockSpotify { get; set; }
-
         /// <summary>
         /// The Scopes list contains the scopes of access that the application is requesting from the Spotify API.
         /// </summary>

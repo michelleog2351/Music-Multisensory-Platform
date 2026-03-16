@@ -42,7 +42,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Mock
 
         public BreathingRate GetBreathingRateData()
         {
-            var filePath = Path.Combine(_jsonFilePath, "heart.json");
+            var filePath = Path.Combine(_jsonFilePath, "breathing_rate.json");
 
             if (!File.Exists(filePath))
             {
@@ -56,12 +56,26 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Mock
 
         public Task<ActivitySummary> GetDailyActivityAsync(DateTime date)
         {
-            throw new NotImplementedException();
+            var activity = new ActivitySummary
+            {
+                ActiveMinutes = 30
+            };
+
+            return Task.FromResult(activity);
         }
 
         public Task<HeartRateSummary> GetDailyHeartRateAsync(DateTime date)
         {
-            throw new NotImplementedException();
+            var filePath = Path.Combine(_jsonFilePath, "heart_rate.json");
+
+            var jsonData = File.ReadAllText(filePath);
+
+            var result = JsonSerializer.Deserialize<HeartRateSummary>(
+                jsonData,
+                _jsonOptions
+            )!;
+
+            return Task.FromResult(result);
         }
 
         public Task<Steps> GetDistanceInStepsAsync(DateTime date)

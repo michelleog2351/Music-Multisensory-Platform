@@ -29,28 +29,31 @@ builder.Services.Configure<SpotifySettings>(
 builder.Services.Configure<FitbitSettings>(
     builder.Configuration.GetSection("Fitbit"));
 
-bool useMockSpotify = builder.Configuration.GetValue<bool>("Spotify:UseMockSpotify");
+builder.Services.AddHttpClient<ISpotifyDataService, LiveSpotifyDataService>();
+builder.Services.AddHttpClient<IFitbitDataService, LiveFitbitDataService>();
 
-if (useMockSpotify)
-{
-    builder.Services.AddScoped<ISpotifyDataService, MockSpotifyDataService>();
-}
-else
-{
-    builder.Services.AddHttpClient<ISpotifyDataService, LiveSpotifyDataService>();
-}
+//bool useMockSpotify = builder.Configuration.GetValue<bool>("Spotify:UseMockSpotify");
 
-bool useMockFitbit =
-    builder.Configuration.GetValue<bool>("Fitbit:UseMockFitbit");
+//if (useMockSpotify)
+//{
+//    builder.Services.AddScoped<ISpotifyDataService, MockSpotifyDataService>();
+//}
+//else
+//{
+//    builder.Services.AddHttpClient<ISpotifyDataService, LiveSpotifyDataService>();
+//}
 
-if (useMockFitbit)
-{
-    builder.Services.AddScoped<IFitbitDataService, MockFitbitDataService>();
-}
-else
-{
-    builder.Services.AddHttpClient<IFitbitDataService, LiveFitbitDataService>();
-}
+//bool useMockFitbit =
+//    builder.Configuration.GetValue<bool>("Fitbit:UseMockFitbit");
+
+//if (useMockFitbit)
+//{
+//    builder.Services.AddScoped<IFitbitDataService, MockFitbitDataService>();
+//}
+//else
+//{
+//    builder.Services.AddHttpClient<IFitbitDataService, LiveFitbitDataService>();
+//}
 
 builder.Services.AddDbContext<AppDBContext>(options =>
     options.UseSqlite(
