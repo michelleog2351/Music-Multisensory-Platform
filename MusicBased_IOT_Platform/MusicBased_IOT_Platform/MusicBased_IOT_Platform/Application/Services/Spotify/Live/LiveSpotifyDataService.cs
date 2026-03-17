@@ -48,9 +48,6 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             _httpClient = httpClient;
             _settings = settings.Value;
 
-            ClientID = config["Spotify:ClientID"];
-            ClientSecret = config["Spotify:ClientSecret"];
-
             AccessToken = new AccessToken();
 
             AuthorisationUrl = _settings.AuthorisationUrl;

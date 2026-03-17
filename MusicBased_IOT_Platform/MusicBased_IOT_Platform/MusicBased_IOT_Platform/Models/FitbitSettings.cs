@@ -12,7 +12,7 @@ namespace MusicBased_IOT_Platform.Models
 
         // Constructors
         /// <summary>
-        /// Constructor for AppSettings class
+        /// Constructor for FitbitSettings class
         /// </summary>
         public FitbitSettings()
         {
@@ -27,7 +27,7 @@ namespace MusicBased_IOT_Platform.Models
         // Properties
 
         /// <summary>
-        /// The URL Spotify uses to authorise clients and get access token
+        /// The URL Fitbit uses to authorise clients and get access token
         /// </summary>
         public string AuthorisationUrl { get; set; }
 
