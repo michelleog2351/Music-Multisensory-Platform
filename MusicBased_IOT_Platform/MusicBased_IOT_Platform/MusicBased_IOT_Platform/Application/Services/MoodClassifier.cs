@@ -2,6 +2,9 @@
 
 namespace MusicBased_IOT_Platform.Application.Services
 {
+    /// <summary>
+    /// The MoodClassifier class 
+    /// </summary>
     public static class MoodClassifier
     {
         public static MoodState ClassifyMood(BiometricSummary biometric)

@@ -96,9 +96,6 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
                 HttpMethod.Post,
                 AuthorisationUrl);
 
-            Console.WriteLine($"ClientID: {ClientID}");
-            Console.WriteLine($"ClientSecret length: {ClientSecret?.Length}");
-
             // The authorisation string consisting of the ClientID and ClientSecret has to be
             // converted into a Base64 string for the Spotify authorisation request. 
             string auth_string = $"{ClientID}:{ClientSecret}";

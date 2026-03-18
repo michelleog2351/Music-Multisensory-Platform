@@ -51,7 +51,7 @@ namespace MusicBased_IOT_Platform.Application.Services
             {
                 BiometricSummary = biometric,
                 Mood = mood,
-                RecommendedTracks = [.. tracks.Tracks!]
+                RecommendedTracks = tracks?.Tracks?.ToList() ?? []
             };
 
         }
@@ -71,16 +71,18 @@ namespace MusicBased_IOT_Platform.Application.Services
                 valence,
                 liveness);
 
-
-            return new MusicMoodResult
-            {
-                BiometricSummary = biometric,
-                Mood = mood,
-                RecommendedTracks = [.. tracks.Tracks!]
-            };
+            //if (tracks == null)
+            //{
+                return new MusicMoodResult
+                {
+                    BiometricSummary = biometric,
+                    Mood = mood,
+                    RecommendedTracks = tracks!.Tracks?.ToList() ?? []
+                };
+           // }
         }
 
-        private async Task<DateTime> GetLastCalibrationDate()
+        private static async Task<DateTime> GetLastCalibrationDate()
         {
             // TEMP placeholder until database integration
             await Task.CompletedTask;
@@ -99,7 +101,7 @@ namespace MusicBased_IOT_Platform.Application.Services
             };
         }
 
-        private async Task SaveCalibrationAsync(BiometricSummary biometric)
+        private static async Task SaveCalibrationAsync(BiometricSummary biometric)
         {
             await Task.CompletedTask;
 

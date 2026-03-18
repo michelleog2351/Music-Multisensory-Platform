@@ -40,6 +40,8 @@ namespace MusicBased_IOT_Platform.Application.Services
             await _storage.SetAsync("userSession", user);
 
             NotifyStateChanged();
+            CurrentUser = user;
+
         }
 
         /// <summary>
