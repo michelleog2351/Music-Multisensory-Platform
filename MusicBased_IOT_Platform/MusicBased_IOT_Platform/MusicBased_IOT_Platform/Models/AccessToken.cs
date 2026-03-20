@@ -24,7 +24,7 @@ namespace MusicBased_IOT_Platform.Models
         /// </summary>
         public AccessToken()
         {
-            DateTimeAcquired = DateTime.Now;
+            DateTimeAcquired = DateTime.UtcNow;
             Token = string.Empty;
             TokenType = string.Empty;
             RefreshToken = string.Empty;

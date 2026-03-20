@@ -113,6 +113,20 @@
                     <!-- Search Discovery -->
                     @* This section will help users to find popular categories without having to type a search query *@
 
+                    @foreach (var mood in suggestedMoods)
+                    {
+                        <button class="btn btn-outline-primary btn-sm">
+                            @mood
+                        </button>
+                @* @onclick= "() => SearchByMood(mood)" > *@
+
+                    }
+
+                    @if (detectedMood == "stressed")
+                    {
+                    suggestedMoods = new () { "Calm", "Ambient", "Lo-fi" };
+                    }
+
                     <h6 class="mt-4">Popular Searches</h6>
                     <div class="d-flex gap-2 flex-wrap">
                         <button class="btn btn-outline-primary btn-sm">Longing</button>
@@ -306,6 +320,16 @@
     }
 }
 
+@if (NowPlaying != null)
+{
+    <div class="player-sidebar">
+        <h5>@NowPlaying.Name</h5>
+        @* <p>@NowPlaying.Artist</p> *@
+
+        @* <button @onclick="Pause">Pause</button> *@
+    </div>
+}
+
 @if (recalibrationRequired)
 {
     <div class="alert alert-warning">
@@ -372,6 +396,14 @@
 
     private bool showMoodPrompt = false;
     private string detectedMood = "";
+
+    Track? NowPlaying;
+
+    async Task OnPlayClicked(Track track)
+    {
+        await Spotify.PlayTrack(track.Uri!);
+        NowPlaying = track;
+    }
 
     /// <summary>
     /// This method is called when the component is initialised.
@@ -563,8 +595,25 @@
                         ?? new();
     }
 
+    private void RejectMood()
+    {
+        showMoodPrompt = false;
+
+        // Option 1: open search modal
+        isSearchModalOpen = true;
+
+        // Option 2: show alternative moods
+        suggestedMoods = new List<string> { "Energetic", "Workout", "Focus" };
+    }
+
+    private List<string> suggestedMoods = new()
+    {
+        "Calm", "Happy", "Focus"
+    };
+
     // private void DisplayArtist(MouseEventArgs args)
     // {
     //     throw new NotImplementedException();
     // }
 }
+

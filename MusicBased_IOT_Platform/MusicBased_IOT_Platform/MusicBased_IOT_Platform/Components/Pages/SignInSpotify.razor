@@ -1,13 +1,14 @@
-﻿@page "/signin-fitbit"
+﻿@page "/signin-spotify"
 @using MusicBased_IOT_Platform.Application.Interfaces.Fitbit
+@using MusicBased_IOT_Platform.Application.Interfaces.Spotify
 @using MusicBased_IOT_Platform.Application.Services
 @using MusicBased_IOT_Platform.Models
+@inject ISpotifyDataService SpotifyService
 @inject UserSessionService Session
-@inject IFitbitDataService FitbitService
 @inject NavigationManager Navigation
 @rendermode InteractiveServer
 
-<h1>Sign In To Fitbit</h1>
+<h1>Sign In To Spotify</h1>
 
 @code {
 
@@ -27,11 +28,10 @@
                 Navigation.NavigateTo("/login");
                 return;
             }
-
-            // Exchange the authorization code for an access token, pass user ID
-            await FitbitService.AuthCodeFlowAsync(code, Session.CurrentUser.ID);
-
-            Navigation.NavigateTo("/dashboard");
+            
+            // Exchange the authorization code for an access token
+            //await SpotifyService.AuthCodeFlowAsync(code, Session.CurrentUser!.ID);
+           // Navigation.NavigateTo("/dashboard");
             return;
         }
     }

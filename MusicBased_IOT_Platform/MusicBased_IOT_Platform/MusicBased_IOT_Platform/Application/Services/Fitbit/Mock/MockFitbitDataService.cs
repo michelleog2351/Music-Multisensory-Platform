@@ -35,7 +35,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Mock
                 );
         }
 
-        public Task<bool> AuthCodeFlowAsync(string code)
+        public Task<bool> AuthCodeFlowAsync(string code, int userID)
         {
             throw new NotImplementedException();
         }

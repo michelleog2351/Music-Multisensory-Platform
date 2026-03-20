@@ -9,10 +9,27 @@ namespace MusicBased_IOT_Platform.Application.Services
     /// </summary>
     /// <param name="fitbitDataService"></param>
     /// <param name="spotifyDataService"></param>
-    public class MoodCalibrationService(IFitbitDataService fitbitDataService, ISpotifyDataService spotifyDataService)
+    //public class MoodCalibrationService( IFitbitDataService live, IFitbitDataService fallback)
+   public class MoodCalibrationService(IFitbitDataService fitbitDataService, ISpotifyDataService spotifyDataService)
     {
         private readonly IFitbitDataService _fitbitDataService = fitbitDataService;
-        private readonly ISpotifyDataService _spotifyDataService = spotifyDataService;
+        //private readonly IFitbitDataService _live = live;
+        //private readonly IFitbitDataService _fallback = fallback;
+
+       private readonly ISpotifyDataService _spotifyDataService = spotifyDataService;
+
+        //public async Task<BiometricSummary> GetBiometricDataAsync()
+        //{
+        //    try
+        //    {
+        //        return await _live.GetBiometricDataAsync();
+        //    }
+        //    catch
+        //    {
+        //        return await _fallback.GetBiometricDataAsync();
+        //    }
+        //}
+
 
         /// <summary>
         /// The MoodCalibrationService is responsible for determining if a recalibration 
@@ -20,11 +37,11 @@ namespace MusicBased_IOT_Platform.Application.Services
         /// music recommendations accordingly.
         /// </summary>
         /// <returns></returns>
-        public async Task<bool> IsRecalibrationRequiredAsync()
+        public static async Task<bool> IsRecalibrationRequiredAsync()
         {
             var lastCalibration = await GetLastCalibrationDate();
 
-            return (DateTime.Now - lastCalibration).TotalDays > 14;
+            return (DateTime.UtcNow - lastCalibration).TotalDays > 14;
         }
 
         /// <summary>

@@ -419,5 +419,10 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
         {
             throw new NotImplementedException();
         }
+
+        public Task PlayTrack(string trackUri)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

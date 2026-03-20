@@ -102,6 +102,8 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Spotify
         /// <returns></returns>
         Task<SearchResults> Search(string searchQuery, string searchItemTypes);
 
+        Task PlayTrack(string trackUri);
+
 
         /// <summary>
         /// The <c>GetTrack</c> method get Spotify catalog information for a single track

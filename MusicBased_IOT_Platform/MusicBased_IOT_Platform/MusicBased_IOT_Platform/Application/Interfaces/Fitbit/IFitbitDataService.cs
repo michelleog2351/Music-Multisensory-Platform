@@ -12,7 +12,7 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Fitbit
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        Task<bool> AuthCodeFlowAsync(string code);
+        Task<bool> AuthCodeFlowAsync(string code, int userID);
 
         /// <summary>
         /// The <c>HasValidTokenAsync</c> method checks if the current access token is valid 

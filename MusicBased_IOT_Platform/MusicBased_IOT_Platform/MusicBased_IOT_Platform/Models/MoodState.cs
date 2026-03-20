@@ -1,7 +1,7 @@
 ﻿namespace MusicBased_IOT_Platform.Models
 {
     /// <summary>
-    /// The 
+    /// The <c>MoodState</c>
     /// </summary>
     public enum MoodState
     {

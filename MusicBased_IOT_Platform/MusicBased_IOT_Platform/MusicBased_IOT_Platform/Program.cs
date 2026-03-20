@@ -32,28 +32,7 @@ builder.Services.Configure<FitbitSettings>(
 builder.Services.AddHttpClient<ISpotifyDataService, LiveSpotifyDataService>();
 builder.Services.AddHttpClient<IFitbitDataService, LiveFitbitDataService>();
 
-//bool useMockSpotify = builder.Configuration.GetValue<bool>("Spotify:UseMockSpotify");
-
-//if (useMockSpotify)
-//{
-//    builder.Services.AddScoped<ISpotifyDataService, MockSpotifyDataService>();
-//}
-//else
-//{
-//    builder.Services.AddHttpClient<ISpotifyDataService, LiveSpotifyDataService>();
-//}
-
-//bool useMockFitbit =
-//    builder.Configuration.GetValue<bool>("Fitbit:UseMockFitbit");
-
-//if (useMockFitbit)
-//{
-//    builder.Services.AddScoped<IFitbitDataService, MockFitbitDataService>();
-//}
-//else
-//{
-//    builder.Services.AddHttpClient<IFitbitDataService, LiveFitbitDataService>();
-//}
+builder.Services.AddScoped<MappingService>();
 
 builder.Services.AddDbContext<AppDBContext>(options =>
     options.UseSqlite(
@@ -64,6 +43,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<UserSessionService>();
+
+builder.Services.AddScoped<IUserContext, UserContext>();
 
 builder.Services.AddScoped<ProtectedLocalStorage>();
 

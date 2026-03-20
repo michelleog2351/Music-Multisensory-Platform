@@ -15,6 +15,9 @@ namespace MusicBased_IOT_Platform.Models
         public string Email { get; set; } = string.Empty;
         public string Username { get; set; } = string.Empty;
         public string PasswordHash { get; set; } = string.Empty;
+        public string? FitbitAccessToken { get; set; }
+        public string? FitbitRefreshToken { get; set; }
+        public DateTime? FitbitTokenExpiry { get; set; }
     }
 }
 

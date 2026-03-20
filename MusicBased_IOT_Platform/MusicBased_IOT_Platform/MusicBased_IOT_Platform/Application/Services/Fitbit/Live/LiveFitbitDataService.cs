@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
+using MusicBased_IOT_Platform.Application.Interfaces;
 using MusicBased_IOT_Platform.Application.Interfaces.Fitbit;
 using MusicBased_IOT_Platform.Application.Services.Fitbit.Mock;
 using MusicBased_IOT_Platform.Models;
@@ -12,6 +13,9 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
     {
         private readonly HttpClient _httpClient;
         private readonly FitbitSettings _settings;
+        private readonly IUserRepository _userRepo;
+       // private readonly UserSessionService _session;
+        private readonly IUserContext _userContext;
 
         /// <summary>
         /// The JsonSerializerOptions object is used to specify options for the JSON serializer
@@ -30,11 +34,13 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
         /// <param name="httpClient"></param>
         /// <param name="settings"></param>
         public LiveFitbitDataService(
-            HttpClient httpClient,
-            IOptions<FitbitSettings> settings)
+            HttpClient httpClient, IOptions<FitbitSettings> settings, IUserRepository userRepo, IUserContext userContext)
         {
             _httpClient = httpClient;
             _settings = settings.Value;
+            _userRepo = userRepo;
+            _userContext = userContext;
+            // _session = session;
 
             AccessToken = new AccessToken();
 
@@ -94,7 +100,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public async Task<bool> AuthCodeFlowAsync(string code)
+        public async Task<bool> AuthCodeFlowAsync(string code, int userID)
         {
             var request = new HttpRequestMessage(
                 HttpMethod.Post,
@@ -115,12 +121,24 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
             });
 
             var response = await _httpClient.SendAsync(request);
+
             response.EnsureSuccessStatusCode();
 
             var body = await response.Content.ReadAsStringAsync();
 
             AccessToken = JsonSerializer.Deserialize<AccessToken>(body, _jsonOptions)!;
 
+            var user = await _userRepo.GetByIdAsync(userID);
+
+            if (user != null)
+            {
+                user.FitbitAccessToken = AccessToken.Token;
+                user.FitbitRefreshToken = AccessToken.RefreshToken;
+                user.FitbitTokenExpiry =
+                    DateTime.UtcNow.AddSeconds(AccessToken.ExpiresIn);
+
+                await _userRepo.UpdateAsync(user);
+            }
             return true;
         }
 
@@ -156,7 +174,23 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
             AccessToken =
                 JsonSerializer.Deserialize<AccessToken>(json, _jsonOptions)!;
 
-            AccessToken.DateTimeAcquired = DateTime.Now;
+            AccessToken.DateTimeAcquired = DateTime.UtcNow;
+
+            
+            //var user = await _userRepo.GetByIdAsync(_session.CurrentUser!.ID);
+            var user = await _userContext.GetCurrentUserAsync();
+
+            if (user != null)
+            {
+                await _userRepo.GetByIdAsync(user.ID);
+
+                user.FitbitAccessToken = AccessToken.Token;
+                user.FitbitRefreshToken = AccessToken.RefreshToken;
+                user.FitbitTokenExpiry =
+                    DateTime.UtcNow.AddSeconds(AccessToken.ExpiresIn);
+
+                await _userRepo.UpdateAsync(user);
+            }
         }
 
         /// <summary>
@@ -173,7 +207,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
             var expiryTime =
                 AccessToken.DateTimeAcquired.AddSeconds(AccessToken.ExpiresIn);
 
-            if (DateTime.Now >= expiryTime)
+            if (DateTime.UtcNow >= expiryTime)
             {
                 await RefreshAccessTokenAsync();
             }
@@ -192,6 +226,11 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
         /// <returns></returns>
         private async Task<T> GetAsync<T>(string endpoint)
         {
+            if (string.IsNullOrEmpty(AccessToken.Token))
+            {
+                await LoadTokenFromDatabaseAsync();
+            }
+
             await HasValidTokenAsync();
 
             var request = new HttpRequestMessage(HttpMethod.Get, endpoint);
@@ -208,6 +247,26 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
             var json = await response.Content.ReadAsStringAsync();
 
             return JsonSerializer.Deserialize<T>(json, _jsonOptions)!;
+        }
+
+        public async Task LoadTokenFromDatabaseAsync()
+        {
+            //await _session.LoadUserAsync();
+
+            //var user = _session.CurrentUser;
+
+            var user = await _userContext.GetCurrentUserAsync();
+
+            if (user == null || string.IsNullOrEmpty(user.FitbitAccessToken))
+                return;
+
+            AccessToken = new AccessToken
+            {
+                Token = user.FitbitAccessToken,
+                RefreshToken = user.FitbitRefreshToken ?? "",
+                ExpiresIn = (int)((user.FitbitTokenExpiry ?? DateTime.UtcNow) - DateTime.UtcNow).TotalSeconds,
+                DateTimeAcquired = DateTime.UtcNow
+            };
         }
 
         /// <summary>

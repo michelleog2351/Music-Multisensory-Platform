@@ -62,5 +62,21 @@ namespace MusicBased_IOT_Platform.Application.Repository
         {
             return await _db.Users.ToListAsync();
         }
+
+        /// <summary>
+        /// The <c>GetByIdAsync</c>
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<UserAccount?> GetByIdAsync(int id)
+        {
+            return await _db.Users.FindAsync(id);
+        }
+
+        public async Task UpdateAsync(UserAccount user)
+        {
+            _db.Users.Update(user);
+            await _db.SaveChangesAsync();
+        }
     }
 }
