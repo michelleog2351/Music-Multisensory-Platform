@@ -21,7 +21,7 @@ jobs:
           dotnet-version: 9.0.x
 
       - name: Restore dependencies
-        run: dotnet restore Music-Multisensory-Platform/MusicBased_IOT_Platform/MusicBased_IOT_Platform.sln
+        run: dotnet restore ./MusicBased_IOT_Platform.sln
 
       - name: Build
         run: dotnet build --no-restore
