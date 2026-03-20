@@ -19,6 +19,9 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.0.x
+          
+      - name: Debug folder
+        run: ls -R
 
       - name: Restore dependencies
         run: dotnet restore ./MusicBased_IOT_Platform.sln
