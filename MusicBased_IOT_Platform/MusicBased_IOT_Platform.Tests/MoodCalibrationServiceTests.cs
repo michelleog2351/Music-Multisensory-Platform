@@ -1,16 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using Moq;
 using Moq.Protected;
 using MusicBased_IOT_Platform.Application.Interfaces.Fitbit;
 using MusicBased_IOT_Platform.Application.Interfaces.Spotify;
 using MusicBased_IOT_Platform.Application.Services;
 using MusicBased_IOT_Platform.Application.Services.Fitbit.Live;
-using MusicBased_IOT_Platform.Application.Services.Fitbit.Mock;
-using MusicBased_IOT_Platform.Application.Services.Spotify.Live;
 using MusicBased_IOT_Platform.Models;
 using System.Net;
-using Xunit;
 
 namespace MusicBased_IOT_Platform.Tests
 {

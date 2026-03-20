@@ -318,6 +318,32 @@
     </button>
 }
 
+@if (showMoodPrompt)
+{
+    <div class="mood-toast">
+        <div class="toast-header fw-bold">
+            Hey Michelle!
+        </div>
+
+        <div class="toast-body">
+            Based on your recent activity, you may be feeling @detectedMood.
+            Would you like to listen to something calming?
+        </div>
+
+        <div class="d-flex flex-column gap-2 mt-2">
+            <button class="btn btn-success"
+                    @onclick="ConfirmMood">
+                Yes Please!
+            </button>
+
+            <button class="btn btn-outline-secondary"
+                    @onclick="RejectMood">
+                Nope, just exercising!
+            </button>
+        </div>
+    </div>
+}
+
 
 @code {
 
@@ -343,6 +369,9 @@
     private bool recalibrationRequired;
 
     private Item? selectedTrack;
+
+    private bool showMoodPrompt = false;
+    private string detectedMood = "";
 
     /// <summary>
     /// This method is called when the component is initialised.
@@ -518,6 +547,20 @@
     private void SetView(TrackViewMode mode)
     {
         currentView = mode;
+    }
+
+    /// <summary>
+    /// The <c>ConfirmMood</c> method is called when the user confirms that they want to listen to music based on their detected mood.
+    /// </summary>
+    /// <returns></returns>
+    private async Task ConfirmMood()
+    {
+        showMoodPrompt = false;
+
+        searchTerm = detectedMood;
+        var results = await Spotify.Search(searchTerm, "track");
+        searchResults = results.Tracks?.Items?.ToList()
+                        ?? new();
     }
 
     // private void DisplayArtist(MouseEventArgs args)
