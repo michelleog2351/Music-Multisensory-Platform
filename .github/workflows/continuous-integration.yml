@@ -19,18 +19,15 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.0.x
-          
-      - name: Debug folder
-        run: ls -R
 
       - name: Restore dependencies
-        run: dotnet restore ./MusicBased_IOT_Platform.sln
-
+        run: dotnet restore ./MusicBased_IOT_Platform/MusicBased_IOT_Platform.sln
+      
       - name: Build
-        run: dotnet build --no-restore
-
+        run: dotnet build ./MusicBased_IOT_Platform/MusicBased_IOT_Platform.sln --no-restore
+      
       - name: Run tests
-        run: dotnet test --no-build
+        run: dotnet test ./MusicBased_IOT_Platform/MusicBased_IOT_Platform.sln --no-build
 
   secret-scan:
     runs-on: ubuntu-latest
