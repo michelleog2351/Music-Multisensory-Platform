@@ -22,12 +22,15 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
+  <!--<ItemGroup>
     <EditorConfigFiles Remove="C:\Users\L00176523\OneDrive - Atlantic TU\Desktop\Music-Multisensory-Platform\MusicBased_IOT_Platform\MusicBased_IOT_Platform\MusicBased_IOT_Platform\.editorconfig" />
-  </ItemGroup>
+  </ItemGroup>-->
 
-  <ItemGroup>
-    <None Include="C:\Users\L00176523\OneDrive - Atlantic TU\Desktop\Music-Multisensory-Platform\MusicBased_IOT_Platform\MusicBased_IOT_Platform\MusicBased_IOT_Platform\.editorconfig" />
-  </ItemGroup>
+  <!--<ItemGroup>
+    <None Include="D:\Music-Multisensory-Platform\MusicBased_IOT_Platform\MusicBased_IOT_Platform\MusicBased_IOT_Platform\.editorconfig" />
+  </ItemGroup>-->
 
+	<ItemGroup>
+		<None Include=".editorconfig" />
+	</ItemGroup>
 </Project>
