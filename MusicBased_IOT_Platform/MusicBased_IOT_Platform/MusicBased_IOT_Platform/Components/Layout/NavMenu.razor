@@ -1,5 +1,12 @@
-﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+﻿@using MusicBased_IOT_Platform.Application.Services
+@inject UserSessionService Session
+@inject NavigationManager NavigationManager
+@implements IDisposable
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
+
         <a class="navbar-brand" href="">
             MusicBased_IOT_Platform
         </a>
@@ -15,33 +22,96 @@
         </button>
 
         <div class="collapse navbar-collapse" id="mainNavbar">
+            <p style="color:yellow">
+                DEBUG USER: @(Session.CurrentUser?.FirstName ?? "NULL")
+            </p>
 
+         @*    <! -- Show the user's first name if logged in, otherwise show "Login" -->
+            @if (Session.CurrentUser != null)
+            {
+                <span>Hi @Session.CurrentUser.FirstName</span>
+            }
+            else
+            {
+                <span>Login</span>
+            }
+ *@
             <ul class="navbar-nav me-auto">
-
                 <li class="nav-item">
                     <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">Home
                     </NavLink>
                 </li>
+                @if (Session.CurrentUser != null)
+                {
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="dashboard">
+                            My Dashboard
+                        </NavLink>
+                    </li>
+                }
 
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="dashboard">
-                        My Dashboard
-                    </NavLink>
-                </li>
             </ul>
 
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="login">Login
-                    </NavLink>
-                </li>
+               @if (Session.CurrentUser == null)
+               {
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="login">Login
+                        </NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="register">
+                            Register
+                        </NavLink>
+                    </li>
+               }
+               else
+               {
 
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="register">Register
-                    </NavLink>
-                </li>
+                    <li class="nav-item">
+                        <span class="navbar-text me-3">
+                            Hi @Session.CurrentUser.FirstName!
+                        </span>
+                    </li>
+
+                    <li class="nav-item">
+                        <button class="btn btn-outline-light btn-sm" @onclick="Logout">
+                            Logout
+                        </button>
+                    </li>
+                }
             </ul>
         </div>
     </div>
 </nav>
+
+@code {
+
+    /// <summary>
+    /// The OnInitialized method is overridden to subscribe to the UserSessionService's OnChange event.
+    /// </summary>
+    protected override void OnInitialized()
+    {
+        Session.OnChange += StateHasChanged;
+    }
+
+    /// <summary>
+    /// The Dispose method is implemented to unsubscribe from the UserSessionService's OnChange event 
+    /// when the component is disposed, preventing memory leaks.
+    /// </summary>
+    public void Dispose()
+    {
+        Session.OnChange -= StateHasChanged;
+    }
+
+    /// <summary>
+    /// The Logout method is responsible for logging the user out of the application.
+    /// </summary>
+    /// <returns></returns>
+    private async Task Logout()
+    {
+        await Session.LogoutAsync();
+        NavigationManager.NavigateTo("/login", true);
+    }
+}
 

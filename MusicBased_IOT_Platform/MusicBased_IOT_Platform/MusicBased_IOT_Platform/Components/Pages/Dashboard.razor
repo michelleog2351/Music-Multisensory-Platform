@@ -1,7 +1,14 @@
 ﻿@page "/dashboard"
+@using MusicBased_IOT_Platform.Application.Services
+@* @inject IJSRuntime JS
+ *@
+ @inject UserSessionService Session
+@inject NavigationManager NavigationManager
+
 <h3>My Dashboard</h3>
 
 <PageTitle>My Dashboard</PageTitle>
+<p>Session User: @Session.CurrentUser?.FirstName</p>
 
 <br />
 <select class="form-control">
@@ -22,4 +29,25 @@
 
 @code {
 
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender && Session.CurrentUser != null)
+        {
+            NavigationManager.NavigateTo("/dashboard", true);
+        }
+    }
+
+    // protected override async Task OnAfterRenderAsync(bool firstRender)
+    // {
+    //     if (firstRender)
+    //     {
+    //         var data = new[]
+    //         {
+    //             new { name = "FG", value = 12000 },
+
+    //         };
+
+    //         await JS.InvokeVoidAsync("renderBarChart", "chart", data);
+    //     }
+    // }
 }

@@ -6,6 +6,8 @@
 using Microsoft.Extensions.Options;
 using MusicBased_IOT_Platform.Application.Interfaces.Spotify;
 using MusicBased_IOT_Platform.Models;
+using System;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
@@ -20,7 +22,19 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         // Fields
         // HttpClient used to make live calls to the spotify API
         private readonly HttpClient _httpClient;
-        private readonly AppSettings _settings;
+        private readonly SpotifySettings _settings;
+
+        /// <summary>
+        /// The JsonSerializerOptions object is used to specify options for the JSON serializer
+        /// PropertyNameCaseInsensitive option to true allowing for the deserialisation of JSON responses
+        /// without being case-sensitive to the property names
+        /// </summary>
+        private static readonly JsonSerializerOptions _jsonOptions =
+            new()
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
 
         /// <summary>
         /// The constructor for the <c>LiveSpotifyDataService</c> class takes an HttpClient and AppSettings as parameters and initialises the class fields and properties.
@@ -29,7 +43,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         /// <param name="settings"></param>
         public LiveSpotifyDataService(
             HttpClient httpClient,
-            IOptions<AppSettings> settings)
+            IOptions<SpotifySettings> settings)
         {
             _httpClient = httpClient;
             _settings = settings.Value;
@@ -41,7 +55,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             ClientID = _settings.ClientID ?? string.Empty;
             ClientSecret = _settings.ClientSecret;
 
-            _httpClient.BaseAddress = new Uri(BaseURL);
+            _httpClient.BaseAddress = new Uri(_settings.BaseURL);
         }
 
         // Properties
@@ -71,6 +85,44 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         public string ClientSecret { get; set; }
 
         // Methods
+        public string GetSpotifyLoginUrl()
+        {
+            return "https://accounts.spotify.com/authorize" +
+                   "?client_id=" + ClientID +
+                   "&response_type=code" +
+                   "&redirect_uri=https://localhost:7039/signin-spotify" +
+                   "&scope=user-read-playback-state user-modify-playback-state streaming";
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public async Task ExchangeCodeAsync(string code)
+        {
+            var request = new HttpRequestMessage(
+                HttpMethod.Post,
+                $"https://accounts.spotify.com/api/token");
+
+            var authString = $"{ClientID}:{ClientSecret}";
+            var authBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(authString));
+
+            request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authBase64);
+
+            request.Content = new FormUrlEncodedContent(new Dictionary<string, string>
+            {
+                { "grant_type", "authorization_code" },
+                { "code", code },
+                { "redirect_uri", "https://localhost:7039/signin-spotify" }
+            });
+
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            AccessToken = JsonSerializer.Deserialize<AccessToken>(json, _jsonOptions)!;
+        }
 
         /// <summary>
         /// The <c>AuthoriseClientAsync</c> method authorises the client to access the spotify web API and gets an access token
@@ -80,7 +132,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         {
             var request = new HttpRequestMessage(
                 HttpMethod.Post,
-                $"{AuthorisationUrl}?grant_type=client_credentials");
+                AuthorisationUrl);
 
             // The authorisation string consisting of the ClientID and ClientSecret has to be
             // converted into a Base64 string for the Spotify authorisation request. 
@@ -89,12 +141,17 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             string auth_base64 = Convert.ToBase64String(auth_bytes);
 
             // Add the header information
-            request.Headers.Add("Authorization", "Basic " + auth_base64);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Basic", auth_base64);
 
-            request.Content = new StringContent(
-                string.Empty,
-                Encoding.UTF8,
-                "application/x-www-form-urlencoded");
+            //request.Content = new StringContent(
+            //    "grant_type=client_credentials",
+            //    Encoding.UTF8,
+            //    "application/x-www-form-urlencoded");
+            request.Content = new FormUrlEncodedContent(
+                new Dictionary<string, string>
+                {
+                    { "grant_type", "client_credentials" }
+                });
 
             // Make the request and get the response, throw an exception if we don't get a valid response
             HttpResponseMessage response;
@@ -107,7 +164,9 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             catch (HttpRequestException)
             {
                 // Didn't get a success code
-                // https://developer.spotify.com/documentation/web-api/concepts/api-calls
+
+                Console.WriteLine("Spotify token request failed");
+
                 AccessToken = new AccessToken
                 {
                     Token = "unable to acquire token"
@@ -117,18 +176,14 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
 
             // Read the response body as a string
             string responseBody = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"{responseBody}");
 
             // Deserialise the JSON response into an AccessToken object
             // For details on deserialising JSON see:
             // https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/deserialization
 
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            };
-
             AccessToken =
-                JsonSerializer.Deserialize<AccessToken>(responseBody, options)!;
+                JsonSerializer.Deserialize<AccessToken>(responseBody, _jsonOptions)!;
             return true;
         }
 
@@ -210,8 +265,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         /// otherwise false.</returns>
         public async Task<bool> TestDataConnection()
         {
-            // We could make a dummy call but it is probably better to just re-Authorise the
-            // client an get a new access token.
+            // re-authorise the client and get a new access token.
             return await AuthoriseClientAsync();
         }
 
@@ -249,12 +303,8 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
 
                 string responseBody = await response.Content.ReadAsStringAsync();
 
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                };
 
-                return JsonSerializer.Deserialize<SearchResults>(responseBody, options)
+                return JsonSerializer.Deserialize<SearchResults>(responseBody, _jsonOptions)!
                     ?? new SearchResults();
 
             }
@@ -268,6 +318,31 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="trackUri"></param>
+        /// <returns></returns>
+        public async Task PlayTrack(string trackUri)
+        {
+            var request = new HttpRequestMessage(
+                HttpMethod.Put,
+                $"https://api.spotify.com/v1/me/player/play");
+
+            request.Headers.Authorization =
+                new AuthenticationHeaderValue("Bearer", AccessToken.Token);
+
+            request.Content = new StringContent(
+                JsonSerializer.Serialize(new
+                {
+                    uris = new[] { trackUri }
+                }),
+                Encoding.UTF8,
+                "application/json");
+
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+        }
 
         /// <summary>
         /// The <c>GetAlbum()</c> method  gets Spotify catalog information for a single album.

@@ -1,23 +1,48 @@
 ﻿@page "/"
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
+@inject UserSessionService UserSession
 
 @using MusicBased_IOT_Platform.Application.Interfaces
 @using MusicBased_IOT_Platform.Application.Interfaces.Spotify
+@using MusicBased_IOT_Platform.Application.Services
 @using MusicBased_IOT_Platform.Models
 
 <PageTitle>Home</PageTitle>
 <br />
 <br />
-<h1>Welcome Back Michelle!</h1>
-<h3>Music Platform</h3>
+@inject UserSessionService Session
 
-    <input id="moodSearch"
+@if (Session.CurrentUser != null)
+{
+    <div class="alert alert-success">
+        <h1>Welcome back @Session.CurrentUser.FirstName!</h1>
+    </div>
+}
+
+<h3 style="color: darkgray">Music MultiSensory Platform</h3>
+
+<div class="d-flex gap-2">
+    <input class="form-control mt-3 p-4 d-flex ali"
+           id="moodSearch"
            type="search"
-           class="form-control"
            placeholder="Search for your mood..."  
            readonly
            @onfocus="OpenSearchModal" />
 
+    @* Dropdown music or select from available button selection options *@
+@*     <select class="form-select">
+        <option value="happy">Happy</option>
+        <option value="sad">Sad</option>
+        <option value="energetic">Energetic</option>
+        <option value="relaxed">Relaxed</option>
+    </select>
+
+    <button class="btn btn-spotify">Get Music Suggestions </button> *@
+</div>
+
+<button class="btn btn-info scroll-to-top-btn" title="Scroll to Top">
+    <h1>↑</h1>
+</button>
 
 @if (isSearchModalOpen)
 {
@@ -30,32 +55,55 @@
                     <button type="button" class="btn-close" @onclick="CloseSearchModal"></button>
                 </div>
 
-                <div class="modal-body">
-                    <div class="position-relative">
+                
+                    <div class="search-container">
                         <input type="search"
-                               class="form-control mb-3"
+                               class="form-control form-control-lg mb-3 mt-5 p-3"
                                placeholder="Search tracks..."
+
                                @bind="searchTerm"
                                @oninput="OnSearchChanged" />
 
+                        @* @if (selectedTrack?.PreviewUrl != null)
+                        {
+                            <div class="mt-3">
+                                <h6>@selectedTrack.Name - @selectedTrack.Artists[0].Name</h6>
+
+                                <audio controls style="width:100%">
+                                    <source src="@selectedTrack.PreviewUrl" type="audio/mpeg">
+                                </audio>
+                            </div>
+                        } *@
+
+                        @if (selectedTrack != null)
+                        {
+                            <iframe src="https://open.spotify.com/embed/track/@selectedTrack.Id"
+                                    width="100%"
+                                    height="80"
+                                    frameborder="0"
+                                    allow="encrypted-media">
+                            </iframe>
+                        }
+
                         @if (searchResults.Any())
                         {
-                            <div class="position-absolute bg-white shadow rounded w-100 mt-1" style="z-index:1055;">
+                            <div class="position-absolute suggestions bg-white shadow rounded w-100 mt-1" style="z-index:1055;">
                                 @foreach (var track in searchResults.Take(5))
                                 {
-                                    <div class="suggestion-item p-2"
+                                    <div class="suggestion-item"
                                          style="cursor:pointer;"
                                          @onclick="() => SelectTrack(track)">
-                                        @track.Name - @track?.Artists[0].Name
+                                        @track.Name - @track?.Artists![0].Name
                                     </div>
                                 }
                             </div>
                         }
-                    </div>
+                      
+                
 
                     <!-- Recently Searched -->
                      @* If you have searched previously, these are the text bubbles showing your recent searches *@
-                    <h6>Recently Searched</h6>
+                    <h6 class="mt-4">Recently Searched</h6>
                     <div class="d-flex gap-2 flex-wrap mb-3">
                         <span class="badge bg-secondary">Happy</span>
                         <span class="badge bg-secondary">Calm</span>
@@ -65,7 +113,21 @@
                     <!-- Search Discovery -->
                     @* This section will help users to find popular categories without having to type a search query *@
 
-                    <h6>Popular Searches</h6>
+                    @foreach (var mood in suggestedMoods)
+                    {
+                        <button class="btn btn-outline-primary btn-sm">
+                            @mood
+                        </button>
+                @* @onclick= "() => SearchByMood(mood)" > *@
+
+                    }
+
+                    @if (detectedMood == "stressed")
+                    {
+                    suggestedMoods = new () { "Calm", "Ambient", "Lo-fi" };
+                    }
+
+                    <h6 class="mt-4">Popular Searches</h6>
                     <div class="d-flex gap-2 flex-wrap">
                         <button class="btn btn-outline-primary btn-sm">Longing</button>
                         <button class="btn btn-outline-primary btn-sm">Empowered</button>
@@ -74,7 +136,7 @@
                     </div>
 
                 </div>
-
+               
             </div>
         </div>
     </div>
@@ -83,15 +145,43 @@
     <div class="modal-backdrop fade show"></div>
 }
 
-@* Dropdown music or select from available button selection options *@
-<select class="form-select">
-    <option value="happy">Happy</option>
-    <option value="sad">Sad</option>
-    <option value="energetic">Energetic</option>
-    <option value="relaxed">Relaxed</option>
-</select>
+<br />
+<div class="d-flex gap-2 align-items-center justify-content-end mb-3">
+@*     <span class="mb-0"><b>List</b></span>
+ *@
+    <button class="btn @(currentView == TrackViewMode.List ? "btn-success" : "btn-outline-secondary")
+                   rounded-circle d-flex align-items-center justify-content-center"
+            style="width:50px; height:50px;"
+            @onclick="() => SetView(TrackViewMode.List)"
+            aria-pressed="@(currentView == TrackViewMode.List)">
+        <svg 
+            width="153" 
+            height="20" 
+            viewBox="0 0 153 105" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M44.5833 5H147.5M44.5833 52.5H147.5M44.5833 100H147.5M5 5H5.07917M5 52.5H5.07917M5 100H5.07917" stroke="#1E1E1E" 
+              stroke-width="10" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" />
+        </svg>
+    </button>
 
-<button class="btn btn-spotify">Get Music Suggestions </button>
+@*     <span class="mb-0"><b>Gallery</b></span>
+ *@    <button class="btn @(currentView == TrackViewMode.Gallery ? "btn-success" : "btn-outline-secondary")
+                   rounded-circle d-flex align-items-center justify-content-center"
+            style="width:50px;height:50px;"
+            @onclick="() => SetView(TrackViewMode.Gallery)"
+            aria-pressed="@(currentView == TrackViewMode.Gallery)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="3" width="7" height="7" stroke="currentColor" stroke-width="2" />
+                <rect x="14" y="3" width="7" height="7" stroke="currentColor" stroke-width="2" />
+                <rect x="14" y="14" width="7" height="7" stroke="currentColor" stroke-width="2" />
+                <rect x="3" y="14" width="7" height="7" stroke="currentColor" stroke-width="2" />
+            </svg>
+        </button>
+        
+ </div>
 
 @* @if (isLoading)
 {
@@ -99,34 +189,193 @@
 } *@
 
 
+<div @key="currentView" class="view-container slide-in @(currentView == TrackViewMode.Gallery ? "fade-in" : "fade-in")">
+
+    @if (currentView == TrackViewMode.List)
+    {
+        if (releases?.Albums?.Items == null)
+        {
+                <p>No tracks available yet...</p>
+        }
+        else
+        {
+            @foreach (var track in releases!.Albums!.Items!)
+            {
+                <div class="list-item d-flex justify-content-between align-items-center p-3 border-bottom">
+                        <div class="fw-bold">@track.Name</div>
+                       @*  <img src="@track?.Images?.FirstOrDefault()?.Url"
+                             class=""
+                             style="height:100px; object-fit:cover;" /> *@
+                        <small class="text-muted">
+                            @(track?.Artists?.FirstOrDefault()?.Name ?? "Unknown Artist")
+                        </small>
+                        </div>
+
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="@track?.Images?.FirstOrDefault()?.Url" 
+                                 style="width: 60px; height:60px; object-fit:cover; border-radius: 8px;" />
+
+                            <a href="@track?.ExternalUrls?.Spotify"
+                               target="_blank"
+                               class="btn btn-sm btn-outline-primary  rounded-circle"
+                               style="width:40px;height:40px;">
+                                ▶
+                            </a>
+
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-outline-primary">▶</button>
+                                <button class="btn btn-sm btn-outline-danger rounded-circle"
+                                        style="width:40px;height:40px;">❤️
+                                </button>
+
+                            </div>
+                        </div>
+            }
+        }
+    }
+    else if (currentView == TrackViewMode.Gallery)
+    {
+        <div class="row g-4">
+            @if (releases?.Albums?.Items != null)
+            {
+                foreach (var track in releases.Albums.Items)
+                {
+                    <div class="col-md-4">
+                        <div class="card shadow-sm h-100">
+
+                            <img src="@track?.Images?.FirstOrDefault()?.Url"
+                                 class="card-img-top"
+                                 style="height:200px;object-fit:cover;" />
+
+                            <div class="card-body text-center">
+
+                                <h5 class="card-title">@track!.Name</h5>
+
+                                <p class="text-muted">
+                                    @(track.Artists?.FirstOrDefault()?.Name ?? "Unknown Artist")
+                                </p>
+
+                                <div class="d-flex justify-content-center gap-3 mt-3">
+                                    <button class="btn btn-primary">▶ Play</button>
+                                    <button class="btn btn-outline-danger">❤️</button>
+                                </div>
+
+                                @* <iframe style="border-radius:12px"
+                                        src="https://open.spotify.com/embed/track/@track.Id"
+                                        width="100%"
+                                        height="80"
+                                        frameborder="0"
+                                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+                                </iframe> *@
+
+                                <a href="@track.ExternalUrls?.Spotify"
+                                   target="_blank"
+                                   class="btn btn-sm btn-outline-primary">
+                                    ▶
+                                </a>
+
+                                <iframe src="https://open.spotify.com/embed/track/@track.Id"
+                                        width="300"
+                                        height="380"
+                                        frameborder="0"
+                                        allow="autoplay; clipboard-write; encrypted-media">
+                                </iframe>
+
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    }
+
+</div>
+
 @if (releases != null)
 {
     var index = 1;
 
-    foreach (var album in releases.Albums!.Items!)
+    @if (releases?.Albums?.Items != null)
     {
-        <div class="app-card mb-3">
-            <div>
-                <h5>
-                    <span class="track-number">@index</span>
-                    @album.Name
-                </h5>
-                <p class="text-muted">
-                    @album.Artists![0].Name
-                </p>
+        foreach (var album in releases.Albums.Items)
+        {
+            <div class="app-card mb-3">
+                <div>
+                    <h5>
+                        <span class="track-number">@index</span>
+                        @album.Name
+                    </h5>
+                    <img src="@album?.Images?.FirstOrDefault()?.Url"
+                         class=""
+                         style="height:100px; object-fit:cover;"/>
+                    <p class="text-muted">
+                        @album?.Artists![0].Name
+                    </p>
+                </div>
             </div>
-        </div>
 
-        index++;
+            index++;
+        }
     }
 }
 
+@if (NowPlaying != null)
+{
+    <div class="player-sidebar">
+        <h5>@NowPlaying.Name</h5>
+        @* <p>@NowPlaying.Artist</p> *@
+
+        @* <button @onclick="Pause">Pause</button> *@
+    </div>
+}
+
+@if (recalibrationRequired)
+{
+    <div class="alert alert-warning">
+        Your biometric baseline needs recalibration.
+        Please remain calm and click recalibrate.
+    </div>
+
+    <button class="btn btn-primary" @onclick="Recalibrate">
+        Recalibrate Biometrics
+    </button>
+}
+
+@if (showMoodPrompt)
+{
+    <div class="mood-toast">
+        <div class="toast-header fw-bold">
+            Hey Michelle!
+        </div>
+
+        <div class="toast-body">
+            Based on your recent activity, you may be feeling @detectedMood.
+            Would you like to listen to something calming?
+        </div>
+
+        <div class="d-flex flex-column gap-2 mt-2">
+            <button class="btn btn-success"
+                    @onclick="ConfirmMood">
+                Yes Please!
+            </button>
+
+            <button class="btn btn-outline-secondary"
+                    @onclick="RejectMood">
+                Nope, just exercising!
+            </button>
+        </div>
+    </div>
+}
 
 
 @code {
 
     [Inject]
     public ISpotifyDataService Spotify { get; set; } = default!;
+
+    [Inject]
+    public MoodCalibrationService MoodCalibrationService { get; set; } = default!;
 
     private string searchTerm = "";
     private List<Item> searchResults = new();
@@ -140,9 +389,21 @@
 
     private NewReleases? releases;
 
-    private Tracks? tracks;
+    private MusicMoodResult? moodResult;
+    private bool recalibrationRequired;
 
-    List<Track>? allTracks;
+    private Item? selectedTrack;
+
+    private bool showMoodPrompt = false;
+    private string detectedMood = "";
+
+    Track? NowPlaying;
+
+    async Task OnPlayClicked(Track track)
+    {
+        await Spotify.PlayTrack(track.Uri!);
+        NowPlaying = track;
+    }
 
     /// <summary>
     /// This method is called when the component is initialised.
@@ -163,6 +424,20 @@
         inactivityTimer.Elapsed += OnInactivityElapsed!;
         inactivityTimer.AutoReset = false; // Only trigger once
         inactivityTimer.Start();
+
+        recalibrationRequired = await MoodCalibrationService.IsRecalibrationRequiredAsync();
+
+        if (!recalibrationRequired)
+        {
+            moodResult = await MoodCalibrationService.GenerateMoodMusicAsync();
+        }
+    }
+
+    private async Task Recalibrate()
+    {
+        // await MoodCalibrationService.RecalibrateAsync();
+        // recalibrationRequired = false;
+        moodResult = await MoodCalibrationService.RecalibrateAsync();
     }
 
     /// <summary>
@@ -206,10 +481,11 @@
 
     private void SelectTrack(Item track)
     {
+        selectedTrack = track;
         searchTerm = track.Name!;
         searchResults.Clear();
 
-        CloseSearchModal();
+        //CloseSearchModal();
     }
 
     private async Task OnSearchChanged(ChangeEventArgs e)
@@ -259,10 +535,10 @@
             return;
         }
 
-        filteredTracks = allTracks?
-            .Where(t => t.Name!.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
-            .Take(8)
-            .ToList();
+        // filteredTracks = allTracks?
+        //     .Where(t => t.Name!.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+        //     .Take(8)
+        //     .ToList();
     }
 
     @* Search box *@
@@ -277,7 +553,7 @@
     /// </summary>
     private void OpenSearchModal()
     {
-       // Console.WriteLine("OPEN CLICKED");
+        // Console.WriteLine("OPEN CLICKED");
         isSearchModalOpen = true;
     }
 
@@ -289,8 +565,55 @@
         isSearchModalOpen = false;
     }
 
+    /// <summary>
+    /// The TrackView m
+    /// </summary>
+    private enum TrackViewMode
+    {
+        List,
+        Gallery
+    }
+
+    private TrackViewMode currentView = TrackViewMode.Gallery;
+
+    private void SetView(TrackViewMode mode)
+    {
+        currentView = mode;
+    }
+
+    /// <summary>
+    /// The <c>ConfirmMood</c> method is called when the user confirms that they want to listen to music based on their detected mood.
+    /// </summary>
+    /// <returns></returns>
+    private async Task ConfirmMood()
+    {
+        showMoodPrompt = false;
+
+        searchTerm = detectedMood;
+        var results = await Spotify.Search(searchTerm, "track");
+        searchResults = results.Tracks?.Items?.ToList()
+                        ?? new();
+    }
+
+    private void RejectMood()
+    {
+        showMoodPrompt = false;
+
+        // Option 1: open search modal
+        isSearchModalOpen = true;
+
+        // Option 2: show alternative moods
+        suggestedMoods = new List<string> { "Energetic", "Workout", "Focus" };
+    }
+
+    private List<string> suggestedMoods = new()
+    {
+        "Calm", "Happy", "Focus"
+    };
+
     // private void DisplayArtist(MouseEventArgs args)
     // {
     //     throw new NotImplementedException();
     // }
 }
+

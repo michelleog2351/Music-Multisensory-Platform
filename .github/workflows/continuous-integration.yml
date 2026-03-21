@@ -1,5 +1,6 @@
 name: Feature Branch CI
 run-name: ${{ github.actor }} is testing out continuous integration
+
 on:
   push:
     branches:
@@ -7,34 +8,29 @@ on:
       - "!main"
 
 jobs:
-  jsdoc:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Install dependencies
-        run: npm install
-
-  test:
+  build-and-test:
     runs-on: windows-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Install dependencies
-        run: npm install
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore ./MusicBased_IOT_Platform/MusicBased_IOT_Platform.sln
+      
+      - name: Build
+        run: dotnet build ./MusicBased_IOT_Platform/MusicBased_IOT_Platform.sln --no-restore
+      
       - name: Run tests
-        run: npm test
+        run: dotnet test ./MusicBased_IOT_Platform/MusicBased_IOT_Platform.sln --no-build
 
   secret-scan:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Scan for secrets
-        uses: trufflesecurity/trufflehog@main
+      - uses: actions/checkout@v4
+      - uses: trufflesecurity/trufflehog@main

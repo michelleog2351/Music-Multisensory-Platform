@@ -1,4 +1,6 @@
-﻿@inherits LayoutComponentBase
+﻿@using MusicBased_IOT_Platform.Application.Services
+@inherits LayoutComponentBase
+@inject UserSessionService Session
 
 <div class="app-root">
  
@@ -14,3 +16,22 @@
     <a href="." class="reload">Reload</a>
     <span class="dismiss">🗙</span>
 </div>
+
+@code {
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     await Session.LoadUserAsync();
+    // }
+
+    private bool _sessionLoaded;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !_sessionLoaded)
+        {
+            _sessionLoaded = true;
+            await Session.LoadUserAsync();
+            StateHasChanged();
+        }
+    }
+}

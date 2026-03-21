@@ -24,9 +24,10 @@ namespace MusicBased_IOT_Platform.Models
         /// </summary>
         public AccessToken()
         {
-            DateTimeAcquired = DateTime.Now;
+            DateTimeAcquired = DateTime.UtcNow;
             Token = string.Empty;
             TokenType = string.Empty;
+            RefreshToken = string.Empty;
         }
 
         // Properties
@@ -37,7 +38,7 @@ namespace MusicBased_IOT_Platform.Models
         public DateTime DateTimeAcquired { get; set; }
 
         /// <summary>
-        /// ExpiresIn
+        /// The expires_in field indicates the lifetime in seconds of the access token. 
         /// </summary>
         [JsonPropertyName("expires_in")]
         public int ExpiresIn { get; set; } // Period of time in seconds
@@ -49,7 +50,15 @@ namespace MusicBased_IOT_Platform.Models
         public string Token { get; set; }
 
         /// <summary>
-        /// TokenType
+        /// The refresh_token field is a token that can be used to obtain a new access token. 
+        /// It is only returned for certain authorization flows and when the access token expires in less than 60 days. 
+        /// For more information, see the Spotify Web API Authorization Guide.
+        /// </summary>
+        [JsonPropertyName("refresh_token")]
+        public string RefreshToken { get; set; }
+
+        /// <summary>
+        /// The token_type field indicates the type of token returned.
         /// </summary>
         [JsonPropertyName("token_type")]
         public string TokenType { get; set; }
@@ -57,12 +66,16 @@ namespace MusicBased_IOT_Platform.Models
         // Methods
 
         /// <summary>
-        /// ToString()
+        /// The ToString method is overridden to provide a string representation of the AccessToken object,
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-            return $"Access token: {Token}, Type: {TokenType}, Acquired: {DateTimeAcquired}, Expires in: {ExpiresIn}";
+            var refreshPreview = string.IsNullOrEmpty(RefreshToken)
+        ? "none"
+        : string.Concat(RefreshToken.AsSpan(0, Math.Min(6, RefreshToken.Length)), "...");
+
+            return $"Access token: {Token}, Type: {TokenType}, Acquired: {DateTimeAcquired}, Expires in: {ExpiresIn}, Refresh Token: {refreshPreview }";
         }
 
     }

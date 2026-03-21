@@ -7,40 +7,29 @@ namespace MusicBased_IOT_Platform.Models
     /// The AppSettings class is used to store authentication details
     /// such as ClientID and ClientSecret
     /// </summary>
-    public class AppSettings
+    public class FitbitSettings
     {
 
         // Constructors
         /// <summary>
-        /// Constructor for AppSettings class
+        /// Constructor for FitbitSettings class
         /// </summary>
-        public AppSettings()
+        public FitbitSettings()
         {
             // Set default settings for the application
             AuthorisationUrl = string.Empty;
-            BaseURL = string.Empty;
+            BaseURL = "https://api.fitbit.com";
             ClientID = string.Empty;
             ClientSecret = string.Empty;
-            InTest = true;
-            InDevelopment = true;
+            RedirectUri = string.Empty;
         }
 
         // Properties
 
         /// <summary>
-        /// The URL Spotify uses to authorise clients and get access token
+        /// The URL Fitbit uses to authorise clients and get access token
         /// </summary>
         public string AuthorisationUrl { get; set; }
-
-        /// <summary>
-        /// If InDevelopment is true the code is not deployed to production. 
-        /// </summary>
-        public bool InDevelopment { get; set; }
-
-        /// <summary>
-        /// If InTest is true we are using the MockClient to get asset quotes.
-        /// </summary>
-        public bool InTest { get; set; }
 
         /// <summary>
         /// The BaseURL is core URL for the live market client to retrieve live market data. 
@@ -57,12 +46,11 @@ namespace MusicBased_IOT_Platform.Models
         /// </summary>
         public string? ClientID { get; set; }
 
+        public string RedirectUri { get; set; }
+
         /// <summary>
         /// The Scopes list contains the scopes of access that the application is requesting from the Spotify API.
         /// </summary>
         public List<string> Scopes { get; set; } = [];
-
-        public bool UseMockSpotify { get; set; }
-
     }
 }

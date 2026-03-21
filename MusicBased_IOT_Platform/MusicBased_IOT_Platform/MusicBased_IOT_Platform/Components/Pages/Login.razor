@@ -1,4 +1,12 @@
 ﻿@page "/login"
+@using Microsoft.EntityFrameworkCore
+@using MusicBased_IOT_Platform.Application.Interfaces
+@using MusicBased_IOT_Platform.Application.Services
+@using MusicBased_IOT_Platform.Models
+@rendermode InteractiveServer
+@inject IUserService UserService
+@inject UserSessionService Session
+@inject NavigationManager NavigationManager
 
 <PageTitle>Login</PageTitle>
 
@@ -8,37 +16,118 @@
          <br />
         <h2 class="text-center">Login</h2>
 
+         <EditForm Model="@loginModel"
+            OnValidSubmit="HandleLogin"
+            FormName="loginForm">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
             <div class="card-body">
                     <div class="mb-3">
-                        <input class="form-control"  
-                               type="text" 
-                               placeholder="Username" 
-                               required
-                               @bind="Username" 
-                               autocomplete="on"
-                                />
+                        <InputText 
+                               class="form-control"  
+                               @bind-Value="loginModel.Username"                              
+                               placeholder="Username"
+                               autocomplete="on" />
                     </div>
 
                     <div class="mb-3">
-                        <input class="form-control"  
-                               type="password"
-                       placeholder="Password"
-                       required
-                       @bind="Password" />
+                        <InputText class="form-control"  
+                                   type="password"
+                                   required
+                                   @bind-Value="loginModel.Password"
+                                   placeholder="Password" />
                     </div>
            
                     <div>
-                <input class="form-check-input" />  Remember me
+                        <InputCheckbox 
+                            @bind-Value="loginModel.RememberMe" /> Remember me
                     </div>
+                    
                     <br />
+            @if (!string.IsNullOrEmpty(ErrorMessage))
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ErrorMessage
+                </div>
+            }
                     <div class="d-grid gap-2">
-                        <button class="btn btn-primary btn-lg">Login</button>
+                        <button class="btn btn-primary btn-lg" type="submit">Login</button>
                     </div>
             </div>
+            </EditForm>
     </div>
  </div>
 @code 
 {
-    public string? Username { get; set; } = string.Empty;
-    public string? Password { get; set; } = string.Empty;
+    private LoginModel loginModel = new();
+
+    private string? ErrorMessage;
+
+    /// <summary>
+    /// The OnInitialized method checks if there is a currently logged-in user in the session.
+    /// </summary>
+    // protected override void OnInitialized()
+    // {
+    //     if (Session.CurrentUser != null)
+    //     {
+    //         NavigationManager.NavigateTo("/dashboard");
+    //     }
+    // }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender && Session.CurrentUser != null)
+        {
+            NavigationManager.NavigateTo("/dashboard");
+        }
+    }
+
+
+    /// <summary>
+    /// The HandleLogin method is responsible for processing the login form submission. 
+    /// It validates the user's credentials by calling the UserService's LoginUserAsync method. 
+    /// If the login attempt is unsuccessful, it sets an error message to be displayed to the user. 
+    /// If the login is successful, it stores the user's information in the session and redirects them to the home page.
+    /// </summary>
+    /// <returns></returns>
+    private async Task HandleLogin()
+    {
+        ErrorMessage = null;
+
+        var result = await UserService.LoginUserAsync(loginModel);
+
+        if (!result.Success)
+        {
+            ErrorMessage = result.Error;
+            return;
+        }
+
+        await Session.SetUserAsync(result.User!);
+
+        NavigationManager.NavigateTo("/dashboard", true);
+    }
+
+    /// <summary>
+    /// The ForgotPassword method
+    /// </summary>
+    /// 
+    // private async Task ForgotPassword()
+    // {
+    //     /// three attempts
+    // }
+
+    private void ClearError(ChangeEventArgs e)
+    {
+        ErrorMessage = null;
+    }
+
+    // recalibration logic
+    // public async Task Recalibrate()
+    // {
+    //     if ((DateTime.Now - user.LastCalibrationDate).TotalDays > 14)
+    //     {
+    //         await PromptRecalibration();
+    //     }
+    // }
+
 }
