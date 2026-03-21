@@ -76,7 +76,6 @@ nunit-*.xml
 postman/globals/
 
 # Fitbit Data
-[d]ata/
 *.csv
 *.db
 .db*
