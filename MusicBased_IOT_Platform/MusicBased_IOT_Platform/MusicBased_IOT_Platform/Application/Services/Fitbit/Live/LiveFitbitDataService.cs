@@ -16,6 +16,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
         private readonly IUserRepository _userRepo;
        // private readonly UserSessionService _session;
         private readonly IUserContext _userContext;
+        private readonly MappingService _mappingService;
 
         /// <summary>
         /// The JsonSerializerOptions object is used to specify options for the JSON serializer
@@ -34,7 +35,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
         /// <param name="httpClient"></param>
         /// <param name="settings"></param>
         public LiveFitbitDataService(
-            HttpClient httpClient, IOptions<FitbitSettings> settings, IUserRepository userRepo, IUserContext userContext)
+            HttpClient httpClient, IOptions<FitbitSettings> settings, IUserRepository userRepo, IUserContext userContext, MappingService mappingService)
         {
             _httpClient = httpClient;
             _settings = settings.Value;
@@ -50,6 +51,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
             ClientSecret = _settings.ClientSecret;
 
             _httpClient.BaseAddress = new Uri(_settings.BaseURL);
+            _mappingService = mappingService;
         }
 
         // Properties
@@ -143,6 +145,89 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
         }
 
         /// <summary>
+        /// The GetAsync method is a helper method that sends an HTTP GET request to the specified endpoint, 
+        /// including the access token in the request headers for authentication. 
+        /// It then reads the response content as a string and deserializes it into an object of type T 
+        /// using the JsonSerializer with the specified options. The deserialized object is returned to the caller.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="endpoint"></param>
+        /// <returns></returns>
+        private async Task<T> GetAsync<T>(string endpoint)
+        {
+            if (string.IsNullOrEmpty(AccessToken.Token))
+            {
+                await LoadTokenFromDatabaseAsync();
+            }
+
+            var hasToken = await HasValidTokenAsync();
+
+            if (!hasToken || string.IsNullOrEmpty(AccessToken.Token)) 
+            {
+                throw new InvalidOperationException("No valid Fitbit access token available.");
+            }
+
+            var request = new HttpRequestMessage(HttpMethod.Get, endpoint);
+
+            request.Headers.Authorization =
+                new AuthenticationHeaderValue(
+                    "Bearer",
+                    AccessToken.Token);
+
+            var response = await _httpClient.SendAsync(request);
+
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<T>(json, _jsonOptions)!;
+        }
+
+        public async Task LoadTokenFromDatabaseAsync()
+        {
+            //await _session.LoadUserAsync();
+
+           // var user = _session.CurrentUser;
+
+            var user = await _userContext.GetCurrentUserAsync();
+            Console.WriteLine(user?.Username ?? "NO USER");
+
+            if (user == null || string.IsNullOrEmpty(user.FitbitAccessToken))
+                return;
+
+            AccessToken = new AccessToken
+            {
+                Token = user.FitbitAccessToken,
+                RefreshToken = user.FitbitRefreshToken ?? "",
+                ExpiresIn = (int)((user.FitbitTokenExpiry ?? DateTime.UtcNow) - DateTime.UtcNow).TotalSeconds,
+                DateTimeAcquired = DateTime.UtcNow
+            };
+        }
+
+        /// <summary>
+        /// The HasValidTokenAsync method checks if the current access token is valid by verifying that it exists and has not expired. 
+        /// If the token has expired, it attempts to refresh the access token using the refresh token. 
+        /// The method returns true if a valid access token is available, and false otherwise.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> HasValidTokenAsync()
+        {
+            if (AccessToken == null || string.IsNullOrEmpty(AccessToken.Token))
+                return false;
+
+            var expiryTime =
+                AccessToken.DateTimeAcquired.AddSeconds(AccessToken.ExpiresIn);
+
+            if (DateTime.UtcNow >= expiryTime)
+            {
+                await RefreshAccessTokenAsync();
+            }
+
+            return true;
+        }
+
+
+        /// <summary>
         /// The RefreshAccessTokenAsync method is responsible for refreshing the access token when it has expired. 
         /// It sends a POST request to the Fitbit API with the refresh token to obtain a new access token, 
         /// and updates the AccessToken property with the new token information.
@@ -182,8 +267,6 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
 
             if (user != null)
             {
-                await _userRepo.GetByIdAsync(user.ID);
-
                 user.FitbitAccessToken = AccessToken.Token;
                 user.FitbitRefreshToken = AccessToken.RefreshToken;
                 user.FitbitTokenExpiry =
@@ -191,82 +274,6 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
 
                 await _userRepo.UpdateAsync(user);
             }
-        }
-
-        /// <summary>
-        /// The HasValidTokenAsync method checks if the current access token is valid by verifying that it exists and has not expired. 
-        /// If the token has expired, it attempts to refresh the access token using the refresh token. 
-        /// The method returns true if a valid access token is available, and false otherwise.
-        /// </summary>
-        /// <returns></returns>
-        public async Task<bool> HasValidTokenAsync()
-        {
-            if (AccessToken == null || string.IsNullOrEmpty(AccessToken.Token))
-                return false;
-
-            var expiryTime =
-                AccessToken.DateTimeAcquired.AddSeconds(AccessToken.ExpiresIn);
-
-            if (DateTime.UtcNow >= expiryTime)
-            {
-                await RefreshAccessTokenAsync();
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// The GetAsync method is a helper method that sends an HTTP GET request to the specified endpoint, 
-        /// including the access token in the request headers for authentication. 
-        /// It then reads the response content as a string and deserializes it into an object of type T 
-        /// using the JsonSerializer with the specified options. The deserialized object is returned to the caller.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="endpoint"></param>
-        /// <returns></returns>
-        private async Task<T> GetAsync<T>(string endpoint)
-        {
-            if (string.IsNullOrEmpty(AccessToken.Token))
-            {
-                await LoadTokenFromDatabaseAsync();
-            }
-
-            await HasValidTokenAsync();
-
-            var request = new HttpRequestMessage(HttpMethod.Get, endpoint);
-
-            request.Headers.Authorization =
-                new AuthenticationHeaderValue(
-                    "Bearer",
-                    AccessToken.Token);
-
-            var response = await _httpClient.SendAsync(request);
-
-            response.EnsureSuccessStatusCode();
-
-            var json = await response.Content.ReadAsStringAsync();
-
-            return JsonSerializer.Deserialize<T>(json, _jsonOptions)!;
-        }
-
-        public async Task LoadTokenFromDatabaseAsync()
-        {
-            //await _session.LoadUserAsync();
-
-            //var user = _session.CurrentUser;
-
-            var user = await _userContext.GetCurrentUserAsync();
-
-            if (user == null || string.IsNullOrEmpty(user.FitbitAccessToken))
-                return;
-
-            AccessToken = new AccessToken
-            {
-                Token = user.FitbitAccessToken,
-                RefreshToken = user.FitbitRefreshToken ?? "",
-                ExpiresIn = (int)((user.FitbitTokenExpiry ?? DateTime.UtcNow) - DateTime.UtcNow).TotalSeconds,
-                DateTimeAcquired = DateTime.UtcNow
-            };
         }
 
         /// <summary>
@@ -299,7 +306,13 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
 
             var response = await GetAsync<HeartRateResponse>(endpoint);
 
-            return response.ActivitiesHeart!.FirstOrDefault()!;
+            Console.WriteLine(response.ActivitiesHeart?[0]?.Value?.RestingHeartRate);
+
+
+            var heartRate = response.ActivitiesHeart!
+                .FirstOrDefault()?.Value;
+
+            return heartRate ?? new HeartRateSummary();
         }
 
         /// <summary>
@@ -363,6 +376,10 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// The ReadBiometricAndMusicDataAsync
+        /// </summary>
+        /// <returns></returns>
         public async Task<MusicMoodResult> ReadBiometricAndMusicDataAsync()
         {
             var biometric = await GetBiometricDataAsync();
@@ -384,7 +401,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
             Console.WriteLine("LIVE FITBIT SERVICE RUNNING");
             try
             {
-                var today = DateTime.Now;
+                var today = DateTime.UtcNow;
 
                 var heartRate = await GetDailyHeartRateAsync(today);
                 var steps = await GetDistanceInStepsAsync(today);
@@ -392,19 +409,18 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
                 //var sleep = await GetSleepAsync(today);
                 //var breathing = await _piService.GetBreathingRateAsync();
 
-                //var heartRate = await GetDailyHeartRateAsync();
-                //var steps = await GetDistanceInStepsAsync();
-                //var sleep = await GetSleepAsync();
-                //var breathing = await GetBreathingRateAsync();
+                return _mappingService.MapToBiometricSummary(
+                    heartRate,
+                    activity);
 
-                return new BiometricSummary
-                {
-                    AverageRestingHeartRate = heartRate?.RestingHeartRate ?? 0,
-                    AverageDailySteps = steps?.Value ?? 0,
-                    AverageActiveMinutes = activity?.ActiveMinutes ?? 0,
-                    //AverageSleepMinutes = sleep?.TotalMinutesAsleep ?? 0,
-                    CapturedAt = DateTime.Now
-                };
+                //return new BiometricSummary
+                //{
+                //    AverageRestingHeartRate = heartRate?.RestingHeartRate ?? 0,
+                //    AverageDailySteps = steps?.Value ?? 0,
+                //    AverageActiveMinutes = activity?.ActiveMinutes ?? 0,
+                //    //AverageSleepMinutes = sleep?.TotalMinutesAsleep ?? 0,
+                //    CapturedAt = DateTime.Now
+                //};
             }
             catch (Exception ex)
             {
