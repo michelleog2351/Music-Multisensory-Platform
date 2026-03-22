@@ -1,6 +1,9 @@
 name: Feature Branch CI
 run-name: ${{ github.actor }} is testing out continuous integration
 
+permissions:
+  contents: read
+
 on:
   push:
     branches:
