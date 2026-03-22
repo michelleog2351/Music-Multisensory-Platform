@@ -1,6 +1,9 @@
 name: Feature Branch CI
 run-name: Continuous Integration
 
+permissions:
+  contents: read
+
 on:
   push:
     branches:
