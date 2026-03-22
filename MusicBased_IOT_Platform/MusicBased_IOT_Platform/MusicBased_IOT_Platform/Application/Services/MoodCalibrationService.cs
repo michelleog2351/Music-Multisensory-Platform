@@ -10,26 +10,11 @@ namespace MusicBased_IOT_Platform.Application.Services
     /// <param name="fitbitDataService"></param>
     /// <param name="spotifyDataService"></param>
     //public class MoodCalibrationService( IFitbitDataService live, IFitbitDataService fallback)
-   public class MoodCalibrationService(IFitbitDataService fitbitDataService, ISpotifyDataService spotifyDataService)
+    public class MoodCalibrationService(IFitbitDataService fitbitDataService, ISpotifyDataService spotifyDataService)
     {
         private readonly IFitbitDataService _fitbitDataService = fitbitDataService;
-        //private readonly IFitbitDataService _live = live;
-        //private readonly IFitbitDataService _fallback = fallback;
 
-       private readonly ISpotifyDataService _spotifyDataService = spotifyDataService;
-
-        //public async Task<BiometricSummary> GetBiometricDataAsync()
-        //{
-        //    try
-        //    {
-        //        return await _live.GetBiometricDataAsync();
-        //    }
-        //    catch
-        //    {
-        //        return await _fallback.GetBiometricDataAsync();
-        //    }
-        //}
-
+        private readonly ISpotifyDataService _spotifyDataService = spotifyDataService;
 
         /// <summary>
         /// The MoodCalibrationService is responsible for determining if a recalibration 
@@ -48,7 +33,7 @@ namespace MusicBased_IOT_Platform.Application.Services
         /// The RecalibrateAsync method retrieves the latest biometric data from the Fitbit service,
         /// </summary>
         /// <returns></returns>
-        public async Task<MusicMoodResult> RecalibrateAsync()
+        public async Task<MusicMoodResult> BuildMoodResultAsync()
         {
             //try catch?????
 
@@ -75,30 +60,22 @@ namespace MusicBased_IOT_Platform.Application.Services
 
         public async Task<MusicMoodResult> GenerateMoodMusicAsync()
         {
-            var biometric = await _fitbitDataService.GetBiometricDataAsync();
-
-            var mood = MoodClassifier.ClassifyMood(biometric);
-
-            var (danceability, energy, valence, liveness) = MapMoodToSpotify(mood);
-
-            var tracks = await _spotifyDataService.GetMoodRecommendations(
-                10,
-                danceability,
-                energy,
-                valence,
-                liveness);
-
-            //if (tracks == null)
-            //{
-                return new MusicMoodResult
-                {
-                    BiometricSummary = biometric,
-                    Mood = mood,
-                    RecommendedTracks = tracks!.Tracks?.ToList() ?? []
-                };
-           // }
+            return await BuildMoodResultAsync();
         }
 
+        public async Task<MusicMoodResult> RecalibrateAsync()
+        {
+            var result = await BuildMoodResultAsync();
+
+            await SaveCalibrationAsync(result.BiometricSummary!);
+
+            return result;
+        }
+
+        /// <summary>
+        /// The 
+        /// </summary>
+        /// <returns></returns>
         private static async Task<DateTime> GetLastCalibrationDate()
         {
             // TEMP placeholder until database integration
@@ -122,7 +99,7 @@ namespace MusicBased_IOT_Platform.Application.Services
         {
             await Task.CompletedTask;
 
-            // later this will store baseline biometrics
+            // store baseline biometrics where? in db??????
         }
     }
 }
