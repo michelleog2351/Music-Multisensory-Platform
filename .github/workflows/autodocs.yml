@@ -28,4 +28,4 @@ jobs:
         run: |
             dotnet tool install -g docfx
             echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
-            docfx docfx.json
+            docfx ./MusicBased_IOT_Platform/docfx.json
