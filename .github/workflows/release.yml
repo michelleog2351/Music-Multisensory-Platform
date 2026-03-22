@@ -1,0 +1,39 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Restore
+        run: dotnet restore ./MusicBased_IOT_Platform/MusicBased_IOT_Platform.sln
+
+      - name: Build
+        run: dotnet build ./MusicBased_IOT_Platform/MusicBased_IOT_Platform.sln --no-restore --configuration Release
+
+      - name: Test
+        run: dotnet test ./MusicBased_IOT_Platform/MusicBased_IOT_Platform.sln --no-build
+
+      - name: Publish
+        run: dotnet publish ./MusicBased_IOT_Platform/MusicBased_IOT_Platform.sln -c Release -o ./publish
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+              name: app-release
+              path: ./publish

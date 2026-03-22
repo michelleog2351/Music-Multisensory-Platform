@@ -1,0 +1,24 @@
+name: Lint
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Restore
+        run: dotnet restore ./MusicBased_IOT_Platform/MusicBased_IOT_Platform.sln
+
+      - name: Check formatting
+        run: dotnet format --verify-no-changes
