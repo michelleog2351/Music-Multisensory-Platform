@@ -1,4 +1,6 @@
-﻿namespace MusicBased_IOT_Platform.Models
+﻿using System.Text.Json.Serialization;
+
+namespace MusicBased_IOT_Platform.Models
 {
     public class FitbitProfileResponse
     {
@@ -12,7 +14,14 @@
 
     public class HeartRateResponse
     {
-        public List<HeartRateSummary>? ActivitiesHeart { get; set; }
+        [JsonPropertyName("activities-heart")]
+        public List<ActivityHeart>? ActivitiesHeart { get; set; }
+    }
+
+    public class ActivityHeart
+    {
+        [JsonPropertyName("value")]
+        public HeartRateSummary? Value { get; set; }
     }
 
     /// <summary>
