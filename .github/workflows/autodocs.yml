@@ -24,16 +24,6 @@ jobs:
       - name: Add dotnet tools to PATH
         run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
 
-      - name: Debug repo structure
-        run: |
-          echo "ROOT:"
-          ls
-          echo "----"
-          echo "MusicBased_IOT_Platform:"
-          ls MusicBased_IOT_Platform || echo "folder not found"
-          echo "---- SEARCH FOR DOCFX ----"
-          find . -name "docfx.json"
-
       - name: Generate docs
         run: |
             dotnet tool install -g docfx
