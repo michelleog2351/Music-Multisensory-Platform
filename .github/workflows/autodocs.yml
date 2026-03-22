@@ -26,6 +26,6 @@ jobs:
 
       - name: Generate docs
         run: |
-            dotnet tool install -g docfx.console
+            dotnet tool install -g docfx
             echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
             docfx docfx.json
