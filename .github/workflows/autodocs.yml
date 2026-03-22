@@ -19,7 +19,13 @@ jobs:
           dotnet-version: 9.0.x
 
       - name: Install DocFX
-        run: dotnet tool install -g docfx
+        run: dotnet tool install -g docfx.console
+
+      - name: Add dotnet tools to PATH
+        run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
 
       - name: Generate docs
-        run: docfx docfx.json
+        run: |
+            dotnet tool install -g docfx.console
+            echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+            docfx docfx.json
