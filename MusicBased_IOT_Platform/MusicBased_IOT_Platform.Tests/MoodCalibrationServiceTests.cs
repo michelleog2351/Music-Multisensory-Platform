@@ -57,6 +57,7 @@ namespace MusicBased_IOT_Platform.Tests
             // Arrange
             var mockFitbit = new Mock<IFitbitDataService>();
             var mockSpotify = new Mock<ISpotifyDataService>();
+            
 
             mockFitbit.Setup(f => f.GetBiometricDataAsync())
                 .ReturnsAsync(new BiometricSummary

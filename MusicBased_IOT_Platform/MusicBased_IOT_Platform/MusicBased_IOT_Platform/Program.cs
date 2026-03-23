@@ -44,6 +44,8 @@ builder.Services.AddScoped<UserSessionService>();
 
 builder.Services.AddScoped<IUserContext, UserContext>();
 
+builder.Services.AddScoped<ICalibrationRepository, CalibrationRepository>();
+
 builder.Services.AddScoped<ProtectedLocalStorage>();
 
 builder.Services.AddScoped<MoodCalibrationService>();

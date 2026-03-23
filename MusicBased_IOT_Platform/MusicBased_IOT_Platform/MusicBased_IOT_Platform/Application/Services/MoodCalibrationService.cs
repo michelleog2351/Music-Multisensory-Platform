@@ -1,4 +1,5 @@
-﻿using MusicBased_IOT_Platform.Application.Interfaces.Fitbit;
+﻿using MusicBased_IOT_Platform.Application.Interfaces;
+using MusicBased_IOT_Platform.Application.Interfaces.Fitbit;
 using MusicBased_IOT_Platform.Application.Interfaces.Spotify;
 using MusicBased_IOT_Platform.Models;
 
@@ -10,11 +11,13 @@ namespace MusicBased_IOT_Platform.Application.Services
     /// <param name="fitbitDataService"></param>
     /// <param name="spotifyDataService"></param>
     //public class MoodCalibrationService( IFitbitDataService live, IFitbitDataService fallback)
-    public class MoodCalibrationService(IFitbitDataService fitbitDataService, ISpotifyDataService spotifyDataService)
+    public class MoodCalibrationService(IFitbitDataService fitbitDataService, ISpotifyDataService spotifyDataService, IUserContext userContext, ICalibrationRepository calibrationRepository)
     {
         private readonly IFitbitDataService _fitbitDataService = fitbitDataService;
-
         private readonly ISpotifyDataService _spotifyDataService = spotifyDataService;
+
+        private readonly IUserContext _userContext = userContext;
+        private readonly ICalibrationRepository _calibrationRepo = calibrationRepository;
 
         /// <summary>
         /// The MoodCalibrationService is responsible for determining if a recalibration 
@@ -95,11 +98,34 @@ namespace MusicBased_IOT_Platform.Application.Services
             };
         }
 
-        private static async Task SaveCalibrationAsync(BiometricSummary biometric)
+        private static CalibrationRecord MapToCalibration(BiometricSummary bio, int userId)
         {
-            await Task.CompletedTask;
-
-            // store baseline biometrics where? in db??????
+            return new CalibrationRecord
+            {
+                UserID = userId,
+                RestingHeartRate = bio.AverageRestingHeartRate,
+                HRV = bio.AverageHeartRateVariability,
+                BreathingRate = bio.AverageBreathingRate,
+                CreatedAt = DateTime.UtcNow
+            };
         }
+
+        /// <summary>
+        /// The 
+        /// </summary>
+        /// <param name="biometric"></param>
+        /// <returns></returns>
+
+        private async Task SaveCalibrationAsync(BiometricSummary biometric)
+        {
+            var user = await _userContext.GetCurrentUserAsync();
+            if (user == null) return;
+
+            var record = MapToCalibration(biometric, user.ID);
+
+            await _calibrationRepo.AddAsync(record);
+        }
+
+
     }
 }
