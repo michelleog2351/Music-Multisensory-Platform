@@ -124,18 +124,16 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             response.EnsureSuccessStatusCode();
 
             var json = await response.Content.ReadAsStringAsync();
-            var token = JsonSerializer.Deserialize<AccessToken>(json, _jsonOptions)!;
-
-            AccessToken = token;
+            AccessToken = JsonSerializer.Deserialize<AccessToken>(json, _jsonOptions)!;
 
             var user = await _userContext.GetCurrentUserAsync();
 
             if (user != null)
             {
-                user.SpotifyAccessToken = token.Token;
-                user.SpotifyRefreshToken = token.RefreshToken;
+                user.SpotifyAccessToken = AccessToken.Token;
+                user.SpotifyRefreshToken = AccessToken.RefreshToken;
                 user.SpotifyTokenExpiry =
-                    DateTime.UtcNow.AddSeconds(token.ExpiresIn);
+                    DateTime.UtcNow.AddSeconds(AccessToken.ExpiresIn);
 
                 await _userRepo.UpdateAsync(user);
             }
@@ -238,18 +236,20 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
 
             var json = await response.Content.ReadAsStringAsync();
 
-            AccessToken =
+            var newToken =
                 JsonSerializer.Deserialize<AccessToken>(json, _jsonOptions)!;
 
+            newToken.RefreshToken ??= AccessToken.RefreshToken;
+            AccessToken = newToken;
             AccessToken.DateTimeAcquired = DateTime.UtcNow;
 
             var user = await _userContext.GetCurrentUserAsync();
 
             if (user != null)
             {
-                user.FitbitAccessToken = AccessToken.Token;
-                user.FitbitRefreshToken = AccessToken.RefreshToken;
-                user.FitbitTokenExpiry =
+                user.SpotifyAccessToken = AccessToken.Token;
+                user.SpotifyRefreshToken = AccessToken.RefreshToken;
+                user.SpotifyTokenExpiry =
                     DateTime.UtcNow.AddSeconds(AccessToken.ExpiresIn);
 
                 await _userRepo.UpdateAsync(user);
@@ -274,11 +274,6 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
 
             // Add the header information
             request.Headers.Authorization = new AuthenticationHeaderValue("Basic", auth_base64);
-
-            //request.Content = new StringContent(
-            //    "grant_type=client_credentials",
-            //    Encoding.UTF8,
-            //    "application/x-www-form-urlencoded");
             request.Content = new FormUrlEncodedContent(
                 new Dictionary<string, string>
                 {
@@ -425,16 +420,57 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         /// <param name="searchQuery"><c>string</c> The values to search for</param>
         /// <param name="searchItemTypes"><c>string</c> The type of items</param>
         /// <returns><c>SearchResults</c> object </returns>
+        //public async Task<SearchResults> Search(string searchQuery, string searchItemTypes)
+        //{
+        //    try
+        //    {
+        //        return await GetAsync<SearchResults>($"https://api.spotify.com/v1/search?q={Uri.EscapeDataString(searchQuery)}&type={searchItemTypes}&market=IE&limit=5&offset=0");
+        //    }
+        //    catch
+        //    {
+        //        return new SearchResults();
+        //    }
+        //}
         public async Task<SearchResults> Search(string searchQuery, string searchItemTypes)
         {
+            // Check to see if the current token is still valid, if not get a new one
+            if (!IsTokenStillValid())
+            {
+                bool authorised = await AuthoriseClientAsync();
+                if (!authorised)
+                    return new SearchResults();
+            }
+
+            // We have a valid token crack on with the request
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                $"https://api.spotify.com/v1/search?q={Uri.EscapeDataString(searchQuery)}&type={searchItemTypes}&market=IE&limit=5&offset=0");
+
+            request.Headers.Add("Authorization", $"Bearer {AccessToken.Token}");
+
+            //HttpResponseMessage response;
+
             try
             {
-                return await GetAsync<SearchResults>($"https://api.spotify.com/v1/search?q={Uri.EscapeDataString(searchQuery)}&type={searchItemTypes}&market=IE&limit=5&offset=0");
+                // throw an exception if we didn't get a valid response
+                var response = await _httpClient.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+
+                return JsonSerializer.Deserialize<SearchResults>(responseBody, _jsonOptions)!
+                    ?? new SearchResults();
+
             }
             catch
             {
+                // Didn't get a valid response, return an empty list
                 return new SearchResults();
             }
+
+            //string responseBody = await response.Content.ReadAsStringAsync();
+
         }
 
         /// <summary>
@@ -517,10 +553,6 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             string market = "IE",
             int limit = 20)
         {
-            if (limit <= 0 || limit > 50)
-                limit = 20;
-
-
             try
             {
                 return await GetAsync<List<Track>>(
@@ -590,28 +622,16 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         /// <returns><c>ArtistAlbums</c>A list of one or more <c>Artist</c> albums.</returns>
         public async Task<ArtistAlbums> GetArtistsAlbums(string id, string market = "IE", int limit = 20)
         {
-
-            var request = new HttpRequestMessage(
-                HttpMethod.Get,
-                $"https://api.spotify.com/v1/artists/{id}/albums?market={market}&limit={limit}");
-
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken.Token);
-
-            HttpResponseMessage response;
-
             try
             {
-                // throw an exception if valid response isn't received
-                response = await _httpClient.SendAsync(request);
-                response.EnsureSuccessStatusCode();
+                return await GetAsync<ArtistAlbums>($"https://api.spotify.com/v1/artists/{id}/albums?market={market}&limit={limit}");
+
             }
-            catch (HttpRequestException)
+            catch
             {
                 // Valid response, return an empty list
                 return new ArtistAlbums();
             }
-            string responseBody = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<ArtistAlbums>(responseBody)!;
         }
 
         /// <summary>
@@ -624,29 +644,16 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             string id,
             string market = "IE")
         {
-
-            var request = new HttpRequestMessage(
-                HttpMethod.Get,
-                $"https://api.spotify.com/v1/artists/{id}/top-tracks?market={market}");
-
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken.Token);
-
-            HttpResponseMessage response;
-
             try
             {
-                // throw an exception if valid response isn't received
-                response = await _httpClient.SendAsync(request);
-                response.EnsureSuccessStatusCode();
+
+                return await GetAsync<ArtistTopTracks>($"https://api.spotify.com/v1/artists/{id}/top-tracks?market={market}");
+
             }
-            catch (HttpRequestException)
+            catch
             {
-                // Didn't get a valid response, return an empty list
                 return new ArtistTopTracks();
             }
-            string responseBody = await response.Content.ReadAsStringAsync();
-
-            return JsonSerializer.Deserialize<ArtistTopTracks>(responseBody)!;
         }
 
         /// <summary>
@@ -657,30 +664,14 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         /// <return><c>List Artist</c>A list of artists similar to the given artist.</returns>
         public async Task<List<Artist>> GetRelatedArtists(string id)
         {
-
-            var request = new HttpRequestMessage(
-                HttpMethod.Get,
-                $"https://api.spotify.com/v1/artists/{id}/related-artists");
-
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken.Token);
-
-            HttpResponseMessage response;
-
             try
             {
-                // throw an exception if valid response isn't received
-                response = await _httpClient.SendAsync(request);
-                response.EnsureSuccessStatusCode();
+                return await GetAsync<List<Artist>>($"https://api.spotify.com/v1/artists/{id}/related-artists");
             }
-            catch (HttpRequestException)
+            catch 
             {
-                // Didn't get a valid response, return an empty list
                 return [];
             }
-
-            string responseBody = await response.Content.ReadAsStringAsync();
-            ArtistsList artists = JsonSerializer.Deserialize<ArtistsList>(responseBody)!;
-            return artists.Artists!; // Artists may return null 
         }
 
         /// <summary>
@@ -692,29 +683,15 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         public async Task<Track> GetTrack(string id,
             string market = "IE")
         {
-
-            var request = new HttpRequestMessage(
-                HttpMethod.Get,
-                $"https://api.spotify.com/v1/tracks/{id}");
-
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken.Token);
-
-            HttpResponseMessage response;
-
             try
             {
-                // throw an exception if valid response isn't received
-                response = await _httpClient.SendAsync(request);
-                response.EnsureSuccessStatusCode();
+
+                return await GetAsync<Track>($"https://api.spotify.com/v1/tracks/{id}");
             }
             catch (HttpRequestException)
             {
-                // Didn't get a valid response, return an empty list
                 return new Track();
             }
-            string responseBody = await response.Content.ReadAsStringAsync();
-
-            return JsonSerializer.Deserialize<Track>(responseBody)!;
         }
 
         /// <summary>
@@ -727,29 +704,16 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             string ids,
             string market = "IE")
         {
-
-            var request = new HttpRequestMessage(
-                HttpMethod.Get,
-                $"https://api.spotify.com/v1/tracks?ids={ids}");
-
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken.Token);
-
-            HttpResponseMessage response;
             try
             {
-                // throw an exception if valid response isn't received
-                response = await _httpClient.SendAsync(request);
-                response.EnsureSuccessStatusCode();
+
+                return await GetAsync<List<Track>>($"https://api.spotify.com/v1/tracks?ids={ids}");
+
             }
-            catch (HttpRequestException)
+            catch
             {
-                // We didn't get a valid response, return an empty list
                 return [];
             }
-            string responseBody = await response.Content.ReadAsStringAsync();
-
-            Tracks tracks = JsonSerializer.Deserialize<Tracks>(responseBody)!;
-            return tracks.TrackList!;
         }
 
         /// <summary>
@@ -772,28 +736,16 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             int limit = 10,
             string market = "IE")
         {
-
-            var request = new HttpRequestMessage(HttpMethod.Get,
-                $"https://api.spotify.com/v1/recommendations?seed_artists={seedArtists}&seed_genres={seedGenres}&seed_tracks={seedTracks}&limit={limit}&market={market}");
-
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken.Token);
-
-            HttpResponseMessage response;
-
             try
             {
-                // throw an exception if valid response isn't received
-                response = await _httpClient.SendAsync(request);
-                response.EnsureSuccessStatusCode();
+
+                return await GetAsync<Recommendations>($"https://api.spotify.com/v1/recommendations?seed_artists={seedArtists}&seed_genres={seedGenres}&seed_tracks={seedTracks}&limit={limit}&market={market}");
             }
-            catch (HttpRequestException)
+            catch
             {
-                // Didn't get a valid response, return an empty list
                 return new Recommendations();
             }
-            string responseBody = await response.Content.ReadAsStringAsync();
-
-            return JsonSerializer.Deserialize<Recommendations>(responseBody)!;
+     
         }
 
         /// <summary>
@@ -803,29 +755,15 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         /// <returns> <c>Recommendations</c> object with recommended tracks based on users mood</returns>
         public async Task<Recommendations> GetRecommendedTracks(string id)
         {
-
-            var request = new HttpRequestMessage(
-                HttpMethod.Get,
-                $"https://api.spotify.com/v1/recommendations?seed_tracks={id}");
-
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken.Token);
-
-            HttpResponseMessage response;
             try
             {
-                // throw an exception if valid response isn't received
-                response = await _httpClient.SendAsync(request);
-                response.EnsureSuccessStatusCode();
+               return await GetAsync<Recommendations>($"https://api.spotify.com/v1/recommendations?seed_tracks={id}");
             }
-            catch (HttpRequestException)
+            catch
             {
                 // Didn't get a valid response, return an empty list
                 return new Recommendations();
             }
-
-            string responseBody = await response.Content.ReadAsStringAsync();
-
-            return JsonSerializer.Deserialize<Recommendations>(responseBody)!;
         }
 
         /// <summary>
@@ -834,31 +772,16 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         /// <returns><c>List string</c> A list of available genres seed values for recommendations</returns>
         public async Task<List<string>> GetSeedGenres()
         {
-
-            var request = new HttpRequestMessage(
-                HttpMethod.Get,
-                $"https://api.spotify.com/v1/recommendations/available-genre-seeds");
-
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken.Token);
-
-            HttpResponseMessage response;
             try
-            {
-                // throw an exception if valid response isn't received
-                response = await _httpClient.SendAsync(request);
-                response.EnsureSuccessStatusCode();
+             {
+                var result = await GetAsync<Genre>($"https://api.spotify.com/v1/recommendations/available-genre-seeds");
+                return result.Genres ?? [];
             }
-            catch (HttpRequestException)
+            catch
             {
-                // Didn't get a valid response, return an empty list
                 return [];
             }
-
-            string responseBody = await response.Content.ReadAsStringAsync();
-
-            return JsonSerializer.Deserialize<Genre>(responseBody)!.Genres!;
         }
-
 
         /// <summary>
         /// The <c>GetMoodRecommendations</c> method is used to get return
@@ -869,7 +792,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         /// <param name="max_energy"><c>double</c>value for energy</param>
         /// <param name="max_valence"><c>double</c>value for valence</param>
         /// <param name="max_liveness"><c>double</c>value for liveness</param>
-        /// <returns> <c>Reccomendations</c> object with artists based on users mood</returns>
+        /// <returns> <c>Recomendations</c> object with artists based on users mood</returns>
         public async Task<Recommendations> GetMoodRecommendations(
             int limit,
             double max_danceability,
@@ -877,41 +800,23 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             double max_valence,
             double max_liveness)
         {
+            var seedGenres = "pop,rock,chill,folk-hop,lofi";
 
-            //var genres = await GetSeedGenres();
-            //var seedGenres = string.Join(",", genres.Take(5));
-            var seedGenres = "pop,rock,hip-hop,edm,chill,folk-hop,lofi";
-
-            var request = new HttpRequestMessage(
-                HttpMethod.Get,
+            try
+            {
+                return await GetAsync<Recommendations>(
                  $"https://api.spotify.com/v1/recommendations?" +
                  $"limit={limit}&seed_genres={seedGenres}" +
                  $"&max_danceability={max_danceability}" +
                  $"&max_energy={max_energy}" +
                  $"&max_valence={max_valence}" +
                  $"&max_liveness={max_liveness}");
-
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken.Token);
-
-            //HttpResponseMessage response;
-            try
-            {
-                // throw an exception if valid response isn't received
-                var response = await _httpClient.SendAsync(request);
-                response.EnsureSuccessStatusCode();
-
-                var responseBody = await response.Content.ReadAsStringAsync();
-
-                return JsonSerializer.Deserialize<Recommendations>(responseBody)!;
             }
-            catch (HttpRequestException)
+            
+            catch
             {
                 return new Recommendations();
             }
-
-            //string responseBody = await response.Content.ReadAsStringAsync();
-            //Recommendations moods = JsonSerializer.Deserialize<Recommendations>(responseBody)!;
-            //return moods; // TrackList may return null
         }
     }
 

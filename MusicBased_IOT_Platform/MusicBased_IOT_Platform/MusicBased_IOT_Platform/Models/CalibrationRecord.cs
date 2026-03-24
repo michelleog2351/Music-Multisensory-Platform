@@ -10,6 +10,9 @@
         public double HRV { get; set; }
         public double BreathingRate { get; set; }
 
+        public string Mood { get; set; } = string.Empty;
+        public string TracksJson { get; set; } = string.Empty;
+
         public DateTime CreatedAt { get; set; }
     }
 }

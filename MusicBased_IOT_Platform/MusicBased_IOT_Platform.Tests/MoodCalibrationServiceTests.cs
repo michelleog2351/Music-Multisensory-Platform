@@ -1,4 +1,5 @@
 ﻿using Moq;
+using MusicBased_IOT_Platform.Application.Interfaces;
 using MusicBased_IOT_Platform.Application.Interfaces.Fitbit;
 using MusicBased_IOT_Platform.Application.Interfaces.Spotify;
 using MusicBased_IOT_Platform.Application.Services;
@@ -57,6 +58,8 @@ namespace MusicBased_IOT_Platform.Tests
             // Arrange
             var mockFitbit = new Mock<IFitbitDataService>();
             var mockSpotify = new Mock<ISpotifyDataService>();
+            var mockUserContext = new Mock<IUserContext>();
+            var mockCalibrationRepo = new Mock<ICalibrationRepository>();
             
 
             mockFitbit.Setup(f => f.GetBiometricDataAsync())
@@ -89,7 +92,9 @@ namespace MusicBased_IOT_Platform.Tests
 
             var service = new MoodCalibrationService(
                 mockFitbit.Object,
-                mockSpotify.Object);
+                mockSpotify.Object,
+                mockUserContext.Object,
+                mockCalibrationRepo.Object);
 
             // Act
             var result = await service.BuildMoodResultAsync();

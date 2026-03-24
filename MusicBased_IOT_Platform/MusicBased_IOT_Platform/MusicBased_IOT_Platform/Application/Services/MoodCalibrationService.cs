@@ -2,6 +2,7 @@
 using MusicBased_IOT_Platform.Application.Interfaces.Fitbit;
 using MusicBased_IOT_Platform.Application.Interfaces.Spotify;
 using MusicBased_IOT_Platform.Models;
+using System.Text.Json;
 
 namespace MusicBased_IOT_Platform.Application.Services
 {
@@ -70,7 +71,7 @@ namespace MusicBased_IOT_Platform.Application.Services
         {
             var result = await BuildMoodResultAsync();
 
-            await SaveCalibrationAsync(result.BiometricSummary!);
+            await SaveCalibrationAsync(result);
 
             return result;
         }
@@ -98,34 +99,48 @@ namespace MusicBased_IOT_Platform.Application.Services
             };
         }
 
-        private static CalibrationRecord MapToCalibration(BiometricSummary bio, int userId)
-        {
-            return new CalibrationRecord
-            {
-                UserID = userId,
-                RestingHeartRate = bio.AverageRestingHeartRate,
-                HRV = bio.AverageHeartRateVariability,
-                BreathingRate = bio.AverageBreathingRate,
-                CreatedAt = DateTime.UtcNow
-            };
-        }
+        //private static CalibrationRecord MapToCalibration(BiometricSummary bio, int userId)
+        //{
+        //    return new CalibrationRecord
+        //    {
+        //        UserID = userId,
+        //        RestingHeartRate = bio.AverageRestingHeartRate,
+        //        HRV = bio.AverageHeartRateVariability,
+        //        BreathingRate = bio.AverageBreathingRate,
+        //        CreatedAt = DateTime.UtcNow
+        //    };
+        //}
 
         /// <summary>
         /// The 
         /// </summary>
-        /// <param name="biometric"></param>
+        /// <param name="result"></param>
         /// <returns></returns>
-
-        private async Task SaveCalibrationAsync(BiometricSummary biometric)
+        private async Task SaveCalibrationAsync(MusicMoodResult result)
         {
             var user = await _userContext.GetCurrentUserAsync();
             if (user == null) return;
 
-            var record = MapToCalibration(biometric, user.ID);
+            var record = new CalibrationRecord
+            {
+                UserID = user.ID,
+                RestingHeartRate = result.BiometricSummary!.AverageRestingHeartRate,
+                HRV = result.BiometricSummary!.AverageHeartRateVariability,
+                BreathingRate = result.BiometricSummary!.AverageBreathingRate,
+                Mood = result.Mood.ToString(),
 
+                TracksJson = JsonSerializer.Serialize(
+                    result.RecommendedTracks?.Select(
+                        t => new
+                        {
+                            t.Name,
+                            Artist = t.Artists?.FirstOrDefault()?.Name
+                        })
+                    ),
+                CreatedAt = DateTime.UtcNow
+            };
+                
             await _calibrationRepo.AddAsync(record);
         }
-
-
     }
 }
