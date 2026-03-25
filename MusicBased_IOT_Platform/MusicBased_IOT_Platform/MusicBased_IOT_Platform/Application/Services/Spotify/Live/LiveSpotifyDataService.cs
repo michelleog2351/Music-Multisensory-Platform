@@ -149,8 +149,14 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             var hasToken = await HasValidTokenAsync();
 
             if (!hasToken || string.IsNullOrEmpty(AccessToken.Token))
+            //{
+            //    throw new InvalidOperationException("No valid Spotify access token available.");
+            //}
             {
-                throw new InvalidOperationException("No valid Spotify access token available.");
+                var authorised = await AuthoriseClientAsync();
+
+                if (!authorised)
+                    return Activator.CreateInstance<T>(); // safe fallback
             }
 
             var request = new HttpRequestMessage(HttpMethod.Get, endpoint);

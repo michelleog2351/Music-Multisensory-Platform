@@ -90,9 +90,16 @@
     /// <summary>
     /// The OnInitialized method is overridden to subscribe to the UserSessionService's OnChange event.
     /// </summary>
-    protected override void OnInitialized()
+    // protected override void OnInitialized()
+    // {
+    //     Session.OnChange += async () => await InvokeAsync(StateHasChanged);
+    // }
+    protected override async Task OnInitializedAsync()
     {
-        Session.OnChange += StateHasChanged;
+        Session.OnChange += async () => await InvokeAsync(StateHasChanged);
+        await Session.LoadUserAsync();
+
+        StateHasChanged();
     }
 
     /// <summary>

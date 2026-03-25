@@ -67,20 +67,20 @@
     /// <summary>
     /// The OnInitialized method checks if there is a currently logged-in user in the session.
     /// </summary>
-    // protected override void OnInitialized()
-    // {
-    //     if (Session.CurrentUser != null)
-    //     {
-    //         NavigationManager.NavigateTo("/dashboard");
-    //     }
-    // }
-    protected override void OnAfterRender(bool firstRender)
+    protected override void OnInitialized()
     {
-        if (firstRender && Session.CurrentUser != null)
+        if (Session.CurrentUser != null)
         {
             NavigationManager.NavigateTo("/dashboard");
         }
     }
+    // protected override void OnAfterRender(bool firstRender)
+    // {
+    //     if (firstRender && Session.CurrentUser != null)
+    //     {
+    //         NavigationManager.NavigateTo("/dashboard");
+    //     }
+    // }
 
 
     /// <summary>

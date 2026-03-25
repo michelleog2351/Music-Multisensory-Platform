@@ -50,6 +50,8 @@ builder.Services.AddScoped<ProtectedLocalStorage>();
 
 builder.Services.AddScoped<MoodCalibrationService>();
 
+builder.Services.AddControllers();
+
 
 var app = builder.Build();
 
@@ -75,5 +77,7 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(MusicBased_IOT_Platform.Client._Imports).Assembly);
+
+app.MapControllers();
 
 await app.RunAsync();

@@ -155,7 +155,9 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
         /// <returns></returns>
         private async Task<T> GetAsync<T>(string endpoint)
         {
-            if (string.IsNullOrEmpty(AccessToken.Token))
+
+            Console.WriteLine($"TOKEN: {AccessToken?.Token}");
+            if (string.IsNullOrEmpty(AccessToken!.Token))
             {
                 await LoadTokenFromDatabaseAsync();
             }

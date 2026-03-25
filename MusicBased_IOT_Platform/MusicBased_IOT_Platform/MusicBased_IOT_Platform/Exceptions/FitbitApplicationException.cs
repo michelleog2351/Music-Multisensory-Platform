@@ -23,12 +23,6 @@ namespace MusicBased_IOT_Platform.Exceptions
             /// </summary>
             /// <param name="message"></param>
             public FitbitServiceConnectionException(string message) : base(message) { }
-            /// <summary>
-            /// FitbitServiceConnectionException
-            /// </summary>
-            /// <param name="message"></param>
-            /// <param name="inner"></param>
-            public FitbitServiceConnectionException(string message, Exception inner) : base(message, inner) { }
         }
     }
 }

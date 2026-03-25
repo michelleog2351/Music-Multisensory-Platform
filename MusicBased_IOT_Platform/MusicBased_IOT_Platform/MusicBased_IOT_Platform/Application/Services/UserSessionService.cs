@@ -40,7 +40,7 @@ namespace MusicBased_IOT_Platform.Application.Services
             await _storage.SetAsync("userSession", user);
 
             NotifyStateChanged();
-            CurrentUser = user;
+            //CurrentUser = user;
 
         }
 
@@ -69,7 +69,7 @@ namespace MusicBased_IOT_Platform.Application.Services
                 }
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("SESSION ERROR: " + ex.Message);
                 CurrentUser = null;
@@ -86,9 +86,8 @@ namespace MusicBased_IOT_Platform.Application.Services
         {
             CurrentUser = null;
 
-            await _storage.DeleteAsync("userSession");
-
             NotifyStateChanged();
+            await _storage.DeleteAsync("userSession");
         }
     }
 }
