@@ -2,7 +2,7 @@
 using MusicBased_IOT_Platform.Application.Services;
 using System.Text.Json;
 
-namespace MusicBased_IOT_Platform.Application.Controller
+namespace MusicBased_IOT_Platform.Controller
 {
     //[HttpGet("history")]
     //public async Task<IActionResult> GetHistory(int days = 7)

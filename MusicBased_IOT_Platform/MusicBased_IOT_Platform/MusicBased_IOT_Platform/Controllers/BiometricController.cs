@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MusicBased_IOT_Platform.Models;
 
-namespace MusicBased_IOT_Platform.Application.Controller
+namespace MusicBased_IOT_Platform.Controller
 {
     [ApiController]
     [Route("api/biometric")]

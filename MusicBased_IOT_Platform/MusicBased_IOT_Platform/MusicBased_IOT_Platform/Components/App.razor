@@ -1,57 +1,22 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="/" />
-    <link rel="stylesheet" href="@Assets["lib/bootstrap/dist/css/bootstrap.min.css"]" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="@Assets["app.css"]" />
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <base href="/" />
+        <link rel="stylesheet" href="@Assets["lib/bootstrap/dist/css/bootstrap.min.css"]" />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="@Assets["app.css"]" />
    
-    <ImportMap />
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <HeadOutlet />
-</head>
+        <ImportMap />
+        <link rel="icon" type="image/png" href="favicon.png" />
+        <HeadOutlet />
+    </head>
 
-<body>
-    <Routes @rendermode="InteractiveServer" />
-    <script src="_framework/blazor.web.js"></script>
-@*     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <div id="chart"></div> *@
-
-    @* <script>
-        d3.json("/api/chart").then(function(data) {
-
-            const width = 500;
-            const height = 300;
-
-            const svg = d3.select("#chart")
-                .append("svg")
-                .attr("width", width)
-                .attr("height", height);
-
-            const x = d3.scaleBand()
-                .domain(data.map(d => d.Name))
-                .range([0, width])
-                .padding(0.2);
-
-            const y = d3.scaleLinear()
-                .domain([0, d3.max(data, d => d.Value)])
-                .range([height, 0]);
-
-            svg.selectAll("rect")
-                .data(data)
-                .enter()
-                .append("rect")
-                .attr("x", d => x(d.Name))
-                .attr("y", d => y(d.Value))
-                .attr("width", x.bandwidth())
-                .attr("height", d => height - y(d.Value))
-                .attr("fill", "steelblue");
-
-        });
-    </script> *@
-</body>
-
+    <body>
+        <Routes @rendermode="InteractiveServer" />
+        <script src="_framework/blazor.web.js"></script>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="/js/dashboard.js"></script>
+    </body>
 </html>

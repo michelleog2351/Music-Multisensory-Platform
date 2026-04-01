@@ -29,6 +29,8 @@ window.loadData = async function (days = 7) {
 
         const data = JSON.parse(text);
 
+        console.log("DATA:", data);
+
         renderChart(data);
 
     } catch (err) {
@@ -92,13 +94,13 @@ window.loadData = async function (days = 7) {
 //}
 
 function renderChart(data) {
-    d3.select("#chart").selectAll("*").remove();
+    d3.select("#myChart").selectAll("*").remove();
 
     const width = 600;
     const height = 300;
     const margin = { top: 20, right: 20, bottom: 40, left: 50 };
 
-    const svg = d3.select("#chart")
+    const svg = d3.select("#myChart")
         .append("svg")
         .attr("width", width)
         .attr("height", height);
@@ -109,31 +111,31 @@ function renderChart(data) {
     const g = svg.append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // 🔹 X axis (time/index)
+    // x-axis (time/index)
     const x = d3.scaleBand()
         .domain(data.map((d, i) => i))
         .range([0, chartWidth])
         .padding(0.2);
 
-    // 🔹 Y axis (heart rate)
+    // y-axis (heart rate)
     const y = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.restingHeartRate || 0)])
+        .domain([0, d3.max(data, d => d.restingHeartRate || 20)])
         .nice()
         .range([chartHeight, 0]);
 
-    // 🔹 Draw X axis
+    // 🔹 Draw x-axis
     g.append("g")
         .attr("transform", `translate(0,${chartHeight})`)
         .call(d3.axisBottom(x).tickFormat(i => `Day ${i + 1}`));
 
-    // 🔹 Draw Y axis
+    // Draw y-axis
     g.append("g")
         .call(d3.axisLeft(y));
 
-    // 🔹 Tooltip
+    // Tooltip
     const tooltip = d3.select("#tooltip");
 
-    // 🔹 Bars
+    // Bars
     g.selectAll("rect")
         .data(data)
         .enter()
@@ -160,3 +162,7 @@ function renderChart(data) {
             tooltip.style("display", "none");
         });
 }
+
+window.focusSearch = () => {
+    document.querySelector('.search-container input')?.focus();
+};
