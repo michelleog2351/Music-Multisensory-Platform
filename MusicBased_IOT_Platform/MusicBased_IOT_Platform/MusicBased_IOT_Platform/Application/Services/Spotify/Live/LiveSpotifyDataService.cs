@@ -501,8 +501,17 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
                 Encoding.UTF8,
                 "application/json");
 
-            var response = await _httpClient.SendAsync(request);
-            response.EnsureSuccessStatusCode();
+            var response = await _httpClient.SendAsync(request); 
+            var body = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(body);
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"Spotify play failed: {response.StatusCode}");
+                
+            }
+
+
+           
         }
 
         /// <summary>

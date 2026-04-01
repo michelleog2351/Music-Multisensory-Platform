@@ -150,7 +150,14 @@ body {
     color: white;
 }
 
-#search-btn,
+.tooltiptext {
+    width: 130px;
+    bottom: 100%;
+    left: 65%;
+    margin-left: -65px;
+}
+
+/*#search-btn,
 #search-input {
   margin: 0;
   padding: 5px;
@@ -162,8 +169,6 @@ body {
   margin-top: 0;
 }
 
-/* Stops the search icon button from having white outline when user types but cursor
-   isn't placed in the input box */
 #search-btn:focus {
   outline: none !important;
   box-shadow: none !important;
@@ -183,7 +188,7 @@ body {
   width: 250px;
   opacity: 1;
   border: 1px solid #ccc;
-}
+}*/
 
 .search-container{
     position: relative;
@@ -205,20 +210,6 @@ body {
     z-index: 2000;
 }
 
-/*.suggestions {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-
-    background: white;
-    border: 1px solid #e9ecef;
-    border-radius: 10px;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-    z-index: 1050;
-    max-height: 250px;
-    overflow-y: auto;
-}*/
 
 .suggestion-item {
     /*padding: 10px 12px;*/
@@ -288,13 +279,13 @@ body {
 }
 
     .app-card:hover {
-        transform: translateY(-2px);
+        transform: translateY(-6px);
         box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
     }
 
 .app-card-title {
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 550;
     margin-bottom: 1rem;
     color: #212529;
 }
@@ -328,6 +319,8 @@ body {
         border-color: var(--spotify-green);
         box-shadow: 0 0 0 0.2rem rgba(29,185,84,0.25);
     }
+
+
 
 .card-body {
   flex-grow: 1;
