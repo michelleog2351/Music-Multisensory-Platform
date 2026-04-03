@@ -1,4 +1,4 @@
-\### Overview
+### Overview
 
 
 
@@ -6,35 +6,34 @@ This PR integrates the core system functionality for the Music-Based IoT Platfor
 
 
 
-\### Key Features
+### Key Features
 
-\- \[ ]
-
-
-
-\### Technical Improvements
-
-\- \[ ]
+- [ ]
 
 
 
-\### Testing
+### Technical Improvements
+
+- \[ ]
 
 
 
-\- \[ ] 
+### Testing
 
 
 
-\### Known Issues / Limitations
+- [ ] 
 
 
 
-\- \[ ]
+### Known Issues / Limitations
 
-\### Next Steps
 
-\- \[ ]
+- \[ ]
+
+### Next Steps
+
+- \[ ]
 
 
 
