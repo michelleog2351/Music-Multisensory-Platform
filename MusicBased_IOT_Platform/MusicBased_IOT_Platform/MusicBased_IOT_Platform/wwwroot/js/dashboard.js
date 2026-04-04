@@ -112,21 +112,42 @@ function renderChart(data) {
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
     // x-axis (time/index)
-    const x = d3.scaleBand()
-        .domain(data.map((d, i) => i))
-        .range([0, chartWidth])
-        .padding(0.2);
+    //const x = d3.scaleBand()
+    //    .domain(data.map((d, i) => i))
+    //    .range([0, chartWidth])
+    //    .padding(0.2);
 
-    // y-axis (heart rate)
+    //// y-axis (heart rate)
+    //const y = d3.scaleLinear()
+    //    .domain([0, d3.max(data, d => d.restingHeartRate || 20)])
+    //    .nice()
+    //    .range([chartHeight, 0]);
+
+    //// 🔹 Draw x-axis
+    //g.append("g")
+    //    .attr("transform", `translate(0,${chartHeight})`)
+    //    .call(d3.axisBottom(x).tickFormat(i => `Day ${i + 1}`));
+
+
+    const x = d3.scaleTime()
+        .domain(d3.extent(data, d => new Date(d.createdAt)))
+        .range([0, chartWidth]);
+
     const y = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.restingHeartRate || 20)])
+        .domain([0, d3.max(data, d => d.restingHeartRate || 0)])
         .nice()
         .range([chartHeight, 0]);
 
-    // 🔹 Draw x-axis
-    g.append("g")
-        .attr("transform", `translate(0,${chartHeight})`)
-        .call(d3.axisBottom(x).tickFormat(i => `Day ${i + 1}`));
+    const line = d3.line()
+        .x(d => x(new Date(d.createdAt)))
+        .y(d => y(d.restingHeartRate));
+
+    g.append("path")
+        .datum(data)
+        .attr("fill", "none")
+        .attr("stroke", "#1DB954")
+        .attr("stroke-width", 2)
+        .attr("d", line);
 
     // Draw y-axis
     g.append("g")
@@ -136,33 +157,56 @@ function renderChart(data) {
     const tooltip = d3.select("#tooltip");
 
     // Bars
-    g.selectAll("rect")
-        .data(data)
-        .enter()
-        .append("rect")
-        .attr("x", (d, i) => x(i))
-        .attr("y", d => y(d.restingHeartRate || 0))
-        .attr("width", x.bandwidth())
-        .attr("height", d => chartHeight - y(d.restingHeartRate || 0))
-        .on("mouseover", function (event, d) {
-            tooltip
-                .style("display", "block")
-                .html(`
-                    HR: ${d.restingHeartRate}<br/>
-                    HRV: ${d.hrv}<br/>
-                    Breathing: ${d.breathingRate}
-                `);
-        })
-        .on("mousemove", function (event) {
-            tooltip
-                .style("left", (event.pageX + 10) + "px")
-                .style("top", (event.pageY - 20) + "px");
-        })
-        .on("mouseout", function () {
-            tooltip.style("display", "none");
-        });
-}
+    //    g.selectAll("rect")
+    //        .data(data)
+    //        .enter()
+    //        .append("rect")
+    //        .attr("x", (d, i) => x(i))
+    //        .attr("y", d => y(d.restingHeartRate || 0))
+    //        .attr("width", x.bandwidth())
+    //        .attr("height", d => chartHeight - y(d.restingHeartRate || 0))
+    //        .on("mouseover", function (event, d) {
+    //            tooltip
+    //                .style("display", "block")
+    //                .html(`
+    //                    HR: ${d.restingHeartRate}<br/>
+    //                    HRV: ${d.hrv}<br/>
+    //                    Breathing: ${d.breathingRate}
+    //                `);
+    //        })
+    //        .on("mousemove", function (event) {
+    //            tooltip
+    //                .style("left", (event.pageX + 10) + "px")
+    //                .style("top", (event.pageY - 20) + "px");
+    //        })
+    //        .on("mouseout", function () {
+    //            tooltip.style("display", "none");
+    //        });
 
-window.focusSearch = () => {
-    document.querySelector('.search-container input')?.focus();
-};
+    //        const x = d3.scaleTime()
+    //    .domain(d3.extent(data, d => new Date(d.createdAt)))
+    //    .range([0, chartWidth]);
+
+    //const y = d3.scaleLinear()
+    //    .domain([0, d3.max(data, d => d.restingHeartRate || 0)])
+    //    .nice()
+    //    .range([chartHeight, 0]);
+
+    //// line generator
+    //const line = d3.line()
+    //    .x(d => x(new Date(d.createdAt)))
+    //    .y(d => y(d.restingHeartRate));
+
+    //// draw line
+    //g.append("path")
+    //    .datum(data)
+    //    .attr("fill", "none")
+    //    .attr("stroke", "#1DB954") // Spotify green 👀
+    //    .attr("stroke-width", 2)
+    //    .attr("d", line);
+    //}
+
+    window.focusSearch = () => {
+        document.querySelector('.search-container input')?.focus();
+    };
+}

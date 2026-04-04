@@ -8,6 +8,8 @@
 @inject NavigationManager Navigation
 @rendermode InteractiveServer
 
+<br />
+<br />
 <h1>Sign In To Spotify</h1>
 
 @code {
@@ -30,8 +32,9 @@
             }
             
             // Exchange the authorization code for an access token
-            //await SpotifyService.AuthCodeFlowAsync(code, Session.CurrentUser!.ID);
-           // Navigation.NavigateTo("/dashboard");
+            // await SpotifyService.ExchangeCodeAsync(code, Session.CurrentUser!.ID);
+            await SpotifyService.ExchangeCodeAsync(code);
+           Navigation.NavigateTo("/dashboard");
             return;
         }
     }

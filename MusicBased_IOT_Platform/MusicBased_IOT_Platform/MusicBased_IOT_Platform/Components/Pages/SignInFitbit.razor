@@ -7,6 +7,8 @@
 @inject NavigationManager Navigation
 @rendermode InteractiveServer
 
+<br />
+<br />
 <h1>Sign In To Fitbit</h1>
 
 @code {
@@ -31,7 +33,7 @@
             // Exchange the authorization code for an access token, pass user ID
             await FitbitService.AuthCodeFlowAsync(code, Session.CurrentUser.ID);
 
-            Navigation.NavigateTo("/dashboard");
+            Navigation.NavigateTo("/dashboard", true);
             return;
         }
     }

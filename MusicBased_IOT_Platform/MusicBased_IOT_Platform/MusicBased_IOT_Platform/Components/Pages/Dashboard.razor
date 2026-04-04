@@ -1,13 +1,11 @@
 ﻿@page "/dashboard"
 @using MusicBased_IOT_Platform.Application.Services
 @inject IJSRuntime JS
-
- @inject UserSessionService Session
+@inject UserSessionService Session
 @inject NavigationManager NavigationManager
 
-@* <script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="/js/dashboard.js"></script> *@
-
+<br />
+<br />
 <h3>My Dashboard (Biometric Trends)</h3>
 
 <PageTitle>My Dashboard</PageTitle>
@@ -20,20 +18,24 @@
     <option value="30">Monthly</option>
 </select>
 
-
+<br />
 
 @* d3 barchart *@
 <div id="myChart" 
-            width="400" 
-            height="200">
+     width="400" 
+     height="600"
+     class="d-flex justify-content-center">
 </div>
 
-<div id="tooltip" style="
+<div 
+    id="tooltip" 
+    style="
     position:absolute;
     display:none;
     background:#eee;
     padding:10px;
-    border:1px solid #ccc;">
+    border:1px solid #ccc;
+    border-radius: 25px">
 </div>
 
 @* <script>
@@ -78,4 +80,4 @@
 }
 
 
-    }
+}

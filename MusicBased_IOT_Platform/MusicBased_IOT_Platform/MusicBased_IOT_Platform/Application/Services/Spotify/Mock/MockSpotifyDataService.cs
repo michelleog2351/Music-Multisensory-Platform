@@ -424,5 +424,10 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
         {
             throw new NotImplementedException();
         }
+
+        public Task ExchangeCodeAsync(string code)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
