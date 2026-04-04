@@ -1,40 +1,31 @@
-\### Overview
-
-
+### Overview
 
 This PR integrates the core system functionality for the Music-Based IoT Platform, combining biometric data processing with music recommendation.
 
 
+### Key Features
 
-\### Key Features
-
-\- \[ ]
-
+- [ ]
 
 
-\### Technical Improvements
+### Technical Improvements
 
-\- \[ ]
-
-
-
-\### Testing
+- [ ]
 
 
+### Testing
 
-\- \[ ] 
-
-
-
-\### Known Issues / Limitations
+- [ ] 
 
 
+### Known Issues / Limitations
 
-\- \[ ]
 
-\### Next Steps
+- \[ ]
 
-\- \[ ]
+### Next Steps
+
+- \[ ]
 
 
 
