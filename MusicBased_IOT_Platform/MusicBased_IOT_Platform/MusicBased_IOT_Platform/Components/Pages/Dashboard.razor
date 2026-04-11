@@ -62,7 +62,7 @@
         {
             try
             {
-                await JS.InvokeVoidAsync("loadData", 7);
+                await JS.InvokeVoidAsync("loadData", 7, Session.CurrentUser?.ID);
             }
             catch (Exception ex)
             {
@@ -71,13 +71,13 @@
         }
     }
     private async Task OnRangeChange(ChangeEventArgs e)
-{
-    if (JS == null) return;
+    {
+        if (JS == null) return;
 
-    var days = int.Parse(e.Value!.ToString()!);
+        var days = int.Parse(e.Value!.ToString()!);
 
-    await JS.InvokeVoidAsync("loadData", days);
-}
+        await JS.InvokeVoidAsync("loadData", days, Session.CurrentUser?.ID);
+    }
 
 
 }

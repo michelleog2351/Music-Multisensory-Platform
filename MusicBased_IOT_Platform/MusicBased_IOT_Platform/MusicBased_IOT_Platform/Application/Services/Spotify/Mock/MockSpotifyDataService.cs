@@ -429,5 +429,10 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
         {
             throw new NotImplementedException();
         }
+
+        public string GetSpotifyLoginUrl()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

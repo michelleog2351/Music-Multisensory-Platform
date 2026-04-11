@@ -3,7 +3,7 @@
 namespace MusicBased_IOT_Platform.Application.Services
 {
     /// <summary>
-    /// The MoodClassifier class 
+    /// The MoodClassifier class is responsible for classifying the user's mood based on their biometric data.
     /// </summary>
     public static class MoodClassifier
     {

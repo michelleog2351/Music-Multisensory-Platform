@@ -10,26 +10,32 @@
 
 //    loadData();
 //};
-window.loadData = async function (days = 7) {
+window.loadData = async function (days = 7, userId) {
 
     try {
-        const response = await fetch(`/api/calibration/history?days=${days}`);
+        //const response = await fetch(`/api/calibration/history?days=${days}`);
+        const response = await fetch(`/api/calibration/history?userId=${userId}&days=${days}`);
 
         if (!response.ok) {
             console.error("API failed:", response.status);
             return;
         }
 
-        const text = await response.text();
+        //const text = await response.text();
 
-        if (!text) {
-            console.warn("Empty response");
-            return;
-        }
+        //if (!text) {
+        //    console.warn("Empty response");
+        //    return;
+        //}
+        const data = await response.json();
 
-        const data = JSON.parse(text);
+
+       // const data = JSON.parse(text);
 
         console.log("DATA:", data);
+
+        console.log("DAYS:", days);
+        console.log("DATA LENGTH:", data.length);
 
         renderChart(data);
 
@@ -96,38 +102,28 @@ window.loadData = async function (days = 7) {
 function renderChart(data) {
     d3.select("#myChart").selectAll("*").remove();
 
+    if (!data || data.length === 0) {
+        console.warn("No data for chart");
+        return;
+    }
+
+    // ✅ Sort by date (VERY IMPORTANT)
+    data.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+
     const width = 600;
     const height = 300;
     const margin = { top: 20, right: 20, bottom: 40, left: 50 };
+
+    const chartWidth = width - margin.left - margin.right;
+    const chartHeight = height - margin.top - margin.bottom;
 
     const svg = d3.select("#myChart")
         .append("svg")
         .attr("width", width)
         .attr("height", height);
 
-    const chartWidth = width - margin.left - margin.right;
-    const chartHeight = height - margin.top - margin.bottom;
-
     const g = svg.append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
-
-    // x-axis (time/index)
-    //const x = d3.scaleBand()
-    //    .domain(data.map((d, i) => i))
-    //    .range([0, chartWidth])
-    //    .padding(0.2);
-
-    //// y-axis (heart rate)
-    //const y = d3.scaleLinear()
-    //    .domain([0, d3.max(data, d => d.restingHeartRate || 20)])
-    //    .nice()
-    //    .range([chartHeight, 0]);
-
-    //// 🔹 Draw x-axis
-    //g.append("g")
-    //    .attr("transform", `translate(0,${chartHeight})`)
-    //    .call(d3.axisBottom(x).tickFormat(i => `Day ${i + 1}`));
-
 
     const x = d3.scaleTime()
         .domain(d3.extent(data, d => new Date(d.createdAt)))
@@ -138,75 +134,53 @@ function renderChart(data) {
         .nice()
         .range([chartHeight, 0]);
 
+    g.append("g")
+        .attr("transform", `translate(0,${chartHeight})`)
+        .call(d3.axisBottom(x));
+
+    g.append("g")
+        .call(d3.axisLeft(y));
+
     const line = d3.line()
+        .defined(d => d.restingHeartRate != null) 
         .x(d => x(new Date(d.createdAt)))
         .y(d => y(d.restingHeartRate));
 
     g.append("path")
         .datum(data)
         .attr("fill", "none")
-        .attr("stroke", "#1DB954")
+        .attr("stroke", "#1DB954") 
         .attr("stroke-width", 2)
         .attr("d", line);
 
-    // Draw y-axis
-    g.append("g")
-        .call(d3.axisLeft(y));
-
-    // Tooltip
     const tooltip = d3.select("#tooltip");
 
-    // Bars
-    //    g.selectAll("rect")
-    //        .data(data)
-    //        .enter()
-    //        .append("rect")
-    //        .attr("x", (d, i) => x(i))
-    //        .attr("y", d => y(d.restingHeartRate || 0))
-    //        .attr("width", x.bandwidth())
-    //        .attr("height", d => chartHeight - y(d.restingHeartRate || 0))
-    //        .on("mouseover", function (event, d) {
-    //            tooltip
-    //                .style("display", "block")
-    //                .html(`
-    //                    HR: ${d.restingHeartRate}<br/>
-    //                    HRV: ${d.hrv}<br/>
-    //                    Breathing: ${d.breathingRate}
-    //                `);
-    //        })
-    //        .on("mousemove", function (event) {
-    //            tooltip
-    //                .style("left", (event.pageX + 10) + "px")
-    //                .style("top", (event.pageY - 20) + "px");
-    //        })
-    //        .on("mouseout", function () {
-    //            tooltip.style("display", "none");
-    //        });
-
-    //        const x = d3.scaleTime()
-    //    .domain(d3.extent(data, d => new Date(d.createdAt)))
-    //    .range([0, chartWidth]);
-
-    //const y = d3.scaleLinear()
-    //    .domain([0, d3.max(data, d => d.restingHeartRate || 0)])
-    //    .nice()
-    //    .range([chartHeight, 0]);
-
-    //// line generator
-    //const line = d3.line()
-    //    .x(d => x(new Date(d.createdAt)))
-    //    .y(d => y(d.restingHeartRate));
-
-    //// draw line
-    //g.append("path")
-    //    .datum(data)
-    //    .attr("fill", "none")
-    //    .attr("stroke", "#1DB954") // Spotify green 👀
-    //    .attr("stroke-width", 2)
-    //    .attr("d", line);
-    //}
+    g.selectAll("circle")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("cx", d => x(new Date(d.createdAt)))
+        .attr("cy", d => y(d.restingHeartRate))
+        .attr("r", 4)
+        .on("mouseover", function (event, d) {
+            tooltip
+                .style("display", "block")
+                .html(`
+                    HR: ${d.restingHeartRate}<br/>
+                    HRV: ${d.hrv}<br/>
+                    Breathing: ${d.breathingRate}
+                `);
+        })
+        .on("mousemove", function (event) {
+            tooltip
+                .style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 20) + "px");
+        })
+        .on("mouseout", function () {
+            tooltip.style("display", "none");
+        });
+}
 
     window.focusSearch = () => {
         document.querySelector('.search-container input')?.focus();
     };
-}

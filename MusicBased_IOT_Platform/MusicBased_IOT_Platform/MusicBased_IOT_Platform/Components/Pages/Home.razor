@@ -2,6 +2,10 @@
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 @inject UserSessionService UserSession
 @inject IJSRuntime JS
+@inject NavigationManager NavigationManager
+@inject ISpotifyDataService SpotifyService
+
+
 
 
 @using MusicBased_IOT_Platform.Application.Interfaces
@@ -374,6 +378,11 @@ selection options *@
 
 </div>
 
+<button class="btn-fitbit" @onclick="ConnectToSpotify">
+    Connect Spotify
+</button>
+
+
 @* @if (releases != null)
 {
     var index = 1;
@@ -481,6 +490,22 @@ selection options *@
     private string detectedMood = "";
 
     Item? NowPlaying;
+
+
+    private async Task ConnectToSpotify()
+    {
+        await Session.LoadUserAsync();
+
+        if (Session.CurrentUser == null)
+        {
+            NavigationManager.NavigateTo("/login");
+            return;
+        }
+
+
+        var url = SpotifyService.GetSpotifyLoginUrl();
+        NavigationManager.NavigateTo(url, true);
+    }
 
     async Task OnPlayClicked(Item track)
     {

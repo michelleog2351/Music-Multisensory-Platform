@@ -5,6 +5,13 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Fitbit
 {
     public interface IFitbitDataService
     {
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        string GetFitbitAuthUrl();
+
         /// <summary>
         /// The <c>AuthCodeFlowAsync</c> method takes an authorization code as a parameter 
         /// and uses it to acquire an access token from the Fitbit API. 

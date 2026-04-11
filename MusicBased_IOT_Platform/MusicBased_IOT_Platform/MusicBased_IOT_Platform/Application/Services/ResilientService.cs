@@ -42,6 +42,11 @@ namespace MusicBased_IOT_Platform.Application.Services
             throw new NotImplementedException();
         }
 
+        public string GetFitbitAuthUrl()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<List<HeartRateZone>> GetHeartRateZonesAsync(DateTime date)
         {
             throw new NotImplementedException();

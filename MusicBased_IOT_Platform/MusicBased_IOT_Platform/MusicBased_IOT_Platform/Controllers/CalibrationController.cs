@@ -14,7 +14,7 @@ namespace MusicBased_IOT_Platform.Controller
         private readonly ICalibrationRepository _calibrationRepo = calibrationRepo;
 
         [HttpGet("history")]
-        public async Task<IActionResult> GetHistory([FromQuery] int days = 7)
+        public async Task<IActionResult> GetHistory([FromQuery] int userId, int days = 7)
         {
             //var user = await _userContext.GetCurrentUserAsync();
 
@@ -22,23 +22,27 @@ namespace MusicBased_IOT_Platform.Controller
             //    return Unauthorized();
 
 
-            var user = await _userContext.GetCurrentUserAsync();
+          //   var user = await _userContext.GetCurrentUserAsync();
 
-            if (user == null)
-                Console.WriteLine("⚠️ No user found - using fallback userId = 1");
-            user = new Models.UserAccount { ID = 1 };
+            //if (user == null)
+            //    Console.WriteLine("⚠️ No user found - using fallback userId = 1");
+          //  user = new Models.UserAccount { ID = 1 };
 
-            Console.WriteLine($"USER: {user!.FirstName}");
+            //Console.WriteLine($"USER: {user!.FirstName}");
 
             //var history = await _calibrationRepo.GetByUserIDAsync(user.ID);
-            var history = await _calibrationRepo.GetRecentAsync(user.ID, days);
+            var history = await _calibrationRepo.GetRecentAsync(userId, days);
 
-            //return Ok(history);
+           // await Http.GetAsync($"api/calibration/history?userId={Session.CurrentUser.ID}");
+
+           // return Ok(history);
+
             return Ok(new[]
             {
-                new { restingHeartRate = 70, hrv = 50, breathingRate = 12, createdAt = DateTime.Now },
-                new { restingHeartRate = 75, hrv = 48, breathingRate = 13, createdAt = DateTime.Now},
+              new { restingHeartRate = 70, hrv = 50, breathingRate = 12, createdAt = DateTime.Now.AddDays(-2) },
+              new { restingHeartRate = 75, hrv = 48, breathingRate = 30, createdAt = DateTime.Now.AddDays(-1) },
+              new { restingHeartRate = 65, hrv = 52, breathingRate = 14, createdAt = DateTime.Now },
                 });
-             }
         }
+    }
 }

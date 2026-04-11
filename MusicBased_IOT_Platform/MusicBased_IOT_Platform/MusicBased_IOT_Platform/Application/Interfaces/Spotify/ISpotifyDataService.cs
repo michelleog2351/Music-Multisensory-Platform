@@ -16,7 +16,10 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Spotify
     public interface ISpotifyDataService
     {
 
-        Task ExchangeCodeAsync(string code);
+        string GetSpotifyLoginUrl();
+
+        //Task ExchangeCodeAsync(string code);
+        Task ExchangeCodeAsync(string code, int userId);
 
         /// <summary>
         /// The <c>GetAlbum</c> method gets Spotify catalog information for a single album.

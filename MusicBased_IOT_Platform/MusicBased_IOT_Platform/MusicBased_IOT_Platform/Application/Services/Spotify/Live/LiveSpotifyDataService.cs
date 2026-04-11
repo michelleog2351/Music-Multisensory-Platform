@@ -102,7 +102,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public async Task ExchangeCodeAsync(string code)
+        public async Task ExchangeCodeAsync(string code, int userId)
         {
             var request = new HttpRequestMessage(
                 HttpMethod.Post,

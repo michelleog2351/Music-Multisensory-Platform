@@ -21,7 +21,7 @@ namespace MusicBased_IOT_Platform.Models
             BaseURL = "https://api.fitbit.com";
             ClientID = string.Empty;
             ClientSecret = string.Empty;
-            RedirectUri = string.Empty;
+            RedirectUri = "https://localhost:7039/signin-fitbit";
         }
 
         // Properties

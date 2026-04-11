@@ -26,16 +26,17 @@
         {
             if (Session.CurrentUser == null)
             {
-                // no user logged in, therefore cannot access fitbit
+                // no user logged in, therefore cannot access spotify
                 Navigation.NavigateTo("/login");
                 return;
             }
-            
+
             // Exchange the authorization code for an access token
             // await SpotifyService.ExchangeCodeAsync(code, Session.CurrentUser!.ID);
             await SpotifyService.ExchangeCodeAsync(code);
-           Navigation.NavigateTo("/dashboard");
+            Navigation.NavigateTo("/dashboard");
             return;
         }
     }
+  
 }
