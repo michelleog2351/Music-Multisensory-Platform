@@ -425,12 +425,17 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
             throw new NotImplementedException();
         }
 
-        public Task ExchangeCodeAsync(string code)
+        //public Task ExchangeCodeAsync(string code)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        public string GetSpotifyLoginUrl()
         {
             throw new NotImplementedException();
         }
 
-        public string GetSpotifyLoginUrl()
+        public Task ExchangeCodeAsync(string code, int userId)
         {
             throw new NotImplementedException();
         }

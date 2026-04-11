@@ -26,16 +26,6 @@
                 DEBUG USER: @(Session.CurrentUser?.FirstName ?? "NULL")
             </p>
 
-         @*    <! -- Show the user's first name if logged in, otherwise show "Login" -->
-            @if (Session.CurrentUser != null)
-            {
-                <span>Hi @Session.CurrentUser.FirstName</span>
-            }
-            else
-            {
-                <span>Login</span>
-            }
- *@
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">Home
@@ -60,8 +50,7 @@
                         </NavLink>
                     </li>
                     <li class="nav-item">
-                        <NavLink class="nav-link" href="register">
-                            Register
+                        <NavLink class="nav-link" href="register">Register
                         </NavLink>
                     </li>
                }

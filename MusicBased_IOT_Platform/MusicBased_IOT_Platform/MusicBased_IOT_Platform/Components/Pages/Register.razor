@@ -30,7 +30,9 @@
                     <InputText 
                            class="form-control" 
                            @bind-Value="registerModel.FirstName"
-                           placeholder="First Name" />
+                           placeholder="First Name"
+                           aria-label="Enter your first name"
+                           aria-live="polite" />
                 </div>
 
                 <div class="col-md-6">
@@ -38,7 +40,9 @@
                     <InputText 
                            class="form-control"  
                            @bind-Value="registerModel.LastName"
-                           placeholder="Last Name" />
+                               placeholder="Last Name" 
+                               aria-label="Enter your last name"
+                               aria-live="polite" />
                 </div>
             </div>
 
@@ -47,29 +51,56 @@
                        class="form-control"  
                        type="email"
                        @bind-Value="registerModel.Email"
-                       placeholder="Email address" />
+                       placeholder="Email address" 
+                       aria-label="Enter your email address"
+                       aria-live="polite" />
             </div>
 
             <div class="mb-3">
                 <InputText 
                        class="form-control"  
                        @bind-Value="registerModel.Username"
-                       placeholder="Username" />
+                       placeholder="Username"
+                       aria-label="Enter your username"
+                       aria-live="polite" />
             </div>
 
-            <div class="mb-3">
+            <div class="input-group mb-3">
                 <InputText class="form-control"  
-                       type="password" 
+                       type="@(showPassword ? "text" : "password")"
                        @bind-Value="registerModel.Password"
-                       placeholder="Password" />
+                       placeholder="Password"
+                       aria-label="Enter your password"
+                       aria-live="polite" />
+
+                <button type="button"
+                        class="btn btn-outline-dark"
+                        @onclick="TogglePasswordVisibility"
+                        aria-label="Toggle password visibility">
+                    
+                    <i class="bi @(showPassword ? "bi bi-eye-slash" : "bi bi-eye-fill")"></i>
+                </button>
+
+                
             </div>
 
-            <div class="mb-3">
-                <InputText class="form-control"  
-                       type="password" 
-                       @bind-Value="registerModel.ConfirmPassword"
-                       placeholder="Confirm your password" />
+            <div class="input-group mb-3">
+                <InputText class="form-control"
+                           type="@(showConfirmPassword ? "text" : "password")"
+                           @bind-Value="registerModel.ConfirmPassword"
+                           placeholder="Confirm your password"
+                           aria-label="Confirm your password"
+                           aria-live="polite" />
+
+                <button type="button"
+                        class="btn btn-outline-dark"
+                        @onclick="ToggleConfirmPasswordVisibility"
+                        aria-label="Toggle confirm password visibility">
+
+                    <i class="bi @(showConfirmPassword ? "bi bi-eye-slash" : "bi bi-eye-fill")"></i>
+                </button>
             </div>
+            <br />
 
             @if (!string.IsNullOrEmpty(ErrorMessage))
             {
@@ -78,8 +109,9 @@
                 </div>
             }
             <div class="d-grid gap-2">
-                <button class="btn btn-spotify btn-lg"
-                        type="submit">Register</button>
+                <button class="btn btn-spotify btn-lg shadow"
+                        style="border-radius: 50px;"
+                        type="submit"><b>Register</b></button>
             </div>
         </EditForm>
     </div>
@@ -90,6 +122,10 @@
     private RegisterModel registerModel = new();
 
     private string? ErrorMessage;
+
+    private bool showPassword = false;
+
+    private bool showConfirmPassword = false;
 
     /// <summary>
     /// The OnInitialized method checks if there is a currently logged-in user in the session.
@@ -142,15 +178,16 @@
         ErrorMessage = null;
     }
 
-
-    // how do i prevent sql injection in this code?
-    public void PreventSqlInjection()
+    /// <summary>
+    /// The TogglePasswordVisibility method is called when the user clicks on the "Show Password" checkbox. It toggles the value of the showPassword variable, which determines whether the password input fields should be displayed as plain text or as masked characters.
+    /// </summary>
+    private void TogglePasswordVisibility()
     {
-        // In this code, we are using Entity Framework Core which uses parameterized queries by default. 
-        // This means that the user input is treated as a parameter and not as part of the SQL query, 
-        // which helps to prevent SQL injection attacks.
-        // However, it is still important to validate and sanitize user input to ensure that it does not contain any malicious content. 
-        // For example, you can use data annotations to validate the input fields in the RegisterModel class.
-        // Additionally, you should also ensure that you are using the latest version of Entity Framework Core and that you have applied all security patches.
+        showPassword = !showPassword;
+    }
+
+    private void ToggleConfirmPasswordVisibility()
+    {
+        showConfirmPassword = !showConfirmPassword;
     }
 }

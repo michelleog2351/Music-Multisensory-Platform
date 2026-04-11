@@ -33,7 +33,7 @@
 
             // Exchange the authorization code for an access token
             // await SpotifyService.ExchangeCodeAsync(code, Session.CurrentUser!.ID);
-            await SpotifyService.ExchangeCodeAsync(code);
+            await SpotifyService.ExchangeCodeAsync(code, Session.CurrentUser!.ID);
             Navigation.NavigateTo("/dashboard");
             return;
         }

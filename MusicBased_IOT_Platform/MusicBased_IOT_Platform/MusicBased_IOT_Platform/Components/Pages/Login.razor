@@ -28,15 +28,26 @@
                                class="form-control"  
                                @bind-Value="loginModel.Username"                              
                                placeholder="Username"
+                               aria-label="Enter your username"
+                               aria-live="polite"
                                autocomplete="on" />
                     </div>
 
-                    <div class="mb-3">
-                        <InputText class="form-control"  
-                                   type="password"
+                    <div class="input-group mb-3">
+                        <InputText class="form-control"
+                               type="@(showPassword ? "text" : "password")"
                                    required
                                    @bind-Value="loginModel.Password"
-                                   placeholder="Password" />
+                                   placeholder="Password"
+                                   aria-label="Enter your password"
+                                   aria-live="polite" />
+                        <button type="button"
+                                class="btn btn-outline-info"
+                                @onclick="TogglePasswordVisibility"
+                                aria-label="Toggle confirm password visibility">
+
+                            <i class="bi @(showPassword ? "bi bi-eye-slash" : "bi bi-eye-fill")"></i>
+                        </button>
                     </div>
            
                     <div>
@@ -52,7 +63,11 @@
                 </div>
             }
                     <div class="d-grid gap-2">
-                        <button class="btn btn-fitbit btn-lg" type="submit">Login</button>
+                    <button class="btn btn-fitbit btn-lg shadow"
+                            type="submit"
+                                style="border-radius: 50px;"> 
+                                Login
+                    </button>
                     </div>
             </div>
             </EditForm>
@@ -63,6 +78,8 @@
     private LoginModel loginModel = new();
 
     private string? ErrorMessage;
+
+    private bool showPassword = false;
 
     /// <summary>
     /// The OnInitialized method checks if there is a currently logged-in user in the session.
@@ -119,6 +136,11 @@
     private void ClearError(ChangeEventArgs e)
     {
         ErrorMessage = null;
+    }
+
+    private void TogglePasswordVisibility()
+    {
+        showPassword = !showPassword;
     }
 
     // recalibration logic

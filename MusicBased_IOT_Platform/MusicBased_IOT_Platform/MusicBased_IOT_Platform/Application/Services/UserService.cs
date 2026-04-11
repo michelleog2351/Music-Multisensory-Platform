@@ -60,6 +60,10 @@ namespace MusicBased_IOT_Platform.Application.Services
             return (true, null, user);
         }
 
+        /// <summary>
+        /// The LogoutUserAsync method
+        /// </summary>
+        /// <returns></returns>
         public Task LogoutUserAsync()
         {
             return Task.CompletedTask;
