@@ -11,5 +11,7 @@ namespace MusicBased_IOT_Platform.Application.Interfaces
         Task LogoutUserAsync();
   
         Task<UserAccount?> GetCurrentUserAsync();
+
+        Task<bool> ResetPassword(string username, string newPassword);
     }
 }

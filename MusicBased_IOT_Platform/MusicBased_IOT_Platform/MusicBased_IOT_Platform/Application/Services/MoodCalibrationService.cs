@@ -57,10 +57,43 @@ namespace MusicBased_IOT_Platform.Application.Services
             {
                 BiometricSummary = biometric,
                 Mood = mood,
-                RecommendedTracks = tracks?.Tracks?.ToList() ?? []
+                RecommendedTracks = tracks?.Tracks?.ToList() ?? [],
+                GeneratedAt = DateTime.UtcNow
             };
 
         }
+
+        //public async Task<MusicMoodResult> BuildMoodResultAsync()
+        //{
+        //    var bio = await _fitbitService.GetBiometricDataAsync();
+
+        //    var mood = _mappingService.ClassifyMood(bio);
+
+        //    var result = new MusicMoodResult
+        //    {
+        //        BiometricSummary = bio,
+        //        Mood = mood,
+        //        GeneratedAt = DateTime.Now
+        //    };
+
+        //    // 🔥 THIS PART IS MISSING IN YOUR FLOW
+        //    var user = await _userContext.GetCurrentUserAsync();
+
+        //    if (user != null)
+        //    {
+        //        await _calibrationRepo.AddAsync(new Calibration
+        //        {
+        //            UserID = user.ID,
+        //            RestingHeartRate = bio.AverageRestingHeartRate,
+        //            HRV = bio.AverageHeartRateVariability,
+        //            BreathingRate = bio.AverageBreathingRate,
+        //            Mood = mood.ToString(),
+        //            CreatedAt = DateTime.Now
+        //        });
+        //    }
+
+        //    return result;
+        //}
 
         public async Task<MusicMoodResult> GenerateMoodMusicAsync()
         {
@@ -116,30 +149,71 @@ namespace MusicBased_IOT_Platform.Application.Services
         /// </summary>
         /// <param name="result"></param>
         /// <returns></returns>
+        //private async Task SaveCalibrationAsync(MusicMoodResult result)
+        //{
+        //    var user = await _userContext.GetCurrentUserAsync();
+        //    if (user == null) return;
+
+        //    var record = new CalibrationRecord
+        //    {
+        //        UserID = user.ID,
+        //        RestingHeartRate = result.BiometricSummary!.AverageRestingHeartRate,
+        //        HRV = result.BiometricSummary!.AverageHeartRateVariability,
+        //        BreathingRate = result.BiometricSummary!.AverageBreathingRate,
+        //        Mood = result.Mood.ToString(),
+
+        //        TracksJson = JsonSerializer.Serialize(
+        //            result.RecommendedTracks?.Select(
+        //                t => new
+        //                {
+        //                    t.Name,
+        //                    Artist = t.Artists?.FirstOrDefault()?.Name
+        //                })
+        //            ),
+        //        CreatedAt = DateTime.UtcNow
+        //    };
+
+        //    await _calibrationRepo.AddAsync(record);
+        //}
         private async Task SaveCalibrationAsync(MusicMoodResult result)
         {
             var user = await _userContext.GetCurrentUserAsync();
-            if (user == null) return;
+
+            if (user == null)
+            {
+                Console.WriteLine("❌ SaveCalibration: user is NULL");
+                return;
+            }
+
+            if (result.BiometricSummary == null)
+            {
+                Console.WriteLine("❌ SaveCalibration: biometric data is NULL");
+                return;
+            }
 
             var record = new CalibrationRecord
             {
                 UserID = user.ID,
-                RestingHeartRate = result.BiometricSummary!.AverageRestingHeartRate,
-                HRV = result.BiometricSummary!.AverageHeartRateVariability,
-                BreathingRate = result.BiometricSummary!.AverageBreathingRate,
+                RestingHeartRate = result.BiometricSummary.AverageRestingHeartRate,
+                HRV = result.BiometricSummary.AverageHeartRateVariability,
+                BreathingRate = result.BiometricSummary.AverageBreathingRate,
                 Mood = result.Mood.ToString(),
 
                 TracksJson = JsonSerializer.Serialize(
-                    result.RecommendedTracks?.Select(
-                        t => new
+                    result.RecommendedTracks?
+                        .Select(t => new
                         {
                             t.Name,
                             Artist = t.Artists?.FirstOrDefault()?.Name
                         })
-                    ),
+                   .ToList()
+                ),
+
                 CreatedAt = DateTime.UtcNow
             };
-                
+
+            Console.WriteLine($"✅ Saving calibration for user {user.ID}");
+
             await _calibrationRepo.AddAsync(record);
         }
     }

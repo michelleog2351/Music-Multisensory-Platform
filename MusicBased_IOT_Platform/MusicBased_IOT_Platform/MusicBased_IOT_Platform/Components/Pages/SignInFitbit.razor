@@ -20,37 +20,6 @@
 @code {
     private bool _processed = false;
 
-    // protected override async Task OnInitializedAsync()
-    // {
-    //     if (_processed) return;
-    //     _processed = true;
-        
-    //     await Session.LoadUserAsync();
-
-    //     var uri = new Uri(Navigation.Uri);
-    //     var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
-    //     var code = query["code"];
-
-    //     if (!string.IsNullOrEmpty(code))
-    //     {
-    //         if (Session.CurrentUser == null)
-    //         {
-    //             // no user logged in, therefore cannot access fitbit
-    //             // Navigation.NavigateTo("/login");
-    //             // return;
-    //             await Session.LoadUserAsync();
-    //         }
-    //         Console.WriteLine("🔥 SIGNIN-FITBIT PAGE HIT");
-
-    //         Console.WriteLine($"URL: {Navigation.Uri}");
-    //         Console.WriteLine($"CODE: {code}");
-    //         // Exchange the authorization code for an access token, pass user ID
-    //         await FitbitService.AuthCodeFlowAsync(code, Session.CurrentUser!.ID);
-    //         Navigation.NavigateTo("/dashboard", true);
-    //         return;
-    //     }
-    // }
-
     private bool _hasRun = false;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -66,7 +35,7 @@
         var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
         var code = query["code"];
 
-        Console.WriteLine("🔥 SIGNIN-FITBIT PAGE HIT");
+        Console.WriteLine("SIGNIN-FITBIT PAGE HIT");
         Console.WriteLine($"URL: {Navigation.Uri}");
         Console.WriteLine($"CODE: {code}");
 
@@ -74,13 +43,13 @@
         {
             if (Session.CurrentUser == null)
             {
-                Console.WriteLine("❌ USER STILL NULL AFTER LOAD");
+                Console.WriteLine("USER STILL NULL AFTER LOAD");
 
                 Navigation.NavigateTo("/login");
                 return;
             }
 
-            Console.WriteLine($"✅ USER: {Session.CurrentUser.Username}");
+            Console.WriteLine($"USER: {Session.CurrentUser.Username}");
 
             await FitbitService.AuthCodeFlowAsync(code, Session.CurrentUser.ID);
 

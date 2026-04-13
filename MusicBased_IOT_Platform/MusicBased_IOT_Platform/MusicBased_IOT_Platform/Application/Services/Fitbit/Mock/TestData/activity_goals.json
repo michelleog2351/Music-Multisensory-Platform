@@ -1,146 +1,22 @@
-[
-  {
-    "type": "ACTIVE_ZONE_MINUTES_GOAL",
-    "frequency": "DAILY",
-    "target": 15,
-    "result": null,
-    "status": "NEW",
-    "is_primary": false,
-    "start_date": null,
-    "end_date": null,
-    "created_on": "2024-03-08T21:54:11.798+00:00",
-    "edited_on": null
-  },
-  {
-    "type": "ACTIVE_ZONE_MINUTES_GOAL",
-    "frequency": "WEEKLY",
-    "target": 150,
-    "result": null,
-    "status": null,
-    "is_primary": false,
-    "start_date": null,
-    "end_date": null,
-    "created_on": null,
-    "edited_on": null
-  },
-  {
-    "type": "CALORIES_BURNED_GOAL",
-    "frequency": "DAILY",
-    "target": 2500,
-    "result": 1352,
-    "status": "INPROGRESS_SO_FAR_MISSED",
-    "is_primary": false,
-    "start_date": "2026-01-11",
-    "end_date": "2026-01-11",
-    "created_on": "2020-10-30T20:36:18.000+00:00",
-    "edited_on": null
-  },
-  {
-    "type": "STEPS_GOAL",
-    "frequency": "DAILY",
-    "target": 10000,
-    "result": 0,
-    "status": "INPROGRESS_SO_FAR_MISSED",
-    "is_primary": false,
-    "start_date": "2026-01-11",
-    "end_date": "2026-01-11",
-    "created_on": "2020-10-30T20:36:18.000+00:00",
-    "edited_on": null
-  },
-  {
-    "type": "FLOORS_CLIMBED_GOAL",
-    "frequency": "DAILY",
-    "target": 10,
-    "result": 0,
-    "status": "INPROGRESS_SO_FAR_MISSED",
-    "is_primary": false,
-    "start_date": "2026-01-11",
-    "end_date": "2026-01-11",
-    "created_on": "2020-10-30T20:36:18.000+00:00",
-    "edited_on": null
-  },
-  {
-    "type": "DISTANCE_FROM_STEPS_GOAL",
-    "frequency": "DAILY",
-    "target": 5,
-    "result": 0,
-    "status": "INPROGRESS_SO_FAR_MISSED",
-    "is_primary": false,
-    "start_date": "2026-01-11",
-    "end_date": "2026-01-11",
-    "created_on": "2020-10-30T20:36:18.000+00:00",
-    "edited_on": null
-  },
-  {
-    "type": "ACTIVE_MINUTES_GOAL",
-    "frequency": "DAILY",
-    "target": 30,
-    "result": 0,
-    "status": "INPROGRESS_SO_FAR_MISSED",
-    "is_primary": false,
-    "start_date": "2026-01-11",
-    "end_date": "2026-01-11",
-    "created_on": "2020-10-30T20:36:18.000+00:00",
-    "edited_on": null
-  },
-  {
-    "type": "STEPS_GOAL",
-    "frequency": "WEEKLY",
-    "target": 70000,
-    "result": 14343,
-    "status": "INPROGRESS_SO_FAR_MISSED",
-    "is_primary": true,
-    "start_date": "2026-01-05",
-    "end_date": "2026-01-11",
-    "created_on": "2020-10-30T20:36:18.000+00:00",
-    "edited_on": null
-  },
-  {
-    "type": "DISTANCE_FROM_STEPS_GOAL",
-    "frequency": "WEEKLY",
-    "target": 35,
-    "result": 5.89827,
-    "status": "INPROGRESS_SO_FAR_MISSED",
-    "is_primary": false,
-    "start_date": "2026-01-05",
-    "end_date": "2026-01-11",
-    "created_on": "2020-10-30T20:36:18.000+00:00",
-    "edited_on": null
-  },
-  {
-    "type": "FLOORS_CLIMBED_GOAL",
-    "frequency": "WEEKLY",
-    "target": 70,
-    "result": 1,
-    "status": "INPROGRESS_SO_FAR_MISSED",
-    "is_primary": false,
-    "start_date": "2026-01-05",
-    "end_date": "2026-01-11",
-    "created_on": "2020-10-30T20:36:18.000+00:00",
-    "edited_on": null
-  },
-  {
-    "type": "CALORIES_BURNED_GOAL",
-    "frequency": "WEEKLY",
-    "target": 19936,
-    "result": 12966,
-    "status": "INPROGRESS_SO_FAR_MISSED",
-    "is_primary": false,
-    "start_date": "2026-01-05",
-    "end_date": "2026-01-11",
-    "created_on": "2020-10-30T20:36:18.000+00:00",
-    "edited_on": null
-  },
-  {
-    "type": "WATER_GOAL",
-    "frequency": "DAILY",
-    "target": 1893,
-    "result": 0,
-    "status": "INPROGRESS_SO_FAR_MISSED",
-    "is_primary": false,
-    "start_date": "2021-05-27",
-    "end_date": "2021-05-28",
-    "created_on": "2020-10-30T20:36:18.000+00:00",
-    "edited_on": null
-  }
-]
+{
+  "activityGoals": [
+    {
+      "type": "STEPS",
+      "target": 10000,
+      "result": 0,
+      "status": "IN_PROGRESS"
+    },
+    {
+      "type": "CALORIES",
+      "target": 2500,
+      "result": 1352,
+      "status": "IN_PROGRESS"
+    },
+    {
+      "type": "ACTIVE_MINUTES",
+      "target": 30,
+      "result": 0,
+      "status": "MISSED"
+    }
+  ]
+}

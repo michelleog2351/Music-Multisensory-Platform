@@ -66,7 +66,8 @@
                     </li>
 
                     <li class="nav-item">
-                        <button class="btn btn-outline-light btn-sm" @onclick="Logout">
+                        <button class="btn btn-outline-light btn-sm" 
+                        @onclick="OpenLogoutModal">
                             Logout
                         </button>
                     </li>
@@ -76,6 +77,46 @@
     </div>
 </nav>
 
+@if (showLogoutModal)
+{
+    <div class="modal fade show d-block" tabindex="-1" @onclick="CloseLogoutModal">
+        <div class="modal-dialog modal-dialog-centered" @onclick:stopPropagation="true">
+            <div class="modal-content rounded-4 shadow">
+
+                <div class="modal-header">
+                    <h5 class="modal-title"><b>Confirm Logout</b></h5>
+                    <button class="btn-close" @onclick="CloseLogoutModal"></button>
+                </div>
+
+                <div class="modal-body text-center">
+                    <p class="mb-0">
+                        Are you sure you want to log out?
+                    </p>
+                </div>
+
+                <div class="modal-footer border-0 d-flex justify-content-center gap-3">
+
+                    <button class="btn btn-link text-muted px-2"
+                    style="text-decoration: none;"
+                            @onclick="CloseLogoutModal">
+                        <b>Cancel</b>
+                    </button>
+
+                    <button class="btn btn-spotify px-4"
+                            @onclick="ConfirmLogout">
+                        Confirm
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Backdrop -->
+    <div class="modal-backdrop fade show"></div>
+}
+
 @code {
 
     /// <summary>
@@ -84,6 +125,8 @@
     // protected override void OnInitialized()
     // {
     //     Session.OnChange += async () => await InvokeAsync(StateHasChanged);
+    private bool showLogoutModal = false;
+
     // }
     protected override async Task OnInitializedAsync()
     {
@@ -106,9 +149,25 @@
     /// The Logout method is responsible for logging the user out of the application.
     /// </summary>
     /// <returns></returns>
-    private async Task Logout()
+    // private async Task Logout()
+    // {
+    //     await Session.LogoutAsync();
+    //     NavigationManager.NavigateTo("/login", true);
+    // }
+
+    private void OpenLogoutModal()
     {
-        await Session.LogoutAsync();
+        showLogoutModal = true;
+    }
+
+    private void CloseLogoutModal()
+    {
+        showLogoutModal = false;
+    }
+
+    private async Task ConfirmLogout()
+    {
+        await Session.LogoutAsync(); 
         NavigationManager.NavigateTo("/login", true);
     }
 }

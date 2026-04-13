@@ -137,13 +137,15 @@ selection options *@
 
                     @if (selectedTrack != null)
                     {
-                        <br />
-                        <iframe src="https://open.spotify.com/embed/track/@selectedTrack.Id"
-                                width="400"
-                                height="80"
-                                frameborder="0"
-                                allow="encrypted-media">
-                        </iframe>
+                        <div class="spotify-player-bar">
+                            @* <h6>@selectedTrack.Name - @selectedTrack.Artists?[0].Name</h6> *@
+
+                            <iframe src="@($"https://open.spotify.com/embed/track/{selectedTrack.Id}")"
+                                    height="152"
+                                    style="border-radius:12px; width:100%;"
+                                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+                            </iframe>
+                        </div>
                     }
                 
 
@@ -282,7 +284,8 @@ selection options *@
                         </button>
 
                         <button class="btn btn-sm btn-outline-danger rounded-circle"
-                                style="width:40px;height:40px;">
+                                style="width:40px;height:40px;"
+                                >
                             ❤️
                         </button>
 
@@ -292,7 +295,7 @@ selection options *@
 
             @if (NowPlaying != null)
             {
-                <div class="player-sidebar mt-3">
+                <div class="player mt-3">
 
                     <h6>@NowPlaying.Name</h6>
 
@@ -458,7 +461,9 @@ selection options *@
         </div>
     </div>
 }
-
+<button class="btn btn-success" @onclick="TestPlay">
+    TEST PLAY
+</button>
 
 @code {
 
@@ -491,6 +496,15 @@ selection options *@
 
     Item? NowPlaying;
 
+    private List<UiTrack> favourites = new();
+
+    private bool _spotifyReady = false;
+
+    private void AddToFavourites(UiTrack track)
+    {
+        if (!favourites.Any(t => t.Id == track.Id))
+            favourites.Add(track);
+    }
 
     private async Task ConnectToSpotify()
     {
@@ -502,22 +516,49 @@ selection options *@
             return;
         }
 
-
         var url = SpotifyService.GetSpotifyLoginUrl();
         NavigationManager.NavigateTo(url, true);
     }
 
     async Task OnPlayClicked(Item track)
     {
-        try
-        {
-            await Spotify.PlayTrack(track.Uri!);
-            NowPlaying = track;
-        }
-        catch
-        {
-            NowPlaying = track;
-        }
+        await Session.LoadUserAsync();
+
+        var token = Session.CurrentUser?.SpotifyAccessToken;
+
+        if (string.IsNullOrEmpty(token))
+            return;
+
+        await JS.InvokeVoidAsync(
+            "playTrackWeb",
+            token,
+            track.Uri
+        );
+
+        NowPlaying = track;
+    }
+
+    async Task Pause()
+    {
+        await JS.InvokeVoidAsync("pauseTrack");
+    }
+
+    async Task Resume()
+    {
+        await JS.InvokeVoidAsync("resumeTrack");
+    }
+
+    private async Task TestPlay()
+    {
+        await Session.LoadUserAsync();
+
+        var token = Session.CurrentUser?.SpotifyAccessToken;
+
+        await JS.InvokeVoidAsync(
+            "playTrackWeb",
+            token,
+            "spotify:track:59oIHy7WdyoWY8LkUGX3O0" // random test track
+        );
     }
 
     /// <summary>
@@ -544,12 +585,35 @@ selection options *@
 
         if (!recalibrationRequired)
         {
-            moodResult = await MoodCalibrationService.BuildMoodResultAsync();
+            moodResult = await MoodCalibrationService.RecalibrateAsync();
         }
     }
 
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        if (!firstRender || _spotifyReady)
+            return;
+
+        _spotifyReady = true;
+
+        await Session.LoadUserAsync();
+
+        var token = Session.CurrentUser?.SpotifyAccessToken;
+
+        Console.WriteLine($"TOKEN: {token}");
+
+        if (!string.IsNullOrEmpty(token))
+        {
+            await JS.InvokeVoidAsync("initializeSpotifyPlayer", token);
+
+            // small delay ensures deviceId exists
+            await Task.Delay(1000);
+
+            await JS.InvokeVoidAsync("transferPlayback", token);
+        }
+    
+    
         if (isSearchModalOpen)
         {
             await JS.InvokeVoidAsync("focusSearch");
@@ -560,7 +624,8 @@ selection options *@
     {
         // await MoodCalibrationService.RecalibrateAsync();
         // recalibrationRequired = false;
-        moodResult = await MoodCalibrationService.BuildMoodResultAsync();
+        //moodResult = await MoodCalibrationService.BuildMoodResultAsync();
+        moodResult = await MoodCalibrationService.RecalibrateAsync();
     }
 
     /// <summary>
@@ -613,10 +678,10 @@ selection options *@
 
     private void SelectTrack(Item track)
     {
-        selectedTrack = track;
         searchTerm = track.Name!;
         searchResults.Clear();
-
+        selectedTrack = track;
+       // selectedTrack = moodResult.RecommendedTracks?.FirstOrDefault();
         //CloseSearchModal();
     }
 
@@ -768,6 +833,28 @@ selection options *@
                         ?? new List<Item>();
 
         isLoading = false;
+    }
+
+    private UiTrack MapFromItem(Item item)
+    {
+        return new UiTrack
+        {
+            Id = item.Id!,
+            Name = item.Name!,
+            Artist = item.Artists?.FirstOrDefault()?.Name ?? "",
+            ImageUrl = item?.Images?.FirstOrDefault()?.Url
+        };
+    }
+
+    private UiTrack MapFromTrack(Track track)
+    {
+        return new UiTrack
+        {
+            Id = track.Id!,
+            Name = track.Name!,
+            Artist = track.Artists?.FirstOrDefault()?.Name ?? "",
+            ImageUrl = track.Album?.Images?.FirstOrDefault()?.Url
+        };
     }
 }
 

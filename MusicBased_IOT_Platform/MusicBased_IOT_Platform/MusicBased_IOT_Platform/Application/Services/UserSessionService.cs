@@ -3,14 +3,9 @@ using MusicBased_IOT_Platform.Models;
 
 namespace MusicBased_IOT_Platform.Application.Services
 {
-    public class UserSessionService
+    public class UserSessionService(ProtectedLocalStorage storage)
     {
-        private readonly ProtectedLocalStorage _storage;
-
-        public UserSessionService(ProtectedLocalStorage storage)
-        {
-            _storage = storage;
-        }
+        private readonly ProtectedLocalStorage _storage = storage;
 
         /// <summary>
         /// The CurrentUser property holds the information about the currently logged-in user.
@@ -40,8 +35,6 @@ namespace MusicBased_IOT_Platform.Application.Services
             await _storage.SetAsync("userSession", user);
 
             NotifyStateChanged();
-            //CurrentUser = user;
-
         }
 
         /// <summary>

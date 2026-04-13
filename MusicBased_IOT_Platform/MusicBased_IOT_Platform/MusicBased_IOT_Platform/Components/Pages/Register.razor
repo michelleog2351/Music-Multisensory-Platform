@@ -31,7 +31,8 @@
                            class="form-control" 
                            @bind-Value="registerModel.FirstName"
                            placeholder="First Name"
-                           aria-label="Enter your first name"
+                               style="padding: 10px;"
+                               aria-label="Enter your first name"
                            aria-live="polite" />
                 </div>
 
@@ -40,7 +41,8 @@
                     <InputText 
                            class="form-control"  
                            @bind-Value="registerModel.LastName"
-                               placeholder="Last Name" 
+                               placeholder="Last Name"
+                               style="padding: 10px;"
                                aria-label="Enter your last name"
                                aria-live="polite" />
                 </div>
@@ -51,8 +53,9 @@
                        class="form-control"  
                        type="email"
                        @bind-Value="registerModel.Email"
-                       placeholder="Email address" 
-                       aria-label="Enter your email address"
+                       placeholder="Email address"
+                           style="padding: 10px;"
+                           aria-label="Enter your email address"
                        aria-live="polite" />
             </div>
 
@@ -61,7 +64,8 @@
                        class="form-control"  
                        @bind-Value="registerModel.Username"
                        placeholder="Username"
-                       aria-label="Enter your username"
+                           style="padding: 10px;"
+                           aria-label="Enter your username"
                        aria-live="polite" />
             </div>
 
@@ -70,7 +74,8 @@
                        type="@(showPassword ? "text" : "password")"
                        @bind-Value="registerModel.Password"
                        placeholder="Password"
-                       aria-label="Enter your password"
+                           style="padding: 10px;"
+                           aria-label="Enter your password"
                        aria-live="polite" />
 
                 <button type="button"
@@ -89,6 +94,7 @@
                            type="@(showConfirmPassword ? "text" : "password")"
                            @bind-Value="registerModel.ConfirmPassword"
                            placeholder="Confirm your password"
+                           style="padding: 10px;"
                            aria-label="Confirm your password"
                            aria-live="polite" />
 

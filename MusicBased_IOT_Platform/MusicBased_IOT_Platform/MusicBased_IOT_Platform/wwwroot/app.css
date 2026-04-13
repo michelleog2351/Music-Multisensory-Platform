@@ -141,6 +141,7 @@ body {
 
     .btn-spotify:hover {
         background-color: #17a44b;
+        color: white;
         font-weight: bold;
     }
 
@@ -500,5 +501,15 @@ function getWindowScroll(node) {
     background: white;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    z-index: 2000;
+}
+
+.spotify-player-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #121212;
+    padding: 10px;
     z-index: 2000;
 }

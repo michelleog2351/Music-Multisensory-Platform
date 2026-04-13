@@ -1,4 +1,5 @@
-﻿using MusicBased_IOT_Platform.Application.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using MusicBased_IOT_Platform.Application.Interfaces;
 using MusicBased_IOT_Platform.Models;
 
 namespace MusicBased_IOT_Platform.Application.Services
@@ -72,6 +73,19 @@ namespace MusicBased_IOT_Platform.Application.Services
         public Task<UserAccount?> GetCurrentUserAsync()
         {
             return Task.FromResult<UserAccount?>(null);
+        }
+
+        public async Task<bool> ResetPassword(string username, string newPassword)
+        {
+            var user = await _userRepo.GetByUsernameAsync(username);
+
+            if (user == null)
+                return false;
+
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(newPassword);
+            await _userRepo.UpdateAsync(user);
+
+            return true;
         }
     }
 }

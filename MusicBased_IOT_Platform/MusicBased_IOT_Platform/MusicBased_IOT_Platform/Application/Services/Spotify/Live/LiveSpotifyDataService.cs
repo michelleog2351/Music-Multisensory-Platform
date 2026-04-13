@@ -95,7 +95,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
                    "?client_id=" + ClientID +
                    "&response_type=code" +
                    "&redirect_uri=https://localhost:7039/signin-spotify" +
-                   "&scope=user-read-playback-state user-modify-playback-state streaming";
+                   "&scope=user-read-recently-played user-read-email user-read-playback-state user-library-read user-modify-playback-state streaming";
         }
 
         /// <summary>
@@ -126,7 +126,9 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             var json = await response.Content.ReadAsStringAsync();
             AccessToken = JsonSerializer.Deserialize<AccessToken>(json, _jsonOptions)!;
 
-            var user = await _userContext.GetCurrentUserAsync();
+
+            var user = await _userRepo.GetByIdAsync(userId);
+            //var user = await _userContext.GetCurrentUserAsync();
 
             if (user != null)
             {
@@ -149,9 +151,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             var hasToken = await HasValidTokenAsync();
 
             if (!hasToken || string.IsNullOrEmpty(AccessToken.Token))
-            //{
-            //    throw new InvalidOperationException("No valid Spotify access token available.");
-            //}
+
             {
                 var authorised = await AuthoriseClientAsync();
 

@@ -5,14 +5,9 @@ using MusicBased_IOT_Platform.Models;
 
 namespace MusicBased_IOT_Platform.Application.Repository
 {
-    public class CalibrationRepository : ICalibrationRepository
+    public class CalibrationRepository(AppDBContext dbContext) : ICalibrationRepository
     {
-        private readonly AppDBContext _dB;
-
-        public CalibrationRepository(AppDBContext dbContext)
-        {
-            _dB = dbContext;
-        }
+        private readonly AppDBContext _dB = dbContext;
 
         public async Task AddAsync(CalibrationRecord record)
         {

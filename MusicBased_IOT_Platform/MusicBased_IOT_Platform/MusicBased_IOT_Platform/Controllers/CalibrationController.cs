@@ -2,7 +2,7 @@
 using MusicBased_IOT_Platform.Application.Interfaces;
 using MusicBased_IOT_Platform.Application.Services;
 
-namespace MusicBased_IOT_Platform.Controller
+namespace MusicBased_IOT_Platform.Controllers
 {
     [ApiController]
     [Route("api/calibration")]
