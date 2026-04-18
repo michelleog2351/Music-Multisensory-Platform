@@ -119,18 +119,32 @@
 
 @code {
 
+    private bool showLogoutModal = false;
+    private bool _loaded = false;
+
     /// <summary>
     /// The OnInitialized method is overridden to subscribe to the UserSessionService's OnChange event.
     /// </summary>
     // protected override void OnInitialized()
     // {
     //     Session.OnChange += async () => await InvokeAsync(StateHasChanged);
-    private bool showLogoutModal = false;
 
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     Session.OnChange += async () => await InvokeAsync(StateHasChanged);
+    //     await Session.LoadUserAsync();
+
+    //     StateHasChanged();
     // }
-    protected override async Task OnInitializedAsync()
+
+
+    ///
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        Session.OnChange += async () => await InvokeAsync(StateHasChanged);
+        if (!firstRender || _loaded) return;
+
+        _loaded = true;
+
         await Session.LoadUserAsync();
 
         StateHasChanged();

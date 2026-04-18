@@ -8,6 +8,7 @@
         Calm,
         Active,
         Restless,
+        Stressed,
         Inactive,
         Neutral
     }

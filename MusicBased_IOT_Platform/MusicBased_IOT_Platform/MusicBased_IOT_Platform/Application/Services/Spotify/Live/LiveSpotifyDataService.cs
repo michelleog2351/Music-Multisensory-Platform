@@ -91,11 +91,18 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         // Methods
         public string GetSpotifyLoginUrl()
         {
-            return "https://accounts.spotify.com/authorize" +
-                   "?client_id=" + ClientID +
-                   "&response_type=code" +
-                   "&redirect_uri=https://localhost:7039/signin-spotify" +
-                   "&scope=user-read-recently-played user-read-email user-read-playback-state user-library-read user-modify-playback-state streaming";
+            //return "https://accounts.spotify.com/authorize" +
+            //       "?client_id=" + ClientID +
+            //       "&response_type=code" +
+            //       "&redirect_uri=https://localhost:7039/signin-spotify" +
+            //       "&scope=user-read-recently-played user-read-email user-read-playback-state user-library-read user-modify-playback-state streaming";
+            var scopes = string.Join(" ", _settings.Scopes);
+
+            return $"https://accounts.spotify.com/authorize" +
+                   $"?client_id={ClientID}" +
+                   $"&response_type=code" +
+                   $"&redirect_uri={Uri.EscapeDataString(_settings.RedirectUri)}" +
+                   $"&scope={Uri.EscapeDataString(scopes)}";
         }
 
         /// <summary>
@@ -153,10 +160,10 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             if (!hasToken || string.IsNullOrEmpty(AccessToken.Token))
 
             {
-                var authorised = await AuthoriseClientAsync();
+                //var authorised = await AuthoriseClientAsync();
 
-                if (!authorised)
-                    return Activator.CreateInstance<T>(); // safe fallback
+                //if (!authorised)
+                //    return Activator.CreateInstance<T>(); // safe fallback
             }
 
             var request = new HttpRequestMessage(HttpMethod.Get, endpoint);
@@ -178,6 +185,8 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         private async Task LoadTokenFromDatabaseAsync()
         {
             var user = await _userContext.GetCurrentUserAsync();
+            Console.WriteLine(user?.Username ?? "NO USER");
+
 
             if (user == null || string.IsNullOrEmpty(user.SpotifyAccessToken))
                 return;
@@ -242,11 +251,13 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
 
             var json = await response.Content.ReadAsStringAsync();
 
-            var newToken =
+            //var newToken
+                
+                AccessToken =
                 JsonSerializer.Deserialize<AccessToken>(json, _jsonOptions)!;
 
-            newToken.RefreshToken ??= AccessToken.RefreshToken;
-            AccessToken = newToken;
+            //newToken.RefreshToken ??= AccessToken.RefreshToken = newToken;
+
             AccessToken.DateTimeAcquired = DateTime.UtcNow;
 
             var user = await _userContext.GetCurrentUserAsync();
@@ -509,9 +520,6 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
                 Console.WriteLine($"Spotify play failed: {response.StatusCode}");
                 
             }
-
-
-           
         }
 
         /// <summary>

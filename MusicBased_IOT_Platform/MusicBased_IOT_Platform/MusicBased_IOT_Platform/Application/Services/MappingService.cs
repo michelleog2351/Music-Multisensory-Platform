@@ -44,20 +44,6 @@ namespace MusicBased_IOT_Platform.Application.Services
         {
             return heartRate.RestingHeartRate / 4.0;
         }
-
-        public static MoodState ClassifyMood(BiometricSummary bio)
-        {
-            if (bio.AverageRestingHeartRate < 65 && bio.AverageHeartRateVariability > 70)
-                return MoodState.Calm;
-
-            if (bio.AverageActiveMinutes > 30)
-                return MoodState.Active;
-
-            if (bio.AverageHeartRateVariability < 40)
-                return MoodState.Restless;
-
-            return MoodState.Neutral;
-        }
     }
 }
 

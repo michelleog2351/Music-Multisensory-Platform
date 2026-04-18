@@ -23,7 +23,7 @@ namespace MusicBased_IOT_Platform.Models
             BaseURL = "https://api.spotify.com/v1";
             ClientID = string.Empty;
             ClientSecret = string.Empty;
-            RedirectUri = "https://oauth.pstmn.io/v1/callback";
+            RedirectUri = "https://localhost:7039/signin-spotify";
         }
 
         // Properties

@@ -1,11 +1,9 @@
 ﻿@page "/"
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
-@inject UserSessionService UserSession
 @inject IJSRuntime JS
-@inject NavigationManager NavigationManager
 @inject ISpotifyDataService SpotifyService
-
-
+@inject UserSessionService Session
+@inject NavigationManager NavigationManager
 
 
 @using MusicBased_IOT_Platform.Application.Interfaces
@@ -16,7 +14,7 @@
 <PageTitle>Home</PageTitle>
 <br />
 <br />
-@inject UserSessionService Session
+
 
 @if (Session.CurrentUser != null)
 {
@@ -50,7 +48,9 @@ selection options *@
     </div>
 </div>
 
-<button class="btn btn-info scroll-to-top-btn" title="Scroll to Top">
+<button class="btn btn-info scroll-to-top-btn" 
+        title="Scroll to Top"
+        @onclick="ScrollToTop">
     <h1>↑</h1>
 </button>
 
@@ -532,18 +532,18 @@ selection options *@
         await JS.InvokeVoidAsync(
             "playTrackWeb",
             token,
-            track.Uri
+             $"spotify:track:{track.Id}"
         );
 
         NowPlaying = track;
     }
 
-    async Task Pause()
+    private async Task Pause()
     {
         await JS.InvokeVoidAsync("pauseTrack");
     }
 
-    async Task Resume()
+    private async Task Resume()
     {
         await JS.InvokeVoidAsync("resumeTrack");
     }
@@ -564,56 +564,105 @@ selection options *@
     /// <summary>
     /// This method is called when the component is initialised.
     /// </summary>
-    protected override async Task OnInitializedAsync()
+    // protected override async Task OnInitializedAsync()
+    // {
+
+
+    // }    
+    // 
+    
+    // public Home(UserService sessionService)
+    // {
+    //     this.sessionService = sessionService;
+    // }
+
+   //  UserService sessionService;
+   // [Inject] private UserSessionService Session { get; set; } = default!;
+    // [Inject] private MoodCalibrationService MoodCalibrationService { get; set; } = default!;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
 
         // allTracks = releases?.Albums?.Items?
         // .SelectMany(a => a.Tracks!.Items)
         // .ToList() ?? new();
 
+        // scroll button listener
+        await JS.InvokeVoidAsync("initScrollListener", DotNetObjectReference.Create(this));
 
-        releases = await Spotify.GetNewAlbumReleases();
-
-        // tracks = await ISpotifyDataService.GetTrack(10);
-
-        inactivityTimer = new System.Timers.Timer(30000); // 30 seconds
-        inactivityTimer.Elapsed += OnInactivityElapsed!;
-        inactivityTimer.AutoReset = false; // Only trigger once
-        inactivityTimer.Start();
-
-        recalibrationRequired = await MoodCalibrationService.IsRecalibrationRequiredAsync();
-
-        if (!recalibrationRequired)
-        {
-            moodResult = await MoodCalibrationService.RecalibrateAsync();
-        }
-    }
-
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
         if (!firstRender || _spotifyReady)
             return;
 
         _spotifyReady = true;
-
         await Session.LoadUserAsync();
-
         var token = Session.CurrentUser?.SpotifyAccessToken;
-
         Console.WriteLine($"TOKEN: {token}");
 
         if (!string.IsNullOrEmpty(token))
         {
             await JS.InvokeVoidAsync("initializeSpotifyPlayer", token);
 
-            // small delay ensures deviceId exists
+            // small delay ensuring that the deviceId exists
             await Task.Delay(1000);
-
             await JS.InvokeVoidAsync("transferPlayback", token);
         }
-    
-    
+
+        releases = await Spotify.GetNewAlbumReleases();
+
+        //tracks = await ISpotifyDataService.GetTracks(10);
+
+        inactivityTimer = new System.Timers.Timer(30000); // 30 seconds
+        inactivityTimer.Elapsed += OnInactivityElapsed!;
+        inactivityTimer.AutoReset = false; // Only trigger once
+        inactivityTimer.Start();
+
+        recalibrationRequired = await MoodCalibrationService.ShouldRecalibrateAsync();
+
+        if (!recalibrationRequired)
+        {
+            moodResult = await MoodCalibrationService.GenerateMoodMusicAsync();
+        }
+
+    //     if (firstRender)
+    // {
+    //     var user = await sessionService.GetCurrentUserAsync();
+
+    //     if (user != null)
+    //     {
+    //         recalibrationRequired = await MoodCalibrationService.ShouldRecalibrateAsync();
+    //         StateHasChanged();
+
+    //             if (!recalibrationRequired)
+    //             {
+    //                 await MoodCalibrationService.BuildMoodResultAsync();
+    //             }
+    //     }
+    // }
+
+        if (firstRender)
+        {
+            await Session.LoadUserAsync();
+
+            var user = Session.CurrentUser;
+
+            if (user == null)
+            {
+                Console.WriteLine("No user session found");
+                return;
+            }
+
+            Console.WriteLine($"USER LOADED: {user.Username}");
+
+            recalibrationRequired = await MoodCalibrationService.ShouldRecalibrateAsync();
+
+            if (!recalibrationRequired)
+            {
+                moodResult = await MoodCalibrationService.BuildMoodResultAsync();
+            }
+
+            StateHasChanged();
+        }
+
         if (isSearchModalOpen)
         {
             await JS.InvokeVoidAsync("focusSearch");
@@ -625,7 +674,16 @@ selection options *@
         // await MoodCalibrationService.RecalibrateAsync();
         // recalibrationRequired = false;
         //moodResult = await MoodCalibrationService.BuildMoodResultAsync();
-        moodResult = await MoodCalibrationService.RecalibrateAsync();
+        moodResult = await MoodCalibrationService.GenerateMoodMusicAsync();
+
+        // if (await ShouldRecalibrateAsync())
+        // {
+        //     showRecalibratePrompt = true;
+        // }
+        // else
+        // {
+        //     await BuildMoodResultAsync();
+        // }
     }
 
     /// <summary>
@@ -855,6 +913,22 @@ selection options *@
             Artist = track.Artists?.FirstOrDefault()?.Name ?? "",
             ImageUrl = track.Album?.Images?.FirstOrDefault()?.Url
         };
+    }
+
+    private bool showScroll = false;
+
+
+
+    [JSInvokable]
+    public void OnScroll(int scrollY)
+    {
+        showScroll = scrollY > 200;
+        StateHasChanged();
+    }
+
+    private async Task ScrollToTop()
+    {
+        await JS.InvokeVoidAsync("window.scrollTo", 0, 0);
     }
 }
 

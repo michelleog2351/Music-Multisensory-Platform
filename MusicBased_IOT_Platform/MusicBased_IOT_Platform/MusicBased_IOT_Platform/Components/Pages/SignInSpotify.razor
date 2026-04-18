@@ -22,6 +22,10 @@
         var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
         var code = query["code"];
 
+        Console.WriteLine("SPOTIFY CALLBACK HIT");
+        Console.WriteLine($"URL: {Navigation.Uri}");
+        Console.WriteLine($"CODE: {code}");
+
         if (!string.IsNullOrEmpty(code))
         {
             if (Session.CurrentUser == null)

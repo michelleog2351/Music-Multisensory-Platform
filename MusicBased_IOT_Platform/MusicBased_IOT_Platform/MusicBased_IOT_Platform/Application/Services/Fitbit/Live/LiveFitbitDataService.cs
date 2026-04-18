@@ -189,7 +189,12 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
 
             response.EnsureSuccessStatusCode();
 
+
+
             var json = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine("FITBIT RAW RESPONSE:");
+            Console.WriteLine(json);
 
             return JsonSerializer.Deserialize<T>(json, _jsonOptions)!;
         }
@@ -259,7 +264,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
             var authBytes = Encoding.UTF8.GetBytes(authString);
             var authBase64 = Convert.ToBase64String(authBytes);
 
-            request.Headers.Add("Authorization", "Basic " + authBase64);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authBase64);
 
             request.Content = new FormUrlEncodedContent(new Dictionary<string, string>
             {

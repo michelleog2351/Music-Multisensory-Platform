@@ -7,10 +7,6 @@ namespace MusicBased_IOT_Platform.Application.Interfaces
         Task<(bool Success, string? Error)> RegisterUserAsync(RegisterModel model);
 
         Task<(bool Success, string? Error, UserAccount? User)> LoginUserAsync(LoginModel model);
-    
-        Task LogoutUserAsync();
-  
-        Task<UserAccount?> GetCurrentUserAsync();
 
         Task<bool> ResetPassword(string username, string newPassword);
     }

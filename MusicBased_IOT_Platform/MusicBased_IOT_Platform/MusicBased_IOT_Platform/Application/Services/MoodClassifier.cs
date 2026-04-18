@@ -7,16 +7,37 @@ namespace MusicBased_IOT_Platform.Application.Services
     /// </summary>
     public static class MoodClassifier
     {
-        public static MoodState ClassifyMood(BiometricSummary biometric)
+        //public static MoodState ClassifyMood(BiometricSummary biometric)
+        //{
+        //    if (biometric.AverageRestingHeartRate < 65 && biometric.AverageHeartRateVariability > 70)
+        //        return MoodState.Calm;
+
+        //    if (biometric.AverageActiveMinutes > 30)
+        //        return MoodState.Active;
+
+        //    if (biometric.AverageHeartRateVariability < 40)
+        //        return MoodState.Restless;
+
+        //    return MoodState.Neutral;
+        //}
+        public static MoodState ClassifyMood(
+    BiometricSummary current,
+    CalibrationRecord? baseline)
         {
-            if (biometric.AverageRestingHeartRate < 65 && biometric.AverageHeartRateVariability > 70)
+            if (baseline == null)
+                return MoodState.Neutral;
+
+            var hrDiff = current.AverageRestingHeartRate - baseline.RestingHeartRate;
+            var hrvDiff = current.AverageHeartRateVariability - baseline.HRV;
+
+            if (hrDiff > 10 && hrvDiff < -10)
+                return MoodState.Stressed;
+
+            if (hrDiff < -5 && hrvDiff > 5)
                 return MoodState.Calm;
 
-            if (biometric.AverageActiveMinutes > 30)
+            if (current.AverageActiveMinutes > baseline.RestingHeartRate)
                 return MoodState.Active;
-
-            if (biometric.AverageHeartRateVariability < 40)
-                return MoodState.Restless;
 
             return MoodState.Neutral;
         }

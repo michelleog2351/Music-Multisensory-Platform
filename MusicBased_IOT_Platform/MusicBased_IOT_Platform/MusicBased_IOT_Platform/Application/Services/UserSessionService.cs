@@ -12,7 +12,7 @@ namespace MusicBased_IOT_Platform.Application.Services
         /// </summary>
         public UserAccount? CurrentUser { get; private set; }
 
-        /// <summary>
+        /// <summary>   
         /// The OnChange event is an Action delegate that can be subscribed to by other components or services to be notified when the user session state changes.
         /// </summary>
         public event Action? OnChange;
@@ -52,13 +52,14 @@ namespace MusicBased_IOT_Platform.Application.Services
                 if (result.Success && result.Value != null)
                 {
                     CurrentUser = result.Value;
-
                     Console.WriteLine("SESSION RESTORED: " + CurrentUser.FirstName);
+                    NotifyStateChanged();
+                    //await SetUserAsync(CurrentUser);
                 }
 
                 else
                 {
-                    Console.WriteLine("SESSION FOUND");
+                    Console.WriteLine("NO SESSION FOUND");
                 }
             }
 
@@ -67,8 +68,6 @@ namespace MusicBased_IOT_Platform.Application.Services
                 Console.WriteLine("SESSION ERROR: " + ex.Message);
                 CurrentUser = null;
             }
-
-            NotifyStateChanged();
         }
 
         /// <summary>

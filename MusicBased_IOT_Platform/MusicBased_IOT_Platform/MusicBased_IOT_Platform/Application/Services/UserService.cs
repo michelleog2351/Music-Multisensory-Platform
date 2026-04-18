@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MusicBased_IOT_Platform.Application.Interfaces;
+﻿using MusicBased_IOT_Platform.Application.Interfaces;
 using MusicBased_IOT_Platform.Models;
 
 namespace MusicBased_IOT_Platform.Application.Services
@@ -59,20 +58,6 @@ namespace MusicBased_IOT_Platform.Application.Services
             }
 
             return (true, null, user);
-        }
-
-        /// <summary>
-        /// The LogoutUserAsync method
-        /// </summary>
-        /// <returns></returns>
-        public Task LogoutUserAsync()
-        {
-            return Task.CompletedTask;
-        }
-
-        public Task<UserAccount?> GetCurrentUserAsync()
-        {
-            return Task.FromResult<UserAccount?>(null);
         }
 
         public async Task<bool> ResetPassword(string username, string newPassword)

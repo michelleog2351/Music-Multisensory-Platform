@@ -1,6 +1,7 @@
 ﻿using Moq;
 using MusicBased_IOT_Platform.Application.Interfaces;
 using MusicBased_IOT_Platform.Application.Interfaces.Fitbit;
+using MusicBased_IOT_Platform.Application.Interfaces.Flask;
 using MusicBased_IOT_Platform.Application.Interfaces.Spotify;
 using MusicBased_IOT_Platform.Application.Services;
 using MusicBased_IOT_Platform.Models;
@@ -56,6 +57,7 @@ namespace MusicBased_IOT_Platform.Tests
         public async Task GenerateMoodMusicAsync_ReturnsTracks_WhenValidData()
         {
             // Arrange
+            var mockFlask = new Mock<IFlaskDataService>();
             var mockFitbit = new Mock<IFitbitDataService>();
             var mockSpotify = new Mock<ISpotifyDataService>();
             var mockUserContext = new Mock<IUserContext>();
@@ -91,6 +93,7 @@ namespace MusicBased_IOT_Platform.Tests
             });
 
             var service = new MoodCalibrationService(
+                mockFlask.Object,
                 mockFitbit.Object,
                 mockSpotify.Object,
                 mockUserContext.Object,

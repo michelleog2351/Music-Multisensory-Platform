@@ -32,6 +32,7 @@ namespace MusicBased_IOT_Platform.Models
         public SleepSummary? Summary { get; set; }
     }
 
+    //[JsonPropertyName("activities-steps")]
     public class StepsResponse
     {
         public List<Steps>? ActivitiesSteps { get; set; }
