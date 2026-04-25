@@ -101,9 +101,11 @@ namespace MusicBased_IOT_Platform.Tests
                 {
                     new CalibrationRecord
                     {
-                        AverageRestingHeartRate = 70,
-                        AverageDailySteps = 3000,
-                        AverageActiveMinutes = 20,
+                        RestingHeartRate = 70,
+                        HRV = 50,
+                        BreathingRate = 12,
+                        Mood = "calm",
+                        TracksJson = "[]",
                         CreatedAt = DateTime.UtcNow
                     }
                 });
