@@ -31,8 +31,7 @@ jobs:
         run: dotnet build ./MusicBased_IOT_Platform/MusicBased_IOT_Platform.sln --no-restore --configuration Release
 
       - name: Test
-        run: dotnet test ./MusicBased_IOT_Platform/MusicBased_IOT_Platform.sln --no-build
-
+        run: dotnet test ./MusicBased_IOT_Platform/MusicBased_IOT_Platform.Tests/MusicBased_IOT_Platform.Tests.csproj --no-build --configuration Release --verbosity normal
       - name: Publish
         run: dotnet publish ./MusicBased_IOT_Platform/MusicBased_IOT_Platform.sln -c Release -o ./publish
 
