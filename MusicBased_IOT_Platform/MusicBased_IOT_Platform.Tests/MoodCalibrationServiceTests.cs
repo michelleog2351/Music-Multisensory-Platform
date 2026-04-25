@@ -99,7 +99,7 @@ namespace MusicBased_IOT_Platform.Tests
                     AverageHeartRateVariability = 45,
                     AverageBreathingRate = 14,
                     AverageDailySteps = 4000,
-                    AverageActiveMinutes = 30
+                    AverageActiveMinutes = 30,
                     CapturedAt: "2026-04-16T12:00:00",
                     IsCalmState": false
                 });
