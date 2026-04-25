@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -21,4 +24,5 @@ jobs:
         run: dotnet restore ./MusicBased_IOT_Platform/MusicBased_IOT_Platform.sln
 
       - name: Check formatting
+        working-directory: ./MusicBased_IOT_Platform
         run: dotnet format --verify-no-changes
