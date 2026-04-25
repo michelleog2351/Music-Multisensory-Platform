@@ -138,8 +138,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
             AccessToken = JsonSerializer.Deserialize<AccessToken>(body, _jsonOptions)!;
 
             var user = await _userRepo.GetByIdAsync(userID);
-            Console.WriteLine(user == null ? "❌ USER NULL" : "✅ USER FOUND");
-
+            Console.WriteLine(user == null ? "USER NULL" : "USER FOUND");
 
             if (user != null)
             {

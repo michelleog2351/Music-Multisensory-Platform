@@ -18,8 +18,7 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Spotify
 
         string GetSpotifyLoginUrl();
 
-        //Task ExchangeCodeAsync(string code);
-        Task ExchangeCodeAsync(string code, int userId);
+        Task<bool> ExchangeCodeAsync(string code, int userId);
 
         /// <summary>
         /// The <c>GetAlbum</c> method gets Spotify catalog information for a single album.
@@ -173,6 +172,6 @@ namespace MusicBased_IOT_Platform.Application.Interfaces.Spotify
         /// to the data service. 
         /// </summary>
         /// <returns><c>True</c> if it has a valid data connection, otherwise <c>false</c>.</returns>
-        Task<bool> TestDataConnection();
+      // Task<bool> TestDataConnection();
     }
 }

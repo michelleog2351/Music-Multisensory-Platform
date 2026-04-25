@@ -2,6 +2,7 @@
 @using MusicBased_IOT_Platform.Application.Services
 @inject IJSRuntime JS
 @inject UserSessionService Session
+@inject IUserContext Context
 @inject NavigationManager NavigationManager
 
 <br />
@@ -62,7 +63,12 @@
         {
             try
             {
-                await JS.InvokeVoidAsync("loadData", 7, Session.CurrentUser?.ID);
+                var user = await Context.GetCurrentUserAsync();
+
+                if (user != null)
+                {
+                    await JS.InvokeVoidAsync("loadData", 7, Session.CurrentUser?.ID);
+                }
             }
             catch (Exception ex)
             {

@@ -587,8 +587,10 @@ selection options *@
         // .SelectMany(a => a.Tracks!.Items)
         // .ToList() ?? new();
 
+        releases = await Spotify.GetNewAlbumReleases();
+
         // scroll button listener
-        await JS.InvokeVoidAsync("initScrollListener", DotNetObjectReference.Create(this));
+        //await JS.InvokeVoidAsync("initScrollListener", DotNetObjectReference.Create(this));
 
         if (!firstRender || _spotifyReady)
             return;
@@ -598,16 +600,21 @@ selection options *@
         var token = Session.CurrentUser?.SpotifyAccessToken;
         Console.WriteLine($"TOKEN: {token}");
 
-        if (!string.IsNullOrEmpty(token))
-        {
-            await JS.InvokeVoidAsync("initializeSpotifyPlayer", token);
+        // if (!string.IsNullOrEmpty(token))
+        // {
+        //     await JS.InvokeVoidAsync("initializeSpotifyPlayer", token);
 
-            // small delay ensuring that the deviceId exists
-            await Task.Delay(1000);
-            await JS.InvokeVoidAsync("transferPlayback", token);
-        }
+        //     // small delay ensuring that the deviceId exists
+        //     await Task.Delay(1000);
+        //     await JS.InvokeVoidAsync("transferPlayback", token);
+        // }
 
-        releases = await Spotify.GetNewAlbumReleases();
+        // if (string.IsNullOrEmpty(token))
+        // {
+        //     Console.WriteLine("Spotify not connected");
+        //     return;
+        // }
+
 
         //tracks = await ISpotifyDataService.GetTracks(10);
 

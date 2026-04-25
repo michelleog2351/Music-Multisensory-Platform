@@ -12,6 +12,9 @@ window.initializeSpotifyPlayer = (token) => {
     player.addListener('ready', ({ device_id }) => {
         console.log('Ready with Device ID', device_id);
         window.deviceId = device_id;
+        console.log("TOKEN:", token);
+        console.log("DEVICE:", window.deviceId);
+        transferPlayback(token);
     });
 
     player.addListener('not_ready', ({ device_id }) => {
@@ -24,7 +27,6 @@ window.initializeSpotifyPlayer = (token) => {
     player.addListener('playback_error', e => console.error(e));
 
     player.connect();
-
     window.spotifyPlayer = player;
 };
 

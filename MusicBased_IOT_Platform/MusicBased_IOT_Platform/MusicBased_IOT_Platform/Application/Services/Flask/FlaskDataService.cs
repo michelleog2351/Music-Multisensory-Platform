@@ -4,16 +4,10 @@ using System.Net.Http.Headers;
 
 namespace MusicBased_IOT_Platform.Application.Services.Flask
 {
-    public class FlaskDataService : IFlaskDataService
+    public class FlaskDataService(HttpClient httpClient, IUserContext userContext) : IFlaskDataService
     {
-        private readonly HttpClient _httpClient;
-        private readonly IUserContext _userContext;
-
-        public FlaskDataService(HttpClient httpClient, IUserContext userContext)
-        {
-            _httpClient = httpClient;
-            _userContext = userContext;
-        }
+        private readonly HttpClient _httpClient = httpClient;
+        private readonly IUserContext _userContext = userContext;
 
         public async Task<BiometricSummary> GetBiometricDataAsync()
         {
@@ -22,7 +16,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Flask
             if (user == null || string.IsNullOrEmpty(user.FitbitAccessToken))
 
                 throw new InvalidOperationException("User not authenticated with Fitbit");
-            
+
             var request = new HttpRequestMessage(HttpMethod.Get, $"http://192.168.1.11:5000/api/biometric");
 
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", user.FitbitAccessToken);

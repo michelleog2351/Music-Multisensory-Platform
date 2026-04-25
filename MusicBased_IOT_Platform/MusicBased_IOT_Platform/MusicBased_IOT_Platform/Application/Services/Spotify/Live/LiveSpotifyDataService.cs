@@ -96,35 +96,56 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             //       "&response_type=code" +
             //       "&redirect_uri=https://localhost:7039/signin-spotify" +
             //       "&scope=user-read-recently-played user-read-email user-read-playback-state user-library-read user-modify-playback-state streaming";
-            var scopes = string.Join(" ", _settings.Scopes);
+            //var scopes = string.Join(" ", _settings.Scopes);
 
-            return $"https://accounts.spotify.com/authorize" +
-                   $"?client_id={ClientID}" +
-                   $"&response_type=code" +
-                   $"&redirect_uri={Uri.EscapeDataString(_settings.RedirectUri)}" +
-                   $"&scope={Uri.EscapeDataString(scopes)}";
+            //return $"https://accounts.spotify.com/authorize" +
+            //       $"?client_id={ClientID}" +
+            //       $"&response_type=code" +
+            //       $"&redirect_uri={Uri.EscapeDataString(_settings.RedirectUri)}" +
+            //       $"&scope={Uri.EscapeDataString(scopes)}";
+
+            var scopes = string.Join(" ", new[]
+{
+                "user-read-email",
+                "user-read-playback-state",
+                "user-modify-playback-state",
+                "streaming",
+                "user-read-recently-played"
+            });
+
+         return
+                $"https://accounts.spotify.com/authorize" +
+                $"?client_id={ClientID}" +
+                $"&response_type=code" +
+                $"&redirect_uri={Uri.EscapeDataString("https://localhost:7039/signin-spotify")}" +
+                $"&scope={Uri.EscapeDataString(scopes)}";
         }
 
         /// <summary>
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public async Task ExchangeCodeAsync(string code, int userId)
+        public async Task<bool> ExchangeCodeAsync(string code, int userId)
         {
+            Console.WriteLine($"CODE: {code}");
+            Console.WriteLine($"USER ID: {userId}");
+
             var request = new HttpRequestMessage(
                 HttpMethod.Post,
                 $"https://accounts.spotify.com/api/token");
 
             var authString = $"{ClientID}:{ClientSecret}";
-            var authBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(authString));
+            var authBytes = Encoding.UTF8.GetBytes(authString);
+            var authBase64 = Convert.ToBase64String(authBytes);
 
             request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authBase64);
 
             request.Content = new FormUrlEncodedContent(new Dictionary<string, string>
             {
+                { "client_id", ClientID },
                 { "grant_type", "authorization_code" },
-                { "code", code },
-                { "redirect_uri", "https://localhost:7039/signin-spotify" }
+                { "redirect_uri", "https://localhost:7039/signin-spotify" },
+                { "code", code }
             });
 
             var response = await _httpClient.SendAsync(request);
@@ -146,6 +167,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
 
                 await _userRepo.UpdateAsync(user);
             }
+            return true;
         }
 
         private async Task<T> GetAsync<T>(string endpoint)
@@ -252,9 +274,9 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             var json = await response.Content.ReadAsStringAsync();
 
             //var newToken
-                
-                AccessToken =
-                JsonSerializer.Deserialize<AccessToken>(json, _jsonOptions)!;
+
+            AccessToken =
+            JsonSerializer.Deserialize<AccessToken>(json, _jsonOptions)!;
 
             //newToken.RefreshToken ??= AccessToken.RefreshToken = newToken;
 
@@ -400,10 +422,10 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         /// The <c>InitialiseDataClient()</c> method 
         /// </summary>
         /// <returns></returns>
-        public async Task<bool> InitialiseDataClient()
-        {
-            return await AuthoriseClientAsync();
-        }
+        //public async Task<bool> InitialiseDataClient()
+        //{
+        //    return await AuthoriseClientAsync();
+        //}
 
         /// <summary>
         /// The <c>IsTokenStillValid</c> method checks to see if the current token is still valid.
@@ -424,11 +446,11 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         /// </summary>
         /// <returns><c>true</c> if we have a live connection to the Spotify API service
         /// otherwise false.</returns>
-        public async Task<bool> TestDataConnection()
-        {
-            // re-authorise the client and get a new access token.
-            return await AuthoriseClientAsync();
-        }
+        //public async Task<bool> TestDataConnection()
+        //{
+        //    // re-authorise the client and get a new access token.
+        //    return await AuthoriseClientAsync();
+        //}
 
         /// <summary>
         /// The <c>Search</c> method gets Spotify catalog information about albums, artists,
@@ -453,8 +475,8 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             // Check to see if the current token is still valid, if not get a new one
             if (!IsTokenStillValid())
             {
-                bool authorised = await AuthoriseClientAsync();
-                if (!authorised)
+                bool hasToken = await AuthoriseClientAsync();
+                if (!hasToken)
                     return new SearchResults();
             }
 
@@ -463,9 +485,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
                 HttpMethod.Get,
                 $"https://api.spotify.com/v1/search?q={Uri.EscapeDataString(searchQuery)}&type={searchItemTypes}&market=IE&limit=5&offset=0");
 
-            request.Headers.Add("Authorization", $"Bearer {AccessToken.Token}");
-
-            //HttpResponseMessage response;
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken.Token);
 
             try
             {
@@ -512,13 +532,13 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
                 Encoding.UTF8,
                 "application/json");
 
-            var response = await _httpClient.SendAsync(request); 
+            var response = await _httpClient.SendAsync(request);
             var body = await response.Content.ReadAsStringAsync();
             Console.WriteLine(body);
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"Spotify play failed: {response.StatusCode}");
-                
+
             }
         }
 
@@ -691,7 +711,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             {
                 return await GetAsync<List<Artist>>($"https://api.spotify.com/v1/artists/{id}/related-artists");
             }
-            catch 
+            catch
             {
                 return [];
             }
@@ -768,7 +788,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             {
                 return new Recommendations();
             }
-     
+
         }
 
         /// <summary>
@@ -780,7 +800,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         {
             try
             {
-               return await GetAsync<Recommendations>($"https://api.spotify.com/v1/recommendations?seed_tracks={id}");
+                return await GetAsync<Recommendations>($"https://api.spotify.com/v1/recommendations?seed_tracks={id}");
             }
             catch
             {
@@ -796,7 +816,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         public async Task<List<string>> GetSeedGenres()
         {
             try
-             {
+            {
                 var result = await GetAsync<Genre>($"https://api.spotify.com/v1/recommendations/available-genre-seeds");
                 return result.Genres ?? [];
             }
@@ -835,7 +855,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
                  $"&max_valence={max_valence}" +
                  $"&max_liveness={max_liveness}");
             }
-            
+
             catch
             {
                 return new Recommendations();

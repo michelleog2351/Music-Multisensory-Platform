@@ -238,7 +238,7 @@ namespace MusicBased_IOT_Platform.Application.Services
     public class MoodCalibrationService(IFlaskDataService flaskDataService, IFitbitDataService fitbitDataService, ISpotifyDataService spotifyDataService, IUserContext userContext, ICalibrationRepository calibrationRepository)
     {
         private readonly IFlaskDataService _flaskDataService = flaskDataService;
-        //private readonly IFitbitDataService _fitbitDataService = fitbitDataService;
+        private readonly IFitbitDataService _fitbitDataService = fitbitDataService;
         private readonly ISpotifyDataService _spotifyDataService = spotifyDataService;
 
         private readonly IUserContext _userContext = userContext;
@@ -278,7 +278,19 @@ namespace MusicBased_IOT_Platform.Application.Services
 
             //  var biometric = await _fitbitDataService.GetBiometricDataAsync();
 
-            var biometric = await _flaskDataService.GetBiometricDataAsync();
+            BiometricSummary biometric;
+
+            try
+            { 
+                biometric = await _flaskDataService.GetBiometricDataAsync();
+            }
+
+            catch(Exception ex)
+            {
+                Console.WriteLine("Flask failed: " + ex.Message);
+
+                biometric = await _fitbitDataService.GetBiometricDataAsync();
+            }
 
             var baseline = await GetBaselineAsync();
 
@@ -296,7 +308,7 @@ namespace MusicBased_IOT_Platform.Application.Services
                 valence,
                 liveness);
 
-            return new MusicMoodResult
+            var result = new MusicMoodResult
             {
                 BiometricSummary = biometric,
                 Mood = mood,
@@ -304,6 +316,28 @@ namespace MusicBased_IOT_Platform.Application.Services
                 GeneratedAt = DateTime.UtcNow
             };
 
+            var user = await _userContext.GetCurrentUserAsync();
+
+            if (user != null)
+            {
+                await _calibrationRepo.AddAsync(new CalibrationRecord
+                {
+                    UserID = user.ID,
+                    RestingHeartRate = biometric.AverageRestingHeartRate,
+                    HRV = biometric.AverageHeartRateVariability,
+                    BreathingRate = biometric.AverageBreathingRate,
+                    Mood = mood.ToString(),
+                    TracksJson = JsonSerializer.Serialize(
+                        result.RecommendedTracks?
+                            .Select(t => new
+                            {
+                                t.Name,
+                                Artist = t.Artists?.FirstOrDefault()?.Name
+                            })),
+                    CreatedAt = DateTime.UtcNow
+                });
+            }
+            return result;
         }
 
         //public async Task<MusicMoodResult> BuildMoodResultAsync()
@@ -375,6 +409,8 @@ namespace MusicBased_IOT_Platform.Application.Services
                 BreathingRate = biometric.AverageBreathingRate,
                 CreatedAt = DateTime.UtcNow
             };
+            //    await SaveCalibrationAsync(result);
+
 
             await _calibrationRepo.AddAsync(record);
         }
@@ -401,7 +437,9 @@ namespace MusicBased_IOT_Platform.Application.Services
     CalibrationRecord? baseline)
         {
             if (baseline == null)
+            {
                 return MoodState.Neutral;
+            }
 
             var hrDiff = current.AverageRestingHeartRate - baseline.RestingHeartRate;
             var hrvDiff = current.AverageHeartRateVariability - baseline.HRV;
@@ -441,49 +479,6 @@ namespace MusicBased_IOT_Platform.Application.Services
             };
         }
 
-        //private static CalibrationRecord MapToCalibration(BiometricSummary bio, int userId)
-        //{
-        //    return new CalibrationRecord
-        //    {
-        //        UserID = userId,
-        //        RestingHeartRate = bio.AverageRestingHeartRate,
-        //        HRV = bio.AverageHeartRateVariability,
-        //        BreathingRate = bio.AverageBreathingRate,
-        //        CreatedAt = DateTime.UtcNow
-        //    };
-        //}
-
-        /// <summary>
-        /// The 
-        /// </summary>
-        /// <param name="result"></param>
-        /// <returns></returns>
-        //private async Task SaveCalibrationAsync(MusicMoodResult result)
-        //{
-        //    var user = await _userContext.GetCurrentUserAsync();
-        //    if (user == null) return;
-
-        //    var record = new CalibrationRecord
-        //    {
-        //        UserID = user.ID,
-        //        RestingHeartRate = result.BiometricSummary!.AverageRestingHeartRate,
-        //        HRV = result.BiometricSummary!.AverageHeartRateVariability,
-        //        BreathingRate = result.BiometricSummary!.AverageBreathingRate,
-        //        Mood = result.Mood.ToString(),
-
-        //        TracksJson = JsonSerializer.Serialize(
-        //            result.RecommendedTracks?.Select(
-        //                t => new
-        //                {
-        //                    t.Name,
-        //                    Artist = t.Artists?.FirstOrDefault()?.Name
-        //                })
-        //            ),
-        //        CreatedAt = DateTime.UtcNow
-        //    };
-
-        //    await _calibrationRepo.AddAsync(record);
-        //}
         private async Task SaveCalibrationAsync(MusicMoodResult result)
         {
             var user = await _userContext.GetCurrentUserAsync();

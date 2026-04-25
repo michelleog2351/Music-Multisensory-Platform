@@ -435,7 +435,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Mock
             throw new NotImplementedException();
         }
 
-        public Task ExchangeCodeAsync(string code, int userId)
+        public Task<bool> ExchangeCodeAsync(string code, int userId)
         {
             throw new NotImplementedException();
         }
