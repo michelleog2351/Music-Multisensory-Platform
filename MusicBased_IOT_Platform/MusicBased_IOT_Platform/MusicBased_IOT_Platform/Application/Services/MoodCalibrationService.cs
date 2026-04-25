@@ -74,6 +74,16 @@ namespace MusicBased_IOT_Platform.Application.Services
 
             var baseline = await GetBaselineAsync();
 
+            if (baseline == null)
+            {
+                baseline = new CalibrationRecord
+                {
+                    RestingHeartRate = biometric.AverageRestingHeartRate,
+                    HRV = biometric.AverageHeartRateVariability,
+                    BreathingRate = biometric.AverageBreathingRate
+                };
+            }
+
             var mood = MoodClassifier.ClassifyMood(biometric, baseline);
 
            // var biometric = await _flaskDataService.GetBiometricDataAsync();
