@@ -161,8 +161,13 @@ namespace MusicBased_IOT_Platform.Application.Services
 
             var records = await _calibrationRepo.GetRecentAsync(user!.ID, 14);
 
-            if (records == null || records.Count == 0)
-                return null;
+          //  if (records == null || records.Count == 0)
+        //     return null;
+
+            if (records == null || !records.Any())
+            {
+                return null; 
+            }
 
             return new CalibrationRecord
             {
