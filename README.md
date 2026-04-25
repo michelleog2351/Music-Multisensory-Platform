@@ -3,7 +3,6 @@
 [![Feature Branch CI](https://github.com/michelleog2351/Music-Multisensory-Platform/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/michelleog2351/Music-Multisensory-Platform/actions/workflows/continuous-integration.yml)
 [![Docs](https://github.com/michelleog2351/Music-Multisensory-Platform/actions/workflows/autodocs.yml/badge.svg)](https://github.com/michelleog2351/Music-Multisensory-Platform/actions/workflows/autodocs.yml)
 [![CodeQL](https://github.com/michelleog2351/Music-Multisensory-Platform/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/michelleog2351/Music-Multisensory-Platform/actions/workflows/github-code-scanning/codeql)
-[![Dependabot Updates](https://github.com/michelleog2351/Music-Multisensory-Platform/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/michelleog2351/Music-Multisensory-Platform/actions/workflows/dependabot/dependabot-updates)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -26,9 +25,9 @@ The system dynamically analyses physiological signals (e.g. heart rate, activity
 - Backend: Flask API (Raspberry Pi)
 - Database: SQLite (EF Core)
 - APIs: Fitbit Web API, Spotify Web API
-
+<br>
 <img width="616" height="907" alt="image" src="https://github.com/user-attachments/assets/f2e4b81f-dfcd-40dd-8300-2532d476640c" />
-
+<br>
 
 # ⚙️ Setup Instructions
 ## Prerequisites
