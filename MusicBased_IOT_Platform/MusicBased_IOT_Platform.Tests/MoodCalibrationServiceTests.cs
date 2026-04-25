@@ -92,6 +92,22 @@ namespace MusicBased_IOT_Platform.Tests
                 ]
             });
 
+            var testUser = new UserAccount { ID = 1, Username = "testuser" };
+            mockUserContext.Setup(u => u.GetCurrentUserAsync())
+                .ReturnsAsync(testUser);
+            
+            mockCalibrationRepo.Setup(c => c.GetRecentAsync(It.IsAny<int>(), It.IsAny<int>()))
+                .ReturnsAsync(new List<CalibrationRecord>
+                {
+                    new CalibrationRecord
+                    {
+                        AverageRestingHeartRate = 70,
+                        AverageDailySteps = 3000,
+                        AverageActiveMinutes = 20,
+                        CreatedAt = DateTime.UtcNow
+                    }
+                });
+
             var service = new MoodCalibrationService(
                 mockFlask.Object,
                 mockFitbit.Object,
