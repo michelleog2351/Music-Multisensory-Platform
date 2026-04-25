@@ -1,0 +1,25 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [ "MusicBased_IOT_Platform/**/*.csproj" ]
+        }
+      ],
+      "dest": "api"
+    }
+  ],
+  "build": {
+    "content": [
+      { "files": [ "**/*.md", "**/*.yml" ] },
+      { "files": [ "api/**.yml" ] }
+    ],
+    "dest": "_site",
+    "globalMetadata": {
+      "_enableSearch": true
+    },
+    "template": [
+      "default"
+    ]
+  }
+}

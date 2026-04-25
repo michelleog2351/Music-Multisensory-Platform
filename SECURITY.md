@@ -2,21 +2,42 @@
 
 ## Supported Versions
 
-This section will be used to tell people about the project versions which are
-currently being supported with security updates.
+| Version | Supported |
+| ------- | --------- |
+| 1.0     | ✅        |
+| < 1.0   | ❌        |
 
-i.e.
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-
+---
 
 ## Reporting a Vulnerability
 
-This section will be used to tell people how to report a vulnerability
+If you discover a security vulnerability within this project, please report it responsibly.
+
+### How to report:
+- Open a private issue on GitHub OR
+- Contact the developer directly via email (if applicable)
+
+### What to include:
+- Description of the vulnerability
+- Steps to reproduce
+- Potential impact
+
+### Response Time:
+You can expect an initial response within 3–5 working days.
+
 ---
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+## Security Considerations
+
+This project implements the following security practices:
+- OAuth 2.0 authentication (Fitbit & Spotify)
+- Secure token storage (server-side only)
+- No exposure of API credentials in frontend
+- Dependency scanning via GitHub (Dependabot, CodeQL)
+
+---
+
+## Known Limitations
+- Relies on third-party APIs (Fitbit, Spotify)
+- Token security depends on correct environment configuration
+- Recalibration logic not fully implemented / fallback mechanisms in place to secure the sytem for maintainability

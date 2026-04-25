@@ -3,21 +3,16 @@ using MusicBased_IOT_Platform.Models;
 
 namespace MusicBased_IOT_Platform.Application.Services
 {
-    public class UserSessionService
+    public class UserSessionService(ProtectedLocalStorage storage)
     {
-        private readonly ProtectedLocalStorage _storage;
-
-        public UserSessionService(ProtectedLocalStorage storage)
-        {
-            _storage = storage;
-        }
+        private readonly ProtectedLocalStorage _storage = storage;
 
         /// <summary>
         /// The CurrentUser property holds the information about the currently logged-in user.
         /// </summary>
         public UserAccount? CurrentUser { get; private set; }
 
-        /// <summary>
+        /// <summary>   
         /// The OnChange event is an Action delegate that can be subscribed to by other components or services to be notified when the user session state changes.
         /// </summary>
         public event Action? OnChange;
@@ -40,8 +35,6 @@ namespace MusicBased_IOT_Platform.Application.Services
             await _storage.SetAsync("userSession", user);
 
             NotifyStateChanged();
-            CurrentUser = user;
-
         }
 
         /// <summary>
@@ -59,23 +52,22 @@ namespace MusicBased_IOT_Platform.Application.Services
                 if (result.Success && result.Value != null)
                 {
                     CurrentUser = result.Value;
-
                     Console.WriteLine("SESSION RESTORED: " + CurrentUser.FirstName);
+                    NotifyStateChanged();
+                    //await SetUserAsync(CurrentUser);
                 }
 
                 else
                 {
-                    Console.WriteLine("SESSION FOUND");
+                    Console.WriteLine("NO SESSION FOUND");
                 }
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("SESSION ERROR: " + ex.Message);
                 CurrentUser = null;
             }
-
-            NotifyStateChanged();
         }
 
         /// <summary>
@@ -86,9 +78,8 @@ namespace MusicBased_IOT_Platform.Application.Services
         {
             CurrentUser = null;
 
-            await _storage.DeleteAsync("userSession");
-
             NotifyStateChanged();
+            await _storage.DeleteAsync("userSession");
         }
     }
 }

@@ -88,12 +88,14 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
         /// and scope of access. This URL is used to initiate the OAuth2 authorization process with Fitbit.
         /// </summary>
         /// <returns></returns>
-        private string BuildFitbitAuthUrl()
+        public string GetFitbitAuthUrl()
         {
+            var encodedRedirect = Uri.EscapeDataString(_settings.RedirectUri);
+
             return $"https://www.fitbit.com/oauth2/authorize" +
                    $"?response_type=code" +
                    $"&client_id={ClientID}" +
-                   $"&redirect_uri=https://localhost:7039/signin-fitbit" +
+                   $"&redirect_uri={encodedRedirect}" +
                    $"&scope=activity heartrate profile sleep";
         }
 
@@ -104,6 +106,11 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
         /// <returns></returns>
         public async Task<bool> AuthCodeFlowAsync(string code, int userID)
         {
+
+            Console.WriteLine("AuthCodeFlowAsync HIT");
+            Console.WriteLine($"CODE: {code}");
+            Console.WriteLine($"USER ID: {userID}");
+
             var request = new HttpRequestMessage(
                 HttpMethod.Post,
                 $"https://api.fitbit.com/oauth2/token");
@@ -131,6 +138,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
             AccessToken = JsonSerializer.Deserialize<AccessToken>(body, _jsonOptions)!;
 
             var user = await _userRepo.GetByIdAsync(userID);
+            Console.WriteLine(user == null ? "USER NULL" : "USER FOUND");
 
             if (user != null)
             {
@@ -155,7 +163,9 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
         /// <returns></returns>
         private async Task<T> GetAsync<T>(string endpoint)
         {
-            if (string.IsNullOrEmpty(AccessToken.Token))
+
+            Console.WriteLine($"TOKEN: {AccessToken?.Token}");
+            if (string.IsNullOrEmpty(AccessToken!.Token))
             {
                 await LoadTokenFromDatabaseAsync();
             }
@@ -178,11 +188,21 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
 
             response.EnsureSuccessStatusCode();
 
+
+
             var json = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine("FITBIT RAW RESPONSE:");
+            Console.WriteLine(json);
 
             return JsonSerializer.Deserialize<T>(json, _jsonOptions)!;
         }
 
+
+        /// <summary>
+        /// The LoadTokenFromDatabaseAsync method is responsible for loading the Fitbit access token and refresh token from the database for the current user.
+        /// </summary>
+        /// <returns></returns>
         public async Task LoadTokenFromDatabaseAsync()
         {
             //await _session.LoadUserAsync();
@@ -243,7 +263,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Live
             var authBytes = Encoding.UTF8.GetBytes(authString);
             var authBase64 = Convert.ToBase64String(authBytes);
 
-            request.Headers.Add("Authorization", "Basic " + authBase64);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authBase64);
 
             request.Content = new FormUrlEncodedContent(new Dictionary<string, string>
             {

@@ -1,53 +1,89 @@
 ﻿@page "/dashboard"
 @using MusicBased_IOT_Platform.Application.Services
-@* @inject IJSRuntime JS
- *@
- @inject UserSessionService Session
+@inject IJSRuntime JS
+@inject UserSessionService Session
+@inject IUserContext Context
 @inject NavigationManager NavigationManager
 
-<h3>My Dashboard</h3>
+<br />
+<br />
+<h3>My Dashboard (Biometric Trends)</h3>
 
 <PageTitle>My Dashboard</PageTitle>
 <p>Session User: @Session.CurrentUser?.FirstName</p>
 
 <br />
-<select class="form-control">
-    <option value="daily">Daily</option>
-    <option value="weekly">Weekly</option>
-    <option value="monthly">Monthly</option>
+<select @onchange="OnRangeChange" class="form-control">
+    <option value="7">Daily</option>
+    <option value="14">Weekly</option>
+    <option value="30">Monthly</option>
 </select>
 
+<br />
 
 @* d3 barchart *@
-<div>
-    <canvas id="myChart" 
-            width="400" 
-            height="200"></canvas>
+<div id="myChart" 
+     width="800" 
+     height="900"
+     class="d-flex justify-content-center">
 </div>
 
+<div 
+    id="tooltip" 
+    style="
+    position:absolute;
+    display:none;
+    background:#eee;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius: 25px">
+</div>
 
+@* <script>
+    function OnRangeChange(days) {
+        loadData(days);
+    }
+
+    loadData(); 
+</script> *@
 
 @code {
 
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if (firstRender && Session.CurrentUser != null)
-        {
-            NavigationManager.NavigateTo("/dashboard", true);
-        }
-    }
-
-    // protected override async Task OnAfterRenderAsync(bool firstRender)
+    // protected override void OnAfterRender(bool firstRender)
     // {
-    //     if (firstRender)
+    //     if (firstRender && Session.CurrentUser != null)
     //     {
-    //         var data = new[]
-    //         {
-    //             new { name = "FG", value = 12000 },
-
-    //         };
-
-    //         await JS.InvokeVoidAsync("renderBarChart", "chart", data);
+    //         NavigationManager.NavigateTo("/dashboard", true);
     //     }
     // }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                var user = await Context.GetCurrentUserAsync();
+
+                if (user != null)
+                {
+                    await JS.InvokeVoidAsync("loadData", 7, Session.CurrentUser?.ID);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"JS ERROR: {ex.Message}");
+            }
+        }
+    }
+    private async Task OnRangeChange(ChangeEventArgs e)
+    {
+        if (JS == null) return;
+
+        var days = int.Parse(e.Value!.ToString()!);
+
+        await JS.InvokeVoidAsync("loadData", days, Session.CurrentUser?.ID);
+    }
+
+
 }

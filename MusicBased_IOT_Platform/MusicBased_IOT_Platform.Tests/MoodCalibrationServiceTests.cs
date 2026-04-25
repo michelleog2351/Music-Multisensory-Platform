@@ -1,5 +1,7 @@
 ﻿using Moq;
+using MusicBased_IOT_Platform.Application.Interfaces;
 using MusicBased_IOT_Platform.Application.Interfaces.Fitbit;
+using MusicBased_IOT_Platform.Application.Interfaces.Flask;
 using MusicBased_IOT_Platform.Application.Interfaces.Spotify;
 using MusicBased_IOT_Platform.Application.Services;
 using MusicBased_IOT_Platform.Models;
@@ -55,8 +57,12 @@ namespace MusicBased_IOT_Platform.Tests
         public async Task GenerateMoodMusicAsync_ReturnsTracks_WhenValidData()
         {
             // Arrange
+            var mockFlask = new Mock<IFlaskDataService>();
             var mockFitbit = new Mock<IFitbitDataService>();
             var mockSpotify = new Mock<ISpotifyDataService>();
+            var mockUserContext = new Mock<IUserContext>();
+            var mockCalibrationRepo = new Mock<ICalibrationRepository>();
+            
 
             mockFitbit.Setup(f => f.GetBiometricDataAsync())
                 .ReturnsAsync(new BiometricSummary
@@ -86,9 +92,42 @@ namespace MusicBased_IOT_Platform.Tests
                 ]
             });
 
+            mockFlask.Setup(f => f.GetBiometricDataAsync())
+                .ReturnsAsync(new BiometricSummary
+                {
+                    AverageRestingHeartRate = 65,
+                    AverageHeartRateVariability = 45,
+                    AverageBreathingRate = 14,
+                    AverageDailySteps = 4000,
+                    AverageActiveMinutes = 30,
+                    CapturedAt = DateTime.Parse("2026-04-16T12:00:00"),
+                    IsCalmState = false
+                });
+
+            var testUser = new UserAccount { ID = 1, Username = "testuser" };
+            mockUserContext.Setup(u => u.GetCurrentUserAsync())
+                .ReturnsAsync(testUser);
+            
+            mockCalibrationRepo.Setup(c => c.GetRecentAsync(It.IsAny<int>(), It.IsAny<int>()))
+                .ReturnsAsync(new List<CalibrationRecord>
+                {
+                    new CalibrationRecord
+                    {
+                        RestingHeartRate = 70,
+                        HRV = 50,
+                        BreathingRate = 12,
+                        Mood = "calm",
+                        TracksJson = "[]",
+                        CreatedAt = DateTime.UtcNow
+                    }
+                });
+
             var service = new MoodCalibrationService(
+                mockFlask.Object,
                 mockFitbit.Object,
-                mockSpotify.Object);
+                mockSpotify.Object,
+                mockUserContext.Object,
+                mockCalibrationRepo.Object);
 
             // Act
             var result = await service.BuildMoodResultAsync();

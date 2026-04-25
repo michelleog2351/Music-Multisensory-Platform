@@ -1,0 +1,22 @@
+{
+  "activityGoals": [
+    {
+      "type": "STEPS",
+      "target": 10000,
+      "result": 0,
+      "status": "IN_PROGRESS"
+    },
+    {
+      "type": "CALORIES",
+      "target": 2500,
+      "result": 1352,
+      "status": "IN_PROGRESS"
+    },
+    {
+      "type": "ACTIVE_MINUTES",
+      "target": 30,
+      "result": 0,
+      "status": "MISSED"
+    }
+  ]
+}

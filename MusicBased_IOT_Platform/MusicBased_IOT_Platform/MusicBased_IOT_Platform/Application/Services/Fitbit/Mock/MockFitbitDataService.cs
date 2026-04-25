@@ -54,14 +54,24 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Mock
                 jsonData, _jsonOptions)!;
         }
 
+        //public Task<ActivitySummary> GetDailyActivityAsync(DateTime date)
+        //{
+        //    var activity = new ActivitySummary
+        //    {
+        //        ActiveMinutes = 30
+        //    };
+
+        //    return Task.FromResult(activity);
+        //}
         public Task<ActivitySummary> GetDailyActivityAsync(DateTime date)
         {
-            var activity = new ActivitySummary
-            {
-                ActiveMinutes = 30
-            };
+            var filePath = Path.Combine(_jsonFilePath, "activity_goals.json");
 
-            return Task.FromResult(activity);
+            var json = File.ReadAllText(filePath);
+
+            var result = JsonSerializer.Deserialize<ActivitySummary>(json, _jsonOptions)!;
+
+            return Task.FromResult(result);
         }
 
         public Task<HeartRateSummary> GetDailyHeartRateAsync(DateTime date)
@@ -114,6 +124,11 @@ namespace MusicBased_IOT_Platform.Application.Services.Fitbit.Mock
         }
 
         public Task<MusicMoodResult> ReadBiometricAndMusicDataAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetFitbitAuthUrl()
         {
             throw new NotImplementedException();
         }

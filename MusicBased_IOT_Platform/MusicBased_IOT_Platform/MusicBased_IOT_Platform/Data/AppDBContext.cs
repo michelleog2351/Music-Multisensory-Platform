@@ -6,5 +6,6 @@ namespace MusicBased_IOT_Platform.Data
     public class AppDBContext(DbContextOptions<AppDBContext> options) : DbContext(options)
     {
         public DbSet<UserAccount> Users { get; set; }
+        public DbSet<CalibrationRecord> Calibrations { get; set; }
     }
 }

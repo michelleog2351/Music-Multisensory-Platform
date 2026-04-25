@@ -18,6 +18,9 @@ namespace MusicBased_IOT_Platform.Models
         public string? FitbitAccessToken { get; set; }
         public string? FitbitRefreshToken { get; set; }
         public DateTime? FitbitTokenExpiry { get; set; }
+        public string? SpotifyAccessToken { get; set; }
+        public string? SpotifyRefreshToken { get; set; }
+        public DateTime? SpotifyTokenExpiry { get; set; }
     }
 }
 

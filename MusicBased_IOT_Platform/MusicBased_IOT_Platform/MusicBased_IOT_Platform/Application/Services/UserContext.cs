@@ -11,9 +11,16 @@ namespace MusicBased_IOT_Platform.Application.Services
         /// </summary>
         /// <returns></returns>
         public async Task<UserAccount?> GetCurrentUserAsync()
+        //{
+        //    await _session.LoadUserAsync();
+        //    return _session.CurrentUser;
+        //}
         {
-            await _session.LoadUserAsync();
-            return _session.CurrentUser;
+            if (_session.CurrentUser != null)
+             return _session.CurrentUser;
+
+             await _session.LoadUserAsync();
+             return _session.CurrentUser;
         }
     }
 }

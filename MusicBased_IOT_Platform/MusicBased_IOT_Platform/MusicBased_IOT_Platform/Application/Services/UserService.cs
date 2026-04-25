@@ -60,14 +60,17 @@ namespace MusicBased_IOT_Platform.Application.Services
             return (true, null, user);
         }
 
-        public Task LogoutUserAsync()
+        public async Task<bool> ResetPassword(string username, string newPassword)
         {
-            return Task.CompletedTask;
-        }
+            var user = await _userRepo.GetByUsernameAsync(username);
 
-        public Task<UserAccount?> GetCurrentUserAsync()
-        {
-            return Task.FromResult<UserAccount?>(null);
+            if (user == null)
+                return false;
+
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(newPassword);
+            await _userRepo.UpdateAsync(user);
+
+            return true;
         }
     }
 }

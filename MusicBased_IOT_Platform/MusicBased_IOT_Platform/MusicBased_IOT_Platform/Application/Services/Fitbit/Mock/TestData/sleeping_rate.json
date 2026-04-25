@@ -1,3 +1,32 @@
 {
-
+  "sleep": [
+    {
+      "dateOfSleep": "2026-03-01",
+      "duration": 25200000,
+      "efficiency": 91,
+      "minutesAsleep": 420,
+      "minutesAwake": 30,
+      "timeInBed": 450,
+      "levels": {
+        "summary": {
+          "deep": {
+            "count": 3,
+            "minutes": 90
+          },
+          "light": {
+            "count": 5,
+            "minutes": 240
+          },
+          "rem": {
+            "count": 4,
+            "minutes": 90
+          },
+          "wake": {
+            "count": 6,
+            "minutes": 30
+          }
+        }
+      }
+    }
+  ]
 }

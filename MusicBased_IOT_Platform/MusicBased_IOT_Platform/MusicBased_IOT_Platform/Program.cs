@@ -2,10 +2,12 @@ using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Microsoft.EntityFrameworkCore;
 using MusicBased_IOT_Platform.Application.Interfaces;
 using MusicBased_IOT_Platform.Application.Interfaces.Fitbit;
+using MusicBased_IOT_Platform.Application.Interfaces.Flask;
 using MusicBased_IOT_Platform.Application.Interfaces.Spotify;
 using MusicBased_IOT_Platform.Application.Repository;
 using MusicBased_IOT_Platform.Application.Services;
 using MusicBased_IOT_Platform.Application.Services.Fitbit.Live;
+using MusicBased_IOT_Platform.Application.Services.Flask;
 using MusicBased_IOT_Platform.Application.Services.Spotify.Live;
 using MusicBased_IOT_Platform.Components;
 using MusicBased_IOT_Platform.Data;
@@ -44,9 +46,15 @@ builder.Services.AddScoped<UserSessionService>();
 
 builder.Services.AddScoped<IUserContext, UserContext>();
 
+builder.Services.AddScoped<ICalibrationRepository, CalibrationRepository>();
+
 builder.Services.AddScoped<ProtectedLocalStorage>();
 
 builder.Services.AddScoped<MoodCalibrationService>();
+
+builder.Services.AddScoped<IFlaskDataService, FlaskDataService>();
+
+builder.Services.AddControllers();
 
 
 var app = builder.Build();
@@ -73,5 +81,7 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(MusicBased_IOT_Platform.Client._Imports).Assembly);
+
+app.MapControllers();
 
 await app.RunAsync();

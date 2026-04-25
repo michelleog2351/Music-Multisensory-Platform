@@ -14,8 +14,8 @@
     <div class="card p-4 mt-5 shadow rounded-4"
          style="max-width: 600px; width: 100%">
          <br />
-        <h2 class="text-center">Login</h2>
-
+        <h2 class="text-center">Welcome Back</h2>
+        <p class="text-center text-muted">Please log in to continue</p>
          <EditForm Model="@loginModel"
             OnValidSubmit="HandleLogin"
             FormName="loginForm">
@@ -28,31 +28,68 @@
                                class="form-control"  
                                @bind-Value="loginModel.Username"                              
                                placeholder="Username"
+                               style="padding: 10px;"
+                               aria-label="Enter your username"
+                               aria-live="polite"
                                autocomplete="on" />
                     </div>
 
-                    <div class="mb-3">
-                        <InputText class="form-control"  
-                                   type="password"
+                    <div class="input-group mb-3">
+                        <InputText class="form-control"
+                               type="@(showPassword ? "text" : "password")"
                                    required
                                    @bind-Value="loginModel.Password"
-                                   placeholder="Password" />
+                                   placeholder="Password"
+                                   style="padding: 10px;"
+                                   aria-label="Enter your password"
+                                   aria-live="polite" />
+                        <button type="button"
+                                class="btn btn-outline-info"
+                                @onclick="TogglePasswordVisibility"
+                                aria-label="Toggle password visibility">
+
+                            <i class="bi @(showPassword ? "bi bi-eye-slash" : "bi bi-eye-fill")"></i>
+                        </button>
+
+                    @if (showForgotPassword)
+                    {
+                        <div class="text-end">
+                            <a href="/forgot-password" class="small text-decoration-none">
+                                Forgot password?
+                            </a>
+                        </div>
+                    }
                     </div>
            
                     <div>
-                        <InputCheckbox 
-                            @bind-Value="loginModel.RememberMe" /> Remember me
+                        <InputCheckbox class="form-check-input" @bind-Value="loginModel.RememberMe" /> 
+                        <label class="form-check-label">Remember me</label>
                     </div>
                     
                     <br />
-            @if (!string.IsNullOrEmpty(ErrorMessage))
-            {
-                <div class="alert alert-danger" role="alert">
-                    @ErrorMessage
-                </div>
-            }
+
+                    @if (!string.IsNullOrEmpty(ErrorMessage))
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ErrorMessage
+                        </div>
+                    }
+
                     <div class="d-grid gap-2">
-                        <button class="btn btn-primary btn-lg" type="submit">Login</button>
+                        <button class="btn btn-fitbit btn-lg shadow"
+                                type="submit"
+                                style="border-radius: 50px;"> 
+                                    Login
+                        </button>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <small>
+                            <br />
+                            <a href="/register" class="text-decoration">
+                            <b> Don’t have an account?</b>
+                            </a>
+                        </small>
                     </div>
             </div>
             </EditForm>
@@ -64,23 +101,29 @@
 
     private string? ErrorMessage;
 
+    private bool showPassword = false;
+
+    private int loginAttempts = 0;
+
+    private bool showForgotPassword = false;
+
     /// <summary>
     /// The OnInitialized method checks if there is a currently logged-in user in the session.
     /// </summary>
-    // protected override void OnInitialized()
-    // {
-    //     if (Session.CurrentUser != null)
-    //     {
-    //         NavigationManager.NavigateTo("/dashboard");
-    //     }
-    // }
-    protected override void OnAfterRender(bool firstRender)
+    protected override void OnInitialized()
     {
-        if (firstRender && Session.CurrentUser != null)
+        if (Session.CurrentUser != null)
         {
             NavigationManager.NavigateTo("/dashboard");
         }
     }
+    // protected override void OnAfterRender(bool firstRender)
+    // {
+    //     if (firstRender && Session.CurrentUser != null)
+    //     {
+    //         NavigationManager.NavigateTo("/dashboard");
+    //     }
+    // }
 
 
     /// <summary>
@@ -102,6 +145,13 @@
             return;
         }
 
+        loginAttempts++;
+
+        if (loginAttempts >= 3)
+        {
+            showForgotPassword = true;
+        }
+
         await Session.SetUserAsync(result.User!);
 
         NavigationManager.NavigateTo("/dashboard", true);
@@ -119,6 +169,11 @@
     private void ClearError(ChangeEventArgs e)
     {
         ErrorMessage = null;
+    }
+
+    private void TogglePasswordVisibility()
+    {
+        showPassword = !showPassword;
     }
 
     // recalibration logic

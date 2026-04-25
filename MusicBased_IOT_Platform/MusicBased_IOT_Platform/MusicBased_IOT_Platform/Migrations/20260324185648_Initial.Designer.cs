@@ -11,7 +11,7 @@ using MusicBased_IOT_Platform.Data;
 namespace MusicBased_IOT_Platform.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20260320161835_Initial")]
+    [Migration("20260324185648_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -19,6 +19,40 @@ namespace MusicBased_IOT_Platform.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.13");
+
+            modelBuilder.Entity("MusicBased_IOT_Platform.Models.CalibrationRecord", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("BreathingRate")
+                        .HasColumnType("REAL");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("HRV")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("Mood")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("RestingHeartRate")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("TracksJson")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Calibrations");
+                });
 
             modelBuilder.Entity("MusicBased_IOT_Platform.Models.UserAccount", b =>
                 {
@@ -49,6 +83,15 @@ namespace MusicBased_IOT_Platform.Migrations
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SpotifyAccessToken")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SpotifyRefreshToken")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("SpotifyTokenExpiry")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Username")

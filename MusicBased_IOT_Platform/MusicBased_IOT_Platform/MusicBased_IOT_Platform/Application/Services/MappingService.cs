@@ -23,7 +23,7 @@ namespace MusicBased_IOT_Platform.Application.Services
         }
 
         /// <summary>
-        /// The CalculateHRV
+        /// This is a very simplified calculation for heart rate variability (HRV) based on the average of the heart rate zones. In a real application, you would use more sophisticated methods to calculate HRV, such as analyzing the time intervals between heartbeats (RR intervals) using data from a heart rate monitor that provides this information.
         /// </summary>
         /// <param name="heartRate"></param>
         /// <returns></returns>
@@ -43,20 +43,6 @@ namespace MusicBased_IOT_Platform.Application.Services
         private static double CalculateBreathingRate(HeartRateSummary heartRate)
         {
             return heartRate.RestingHeartRate / 4.0;
-        }
-
-        public static MoodState ClassifyMood(BiometricSummary bio)
-        {
-            if (bio.AverageRestingHeartRate < 65 && bio.AverageHeartRateVariability > 70)
-                return MoodState.Calm;
-
-            if (bio.AverageActiveMinutes > 30)
-                return MoodState.Active;
-
-            if (bio.AverageHeartRateVariability < 40)
-                return MoodState.Restless;
-
-            return MoodState.Neutral;
         }
     }
 }

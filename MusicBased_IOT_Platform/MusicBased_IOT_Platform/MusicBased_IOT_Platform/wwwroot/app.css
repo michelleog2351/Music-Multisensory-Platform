@@ -141,6 +141,7 @@ body {
 
     .btn-spotify:hover {
         background-color: #17a44b;
+        color: white;
         font-weight: bold;
     }
 
@@ -150,7 +151,14 @@ body {
     color: white;
 }
 
-#search-btn,
+.tooltiptext {
+    width: 130px;
+    bottom: 100%;
+    left: 65%;
+    margin-left: -65px;
+}
+
+/*#search-btn,
 #search-input {
   margin: 0;
   padding: 5px;
@@ -162,8 +170,6 @@ body {
   margin-top: 0;
 }
 
-/* Stops the search icon button from having white outline when user types but cursor
-   isn't placed in the input box */
 #search-btn:focus {
   outline: none !important;
   box-shadow: none !important;
@@ -183,34 +189,48 @@ body {
   width: 250px;
   opacity: 1;
   border: 1px solid #ccc;
-}
+}*/
 
 .search-container{
     position: relative;
-}
+/*    width: 100%;
+*/}
+
 
 .suggestions {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100%;
+    right: 0;
+    margin-top: 5px;
     background: white;
-    border: 1px solid #e9ecef;
-    border-radius: 10px;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-    z-index: 1050;
-    max-height: 250px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    max-height: 220px;
     overflow-y: auto;
+    z-index: 2000;
 }
 
+
 .suggestion-item {
-    padding: 10px 12px;
+    /*padding: 10px 12px;*/
+    padding: 12px 16px;
+    font-size: 15px;
     cursor: pointer;
 }
 
+    /*.suggestion-item:hover {
+        background: #f1f3f5;*/
+        /*#f5f5f5;*/
+    /*}*/
     .suggestion-item:hover {
-        background: #f5f5f5;
+        background: rgba(0,176,185,0.1);
     }
+
+.modal-body-scroll {
+    max-height: 70vh;
+    overflow-y: auto;
+}
 
 /*#suggestions {*/
 /*    position: absolute;
@@ -260,13 +280,13 @@ body {
 }
 
     .app-card:hover {
-        transform: translateY(-2px);
+        transform: translateY(-6px);
         box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
     }
 
 .app-card-title {
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 550;
     margin-bottom: 1rem;
     color: #212529;
 }
@@ -281,6 +301,27 @@ body {
   flex-direction: column;
   height: 100%;
 }*/
+
+.modal-content {
+    background: var(--app-white);
+    border-radius: 16px;
+}
+
+/*.modal-header {
+    background: var(--spotify-dark);
+    color: white;
+}*/
+
+.form-control {
+    border: 1px solid var(--app-border);
+}
+
+    .form-control:focus {
+        border-color: var(--spotify-green);
+        box-shadow: 0 0 0 0.2rem rgba(29,185,84,0.25);
+    }
+
+
 
 .card-body {
   flex-grow: 1;
@@ -367,6 +408,29 @@ body {
   transform: scale(1.1);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 }
+
+.go-btn {
+    background: var(--spotify-green);
+    color: white;
+    border: none;
+    width: 60px;
+    height: 60px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 0 12px 12px 0;
+    padding: 0 20px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+    .go-btn:hover {
+        background: #17a74a;
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .go-btn:active {
+        transform: scale(0.95);
+    }
+
 /*
 function getWindowScroll(node) {
     var win = getWindow(node);
@@ -437,5 +501,15 @@ function getWindowScroll(node) {
     background: white;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    z-index: 2000;
+}
+
+.spotify-player-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #121212;
+    padding: 10px;
     z-index: 2000;
 }

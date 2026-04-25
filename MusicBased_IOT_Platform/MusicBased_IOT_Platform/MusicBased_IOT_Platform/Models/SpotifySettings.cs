@@ -20,10 +20,10 @@ namespace MusicBased_IOT_Platform.Models
         {
             // Set default settings for the application
             AuthorisationUrl = string.Empty;
-            BaseURL = string.Empty;
+            BaseURL = "https://api.spotify.com/v1";
             ClientID = string.Empty;
             ClientSecret = string.Empty;
-            RedirectUri = string.Empty;
+            RedirectUri = "https://localhost:7039/signin-spotify";
         }
 
         // Properties

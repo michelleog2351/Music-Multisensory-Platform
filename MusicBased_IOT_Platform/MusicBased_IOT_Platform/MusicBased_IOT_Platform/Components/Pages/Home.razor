@@ -1,6 +1,10 @@
 ﻿@page "/"
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
-@inject UserSessionService UserSession
+@inject IJSRuntime JS
+@inject ISpotifyDataService SpotifyService
+@inject UserSessionService Session
+@inject NavigationManager NavigationManager
+
 
 @using MusicBased_IOT_Platform.Application.Interfaces
 @using MusicBased_IOT_Platform.Application.Interfaces.Spotify
@@ -10,7 +14,7 @@
 <PageTitle>Home</PageTitle>
 <br />
 <br />
-@inject UserSessionService Session
+
 
 @if (Session.CurrentUser != null)
 {
@@ -19,17 +23,20 @@
     </div>
 }
 
-<h3 style="color: darkgray">Music MultiSensory Platform</h3>
+<h3 class="d-flex justify-content-center mt-3" style="color: black">Music Multisensory Platform</h3>
 
-<div class="d-flex gap-2">
-    <input class="form-control mt-3 p-4 d-flex ali"
+<div class="d-flex justify-content-center mt-3">
+    <div class="w-50">
+    <input class="form-control mt-3 p-4 rounded-pill shadow-sm d-flex align-content-center"
            id="moodSearch"
            type="search"
+           style="border-radius: 80px;"
            placeholder="Search for your mood..."  
            readonly
            @onfocus="OpenSearchModal" />
 
-    @* Dropdown music or select from available button selection options *@
+        @* Dropdown music or select from available button     cursor: pointer;
+selection options *@
 @*     <select class="form-select">
         <option value="happy">Happy</option>
         <option value="sad">Sad</option>
@@ -38,57 +45,66 @@
     </select>
 
     <button class="btn btn-spotify">Get Music Suggestions </button> *@
+    </div>
 </div>
 
-<button class="btn btn-info scroll-to-top-btn" title="Scroll to Top">
+<button class="btn btn-info scroll-to-top-btn" 
+        title="Scroll to Top"
+        @onclick="ScrollToTop">
     <h1>↑</h1>
 </button>
 
 @if (isSearchModalOpen)
 {
-    <div class="modal fade show d-block" tabindex="-1">
+    <div class="modal fade show d-block" tabindex="-1" @onclick="CloseSearchModal">
         <div class="modal-dialog modal-dialog-centered modal-lg" @onclick:stopPropagation="true">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title">Find Music by Mood</h5>
+                    <h5 class="modal-title">
+                        <b>Find Music by Mood</b></h5>
                     <button type="button" class="btn-close" @onclick="CloseSearchModal"></button>
                 </div>
 
-                
-                    <div class="search-container">
+                <!-- Body @* class="form-control form-control-lg shadow-sm my-3 px-3 py-2" *@-->
+                <div class="modal-body modal-body-scroll px-4 py-3">
+
+                    <div class="search-container mt-4">
+
+@*                     <div class="d-flex align-items-center gap-2">
+ *@                        
+                <div class="input-group input-group-lg shadow-sm">
                         <input type="search"
-                               class="form-control form-control-lg mb-3 mt-5 p-3"
-                               placeholder="Search tracks..."
-
+                               class="form-control"
+                               
+                               placeholder="Tracks, Artists..."
+                               style="border-radius: 80px;"
                                @bind="searchTerm"
-                               @oninput="OnSearchChanged" />
+                               @oninput="OnSearchChanged"
+                               @onkeydown="HandleKeyDown"
+                               aria-label="Search for tracks or artists"
+                               aria-live="polite"
+                               aria-autocomplete="list"
+                               aria-expanded="@searchResults.Any()"
+                               />
 
-                        @* @if (selectedTrack?.PreviewUrl != null)
-                        {
-                            <div class="mt-3">
-                                <h6>@selectedTrack.Name - @selectedTrack.Artists[0].Name</h6>
 
-                                <audio controls style="width:100%">
-                                    <source src="@selectedTrack.PreviewUrl" type="audio/mpeg">
-                                </audio>
-                            </div>
-                        } *@
+                        <!-- GO BUTTON -->
+                        <button class="rounded-circle go-btn"
+                                @onclick="TriggerSearch"
+                                aria-label="Search"
+                                    tooltiptext="Search for tracks!">
+                            Go
+                        </button>
+                        </div>
+                   @*  </div> *@
 
-                        @if (selectedTrack != null)
-                        {
-                            <iframe src="https://open.spotify.com/embed/track/@selectedTrack.Id"
-                                    width="100%"
-                                    height="80"
-                                    frameborder="0"
-                                    allow="encrypted-media">
-                            </iframe>
-                        }
-
+                      
+                        @* 
                         @if (searchResults.Any())
                         {
                             <div class="position-absolute suggestions bg-white shadow rounded w-100 mt-1" style="z-index:1055;">
-                                @foreach (var track in searchResults.Take(5))
+                                @foreach (var track in searchResults.Take(10))
                                 {
                                     <div class="suggestion-item"
                                          style="cursor:pointer;"
@@ -97,13 +113,45 @@
                                     </div>
                                 }
                             </div>
-                        }
-                      
+                        } *@
+                    @if (searchResults.Any())
+                    {
+                        <div class="suggestions">
+                            @foreach (var track in searchResults.Take(10))
+                            {
+                                <div class="suggestion-item"
+                                     tabindex="0"
+                                     @onclick="() => SelectTrack(track)"
+                                     @onkeydown="HandleKeyDown">
+                                        
+                                     <img src="@track.Images?.FirstOrDefault()?.Url"
+                                          width="40" height="40"
+                                          style="border-radius:6px; margin-right:10px;" />
+
+                                    @track.Name, @track.Artists![0].Name
+                                </div>
+                            }
+                        </div>
+                    }
+                    </div>
+
+                    @if (selectedTrack != null)
+                    {
+                        <div class="spotify-player-bar">
+                            @* <h6>@selectedTrack.Name - @selectedTrack.Artists?[0].Name</h6> *@
+
+                            <iframe src="@($"https://open.spotify.com/embed/track/{selectedTrack.Id}")"
+                                    height="152"
+                                    style="border-radius:12px; width:100%;"
+                                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+                            </iframe>
+                        </div>
+                    }
                 
 
                     <!-- Recently Searched -->
                      @* If you have searched previously, these are the text bubbles showing your recent searches *@
-                    <h6 class="mt-4">Recently Searched</h6>
+                    <h6 class="mt-4"><b>Recently Searched</b></h6>
                     <div class="d-flex gap-2 flex-wrap mb-3">
                         <span class="badge bg-secondary">Happy</span>
                         <span class="badge bg-secondary">Calm</span>
@@ -127,7 +175,7 @@
                     suggestedMoods = new () { "Calm", "Ambient", "Lo-fi" };
                     }
 
-                    <h6 class="mt-4">Popular Searches</h6>
+                    <h6 class="mt-4"><b>Popular Searches</b></h6>
                     <div class="d-flex gap-2 flex-wrap">
                         <button class="btn btn-outline-primary btn-sm">Longing</button>
                         <button class="btn btn-outline-primary btn-sm">Empowered</button>
@@ -136,7 +184,7 @@
                     </div>
 
                 </div>
-               
+               @* </div> *@
             </div>
         </div>
     </div>
@@ -183,10 +231,12 @@
         
  </div>
 
-@* @if (isLoading)
+@if (isLoading)
 {
-    <p>Loading...</p>
-} *@
+    <div class="text-center">
+        <div class="spinner-border text-success"></div>
+    </div>
+}
 
 
 <div @key="currentView" class="view-container slide-in @(currentView == TrackViewMode.Gallery ? "fade-in" : "fade-in")">
@@ -195,96 +245,135 @@
     {
         if (releases?.Albums?.Items == null)
         {
-                <p>No tracks available yet...</p>
+            <p>No tracks available yet...</p>
         }
         else
         {
+            var index = 1;
             @foreach (var track in releases!.Albums!.Items!)
             {
                 <div class="list-item d-flex justify-content-between align-items-center p-3 border-bottom">
-                        <div class="fw-bold">@track.Name</div>
-                       @*  <img src="@track?.Images?.FirstOrDefault()?.Url"
-                             class=""
-                             style="height:100px; object-fit:cover;" /> *@
-                        <small class="text-muted">
-                            @(track?.Artists?.FirstOrDefault()?.Name ?? "Unknown Artist")
-                        </small>
+
+                    <!-- LEFT -->
+                    <div class="d-flex align-items-center gap-3">
+
+
+                         <h5>
+                            <span class="track-number">@index</span>
+                            
+                        </h5>
+                        <img src="@track?.Images?.FirstOrDefault()?.Url"
+                             style="width: 60px; height:60px; object-fit:cover; border-radius: 8px;" />
+
+                        <div>
+                            <div class="fw-bold">@track?.Name</div>
+                            <small class="text-muted">
+                                @(track?.Artists?.FirstOrDefault()?.Name ?? "Unknown Artist")
+                            </small>
                         </div>
+                    </div>
 
-                        <div class="d-flex align-items-center gap-3">
-                            <img src="@track?.Images?.FirstOrDefault()?.Url" 
-                                 style="width: 60px; height:60px; object-fit:cover; border-radius: 8px;" />
+                    <!-- RIGHT -->
+                    <div class="d-flex align-items-center gap-2">
 
-                            <a href="@track?.ExternalUrls?.Spotify"
-                               target="_blank"
-                               class="btn btn-sm btn-outline-primary  rounded-circle"
-                               style="width:40px;height:40px;">
-                                ▶
-                            </a>
+                        <button class="btn btn-sm btn-success rounded-circle"
+                                style="width:40px;height:40px;"
+                                
+                            ▶️
+                            @onclick="() => OnPlayClicked(track)">
+                        </button>
 
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-primary">▶</button>
-                                <button class="btn btn-sm btn-outline-danger rounded-circle"
-                                        style="width:40px;height:40px;">❤️
-                                </button>
+                        <button class="btn btn-sm btn-outline-danger rounded-circle"
+                                style="width:40px;height:40px;"
+                                >
+                            ❤️
+                        </button>
 
-                            </div>
-                        </div>
+                    </div>
+                </div>
             }
+
+            @if (NowPlaying != null)
+            {
+                <div class="player mt-3">
+
+                    <h6>@NowPlaying.Name</h6>
+
+                    <iframe src="https://open.spotify.com/embed/track/@NowPlaying.Id"
+                            width="100%"
+                            height="80"
+                            frameborder="0"
+                            allow="encrypted-media">
+                    </iframe>
+
+                </div>
+            }
+
+
+           
         }
     }
     else if (currentView == TrackViewMode.Gallery)
     {
         <div class="row g-4">
-            @if (releases?.Albums?.Items != null)
+            @if (releases?.Albums?.Items == null)
             {
-                foreach (var track in releases.Albums.Items)
+                <p>No tracks available yet...</p>
+            }
+            else
+            {
+                @foreach (var track in releases!.Albums!.Items!)
                 {
-                    <div class="col-md-4">
-                        <div class="card shadow-sm h-100">
+                        @* <div class="col-md-4"> *@
+                        <div class="col-6 col-md-5 col-lg-3">
+                            <div class="card app-card shadow-sm h-100">
 
-                            <img src="@track?.Images?.FirstOrDefault()?.Url"
-                                 class="card-img-top"
-                                 style="height:200px;object-fit:cover;" />
+                                <img src="@track?.Images?.FirstOrDefault()?.Url"
+                                     class="card-img-top"
+                                     style="height:200px;object-fit:cover;" />
 
-                            <div class="card-body text-center">
+                                <div class="card-body text-center">
 
-                                <h5 class="card-title">@track!.Name</h5>
+                                    <h5 class="app-card-title">@track!.Name</h5>
 
-                                <p class="text-muted">
-                                    @(track.Artists?.FirstOrDefault()?.Name ?? "Unknown Artist")
-                                </p>
+                                    <p class="text-muted">
+                                        @(track.Artists?.FirstOrDefault()?.Name ?? "Unknown Artist")
+                                    </p>
 
-                                <div class="d-flex justify-content-center gap-3 mt-3">
-                                    <button class="btn btn-primary">▶ Play</button>
-                                    <button class="btn btn-outline-danger">❤️</button>
+                                    <div class="d-flex justify-content-center gap-3 mt-3">
+                                        <a href="@track.ExternalUrls?.Spotify"
+                                           target="_blank"
+                                           class="btn btn-fitbit">
+                                            ▶ Play
+                                        </a>
+                                        <button class="btn btn-outline-danger">❤️</button>
+
+                                    </div>
+
+                                    @* <iframe style="border-radius:12px"
+                                            src="https://open.spotify.com/embed/track/@track.Id"
+                                            width="100%"
+                                            height="80"
+                                            frameborder="0"
+                                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+                                    </iframe> *@
+
+                                
+
+                                    @* <iframe src="https://open.spotify.com/embed/track/@track.Id" *@
+                                    @* <iframe src="@($"https://open.spotify.com/embed/track/{selectedTrack?.Id}")" *@
+                                    <iframe src="@($"https://open.spotify.com/embed/album/{track.Id}")"
+
+                                            width="300"
+                                            height="80"
+                                            frameborder="0"
+                                            allow="autoplay; clipboard-write; encrypted-media">
+                                    </iframe>
+
                                 </div>
 
-                                @* <iframe style="border-radius:12px"
-                                        src="https://open.spotify.com/embed/track/@track.Id"
-                                        width="100%"
-                                        height="80"
-                                        frameborder="0"
-                                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-                                </iframe> *@
-
-                                <a href="@track.ExternalUrls?.Spotify"
-                                   target="_blank"
-                                   class="btn btn-sm btn-outline-primary">
-                                    ▶
-                                </a>
-
-                                <iframe src="https://open.spotify.com/embed/track/@track.Id"
-                                        width="300"
-                                        height="380"
-                                        frameborder="0"
-                                        allow="autoplay; clipboard-write; encrypted-media">
-                                </iframe>
-
                             </div>
-
                         </div>
-                    </div>
                 }
             }
         </div>
@@ -292,7 +381,12 @@
 
 </div>
 
-@if (releases != null)
+<button class="btn-fitbit" @onclick="ConnectToSpotify">
+    Connect Spotify
+</button>
+
+
+@* @if (releases != null)
 {
     var index = 1;
 
@@ -318,7 +412,7 @@
             index++;
         }
     }
-}
+} *@
 
 @if (NowPlaying != null)
 {
@@ -367,7 +461,9 @@
         </div>
     </div>
 }
-
+<button class="btn btn-success" @onclick="TestPlay">
+    TEST PLAY
+</button>
 
 @code {
 
@@ -385,6 +481,7 @@
 
     // prompt the user to perform an action if the system has been left inactive after 30 secs i.e. "Play a music track!" or "Search for your mood!"
 
+    private bool isLoading;
     private System.Timers.Timer? inactivityTimer;
 
     private NewReleases? releases;
@@ -397,39 +494,185 @@
     private bool showMoodPrompt = false;
     private string detectedMood = "";
 
-    Track? NowPlaying;
+    Item? NowPlaying;
 
-    async Task OnPlayClicked(Track track)
+    private List<UiTrack> favourites = new();
+
+    private bool _spotifyReady = false;
+
+    private void AddToFavourites(UiTrack track)
     {
-        await Spotify.PlayTrack(track.Uri!);
+        if (!favourites.Any(t => t.Id == track.Id))
+            favourites.Add(track);
+    }
+
+    private async Task ConnectToSpotify()
+    {
+        await Session.LoadUserAsync();
+
+        if (Session.CurrentUser == null)
+        {
+            NavigationManager.NavigateTo("/login");
+            return;
+        }
+
+        var url = SpotifyService.GetSpotifyLoginUrl();
+        NavigationManager.NavigateTo(url, true);
+    }
+
+    async Task OnPlayClicked(Item track)
+    {
+        await Session.LoadUserAsync();
+
+        var token = Session.CurrentUser?.SpotifyAccessToken;
+
+        if (string.IsNullOrEmpty(token))
+            return;
+
+        await JS.InvokeVoidAsync(
+            "playTrackWeb",
+            token,
+             $"spotify:track:{track.Id}"
+        );
+
         NowPlaying = track;
+    }
+
+    private async Task Pause()
+    {
+        await JS.InvokeVoidAsync("pauseTrack");
+    }
+
+    private async Task Resume()
+    {
+        await JS.InvokeVoidAsync("resumeTrack");
+    }
+
+    private async Task TestPlay()
+    {
+        await Session.LoadUserAsync();
+
+        var token = Session.CurrentUser?.SpotifyAccessToken;
+
+        await JS.InvokeVoidAsync(
+            "playTrackWeb",
+            token,
+            "spotify:track:59oIHy7WdyoWY8LkUGX3O0" // random test track
+        );
     }
 
     /// <summary>
     /// This method is called when the component is initialised.
     /// </summary>
-    protected override async Task OnInitializedAsync()
+    // protected override async Task OnInitializedAsync()
+    // {
+
+
+    // }    
+    // 
+    
+    // public Home(UserService sessionService)
+    // {
+    //     this.sessionService = sessionService;
+    // }
+
+   //  UserService sessionService;
+   // [Inject] private UserSessionService Session { get; set; } = default!;
+    // [Inject] private MoodCalibrationService MoodCalibrationService { get; set; } = default!;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
 
         // allTracks = releases?.Albums?.Items?
         // .SelectMany(a => a.Tracks!.Items)
         // .ToList() ?? new();
 
-
         releases = await Spotify.GetNewAlbumReleases();
 
-        // tracks = await ISpotifyDataService.GetTrack(10);
+        // scroll button listener
+        //await JS.InvokeVoidAsync("initScrollListener", DotNetObjectReference.Create(this));
+
+        if (!firstRender || _spotifyReady)
+            return;
+
+        _spotifyReady = true;
+        await Session.LoadUserAsync();
+        var token = Session.CurrentUser?.SpotifyAccessToken;
+        Console.WriteLine($"TOKEN: {token}");
+
+        // if (!string.IsNullOrEmpty(token))
+        // {
+        //     await JS.InvokeVoidAsync("initializeSpotifyPlayer", token);
+
+        //     // small delay ensuring that the deviceId exists
+        //     await Task.Delay(1000);
+        //     await JS.InvokeVoidAsync("transferPlayback", token);
+        // }
+
+        // if (string.IsNullOrEmpty(token))
+        // {
+        //     Console.WriteLine("Spotify not connected");
+        //     return;
+        // }
+
+
+        //tracks = await ISpotifyDataService.GetTracks(10);
 
         inactivityTimer = new System.Timers.Timer(30000); // 30 seconds
         inactivityTimer.Elapsed += OnInactivityElapsed!;
         inactivityTimer.AutoReset = false; // Only trigger once
         inactivityTimer.Start();
 
-        recalibrationRequired = await MoodCalibrationService.IsRecalibrationRequiredAsync();
+        recalibrationRequired = await MoodCalibrationService.ShouldRecalibrateAsync();
 
         if (!recalibrationRequired)
         {
-            moodResult = await MoodCalibrationService.BuildMoodResultAsync();
+            moodResult = await MoodCalibrationService.GenerateMoodMusicAsync();
+        }
+
+    //     if (firstRender)
+    // {
+    //     var user = await sessionService.GetCurrentUserAsync();
+
+    //     if (user != null)
+    //     {
+    //         recalibrationRequired = await MoodCalibrationService.ShouldRecalibrateAsync();
+    //         StateHasChanged();
+
+    //             if (!recalibrationRequired)
+    //             {
+    //                 await MoodCalibrationService.BuildMoodResultAsync();
+    //             }
+    //     }
+    // }
+
+        if (firstRender)
+        {
+            await Session.LoadUserAsync();
+
+            var user = Session.CurrentUser;
+
+            if (user == null)
+            {
+                Console.WriteLine("No user session found");
+                return;
+            }
+
+            Console.WriteLine($"USER LOADED: {user.Username}");
+
+            recalibrationRequired = await MoodCalibrationService.ShouldRecalibrateAsync();
+
+            if (!recalibrationRequired)
+            {
+                moodResult = await MoodCalibrationService.BuildMoodResultAsync();
+            }
+
+            StateHasChanged();
+        }
+
+        if (isSearchModalOpen)
+        {
+            await JS.InvokeVoidAsync("focusSearch");
         }
     }
 
@@ -437,7 +680,17 @@
     {
         // await MoodCalibrationService.RecalibrateAsync();
         // recalibrationRequired = false;
-        moodResult = await MoodCalibrationService.BuildMoodResultAsync();
+        //moodResult = await MoodCalibrationService.BuildMoodResultAsync();
+        moodResult = await MoodCalibrationService.GenerateMoodMusicAsync();
+
+        // if (await ShouldRecalibrateAsync())
+        // {
+        //     showRecalibratePrompt = true;
+        // }
+        // else
+        // {
+        //     await BuildMoodResultAsync();
+        // }
     }
 
     /// <summary>
@@ -471,6 +724,15 @@
         inactivityTimer?.Dispose();
     }
 
+
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            await TriggerSearch();
+        }
+    }
+
     /// <summary>
     /// This method is called when the search box is clicked.
     /// </summary>
@@ -481,10 +743,10 @@
 
     private void SelectTrack(Item track)
     {
-        selectedTrack = track;
         searchTerm = track.Name!;
         searchResults.Clear();
-
+        selectedTrack = track;
+       // selectedTrack = moodResult.RecommendedTracks?.FirstOrDefault();
         //CloseSearchModal();
     }
 
@@ -499,12 +761,20 @@
         {
             await Task.Delay(400, _cts.Token); // 400ms debounce
 
+
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
+                isLoading = true;
                 var results = await Spotify.Search(searchTerm, "track");
 
                 searchResults = results.Tracks?.Items?.ToList()
                                 ?? new List<Item>();
+                isLoading = false;
+
+                // selectedTrack = null;  
+                // searchResults.Clear();
+                // return;
+
             }
             else
             {
@@ -615,5 +885,57 @@
     // {
     //     throw new NotImplementedException();
     // }
+    private async Task TriggerSearch()
+    {
+        if (string.IsNullOrWhiteSpace(searchTerm))
+            return;
+
+        isLoading = true;
+
+        var results = await Spotify.Search(searchTerm, "track");
+
+        searchResults = results.Tracks?.Items?.ToList()
+                        ?? new List<Item>();
+
+        isLoading = false;
+    }
+
+    private UiTrack MapFromItem(Item item)
+    {
+        return new UiTrack
+        {
+            Id = item.Id!,
+            Name = item.Name!,
+            Artist = item.Artists?.FirstOrDefault()?.Name ?? "",
+            ImageUrl = item?.Images?.FirstOrDefault()?.Url
+        };
+    }
+
+    private UiTrack MapFromTrack(Track track)
+    {
+        return new UiTrack
+        {
+            Id = track.Id!,
+            Name = track.Name!,
+            Artist = track.Artists?.FirstOrDefault()?.Name ?? "",
+            ImageUrl = track.Album?.Images?.FirstOrDefault()?.Url
+        };
+    }
+
+    private bool showScroll = false;
+
+
+
+    [JSInvokable]
+    public void OnScroll(int scrollY)
+    {
+        showScroll = scrollY > 200;
+        StateHasChanged();
+    }
+
+    private async Task ScrollToTop()
+    {
+        await JS.InvokeVoidAsync("window.scrollTo", 0, 0);
+    }
 }
 
