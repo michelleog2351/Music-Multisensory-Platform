@@ -24,4 +24,4 @@ jobs:
         run: dotnet restore ./MusicBased_IOT_Platform/MusicBased_IOT_Platform.sln
 
       - name: Check formatting
-        run: dotnet format --verify-no-changes
+        run: dotnet format MusicBased_IOT_Platform.sln --verify-no-changes
