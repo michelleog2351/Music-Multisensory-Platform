@@ -87,16 +87,18 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
         /// ClientSecret used to access the spotify web api
         /// </summary>
         public string ClientSecret { get; set; }
+        private static readonly string[] value =
+[
+                "user-read-email",
+                "user-read-playback-state",
+                "user-modify-playback-state",
+                "streaming",
+                "user-read-recently-played"
+            ];
 
         // Methods
         public string GetSpotifyLoginUrl()
         {
-            //return "https://accounts.spotify.com/authorize" +
-            //       "?client_id=" + ClientID +
-            //       "&response_type=code" +
-            //       "&redirect_uri=https://localhost:7039/signin-spotify" +
-            //       "&scope=user-read-recently-played user-read-email user-read-playback-state user-library-read user-modify-playback-state streaming";
-            //var scopes = string.Join(" ", _settings.Scopes);
 
             //return $"https://accounts.spotify.com/authorize" +
             //       $"?client_id={ClientID}" +
@@ -104,14 +106,7 @@ namespace MusicBased_IOT_Platform.Application.Services.Spotify.Live
             //       $"&redirect_uri={Uri.EscapeDataString(_settings.RedirectUri)}" +
             //       $"&scope={Uri.EscapeDataString(scopes)}";
 
-            var scopes = string.Join(" ", new[]
-{
-                "user-read-email",
-                "user-read-playback-state",
-                "user-modify-playback-state",
-                "streaming",
-                "user-read-recently-played"
-            });
+            var scopes = string.Join(" ", value);
 
          return
                 $"https://accounts.spotify.com/authorize" +
